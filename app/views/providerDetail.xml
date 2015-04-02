@@ -1,0 +1,21 @@
+<Alloy>
+	<Window class="container">
+		<View id="header">
+			<ImageView id="headerLeft" image="/global/blind2.png"></ImageView>
+			<Label id="headerText">Providers Details</Label>
+			<ImageView id="headerRight" image="/global/add126.png"></ImageView>
+		</View>
+		<View>
+			<ImageView id="providerLogo" image="/global/accountImage.png"></ImageView>
+			<Label id="providerName">Sample Provider</Label>
+			<Label id="providerAddress">Provider Address</Label>
+			<Label id="providerPhone">Provider Phone</Label>
+			<Label id="providerEmail">Provicer contact Email</Label>
+			<Label id="services">Services</Label>
+			<Label id="servicesList">
+				Paleo sriracha post-ironic XOXO craft beer. Seitan quinoa farm-to-table literally cronut. Kale chips skateboard McSweeney's, meditation +1 church-key pour-over Brooklyn trust fund American Apparel art party iPhone. Chillwave migas Williamsburg, pop-up ethical brunch locavore sustainable Marfa. Austin tote bag Helvetica, leggings 90's cray drinking vinegar fap Etsy twee cronut aesthetic church-key. Normcore brunch taxidermy direct trade. Jean shorts Williamsburg Pitchfork flannel art party iPhone.
+			</Label>
+			<Label id="similar" onClick="blackMagic">Similar Providers</Label>
+		</View>
+	</Window>
+</Alloy>

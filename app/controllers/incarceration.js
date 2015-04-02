@@ -1,0 +1,7 @@
+function openVine(){
+	
+}
+
+function goToWebsite(){
+	
+}

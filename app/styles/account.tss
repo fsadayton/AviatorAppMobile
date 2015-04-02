@@ -1,0 +1,114 @@
+".container": {
+	backgroundColor:"#0E8FEA",
+	backgroundImage: "/global/background.png"
+}
+
+"#header": {
+	backgroundColor: "#00a1ff",
+	opacity: 0.75,
+	color: "#0e4bea",
+	height: "50dp",
+	top: 0,
+	zIndex: 1
+}
+"#headerText":{
+	color: "#ffd400",
+	font:{
+		fontSize: '24dp',
+		fontWeight: 'bold'
+	}
+}
+
+"#headerLeft":{
+	left: "30dp",
+	width: "40dp"
+}
+
+"#headerRight":{
+	right: "35dp",
+	width: "40dp"
+}
+
+//Profile//
+"#accountInfo":{
+	backgroundColor: "#ffd400",
+	opacity: 0.10
+}
+
+"#accountImage":{
+left: "10dp",
+top: "60dp"	
+}
+
+"#firstNameLine":{
+	left: "10dp",
+	top: "170dp",
+	color: "#00a1ff",
+}
+"#firstName":{
+	left: "150dp",
+	top: "170dp",
+	color: "#00a1ff",
+}
+
+"#lastNameLine":{
+	left: "10dp",
+	top: "185dp",
+	color: "#00a1ff",
+}
+"#lastName":{
+	left: "150dp",
+	top: "185dp",
+	color: "#00a1ff",
+}
+
+"#dobLine":{
+	left: "10dp",
+	top: "200dp",
+	color: "#ffd400",
+}
+"#dob":{
+	left: "50dp",
+	top: "200dp",
+	color: "#ffd400",
+}
+
+"#addressLine":{
+	left: "10dp",
+	top: "215dp",
+	color: "#ffd400",
+}
+"#address":{
+	left: "150dp",
+	top: "215dp",
+	color: "#ffd400",
+}
+
+"#contactTable":{
+	top: "50%"
+}
+
+"#trustedContacts":{
+	color: "#ffd400",
+}
+
+"#name":{
+	left: "10dp",
+	top: "10dp",
+	color: "#ffd400",
+}
+
+"#phone":{
+	left: "10dp",
+	top: "30dp",
+	color: "#ffd400",
+}
+
+"#email":{
+	left: "10dp",
+	top: "50dp",
+	color: "#ffd400",
+}
+
+
+

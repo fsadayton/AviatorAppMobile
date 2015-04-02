@@ -1,0 +1,76 @@
+".container": {
+	//backgroundColor:"#0E8FEA",
+	//backgroundImage: "/global/background.png"
+}
+"#header": {
+	backgroundColor: "#00a1ff",
+	opacity: 0.75,
+	color: "#0e4bea",
+	height: "50dp",
+	top: 0,
+	zIndex: 1
+}
+"#headerText":{
+	color: "#ffd400",
+	font:{
+		fontSize: '24dp',
+		fontWeight: 'bold'
+	}
+}
+
+"#headerLeft":{
+	left: "30dp",
+	width: "40dp"
+}
+
+"#headerRight":{
+	right: "35dp",
+	width: "40dp"
+}
+
+//Provider Info////
+"#providerLogo":{
+left: "40%"	,
+top: "60dp"
+}
+
+"#providerName":{
+	left: "15%",
+	top: "170dp"
+}
+
+"#providerAddress":{
+	left: "15%",
+	top: "190dp"
+}
+
+"#providerPhone":{
+	left: "15%",
+	top: "210dp"
+}
+
+"#providerEmail":{
+	left: "15%",
+	top: "230dp"
+}
+
+"#services":{
+	left: "45%",
+	top: "250dp"
+}
+
+"#servicesList":{
+	left: "15%",
+	top: "270dp"
+}
+
+"#similar":{
+	left: "10dp",
+	bottom: "10dp"
+}
+
+
+
+
+
+

@@ -1,0 +1,73 @@
+".container" : {
+  
+}
+
+"#header": {
+	backgroundColor: "#00a1ff",
+	opacity: 0.75,
+	color: "#0e4bea",
+	height: "50dp",
+	top: 0,
+	zIndex: 1
+}
+"#headerText":{
+	color: "#ffd400",
+	font:{
+		fontSize: '24dp',
+		fontWeight: 'bold'
+	}
+}
+
+"#headerLeft":{
+	left: "30dp",
+	width: "40dp"
+}
+
+"#headerRight":{
+	right: "35dp",
+	width: "40dp"
+}
+
+"#providerTable":{
+	top: "50dp",
+	separatorColor: "#ffffff"
+}
+
+"#search":{
+	
+}
+"#providerName":{
+	left: 0,
+	top:"10dp"
+}
+
+"#providerAddress":{
+	left: 0,
+	top: "25dp"
+}
+
+"#providerPhone":{
+	right: 60,
+	top: "10dp",
+	width: "15dp"
+}
+
+"#providerEmail":{
+	right: 34,
+	top: "10dp",
+	width: "15dp"
+}
+
+"#favorite":{
+	right: 10,
+	top: "10dp",
+	width: "15dp"
+}
+
+"#mapIcon":{
+	left: 10,
+	bottom: 10,
+	width: "26dp"
+}
+
+

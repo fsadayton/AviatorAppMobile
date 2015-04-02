@@ -1,0 +1,29 @@
+<Alloy>		
+		<Window class="container">
+			<View id="header">
+				<ImageView id="headerLeft" image="/global/blind2.png"></ImageView>
+				<Label id="headerText">Victim Services</Label>
+				<ImageView id="headerRight" image="/global/add126.png"></ImageView>
+			</View>
+			<TableView>
+				<TableViewRow>
+					<View>
+						<Label top="52dp">
+							Fixie distillery hoodie, stumptown hella tousled synth. Keytar retro small batch quinoa, raw denim Truffaut letterpress heirloom next level. Flannel Austin scenester bespoke bicycle rights cray. Normcore sustainable irony, jean shorts cray polaroid Odd Future VHS migas pour-over artisan hashtag post-ironic cliche chambray. Distillery banh mi Neutra, post-ironic migas wayfarers fap literally Godard meditation. Sriracha Portland Austin selvage selfies. Cardigan stumptown flexitarian Helvetica, cray Truffaut scenester normcore narwhal gluten-free photo booth umami.
+							Gastropub tilde raw denim, Echo Park gentrify distillery VHS mumblecore gluten-free plaid scenester. PBR&B cardigan tote bag try-hard pork belly, polaroid literally Pitchfork cliche photo booth messenger bag mumblecore keytar keffiyeh beard. Bicycle rights High Life skateboard, Blue Bottle selvage actually chillwave Etsy pour-over letterpress messenger bag meh. Paleo chillwave pug biodiesel, +1 cliche jean shorts. Trust fund plaid synth photo booth retro. Hoodie paleo try-hard, blog American Apparel semiotics lumbersexual VHS deep v. Meh flexitarian literally vegan Austin, artisan Godard.
+						</Label>
+					</View>
+				</TableViewRow>
+				<TableViewRow>
+					<View>
+						<Label id="leftButton" onClick="openVine">
+							Open Vine
+						</Label>
+						<Label id="rightButton" onClick="goToWebsite">
+							Go to Site
+						</Label>
+					</View>
+				</TableViewRow>
+			</TableView>
+	</Window>
+</Alloy>

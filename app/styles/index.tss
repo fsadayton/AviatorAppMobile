@@ -1,15 +1,76 @@
 ".container": {
-	backgroundColor:"white"
+	//backgroundColor:"#0E8FEA",
+	backgroundImage: "/global/background.png"
+}
+"#header": {
+	backgroundColor: "#00a1ff",
+	opacity: 0.75,
+	color: "#0e4bea",
+	height: "50dp",
+	top: 0
 }
 
-"Label": {
-	width: Ti.UI.SIZE,
-	height: Ti.UI.SIZE,
-	color: "#000"
-}
-
-"#label": {
-	font: {
-		fontSize: 12
+"#headerText":{
+	color: "#ffd400",
+	font:{
+		fontSize: '24dp',
+		fontWeight: 'bold'
 	}
 }
+
+"#headerLeft":{
+	left: "30dp",
+	width: "40dp"
+}
+
+"#headerRight":{
+	right: "35dp",
+	width: "40dp"
+}
+
+"#menu":{
+	left: "0dp",
+	width: "275dp",
+	top: "225dp",
+}
+
+"#dropShadowMenu":{
+	left: "0dp",
+	width: "300dp",
+	top: "227dp",
+	separatorColor: "transparent"
+}
+
+".dropShadow":{
+	left: "-3dp",
+	width: "280dp",
+	height: "40dp",
+	borderRadius: 8,
+	borderWidth: 1.5,
+	backgroundColor: "#000000",
+	opacity: 0.5
+}
+
+"#row":{
+	height: "40dp",
+	color: "#F69C22",
+	borderRadius: 8,
+	borderWidth: 1.5,
+	left: "-15dp",
+	backgroundColor: "#00a1ff",
+	opacity: 0.75
+}
+
+".icon":{
+	left: "30dp",
+	width: "30dp"
+}
+
+"#navText": {
+	left: "100dp",
+	color: "#ffd400",
+	font:{
+		fontSize: '20dp'
+	},	
+}
+
