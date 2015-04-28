@@ -4,9 +4,10 @@
 
 "#header": {
 	backgroundColor: "#00a1ff",
-	opacity: 0.75,
+	opacity: 1,
 	color: "#0e4bea",
-	height: "50dp",
+	height: "8%",
+	//height: "50dp",
 	top: 0,
 	zIndex: 1
 }
@@ -19,17 +20,22 @@
 }
 
 "#headerLeft":{
-	left: "30dp",
-	width: "40dp"
+	left: "6%",
+	width: "11%"
+	//left: "30dp",
+	//width: "40dp"
 }
 
 "#headerRight":{
-	right: "35dp",
-	width: "40dp"
+	right: "6.5%",
+	width: "11%"
+	//right: "35dp",
+	//width: "40dp"
 }
 
 "#providerTable":{
-	top: "50dp",
+	top: "8%",
+	//top: "50dp",
 	separatorColor: "#ffffff"
 }
 
@@ -38,29 +44,33 @@
 }
 "#providerName":{
 	left: 0,
-	top:"10dp"
+	top:"3%"
 }
 
 "#providerAddress":{
 	left: 0,
-	top: "25dp"
+	top: "8%",
+	//top: "25dp"
 }
 
 "#providerPhone":{
 	right: 60,
-	top: "10dp",
+	top: "4%",
+//	top: "10dp",
 	width: "15dp"
 }
 
 "#providerEmail":{
 	right: 34,
-	top: "10dp",
+	top: "4%",
+//	top: "10dp",
 	width: "15dp"
 }
 
 "#favorite":{
 	right: 10,
-	top: "10dp",
+	top: "4%",
+//	top: "10dp",
 	width: "15dp"
 }
 

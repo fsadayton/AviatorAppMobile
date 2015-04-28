@@ -1,8 +1,8 @@
-#appname: ArmorApp
-#publisher: errettjm
-#url: http://www.fsadayton.org
-#image: appicon.png
-#appid: org.fsadayton.armorapp
-#desc: undefined
-#type: mobile
-#guid: 57a7aaca-d180-4068-8274-f001f8f0b6ba
+#appname:ArmorApp
+#publisher:errettjm
+#url:http://www.fsadayton.org
+#image:appicon.png
+#appid:org.fsadayton.armorapp
+#desc:undefined
+#type:ipad
+#guid:57a7aaca-d180-4068-8274-f001f8f0b6ba

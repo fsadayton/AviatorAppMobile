@@ -5,36 +5,13 @@
 			<Label id="headerText">Victim Services</Label>
 			<ImageView id="headerRight" image="/global/add126.png"></ImageView>
 		</View>
-		
-		<!--dropshadow table-->
-		<TableView id="dropShadowMenu">
-			<TableViewRow>
-				<View class="dropShadow"></View>
-			</TableViewRow>
-			<TableViewRow class="divider"></TableViewRow>
-			<TableViewRow>
-				<View class="dropShadow"></View>
-			</TableViewRow>
-			<TableViewRow class="divider"></TableViewRow>
-			<TableViewRow>
-				<View class="dropShadow"></View>
-			</TableViewRow>
-			<TableViewRow class="divider"></TableViewRow>
-			<TableViewRow>
-				<View class="dropShadow"></View>
-			</TableViewRow>
-			<TableViewRow class="divider"></TableViewRow>
-			<TableViewRow>
-				<View class="dropShadow"></View>
-			</TableViewRow>
-		</TableView>
 		<TableView id="menu">
-				<!--<TableViewRow onClick="services">-->
-				<TableViewRow >
+				<TableViewRow>
 					<View id="row" onClick="providers">
 						<ImageView class="icon" image="/global/familiar17.png" />
 						<Label id="navText"> Providers</Label>
 					</View>
+					<View class="dropShadow"></View>
 				</TableViewRow>
 			<TableViewRow class="divider"></TableViewRow>
 			<TableViewRow>
@@ -42,6 +19,7 @@
 					<ImageView class="icon" image="/global/info28.png" />
 					<Label id="navText">Resource Directory</Label>
 				</View>
+				<View class="dropShadow"></View>
 			</TableViewRow>
 			<TableViewRow class="divider"></TableViewRow>
 			<TableViewRow >
@@ -49,13 +27,15 @@
 					<ImageView class="icon" image="/global/hands6.png" />
 					<Label id="navText">Incarceration</Label>
 				</View>
+				<View class="dropShadow"></View>
 			</TableViewRow>
 			<TableViewRow class="divider"></TableViewRow>
 			<TableViewRow >
 				<View id="row">
 					<ImageView class="icon" image="/global/notifications.png" />
-					<Label id="navText">Notifictions</Label>
+					<Label id="navText">Notifications</Label>
 				</View>
+				<View class="dropShadow"></View>
 			</TableViewRow>
 			<TableViewRow class="divider"></TableViewRow>
 			<TableViewRow>
@@ -63,6 +43,7 @@
 					<ImageView class="icon" image="/global/round58.png" />
 					<Label id="navText"> Account</Label>
 				</View>
+				<View class="dropShadow"></View>
 			</TableViewRow>
 		</TableView>
 	</Window>

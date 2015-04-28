@@ -4,9 +4,9 @@
 }
 "#header": {
 	backgroundColor: "#00a1ff",
-	opacity: 0.75,
+	opacity: 1,
 	color: "#0e4bea",
-	height: "50dp",
+	height: "10%",
 	top: 0,
 	zIndex: 1
 }
@@ -19,57 +19,88 @@
 }
 
 "#headerLeft":{
-	left: "30dp",
-	width: "40dp"
+	left: "6%",
+	width: "11%"
 }
 
 "#headerRight":{
-	right: "35dp",
-	width: "40dp"
+	right: "6.5%",
+	width: "11%"
 }
 
 //Provider Info////
-"#providerLogo":{
-left: "40%"	,
-top: "60dp"
+"#providerDescription":{
+left: "5%"	,
+right: "5%",
+top: "11%"
 }
 
-"#providerName":{
+"#contactContact":{
 	left: "15%",
-	top: "170dp"
+	top: "30%"
 }
 
 "#providerAddress":{
 	left: "15%",
-	top: "190dp"
+	top: "33%"
+}
+
+"#driveButton":{
+	right: "15%",
+	top: "33%"
 }
 
 "#providerPhone":{
 	left: "15%",
-	top: "210dp"
+	top: "39%"
 }
 
 "#providerEmail":{
 	left: "15%",
-	top: "230dp"
+	top: "42%"
 }
 
-"#services":{
-	left: "45%",
-	top: "250dp"
-}
-
-"#servicesList":{
+"#providerWeb":{
 	left: "15%",
-	top: "270dp"
+	top: "45%"
 }
 
-"#similar":{
-	left: "10dp",
-	bottom: "10dp"
+"#favorite":{
+	left: 0,
+	width: "100%",
+	height: "10%",
+	bottom: "10%",
+	backgroundColor: "#00a1ff",
+	font:{
+		fontSize: '18dp',
+		fontWeight: 'bold',
+	}
+}
+"#favoriteIcon":{
+	width: "8%",
+	bottom: "12.5%",
+	left: "8%",
+	zIndex: 1
 }
 
+"#share":{
+	left: 0,
+	width: "100%",
+	height: "10%",
+	bottom: "10dp",
+	backgroundColor: "#00a1ff",
+	font:{
+		fontSize: '18dp',
+		fontWeight: 'bold'
+	}
+}
 
+"#shareIcon":{
+	width: "8%",
+	bottom: "3%",
+	left: "8%",
+	zIndex: 1
+}
 
 
 

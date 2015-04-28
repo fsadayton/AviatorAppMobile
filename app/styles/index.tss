@@ -4,9 +4,11 @@
 }
 "#header": {
 	backgroundColor: "#00a1ff",
-	opacity: 0.75,
+	opacity: 1,
+	//opacity: 0.75,
 	color: "#0e4bea",
-	height: "50dp",
+	height: "8%",
+	//height: "50dp",
 	top: 0
 }
 
@@ -19,58 +21,63 @@
 }
 
 "#headerLeft":{
-	left: "30dp",
-	width: "40dp"
+	left: "6%",
+	width: "11%"
 }
 
 "#headerRight":{
-	right: "35dp",
-	width: "40dp"
+	right: "6.5%",
+	width: "11%"
 }
 
 "#menu":{
 	left: "0dp",
-	width: "275dp",
-	top: "225dp",
+	//width: "100%",
+	//height: "100%",
+	width: "76.5%",
+	//backgroundColor: "#00a1ff",
+	//top: "8%",
+	top: "25%",
+	opacity: 0.75,
+	backgroundColor: "transparent",
+	separatorColor: "transparent",
 }
 
-"#dropShadowMenu":{
-	left: "0dp",
-	width: "300dp",
-	top: "227dp",
-	separatorColor: "transparent"
-}
-
-".dropShadow":{
-	left: "-3dp",
-	width: "280dp",
-	height: "40dp",
-	borderRadius: 8,
-	borderWidth: 1.5,
-	backgroundColor: "#000000",
-	opacity: 0.5
+ ".dropShadow":{
+    top: "3dp",
+    left: "-3dp",
+    width: "100%",
+    height: "40dp",
+    borderRadius: 8,
+    borderWidth: 1.5,
+    backgroundColor: "#000000",
+    opacity: 0.5
 }
 
 "#row":{
 	height: "40dp",
 	color: "#F69C22",
 	borderRadius: 8,
-	borderWidth: 1.5,
+	//borderWidth: 1.5,
 	left: "-15dp",
 	backgroundColor: "#00a1ff",
-	opacity: 0.75
+	//opacity: 0.75,
+	width: "103.5%"
 }
 
 ".icon":{
-	left: "30dp",
-	width: "30dp"
+	left: "11%",
+	width: "11%"
 }
 
 "#navText": {
-	left: "100dp",
+	left: "30%",
 	color: "#ffd400",
 	font:{
 		fontSize: '20dp'
 	},	
 }
 
+".divider":{
+	opacity: 0,
+}

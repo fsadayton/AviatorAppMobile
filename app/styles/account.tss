@@ -5,9 +5,9 @@
 
 "#header": {
 	backgroundColor: "#00a1ff",
-	opacity: 0.75,
+	opacity: 1,
 	color: "#0e4bea",
-	height: "50dp",
+	height: "10%",
 	top: 0,
 	zIndex: 1
 }
@@ -20,13 +20,13 @@
 }
 
 "#headerLeft":{
-	left: "30dp",
-	width: "40dp"
+	left: "6%",
+	width: "11%"
 }
 
 "#headerRight":{
-	right: "35dp",
-	width: "40dp"
+	right: "6.5%",
+	width: "11%"
 }
 
 //Profile//
@@ -36,78 +36,109 @@
 }
 
 "#accountImage":{
-left: "10dp",
-top: "60dp"	
+left: "35%",
+top: "13%",
+width: "25%",
+//left: "10dp",
+//top: "60dp",
+ borderRadius: 40,
 }
 
 "#firstNameLine":{
-	left: "10dp",
-	top: "170dp",
-	color: "#00a1ff",
+	left: "5%",
+	top: "30%",
+	//left: "10dp",
+	//top: "170dp",
+	color: "#ffffff",
 }
 "#firstName":{
-	left: "150dp",
-	top: "170dp",
-	color: "#00a1ff",
+	left: "46.5%",
+	top: "30%",
+	//left: "150dp",
+	//top: "170dp",
+	color: "#ffffff",
 }
 
 "#lastNameLine":{
-	left: "10dp",
-	top: "185dp",
-	color: "#00a1ff",
+	left: "5%",
+	top: "33%",
+	//left: "10dp",
+	//top: "185dp",
+	color: "#ffffff",
 }
 "#lastName":{
-	left: "150dp",
-	top: "185dp",
-	color: "#00a1ff",
+	left: "46.5%",
+	top: "33%",
+	//left: "150dp",
+	//top: "185dp",
+	color: "#ffffff",
 }
 
 "#dobLine":{
-	left: "10dp",
-	top: "200dp",
-	color: "#ffd400",
+	left: "5%",
+	top: "36%",
+	//left: "10dp",
+	//top: "200dp",
+	color: "#ffffff",
 }
 "#dob":{
-	left: "50dp",
-	top: "200dp",
-	color: "#ffd400",
+	left: "46.5%",
+	top: "36%",
+	//left: "50dp",
+	//top: "200dp",
+	color: "#ffffff",
 }
 
 "#addressLine":{
-	left: "10dp",
-	top: "215dp",
-	color: "#ffd400",
+	left: "5%",
+	top: "39%",
+	//left: "10dp",
+	//top: "215dp",
+	color: "#ffffff",
 }
 "#address":{
-	left: "150dp",
-	top: "215dp",
-	color: "#ffd400",
+	left: "46.5%",
+	top: "39%",
+	//left: "150dp",
+	//top: "215dp",
+	color: "#ffffff",
 }
 
+
+//ToDo: Create IOS Specific styles for the trusted contacts table 
+///
+///
 "#contactTable":{
-	top: "50%"
+	top: "50%",
+	backgroundColor: "transparent"
 }
 
 "#trustedContacts":{
-	color: "#ffd400",
+	color: "#ffffff",
 }
 
 "#name":{
-	left: "10dp",
-	top: "10dp",
-	color: "#ffd400",
+	left: "5%",
+	top: "5%",
+//	left: "10dp",
+	//top: "10dp",
+	color: "#ffffff",
 }
 
 "#phone":{
-	left: "10dp",
-	top: "30dp",
-	color: "#ffd400",
+	left: "5%",
+	top: "33%",
+//	left: "10dp",
+	//top: "30dp",
+	color: "#ffffff",
 }
 
 "#email":{
-	left: "10dp",
-	top: "50dp",
-	color: "#ffd400",
+	left: "5%",
+	top: "60%",
+//	left: "10dp",
+	//top: "50dp",
+	color: "#ffffff",
 }
 
 
