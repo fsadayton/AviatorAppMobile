@@ -1,6 +1,6 @@
 function providers(){
-	var providersView = Alloy.createController('serviceProviders').getView();
-	providersView.open();
+	var providerListView = Alloy.createController('providerList').getView();
+	providerListView.open();
 }
 
 function incarceration(){
