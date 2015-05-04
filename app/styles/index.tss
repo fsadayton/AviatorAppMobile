@@ -39,6 +39,16 @@
 	separatorColor: "transparent",
 }
 
+"#row":{
+	height: "40dp",
+	color: "#F69C22",
+	borderRadius: 8,
+	left: "-15dp",
+	backgroundColor: "#00a1ff",
+	width: "103.5%",
+	zIndex: 1
+}
+
  ".dropShadow":{
     top: "3dp",
     left: "-3dp",
@@ -48,16 +58,6 @@
     borderWidth: 1.5,
     backgroundColor: "#000000",
     opacity: 0.5
-}
-
-"#row":{
-	height: "40dp",
-	color: "#F69C22",
-	borderRadius: 8,
-	left: "-15dp",
-	backgroundColor: "#00a1ff",
-	width: "103.5%",
-	zIndex: 1
 }
 
 ".icon":{

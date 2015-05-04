@@ -28,3 +28,36 @@
 	right: "6.5%",
 	width: "11%"
 }
+
+
+"#menu":{
+	left: "0dp",
+	width: "100%",
+	top: "9%",
+	opacity: 0.75,
+	backgroundColor: "transparent",
+	separatorColor: "transparent",
+}
+
+"#row":{
+	height: "40dp",
+	color: "#F69C22",
+	//borderRadius: 8,
+	//left: "-15dp",
+	backgroundColor: "#00a1ff",
+	width: "100%",
+	zIndex: 1
+}
+
+".icon":{
+	right: "9%",
+	width: "24dp"
+}
+
+"#navText": {
+	left: "3%",
+	color: "#ffd400",
+	font:{
+		fontSize: '20dp'
+	},	
+}
