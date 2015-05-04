@@ -1,0 +1,23 @@
+<Alloy>		
+		<Window class="container">
+			<View id="header">
+				<ImageView id="headerLeft" image="/global/blind2.png"></ImageView>
+				<Label id="headerText">Victim Services</Label>
+				<ImageView id="headerRight" image="/global/add126.png"></ImageView>
+			</View>
+			<View>
+				<Label top="52dp">
+					Fixie distillery hoodie, stumptown hella tousled synth. Keytar retro small batch quinoa, raw denim Truffaut letterpress heirloom next level. Flannel Austin scenester bespoke bicycle rights cray. Normcore sustainable irony, jean shorts cray polaroid Odd Future VHS migas pour-over artisan hashtag post-ironic cliche chambray. Distillery banh mi Neutra, post-ironic migas wayfarers fap literally Godard meditation. Sriracha Portland Austin selvage selfies. Cardigan stumptown flexitarian Helvetica, cray Truffaut scenester normcore narwhal gluten-free photo booth umami.
+				</Label>
+			</View>
+		
+			<View>
+				<Label id="leftButton" onClick="openVine">
+					Open Vine
+				</Label>
+				<Label id="rightButton" onClick="goToWebsite">
+					Go to Site
+				</Label>
+			</View>		
+	</Window>
+</Alloy>

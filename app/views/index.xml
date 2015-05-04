@@ -1,5 +1,50 @@
 <Alloy>
 	<Window class="container">
-		<Label id="label" onClick="doClick">Hello, World</Label>
+		<View id="header">
+			<ImageView id="headerLeft" image="/global/blind2.png"></ImageView>
+			<Label id="headerText">Victim Services</Label>
+			<ImageView id="headerRight" image="/global/add126.png"></ImageView>
+		</View>
+		<TableView id="menu">
+				<TableViewRow>
+					<View id="row" onClick="providers">
+						<ImageView class="icon" image="/global/familiar17.png" />
+						<Label id="navText"> Providers</Label>
+					</View>
+					<View class="dropShadow"></View>
+				</TableViewRow>
+			<TableViewRow class="divider"></TableViewRow>
+			<TableViewRow>
+				<View id="row">
+					<ImageView class="icon" image="/global/info28.png" />
+					<Label id="navText">Resource Directory</Label>
+				</View>
+				<View class="dropShadow"></View>
+			</TableViewRow>
+			<TableViewRow class="divider"></TableViewRow>
+			<TableViewRow >
+				<View id="row" onClick="incarceration">
+					<ImageView class="icon" image="/global/hands6.png" />
+					<Label id="navText">Incarceration</Label>
+				</View>
+				<View class="dropShadow"></View>
+			</TableViewRow>
+			<TableViewRow class="divider"></TableViewRow>
+			<TableViewRow >
+				<View id="row">
+					<ImageView class="icon" image="/global/notifications.png" />
+					<Label id="navText">Notifications</Label>
+				</View>
+				<View class="dropShadow"></View>
+			</TableViewRow>
+			<TableViewRow class="divider"></TableViewRow>
+			<TableViewRow>
+				<View id="row" onClick="account">
+					<ImageView class="icon" image="/global/round58.png" />
+					<Label id="navText"> Account</Label>
+				</View>
+				<View class="dropShadow"></View>
+			</TableViewRow>
+		</TableView>
 	</Window>
 </Alloy>

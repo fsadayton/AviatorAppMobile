@@ -1,0 +1,83 @@
+".container" : {
+  
+}
+
+"#header": {
+	backgroundColor: "#00a1ff",
+	opacity: 1,
+	color: "#0e4bea",
+	height: "8%",
+	//height: "50dp",
+	top: 0,
+	zIndex: 1
+}
+"#headerText":{
+	color: "#ffd400",
+	font:{
+		fontSize: '24dp',
+		fontWeight: 'bold'
+	}
+}
+
+"#headerLeft":{
+	left: "6%",
+	width: "11%"
+	//left: "30dp",
+	//width: "40dp"
+}
+
+"#headerRight":{
+	right: "6.5%",
+	width: "11%"
+	//right: "35dp",
+	//width: "40dp"
+}
+
+"#providerTable":{
+	top: "8%",
+	//top: "50dp",
+	separatorColor: "#ffffff"
+}
+
+"#search":{
+	
+}
+"#providerName":{
+	left: 0,
+	top:"3%"
+}
+
+"#providerAddress":{
+	left: 0,
+	top: "8%",
+	//top: "25dp"
+}
+
+"#providerPhone":{
+	right: 60,
+	top: "4%",
+//	top: "10dp",
+	width: "15dp"
+}
+
+"#providerEmail":{
+	right: 34,
+	top: "4%",
+//	top: "10dp",
+	width: "15dp"
+}
+
+"#favorite":{
+	right: 10,
+	top: "4%",
+//	top: "10dp",
+	width: "15dp"
+}
+
+"#mapIcon":{
+	left: 10,
+	bottom: 10,
+	width: "26dp"
+}
+
+

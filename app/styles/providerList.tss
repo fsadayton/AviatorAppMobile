@@ -1,0 +1,30 @@
+".container": {
+	backgroundColor:"#0E8FEA",
+	backgroundImage: "/global/background.png"
+}
+
+"#header": {
+	backgroundColor: "#00a1ff",
+	opacity: 1,
+	color: "#0e4bea",
+	height: "10%",
+	top: 0,
+	zIndex: 1
+}
+"#headerText":{
+	color: "#ffd400",
+	font:{
+		fontSize: '24dp',
+		fontWeight: 'bold'
+	}
+}
+
+"#headerLeft":{
+	left: "6%",
+	width: "11%"
+}
+
+"#headerRight":{
+	right: "6.5%",
+	width: "11%"
+}

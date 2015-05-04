@@ -1,0 +1,64 @@
+".container": {
+	//backgroundColor:"#0E8FEA",
+	backgroundImage: "/global/background.png"
+}
+"#header": {
+	backgroundColor: "#00a1ff",
+	opacity: 1,
+	color: "#0e4bea",
+	height: "10%",
+	top: 0,
+	zIndex: 1
+}
+"#headerText":{
+	color: "#ffd400",
+	font:{
+		fontSize: '24dp',
+		fontWeight: 'bold'
+	}
+}
+
+"#headerLeft":{
+	left: "6%",
+	width: "11%"
+}
+
+"#headerRight":{
+	right: "6.5%",
+	width: "11%"
+}
+
+
+"#leftButton":{
+	height: "8.5%",
+//	height: "50dp",
+	width: "50%",
+	bottom: 0,
+	left: 0,
+	color: "#ffd400",
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
+	backgroundColor: "#00a1ff",
+	opacity: 0.75,
+	font:{
+		fontSize: '20dp'
+	},	
+}
+
+"#rightButton":{
+	height: "8.5%",
+//	height: "50dp",
+	width: "50%",
+	bottom: 0,
+	right: 0,
+	color: "#ffd400",
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
+	backgroundColor: "#00a1ff",
+	opacity: 0.75,
+	font:{
+		fontSize: '20dp'
+	},	
+}
+
+"Label":{
+	color: "#000000"
+}

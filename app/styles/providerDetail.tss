@@ -1,0 +1,107 @@
+".container": {
+	//backgroundColor:"#0E8FEA",
+	//backgroundImage: "/global/background.png"
+}
+"#header": {
+	backgroundColor: "#00a1ff",
+	opacity: 1,
+	color: "#0e4bea",
+	height: "10%",
+	top: 0,
+	zIndex: 1
+}
+"#headerText":{
+	color: "#ffd400",
+	font:{
+		fontSize: '24dp',
+		fontWeight: 'bold'
+	}
+}
+
+"#headerLeft":{
+	left: "6%",
+	width: "11%"
+}
+
+"#headerRight":{
+	right: "6.5%",
+	width: "11%"
+}
+
+//Provider Info////
+"#providerDescription":{
+left: "5%"	,
+right: "5%",
+top: "11%"
+}
+
+"#contactContact":{
+	left: "15%",
+	top: "30%"
+}
+
+"#providerAddress":{
+	left: "15%",
+	top: "33%"
+}
+
+"#driveButton":{
+	right: "15%",
+	top: "33%"
+}
+
+"#providerPhone":{
+	left: "15%",
+	top: "39%"
+}
+
+"#providerEmail":{
+	left: "15%",
+	top: "42%"
+}
+
+"#providerWeb":{
+	left: "15%",
+	top: "45%"
+}
+
+"#favorite":{
+	left: 0,
+	width: "100%",
+	height: "10%",
+	bottom: "10%",
+	backgroundColor: "#00a1ff",
+	font:{
+		fontSize: '18dp',
+		fontWeight: 'bold',
+	}
+}
+"#favoriteIcon":{
+	width: "8%",
+	bottom: "12.5%",
+	left: "8%",
+	zIndex: 1
+}
+
+"#share":{
+	left: 0,
+	width: "100%",
+	height: "10%",
+	bottom: "10dp",
+	backgroundColor: "#00a1ff",
+	font:{
+		fontSize: '18dp',
+		fontWeight: 'bold'
+	}
+}
+
+"#shareIcon":{
+	width: "8%",
+	bottom: "3%",
+	left: "8%",
+	zIndex: 1
+}
+
+
+
+

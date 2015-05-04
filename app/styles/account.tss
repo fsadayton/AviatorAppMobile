@@ -1,0 +1,145 @@
+".container": {
+	backgroundColor:"#0E8FEA",
+	backgroundImage: "/global/background.png"
+}
+
+"#header": {
+	backgroundColor: "#00a1ff",
+	opacity: 1,
+	color: "#0e4bea",
+	height: "10%",
+	top: 0,
+	zIndex: 1
+}
+"#headerText":{
+	color: "#ffd400",
+	font:{
+		fontSize: '24dp',
+		fontWeight: 'bold'
+	}
+}
+
+"#headerLeft":{
+	left: "6%",
+	width: "11%"
+}
+
+"#headerRight":{
+	right: "6.5%",
+	width: "11%"
+}
+
+//Profile//
+"#accountInfo":{
+	backgroundColor: "#ffd400",
+	opacity: 0.10
+}
+
+"#accountImage":{
+left: "35%",
+top: "13%",
+width: "25%",
+//left: "10dp",
+//top: "60dp",
+ borderRadius: 40,
+}
+
+"#firstNameLine":{
+	left: "5%",
+	top: "30%",
+	//left: "10dp",
+	//top: "170dp",
+	color: "#ffffff",
+}
+"#firstName":{
+	left: "46.5%",
+	top: "30%",
+	//left: "150dp",
+	//top: "170dp",
+	color: "#ffffff",
+}
+
+"#lastNameLine":{
+	left: "5%",
+	top: "33%",
+	//left: "10dp",
+	//top: "185dp",
+	color: "#ffffff",
+}
+"#lastName":{
+	left: "46.5%",
+	top: "33%",
+	//left: "150dp",
+	//top: "185dp",
+	color: "#ffffff",
+}
+
+"#dobLine":{
+	left: "5%",
+	top: "36%",
+	//left: "10dp",
+	//top: "200dp",
+	color: "#ffffff",
+}
+"#dob":{
+	left: "46.5%",
+	top: "36%",
+	//left: "50dp",
+	//top: "200dp",
+	color: "#ffffff",
+}
+
+"#addressLine":{
+	left: "5%",
+	top: "39%",
+	//left: "10dp",
+	//top: "215dp",
+	color: "#ffffff",
+}
+"#address":{
+	left: "46.5%",
+	top: "39%",
+	//left: "150dp",
+	//top: "215dp",
+	color: "#ffffff",
+}
+
+
+//ToDo: Create IOS Specific styles for the trusted contacts table 
+///
+///
+"#contactTable":{
+	top: "50%",
+	backgroundColor: "transparent"
+}
+
+"#trustedContacts":{
+	color: "#ffffff",
+}
+
+"#name":{
+	left: "5%",
+	top: "5%",
+//	left: "10dp",
+	//top: "10dp",
+	color: "#ffffff",
+}
+
+"#phone":{
+	left: "5%",
+	top: "33%",
+//	left: "10dp",
+	//top: "30dp",
+	color: "#ffffff",
+}
+
+"#email":{
+	left: "5%",
+	top: "60%",
+//	left: "10dp",
+	//top: "50dp",
+	color: "#ffffff",
+}
+
+
+
