@@ -1,7 +1,7 @@
 <Alloy>
 	<Window class="container">
 		<View id="header">
-			<ImageView id="headerLeft" image="/global/blind2.png"></ImageView>
+			<ImageView id="headerLeft" image="/global/blind2.png" onClick="hide"></ImageView>
 			<Label id="headerText">Victim Services</Label>
 			<ImageView id="headerRight" image="/global/add126.png"></ImageView>
 		</View>

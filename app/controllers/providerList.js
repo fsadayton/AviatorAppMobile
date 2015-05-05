@@ -20,3 +20,7 @@ alertDialog.addEventListener('click',function(e){
 alertDialog.show();
 };
 
+//Function to rout to a family of providers
+function connect(){
+	
+};
