@@ -1,16 +1,17 @@
 function providers(){
-	var providerListView = Alloy.createController('providerList').getView();
-	providerListView.open();
+	Alloy.createController('providerList').getView().open();
 }
 
 function incarceration(){
-	var incarceratioinView = Alloy.createController('incarceration').getView();
-	incarceratioinView.open();
+	Alloy.createController('incarceration').getView().open();
 }
 
 function account(){
-	var accountView = Alloy.createController('account').getView();
-	accountView.open();
+	Alloy.createController('account').getView().open();
+}
+
+function listProviders(){
+	Alloy.createController('listOfProviders').getView().open();
 }
 
 $.index.open();

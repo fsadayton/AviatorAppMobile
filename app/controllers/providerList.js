@@ -1,5 +1,3 @@
-
-
 function info(){
 	
 var alertDialog = Titanium.UI.createAlertDialog({
