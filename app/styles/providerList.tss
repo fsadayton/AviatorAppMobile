@@ -40,7 +40,7 @@
 }
 
 "#row":{
-	height: "40dp",
+	height: "50dp",
 	color: "#F69C22",
 	//borderRadius: 8,
 	//left: "-15dp",
