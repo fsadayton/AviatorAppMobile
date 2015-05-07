@@ -36,71 +36,53 @@
 }
 
 "#accountImage":{
-left: "35%",
-top: "13%",
-width: "25%",
-//left: "10dp",
-//top: "60dp",
- borderRadius: 40,
+	left: "35%",
+	top: "13%",
+	width: "25%",
+ 	borderRadius: 40,
 }
 
 "#firstNameLine":{
 	left: "5%",
 	top: "30%",
-	//left: "10dp",
-	//top: "170dp",
 	color: "#ffffff",
 }
 "#firstName":{
 	left: "46.5%",
 	top: "30%",
-	//left: "150dp",
-	//top: "170dp",
 	color: "#ffffff",
 }
 
 "#lastNameLine":{
 	left: "5%",
 	top: "33%",
-	//left: "10dp",
-	//top: "185dp",
 	color: "#ffffff",
 }
 "#lastName":{
 	left: "46.5%",
 	top: "33%",
-	//left: "150dp",
-	//top: "185dp",
 	color: "#ffffff",
 }
 
 "#dobLine":{
 	left: "5%",
 	top: "36%",
-	//left: "10dp",
-	//top: "200dp",
 	color: "#ffffff",
 }
 "#dob":{
 	left: "46.5%",
 	top: "36%",
-	//left: "50dp",
-	//top: "200dp",
 	color: "#ffffff",
 }
 
 "#addressLine":{
 	left: "5%",
 	top: "39%",
-	//left: "10dp",
-	//top: "215dp",
 	color: "#ffffff",
 }
 "#address":{
 	left: "46.5%",
 	top: "39%",
-	//left: "150dp",
-	//top: "215dp",
 	color: "#ffffff",
 }
 
@@ -120,24 +102,18 @@ width: "25%",
 "#name":{
 	left: "5%",
 	top: "5%",
-//	left: "10dp",
-	//top: "10dp",
 	color: "#ffffff",
 }
 
 "#phone":{
 	left: "5%",
 	top: "33%",
-//	left: "10dp",
-	//top: "30dp",
 	color: "#ffffff",
 }
 
 "#email":{
 	left: "5%",
 	top: "60%",
-//	left: "10dp",
-	//top: "50dp",
 	color: "#ffffff",
 }
 

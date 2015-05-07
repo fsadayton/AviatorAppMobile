@@ -1,7 +1,3 @@
-".container": {
-	//backgroundColor:"#0E8FEA",
-	//backgroundImage: "/global/background.png"
-}
 "#header": {
 	backgroundColor: "#00a1ff",
 	opacity: 1,

@@ -45,6 +45,13 @@
 				</View>
 				<View class="dropShadow"></View>
 			</TableViewRow>
+			<TableViewRow>
+				<View id="row" onClick="listProviders">
+					<ImageView class="icon" image="/global/round58.png" />
+					<Label id="navText"> List of providers TEST</Label>
+				</View>
+				<View class="dropShadow"></View>
+			</TableViewRow>
 		</TableView>
 	</Window>
 </Alloy>
