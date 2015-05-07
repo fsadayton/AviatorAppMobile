@@ -1,0 +1,14 @@
+<Alloy>
+	<TabGroup>
+		<Tab title="test 1">
+			<Window>
+			<Module module="ti.map"></Module>
+			</Window>
+		</Tab>
+		<Tab title="test2">
+			<Window>
+			<Require src="providerList" />
+			</Window>
+		</Tab>
+	</TabGroup>
+</Alloy>
