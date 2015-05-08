@@ -1,13 +1,47 @@
 <Alloy>
 	<TabGroup>
-		<Tab title="test 1">
+		<Tab title="Map">
 			<Window>
-			<Module module="ti.map"></Module>
+			<!--	<View id="map" module="ti.map">
+					
+				</View>-->
+			<Module id="map" module="ti.map">
+			</Module>
 			</Window>
 		</Tab>
-		<Tab title="test2">
+		<Tab title="List">
 			<Window>
-			<Require src="providerList" />
+				<TableView id="menu">
+					<TableViewSection headerTitle="Owl Removal and care">
+						
+						<TableViewRow>
+							<View id="row" onClick="providerDetail">
+								<ImageView class="icon" image="/global/linkArrow.png"  />
+								<Label id="providerName"> Als Owls</Label>
+								<Label id="providerDistance"> 3 Miles Away</Label>
+							</View>
+							<View class="dropShadow"></View>
+						</TableViewRow>
+						<TableViewRow>
+							<View id="row" >
+								<ImageView class="icon" image="/global/linkArrow.png" />
+								<Label id="providerName">Parlement De-Funkadellik </Label>
+								<Label id="providerDistance"> 7 Miles Away</Label>
+							</View>
+							<View class="dropShadow"></View>
+						</TableViewRow>
+					</TableViewSection>
+					<TableViewSection headerTitle="Auxiliary Support">
+						<TableViewRow>
+							<View id="row" >
+								<ImageView class="icon" image="/global/linkArrow.png"/>
+								<Label id="providerName"> Owl Soap Emporium</Label>
+								<Label id="providerDistance"> 1 Miles Away</Label>
+							</View>
+							<View class="dropShadow"></View>
+						</TableViewRow>
+					</TableViewSection>
+				</TableView>
 			</Window>
 		</Tab>
 	</TabGroup>

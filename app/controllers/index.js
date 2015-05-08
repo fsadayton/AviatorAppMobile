@@ -10,8 +10,6 @@ function account(){
 	Alloy.createController('account').getView().open();
 }
 
-function listProviders(){
-	Alloy.createController('listOfProviders').getView().open();
-}
+
 
 $.index.open();
