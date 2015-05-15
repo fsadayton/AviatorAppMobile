@@ -5,10 +5,8 @@
 "#header": {
 	backgroundColor: "#00a1ff",
 	opacity: 1,
-	//opacity: 0.75,
 	color: "#0e4bea",
 	height: "8%",
-	//height: "50dp",
 	top: 0
 }
 
