@@ -27,8 +27,8 @@ $.index.open();
 //project's tiapp.xml file.
 function hide(){
 	//Either line can be commented or un-commented to show the photo gallery or camera of the device
-Titanium.Media.openPhotoGallery({
-//Titanium.Media.showCamera({
+//Titanium.Media.openPhotoGallery({
+Titanium.Media.showCamera({
 	success:function(event) {
  // called when media returned from the camera
 		Ti.API.debug('Our type was: '+event.mediaType);
@@ -43,9 +43,7 @@ Titanium.Media.openPhotoGallery({
 			alert("got the wrong type back ="+event.mediaType);
 		}
 	},
-	cancel:function() {
- // called when user cancels taking a picture
-	},
+	
 	error:function(error) {
  // called when there's an error
 		var a = Titanium.UI.createAlertDialog({title:'Camera'});
@@ -62,3 +60,4 @@ Titanium.Media.openPhotoGallery({
 	mediaTypes:[Ti.Media.MEDIA_TYPE_VIDEO,Ti.Media.MEDIA_TYPE_PHOTO]
 });
 };
+
