@@ -1,0 +1,23 @@
+<Alloy>
+	<Window class="container">
+		<View id="header">
+			<ImageView id="headerLeft" image="/global/blind2.png"></ImageView>
+			<Label id="headerText">Service Providers</Label>
+			<ImageView id="headerRight" image="/global/add126.png"></ImageView>
+		</View>
+		
+		<TableView id="providerTable">
+			<SearchBar id="search"></SearchBar>
+			<TableViewRow>
+				<View onClick="provider">
+					<Label id="providerName"> Provider Name</Label>
+					<Label id="providerAddress">Provider Address</Label>
+					<ImageView id="providerPhone" image="/global/phoneIcon.png" />
+					<ImageView id="providerEmail" image="/global/emailIcon.png" />
+					<ImageView id="favorite" image="/global/heartIcon.png" />
+				</View>
+			</TableViewRow>
+		</TableView>
+		<ImageView id="mapIcon" image="/global/mapIcon.png" />
+	</Window>
+</Alloy>

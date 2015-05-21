@@ -1,0 +1,22 @@
+<Alloy>
+	<Window class="container">
+		<View id="header">
+			<ImageView id="headerLeft" image="/global/blind2.png"></ImageView>
+			<Label id="headerText">Providers Details</Label>
+			<ImageView id="headerRight" image="/global/add126.png"></ImageView>
+		</View>
+		<View>
+			<Label id="providerDescription">Mario Brothers Plumbing Inc is the worlds premier service provider in Princess extrication and Bowser removal services.</Label>
+			<Label id="contactContact">Contact</Label>
+			<Label id="providerAddress" html="123 S Park Dr. <br>Dayton OH, 45476"></Label>
+			<Label id="driveButton">Drive</Label>
+			<Label id="providerPhone">provider phone</Label>
+			<Label id="providerEmail">toad@mbros.com</Label>
+			<Label id="providerWeb">www.MBrosPlumbingInc.com</Label>
+			<ImageView id="favoriteIcon" image="/global/heartIcon.png" />
+			<Label id="favorite" textAlign="Titanium.UI.TEXT_ALIGNMENT_CENTER">Tag as Favorite</Label>
+			<ImageView id="shareIcon" image="/global/heartIcon.png" />
+			<Label id="share" textAlign="Titanium.UI.TEXT_ALIGNMENT_CENTER">Share with Friends</Label>
+		</View>
+	</Window>
+</Alloy>

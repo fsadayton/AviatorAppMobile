@@ -1,15 +1,16 @@
 ".container": {
-	//backgroundColor:"#0E8FEA",
+	backgroundColor:"#0E8FEA",
 	backgroundImage: "/global/background.png"
 }
+
 "#header": {
 	backgroundColor: "#00a1ff",
 	opacity: 1,
 	color: "#0e4bea",
-	height: "8%",
-	top: 0
+	height: "10%",
+	top: 0,
+	zIndex: 1
 }
-
 "#headerText":{
 	color: "#ffd400",
 	font:{
@@ -28,10 +29,11 @@
 	width: "11%"
 }
 
+
 "#menu":{
 	left: "0dp",
-	width: "76.5%",
-	top: "25%",
+	width: "100%",
+	top: "9%",
 	opacity: 0.75,
 	backgroundColor: "transparent",
 	separatorColor: "transparent",
@@ -40,37 +42,20 @@
 "#row":{
 	height: "40dp",
 	color: "#F69C22",
-	borderRadius: 8,
-	left: "-15dp",
 	backgroundColor: "#00a1ff",
-	width: "103.5%",
+	width: "100%",
 	zIndex: 1
 }
 
- ".dropShadow":{
-    top: "3dp",
-    left: "-3dp",
-    width: "100%",
-    height: "40dp",
-    borderRadius: 8,
-    borderWidth: 1.5,
-    backgroundColor: "#000000",
-    opacity: 0.5
-}
-
 ".icon":{
-	left: "11%",
-	width: "11%"
+	right: "9%",
+	width: "24dp"
 }
 
 "#navText": {
-	left: "30%",
+	left: "3%",
 	color: "#ffd400",
 	font:{
 		fontSize: '20dp'
 	},	
-}
-
-".divider":{
-	opacity: 0,
 }

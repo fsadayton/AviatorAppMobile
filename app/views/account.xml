@@ -1,0 +1,36 @@
+<Alloy>
+	<Window class="container">
+		<View id="header">
+			<ImageView id="headerLeft" image="/global/blind2.png"></ImageView>
+			<Label id="headerText">Account</Label>
+			<ImageView id="headerRight" image="/global/add126.png"></ImageView>
+		</View>
+		<View id="accountInfo"></View>
+		<View>
+			<ImageView id="accountImage" image="/global/accountImage.png" />
+			<Label id="firstNameLine">First Name</Label>
+			<Label id="firstName">Sam</Label>
+			<Label id="lastNameLine">Last Name</Label>
+			<Label id="lastName">Sparks</Label>
+			<Label id="dobLine">DOB</Label>
+			<Label id="dob">3/17/90</Label>
+			<Label id="addressLine">Current Address</Label>
+			<Label id="address">1793 S. 4th St. SanfranSokyo CA, 45789</Label>
+		</View>
+		
+		<TableView id="contactTable">
+			<TableViewRow>
+				<View>
+					<Label id="trustedContacts">Trusted Contacts</Label>
+				</View>
+			</TableViewRow>
+			<TableViewRow>
+				<View>
+					<Label id="name">Name</Label>
+					<Label id="phone">Phone</Label>
+					<Label id="email">Email</Label>
+				</View>
+			</TableViewRow>
+		</TableView>	
+	</Window>
+</Alloy>

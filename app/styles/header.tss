@@ -1,0 +1,26 @@
+
+"#header": {
+	backgroundColor: "#00a1ff",
+	opacity: 1,
+	color: "#0e4bea",
+	height: "8%",
+	top: 0
+}
+
+"#headerText":{
+	color: "#ffd400",
+	font:{
+		fontSize: '24dp',
+		fontWeight: 'bold'
+	}
+}
+
+"#headerLeft":{
+	left: "6%",
+	width: "11%"
+}
+
+"#headerRight":{
+	right: "6.5%",
+	width: "11%"
+}
