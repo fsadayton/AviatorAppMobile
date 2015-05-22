@@ -8,7 +8,7 @@
 		
 		<TableView id="menu">
 			<TableViewRow>
-				<View id="row" >
+				<View id="row"  onClick="listProviders">
 					<ImageView class="icon" image="/global/info28.png"  />
 					<Label id="navText"> Compensation & Assistance</Label>
 				</View>
