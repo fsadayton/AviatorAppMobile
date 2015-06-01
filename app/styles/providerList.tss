@@ -42,8 +42,6 @@
 "#row":{
 	height: "50dp",
 	color: "#F69C22",
-	//borderRadius: 8,
-	//left: "-15dp",
 	backgroundColor: "#00a1ff",
 	width: "100%",
 	zIndex: 1

@@ -1,0 +1,52 @@
+
+"#menu":{
+	left: "0dp",
+	width: "100%",
+	top: "9%",
+	opacity: 0.75,
+	backgroundColor: "transparent",
+	separatorColor: "transparent",
+}
+
+"#row":{
+	height: "50dp",
+	color: "#F69C22",
+	backgroundColor: "#00a1ff",
+	width: "100%",
+	zIndex: 1
+}
+
+".icon":{
+	right: "9%",
+	width: "24dp"
+}
+
+"#providerName": {
+	left: "3%",
+	top: "6%",
+	color: "#ffd400",
+	font:{
+		fontSize: '16dp'
+	},	
+}
+
+"#providerDistance":{
+	left: "3%",
+	top: "50%",
+	color: "#ffd400",
+	font:{
+		fontSize: '16dp'
+	},	
+}
+
+"#map":{
+	mapType: Alloy.Globals.Map.HYBRID_TYPE,
+	 region : {
+        latitude:39.766053,
+        longitude:-84.180840,
+        latitudeDelta:0.01,
+        longitudeDelta:0.01
+    }
+}
+
+

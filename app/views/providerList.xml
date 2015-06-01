@@ -8,7 +8,7 @@
 		
 		<TableView id="menu">
 			<TableViewRow>
-				<View id="row" >
+				<View id="row"  onClick="listProviders">
 					<ImageView class="icon" image="/global/info28.png"  />
 					<Label id="navText"> Compensation & Assistance</Label>
 				</View>
@@ -17,7 +17,7 @@
 			<TableViewRow>
 				<View id="row" >
 					<ImageView class="icon" image="/global/info28.png" />
-					<Label id="navText" onClick="connect"> Counseling & Support</Label>
+					<Label id="navText"> Counseling & Support</Label>
 				</View>
 				<View class="dropShadow"></View>
 			</TableViewRow>
