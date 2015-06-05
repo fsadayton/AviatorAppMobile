@@ -43,7 +43,6 @@
   </ios>
   <android 
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <tool-api-level>14</tool-api-level>
     <manifest>
       <!-- Allows the API to download data from Google Map servers -->
       <uses-permission android:name="android.permission.INTERNET"/>
@@ -64,7 +63,7 @@
         <!-- Replace "PASTE YOUR GOOGLE MAPS API KEY HERE" with the Google API key you obtained -->
         <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyDCmJ4lBpceIqcWtJI9QBws_-l9W6Q5arg"/>
       </application>
-      <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19"/>
+      <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="21"/>
     </manifest>
   </android>
   <mobileweb>
