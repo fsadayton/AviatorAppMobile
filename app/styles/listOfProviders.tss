@@ -2,16 +2,17 @@
 "#menu":{
 	left: "0dp",
 	width: "100%",
-	top: "9%",
-	opacity: 0.75,
-	backgroundColor: "transparent",
-	separatorColor: "transparent",
+	backgroundColor: "#fff",
+	separatorColor: "#65c8c7",
 }
-
+"Tab":{
+	backgroundColor:"#fff",
+	color:"#65c8c7"
+}
 "#row":{
 	height: "50dp",
-	color: "#F69C22",
-	backgroundColor: "#00a1ff",
+	color: "#666",
+	backgroundColor: "#fff",
 	width: "100%",
 	zIndex: 1
 }
@@ -24,7 +25,7 @@
 "#providerName": {
 	left: "3%",
 	top: "6%",
-	color: "#ffd400",
+	color: "#666",
 	font:{
 		fontSize: '16dp'
 	},	

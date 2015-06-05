@@ -1,12 +1,9 @@
 <Alloy>
 	<Window class="container">
-		<View id="header">
-			<ImageView id="headerLeft" image="/global/blind2.png"></ImageView>
-			<Label id="headerText">Victim Services</Label>
-			<ImageView id="headerRight" image="/global/add126.png"></ImageView>
-		</View>
+		<Require src="header"></Require>
 		
 		<TableView id="menu">
+			<TableViewSection id="tableHeader" headerTitle="What can we help you with?" backgroundColor="#d8d8d8" color="#fff">
 			<TableViewRow>
 				<View id="row"  onClick="listProviders">
 					<ImageView class="icon" image="/global/info28.png"  />
@@ -28,6 +25,7 @@
 				</View>
 				<View class="dropShadow"></View>
 			</TableViewRow>
+			</TableViewSection>
 			
 		</TableView>
 	</Window>

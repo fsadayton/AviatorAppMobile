@@ -34,7 +34,6 @@
 	left: "0dp",
 	width: "76.5%",
 	top: "25%",
-	opacity: 0.75,
 	backgroundColor: "transparent",
 	separatorColor: "transparent",
 }
@@ -44,7 +43,7 @@
 	color: "#F69C22",
 	borderRadius: 8,
 	left: "-15dp",
-	backgroundColor: "#00a1ff",
+	backgroundColor: "#65c8c7",
 	width: "103.5%",
 	zIndex: 1
 }

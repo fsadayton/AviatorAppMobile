@@ -1,10 +1,6 @@
 <Alloy>
-	<Window class="container">
-		<View id="header">
-			<ImageView id="headerLeft" image="/global/blind2.png"></ImageView>
-			<Label id="headerText">Account</Label>
-			<ImageView id="headerRight" image="/global/add126.png"></ImageView>
-		</View>
+	<Window id="win" class="container">
+		<Require src="header"></Require>
 		<View id="accountInfo"></View>
 		<View>
 			<ImageView id="accountImage" image="/global/accountImage.png" />

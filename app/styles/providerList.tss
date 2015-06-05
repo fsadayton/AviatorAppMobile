@@ -1,48 +1,20 @@
 ".container": {
-	backgroundColor:"#0E8FEA",
-	backgroundImage: "/global/background.png"
+	backgroundColor:"#fff",
 }
 
-"#header": {
-	backgroundColor: "#00a1ff",
-	opacity: 1,
-	color: "#0e4bea",
-	height: "10%",
-	top: 0,
-	zIndex: 1
-}
-"#headerText":{
-	color: "#ffd400",
-	font:{
-		fontSize: '24dp',
-		fontWeight: 'bold'
-	}
-}
-
-"#headerLeft":{
-	left: "6%",
-	width: "11%"
-}
-
-"#headerRight":{
-	right: "6.5%",
-	width: "11%"
-}
 
 
 "#menu":{
 	left: "0dp",
 	width: "100%",
-	top: "9%",
-	opacity: 0.75,
 	backgroundColor: "transparent",
-	separatorColor: "transparent",
+	separatorColor: "#65c8c7",
 }
 
 "#row":{
 	height: "50dp",
 	color: "#F69C22",
-	backgroundColor: "#00a1ff",
+	backgroundColor: "#fff",
 	width: "100%",
 	zIndex: 1
 }
@@ -54,8 +26,15 @@
 
 "#navText": {
 	left: "3%",
-	color: "#ffd400",
+	color: "#666",
 	font:{
 		fontSize: '20dp'
 	},	
+}
+
+"#tableHeader":{
+	backgroundColor:"#d8d8d8",
+	color:"#fff",
+	textAlign: "center",
+	height:"50dp"
 }

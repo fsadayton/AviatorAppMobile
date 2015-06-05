@@ -59,3 +59,6 @@ Titanium.Media.showCamera({
 	mediaTypes:[Ti.Media.MEDIA_TYPE_VIDEO,Ti.Media.MEDIA_TYPE_PHOTO]
 });
 };
+
+Alloy.Globals.addActionBarButtons($.index);
+

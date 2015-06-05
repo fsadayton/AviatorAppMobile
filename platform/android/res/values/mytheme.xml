@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.CustomActionBar" parent="@style/Theme.AppCompat.Light">
+        <!-- Specify an Action Bar style to use -->
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <!-- This item is required for Android 2.3.x support -->
+        <item name="actionBarStyle">@style/MyActionBar</item>
+    </style>
+    <!-- Define the ActionBar styles -->
+    <style name="MyActionBar"
+           parent="@style/Widget.AppCompat.ActionBar">
+        <!-- Create another style resource to specify the text color -->
+        <item name="android:titleTextStyle">@style/MyActionBarTitleText</item>
+ 
+        <!-- For Android 3.x and later, you can specify either a color or background image -->
+        <item name="android:background">#65c8c7</item>
+ 
+        <!-- These item are required for Android 2.3.x support -->
+        <item name="titleTextStyle">@style/MyActionBarTitleText</item>
+ 
+        <!-- For Android 2.3.x, you can only specify a background image not a color -->
+        <!-- This example references the platform/android/res/drawable-nodpi/actionbar_background.png image -->
+        <!--<item name="background">@drawable/actionbar_background</item>-->
+    </style>
+    <!-- Define a text color for the Action Bar title -->
+    <style name="MyActionBarTitleText"
+           parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">#fff</item>
+    </style>
+</resources> 

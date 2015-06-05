@@ -1,28 +1,4 @@
-"#header": {
-	backgroundColor: "#00a1ff",
-	opacity: 1,
-	color: "#0e4bea",
-	height: "10%",
-	top: 0,
-	zIndex: 1
-}
-"#headerText":{
-	color: "#ffd400",
-	font:{
-		fontSize: '24dp',
-		fontWeight: 'bold'
-	}
-}
 
-"#headerLeft":{
-	left: "6%",
-	width: "11%"
-}
-
-"#headerRight":{
-	right: "6.5%",
-	width: "11%"
-}
 
 //Provider Info////
 "#providerDescription":{
@@ -38,7 +14,7 @@ top: "11%"
 
 "#providerAddress":{
 	left: "15%",
-	top: "33%"
+	top: "36%"
 }
 
 "#driveButton":{
@@ -48,17 +24,17 @@ top: "11%"
 
 "#providerPhone":{
 	left: "15%",
-	top: "39%"
+	top: "45%"
 }
 
 "#providerEmail":{
 	left: "15%",
-	top: "42%"
+	top: "50%"
 }
 
 "#providerWeb":{
 	left: "15%",
-	top: "45%"
+	top: "55%"
 }
 
 "#favorite":{

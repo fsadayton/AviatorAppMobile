@@ -8,10 +8,9 @@ var alertDialog = Titanium.UI.createAlertDialog({
 });
  
  
-alertDialog.show();
-};
+    alertDialog.show();
+}
 
 function listProviders(){
 	Alloy.createController('listOfProviders').getView().open();
 }
-};
