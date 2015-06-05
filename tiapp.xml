@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ti:app 
   xmlns:ti="http://ti.appcelerator.org">
-  <property name="acs-api-key-production" type="string">Ga9J2k1nOHZOQbIltpMTBI9j6MqkDIUi</property>
-  <property name="acs-api-key-development" type="string">w4gTUsCAl3wvnBIyvrPnPcbJHdYDpoUz</property>
+  <property name="acs-api-key-production" type="string">Eiu6BI6l3nK45otbsMiovn7JMvSthhy9</property>
+  <property name="acs-api-key-development" type="string">SjfvIAyGzvcVmGomFN4XbjhNKFMtxKNv</property>
   <id>org.fsadayton.armorapp</id>
   <name>ArmorApp</name>
   <version>1.0</version>
   <publisher>errettjm</publisher>
   <url>http://www.fsadayton.org</url>
   <description>undefined</description>
-  <copyright>2015 by errettjm</copyright>
+  <copyright>2015 by FSA</copyright>
   <icon>appicon.png</icon>
   <fullscreen>false</fullscreen>
   <navbar-hidden>false</navbar-hidden>
@@ -92,4 +92,18 @@
     <plugin version="1.0">ti.alloy</plugin>
   </plugins>
   <property name="appc-app-id" type="string">5571fedd85a48cf624b0e56d</property>
+  <property name="acs-authbase-url-development" type="string">https://secure-identity.cloud.appcelerator.com</property>
+  <property name="acs-base-url-development" type="string">https://api.cloud.appcelerator.com</property>
+  <property name="acs-oauth-secret-development" type="string">WNXKg3T8iFfPGPrhcQQ5sEkcL26CwCS1</property>
+  <property name="acs-oauth-key-development" type="string">6IeEWXwDSVnjGutNz7Hfw0GKZkYkuzRr</property>
+  <property name="acs-username-development" type="string">appc_app_user_dev</property>
+  <property name="acs-password-development" type="string">jzhx3umIWjgIIsd577</property>
+  <property name="acs-authbase-url-production" type="string">https://secure-identity.cloud.appcelerator.com</property>
+  <property name="acs-base-url-production" type="string">https://api.cloud.appcelerator.com</property>
+  <property name="acs-oauth-secret-production" type="string">ubGBIqVRSZJn2a6eyO2gmcO22i4CHfhZ</property>
+  <property name="acs-oauth-key-production" type="string">k4SCu0geITCouJCqVUtlTzvu94f5LqhN</property>
+  <property name="acs-username-production" type="string">appc_app_user</property>
+  <property name="acs-password-production" type="string">1qUyX8tF8D4R0Q6Hp1</property>
+  <property name="appc-org-id" type="string">100031111</property>
+  <property name="appc-creator-user-id" type="string">c1455f21-12e7-4e30-bafc-8b7e6a7369e1</property>
 </ti:app>
