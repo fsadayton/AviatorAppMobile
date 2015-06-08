@@ -4,7 +4,7 @@
   <property name="acs-api-key-production" type="string">Eiu6BI6l3nK45otbsMiovn7JMvSthhy9</property>
   <property name="acs-api-key-development" type="string">SjfvIAyGzvcVmGomFN4XbjhNKFMtxKNv</property>
   <id>org.fsadayton.armorapp</id>
-  <name>ArmorApp</name>
+  <name>Armor App</name>
   <version>1.0</version>
   <publisher>errettjm</publisher>
   <url>http://www.fsadayton.org</url>

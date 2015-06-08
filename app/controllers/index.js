@@ -1,5 +1,5 @@
 function providers(){
-	Alloy.createController('providerList').getView().open();
+	Alloy.createController('providerCategories').getView().open();
 }
 
 function incarceration(){

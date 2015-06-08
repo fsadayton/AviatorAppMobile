@@ -1,18 +1,25 @@
 <Alloy>
-	<Window class="container">
+	<Window class="container" >
 		<Require src="header"></Require>
+		<Label id="providerName"/>
+		<TextArea id="providerDescription"/>
+			
 		<View>
 			<Label id="providerDescription">Provides community mental health counseling, support services & services for the deaf</Label>
-			<Label id="contactContact">Contact</Label>
 			<Label id="providerAddress" html="2211 Arbor Blvd. <br>Dayton OH, 45476"></Label>
-			<Label id="driveButton">Drive</Label>
+			<Label id="driveButton">Get Directions</Label>
 			<Label id="providerPhone">937.222.9481</Label>
 			<Label id="providerEmail">information@fsadayton.org</Label>
 			<Label id="providerWeb">www.fsadayton.org</Label>
-			<ImageView id="favoriteIcon" image="/global/heartIcon.png" />
-			<Label id="favorite" textAlign="Titanium.UI.TEXT_ALIGNMENT_CENTER">Tag as Favorite</Label>
-			<ImageView id="shareIcon" image="/global/heartIcon.png" />
-			<Label id="share" textAlign="Titanium.UI.TEXT_ALIGNMENT_CENTER">Share with Friends</Label>
+			
+			<View id="favorite">
+				<ImageView id="favoriteIcon" image="/global/star256.png" />
+				<Label id="favorite" textAlign="Titanium.UI.TEXT_ALIGNMENT_CENTER">Tag as Favorite</Label>
+			</View>
+			<View id="share">
+				<ImageView id="shareIcon" image="/global/share256.png" />
+				<Label id="share" textAlign="Titanium.UI.TEXT_ALIGNMENT_CENTER">Share with Friends</Label>
+			</View>
 		</View>
 	</Window>
 </Alloy>

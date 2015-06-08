@@ -1,0 +1,19 @@
+"#providerName": {
+	left: "20dp",
+	top:0,
+	color: "#666",
+	font:{
+		fontSize: '17dp'
+	},
+	height:"70%",
+}
+
+"#providerDistance":{
+	left: "20dp",
+	bottom: "5dp",
+	color: "#666",
+	font:{
+		fontSize: '13dp'
+	},
+	height:"30%"
+}

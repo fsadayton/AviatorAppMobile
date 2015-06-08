@@ -2,39 +2,9 @@
 	backgroundColor:"#fff",
 }
 
-
-
-"#menu":{
-	left: "0dp",
-	width: "100%",
-	backgroundColor: "transparent",
+".menu":{
 	separatorColor: "#65c8c7",
 }
 
-"#row":{
-	height: "50dp",
-	color: "#F69C22",
-	backgroundColor: "#fff",
-	width: "100%",
-	zIndex: 1
-}
 
-".icon":{
-	right: "9%",
-	width: "24dp"
-}
 
-"#navText": {
-	left: "3%",
-	color: "#666",
-	font:{
-		fontSize: '20dp'
-	},	
-}
-
-"#tableHeader":{
-	backgroundColor:"#d8d8d8",
-	color:"#fff",
-	textAlign: "center",
-	height:"50dp"
-}

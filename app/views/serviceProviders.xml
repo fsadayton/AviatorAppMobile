@@ -1,19 +1,19 @@
 <Alloy>
-	<Window class="container">
-		<Require src="header"></Require>
-		
-		<TableView id="providerTable">
-			<SearchBar id="search"></SearchBar>
-			<TableViewRow>
-				<View onClick="provider">
-					<Label id="providerName"> Provider Name</Label>
-					<Label id="providerAddress">Provider Address</Label>
-					<ImageView id="providerPhone" image="/global/phoneIcon.png" />
-					<ImageView id="providerEmail" image="/global/emailIcon.png" />
-					<ImageView id="favorite" image="/global/heartIcon.png" />
-				</View>
-			</TableViewRow>
-		</TableView>
-		<ImageView id="mapIcon" image="/global/mapIcon.png" />
-	</Window>
+	<TabGroup>
+		<Tab title="NEARBY">
+			<Window>
+				<TableView id="menu" onClick="providerDetail">
+				</TableView>
+			</Window>
+		</Tab>
+		<Tab title="CRISIS LINES">
+			<Window>
+			<!--	<View id="map" module="ti.map">
+					
+				</View>-->
+			<Module id="map" module="ti.map">
+			</Module>
+			</Window>
+		</Tab>
+	</TabGroup>
 </Alloy>

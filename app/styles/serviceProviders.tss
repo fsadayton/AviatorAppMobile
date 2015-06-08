@@ -1,73 +1,44 @@
-".container" : {
-  
-}
 
-"#header": {
-	backgroundColor: "#00a1ff",
-	opacity: 1,
-	color: "#0e4bea",
-	height: "8%",
-	top: 0,
+"#menu":{
+	left: "0dp",
+	width: "100%",
+	backgroundColor: "#fff",
+	separatorColor: "#65c8c7",
+}
+"Tab":{
+	backgroundColor:"#fff",
+	color:"#65c8c7",
+	titleAttributes:{
+		font: {
+        	fontFamily:"Quicksand-Regular",
+        	fontSize: '25dp'
+      }
+   }
+}
+"TableViewRow":{
+	height: "50dp",
+	color: "#666",
+	backgroundColor: "#fff",
+	width: "100%",
 	zIndex: 1
 }
-"#headerText":{
-	color: "#ffd400",
-	font:{
-		fontSize: '24dp',
-		fontWeight: 'bold'
-	}
+
+".icon":{
+	right: "9%",
+	width: "24dp"
 }
 
-"#headerLeft":{
-	left: "6%",
-	width: "11%"
+
+
+"#map":{
+	mapType: Alloy.Globals.Map.HYBRID_TYPE,
+	 region : {
+        latitude:39.766053,
+        longitude:-84.180840,
+        latitudeDelta:0.01,
+        longitudeDelta:0.01
+    }
 }
 
-"#headerRight":{
-	right: "6.5%",
-	width: "11%"
-}
-
-"#providerTable":{
-	top: "8%",
-	separatorColor: "#ffffff"
-}
-
-"#search":{
-	
-}
-"#providerName":{
-	left: 0,
-	top:"3%"
-}
-
-"#providerAddress":{
-	left: 0,
-	top: "8%",
-}
-
-"#providerPhone":{
-	right: 60,
-	top: "4%",
-	width: "15dp"
-}
-
-"#providerEmail":{
-	right: 34,
-	top: "4%",
-	width: "15dp"
-}
-
-"#favorite":{
-	right: 10,
-	top: "4%",
-	width: "15dp"
-}
-
-"#mapIcon":{
-	left: 10,
-	bottom: 10,
-	width: "26dp"
-}
 
 
