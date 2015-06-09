@@ -3,9 +3,13 @@
 	"env:development": {}, 
 	"env:test": {}, 
 	"env:production": {}, 
-	"os:android": {},
+	"os:android": {
+		"mapUrl": "http://maps.google.com/maps/"
+	},
 	"os:blackberry": {},
-	"os:ios": {},
+	"os:ios": {
+		"mapUrl": "http://maps.apple.com/"
+	},
 	"os:mobileweb": {},
 	"dependencies": {}
 }

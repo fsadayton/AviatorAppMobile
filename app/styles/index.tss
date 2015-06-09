@@ -80,9 +80,3 @@
 ".icon":{
 	width: "28%"
 }
-
-".divider":{
-	height: "10dp",
-	backgroundColor:"#f9c84d",
-	top:0
-}

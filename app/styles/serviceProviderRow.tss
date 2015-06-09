@@ -8,12 +8,13 @@
 	height:"70%",
 }
 
-"#providerDistance":{
+"#subtext":{
 	left: "20dp",
 	bottom: "5dp",
-	color: "#666",
+	color: "#65c8c7",
 	font:{
-		fontSize: '13dp'
+		fontSize: '13dp',
+		fontFamily:"Quicksand-Bold"
 	},
 	height:"30%"
 }

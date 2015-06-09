@@ -1,8 +1,9 @@
 var args = arguments[0] || {};
 
+var Map = require('ti.map');
 var providerObj = {providers:[{
 	name:"South Community Behavioral Health",
-	address:"3095 Kettering Blvd, Dayton, OH",
+	address:"3095 Kettering Boulevard, Moraine, OH",
 	description:"Provides mental health counseling",
 	phone:"123.456.7890",
 	email:"info@test.test",
@@ -21,7 +22,7 @@ var providerObj = {providers:[{
 },
 {
 	name:"Family Services Association",
-	address:"2211 Arbor Blvd, Dayton, OH",
+	address:"2211 Arbor Boulevard, Moraine, OH",
 	description:"Provides community mental health counseling, support services & services for the deaf",
 	phone:"123.456.7890",
 	email:"info@test.test",
@@ -30,15 +31,23 @@ var providerObj = {providers:[{
 }
 ]};
 var allHeaders = [];
+var crisisHeaders = [];
 _.each(providerObj.providers, function(provider){
-	var row = Alloy.createController('serviceProviderRow',{
+	addProviderToMap(provider.address + ", US", provider.name);
+	var row = Alloy.createController('serviceProviderRow', {
 			name:provider.name,
 			address:provider.address,
 			description:provider.description,
 			phone: provider.phone,
 			email: provider.email,
-			website: provider.website
-		}).getView();
+			website: provider.website,
+		}).getView();	
+	if(provider.crisis){
+		crisisHeaders.push(Alloy.createController('serviceProviderRow', {
+			name:provider.name,
+			crisis: provider.crisis
+		}).getView());
+	}
 		
 	_.each(provider.categories, function(category){
 		
@@ -54,6 +63,7 @@ _.each(providerObj.providers, function(provider){
 		Ti.API.info("header index: " + headerIndex);
 		if(headerIndex > -1){
 			allHeaders[headerIndex].add(row);
+			
 		}
 		else{
 			
@@ -65,28 +75,58 @@ _.each(providerObj.providers, function(provider){
 });
 
 $.menu.setData(allHeaders);
+$.crisisMenu.setData(crisisHeaders);
+    
+function providerDetail(e){
+	Alloy.createController('providerDetail',{
+		name:e.row.name,
+		address: e.row.address,
+		description: e.row.description,
+		phone: e.row.phone,
+		email: e.row.email,
+		website: e.row.website
+	}).getView().open();
+}
 
-var Map = require('ti.map');
-var annotation = Map.createAnnotation({
-            latitude: 39.766053,
-   			longitude: -84.180840,
-            title:"SSG",
-            subtitle: "Dayton OH",
+function callPhoneNumber(e){
+    var cleanNumber = e.row.crisis.replace(/\s|-|\./g,'');
+    Ti.Platform.openURL('tel:' + cleanNumber);
+}
+
+function addProviderToMap(address, providerName){
+	Ti.Geolocation.forwardGeocoder(address, function(evt){
+		if(evt.success && evt.latitude)
+		{
+			Ti.API.info("map success for " + providerName + evt.latitude);
+			var annotation = Map.createAnnotation({
+	            latitude: evt.latitude,
+	   			longitude: evt.longitude,
+	            title: providerName,
+	            subtitle: address
            });
-           
            $.map.addAnnotation(annotation);
-           
-           annotation = Map.createAnnotation({
-            latitude: 39.719704,
-            longitude: -84.219832,
-            title:"Family Services",
-            subtitle: "Dayton OH",
-           });
-    $.map.addAnnotation(annotation);
-    
-   $.map.setRegion({latitude:39.719704, longitude:-84.219832, latitudeDelta:0.2, longitudeDelta:0.2});
+		}
+		else{
+				Ti.API.info("error with " + address +": "+ evt.error);
+			}
+		
+	});	
+}
 
-    
-function providerDetail(){
-	Alloy.createController('providerDetail').getView().open();
+function toggleMapListView(){
+	if($.mapModule.visible){
+		setMapVisibility(false);
+	}
+	else{
+		setMapVisibility(true);
+		$.map.setRegion({latitude:39.719704, longitude:-84.219832, latitudeDelta:0.2, longitudeDelta:0.2});
+	}
+	
+	function setMapVisibility(isMapVisible){
+		$.mapModule.visible = isMapVisible;
+		$.mapView.visible = !isMapVisible;
+		
+		$.menu.visible = !isMapVisible;
+		$.listView.visible = isMapVisible;
+	}
 }

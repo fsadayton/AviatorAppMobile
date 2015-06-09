@@ -1,6 +1,6 @@
 <Alloy>
 	<TableViewRow id="row" class="defaultRow">
 		<Label id="providerName"/>
-		<Label id="providerDistance"/>
+		<Label id="subtext"/>
 	</TableViewRow>
 </Alloy>

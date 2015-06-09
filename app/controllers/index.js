@@ -3,7 +3,8 @@ function providers(){
 }
 
 function incarceration(){
-	Alloy.createController('incarceration').getView().open();
+	//Alloy.createController('incarceration').getView().open();
+	Ti.Platform.openURL("https://www.vinelink.com/");
 }
 
 function account(){

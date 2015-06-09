@@ -2,17 +2,31 @@
 	<TabGroup>
 		<Tab title="NEARBY">
 			<Window>
-				<TableView id="menu" onClick="providerDetail">
+				<TableView id="menu" class="menu" onClick="providerDetail" visible=true>
 				</TableView>
+				<View id="mapModule" height="90%" visible=false top=0>
+					<Module id="map" module="ti.map" />
+				</View>
+				<View id="buttonBar">
+					<View id="listView" class="buttonBarAction" left="0" visible=false onClick="toggleMapListView">
+						<ImageView id="listImage" class="buttonBarImage" image="/global/list256.png"/>
+						<Label id="listImage" class="buttonBarLabel">LIST</Label>
+					</View>
+					<View id="mapView" class="buttonBarAction" left="0" onClick="toggleMapListView" visible=true>
+						<ImageView id="mapImage" class="buttonBarImage" image="/global/map256.png"/>
+						<Label id="mapLabel" class="buttonBarLabel">MAP</Label>
+					</View>
+					<View id="filterView" class="buttonBarAction" right="0">
+						<ImageView id="mapImage" class="buttonBarImage" image="/global/filter256.png"/>
+						<Label id="mapLabel" class="buttonBarLabel">FILTER</Label>
+					</View>
+				</View>
 			</Window>
 		</Tab>
-		<Tab title="CRISIS LINES">
+		<Tab title="QUICK CALL">
 			<Window>
-			<!--	<View id="map" module="ti.map">
-					
-				</View>-->
-			<Module id="map" module="ti.map">
-			</Module>
+			<TableView id="crisisMenu" class="menu" onClick="callPhoneNumber">
+			</TableView>
 			</Window>
 		</Tab>
 	</TabGroup>

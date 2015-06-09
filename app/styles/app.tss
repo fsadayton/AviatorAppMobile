@@ -9,3 +9,9 @@
 	color: "#F69C22",
 	backgroundColor: "#fff"
 }
+
+".divider":{
+	height: "10dp",
+	backgroundColor:"#f9c84d",
+	top:0
+}
