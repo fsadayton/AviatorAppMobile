@@ -78,6 +78,8 @@
     <module platform="commonjs">ti.cloud</module>
     <module platform="iphone">ti.map</module>
     <module platform="android">ti.map</module>
+    <module platform="android" version="1.1.0">ti.geocoder</module>
+    <module platform="iphone" version="1.0.0">ti.geocoder</module>
   </modules>
   <deployment-targets>
     <target device="iphone">true</target>

@@ -7,6 +7,10 @@ $.address.text = address[0] + "\n" + address[1].trim() + ", " + address[2].trim(
 $.providerDescription.value = args.description;
 $.phoneLabel.text = "CALL " + args.phone;
 
+$.phoneView.visible = args.phone ? true : false;
+$.emailView.visible = args.email ? true : false;
+$.websiteView.visible = args.website ? true :false;
+
 $.win.activity.onCreateOptionsMenu = function(e){
 	var menu = e.menu;
 	var share = menu.add({
@@ -20,6 +24,8 @@ $.win.activity.onCreateOptionsMenu = function(e){
 		title:"Tag as Favorite",
 		icon:"/global/star256.png"
 	});
+	
+	favorite.addEventListener("click", function(e){alert("Feature coming soon!");});
 };
 
 function getDirections() {
@@ -28,7 +34,6 @@ function getDirections() {
 	} else {        
         // Get Address of order without the name
 	    var destination = args.address;
-	         Ti.API.info("dest:" + destination);
 
 	    Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 	       
@@ -60,7 +65,7 @@ function openEmail(){
 }
 
 function openWebsite(){
-	Ti.Platform.openURL("http://"+args.website);
+	Ti.Platform.openURL(args.website);
 }
 
 function shareInformation(){
@@ -76,3 +81,5 @@ function shareInformation(){
 	intent.putExtra(Ti.Android.EXTRA_TEXT, body);
 	activity.startActivity(Ti.Android.createIntentChooser(intent, 'Share'));
 }
+
+//Alloy.Globals.addActionBarButtons($.win);

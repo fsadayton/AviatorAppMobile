@@ -20,7 +20,6 @@
 	borderRadius: 10,
 	borderWidth: 2,
 	color:"#666",
-	touchEnabled: false,
 	editable: false,
 	focusable: false,
 	height:"20%",

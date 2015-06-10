@@ -44,7 +44,7 @@
 	bottom:"5dp",
 	width:"95%",
 	font:{
-		fontSize:'10dp'
+		fontSize:'13dp'
 	},
 	textAlign: "center"
 }

@@ -24,13 +24,13 @@
 		</View>
 		
 		<View class="boxContainer">
-			<View class="left box">
+			<View class="left box" onClick="account">
 				<View class="divider"/>
-				<Label class="name" onClick="account">PERSONAL</Label>
+				<Label class="name">PERSONAL</Label>
 				<ImageView class="icon" image="/global/round58.png" />
 				<Label class="description">View your trusted contacts and favorite providers</Label>
 			</View>
-			<View class="right box">
+			<View class="right box" onClick="crisisLines">
 				<View class="divider"/>
 				<Label class="name">CRISIS LINES</Label>
 				<ImageView class="icon" image="/global/phone_256.png" />

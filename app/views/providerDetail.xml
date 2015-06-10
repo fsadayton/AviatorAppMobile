@@ -4,7 +4,6 @@
 		<View class="divider"/>
 		<Label id="providerName"/>
 		
-
 		<TextArea id="providerDescription"/>
 		
 		<Label id="addressLabel">ADDRESS</Label>

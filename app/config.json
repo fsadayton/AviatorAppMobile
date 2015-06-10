@@ -1,5 +1,7 @@
 {
-	"global": {}, 
+	"global": {
+		"apiUrl": "http://vision21.cloudapp.net/api/AppData/"
+	}, 
 	"env:development": {}, 
 	"env:test": {}, 
 	"env:production": {}, 

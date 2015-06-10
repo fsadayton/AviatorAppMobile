@@ -1,81 +1,62 @@
 var args = arguments[0] || {};
 
 var Map = require('ti.map');
-var providerObj = {providers:[{
-	name:"South Community Behavioral Health",
-	address:"3095 Kettering Boulevard, Moraine, OH",
-	description:"Provides mental health counseling",
-	phone:"123.456.7890",
-	email:"info@test.test",
-	website:"www.google.com",
-	categories:["Mental Health Counseling"]
-},
-{
-	name:"Artemis Domestic Violence Ctr",
-	address:"310 W Monument Ave, Dayton, OH",
-	description:"Provides crisis intervention, safety planning, education, and support to victims of domestic violence and their children.",
-	phone:"123.456.7890",
-	email:"info@test.test",
-	website:"www.google.com",
-	categories:["Domestic Violence Support"],
-	crisis:"937-222-7233"
-},
-{
-	name:"Family Services Association",
-	address:"2211 Arbor Boulevard, Moraine, OH",
-	description:"Provides community mental health counseling, support services & services for the deaf",
-	phone:"123.456.7890",
-	email:"info@test.test",
-	website:"www.google.com",
-	categories:["Mental Health Counseling", "Services for the Disabled"]
-}
-]};
+var geocoder = require('ti.geocoder');
+
+
+Alloy.Globals.sendHttpRequest("GetCategoryLookupIndex", "GET", null, storeCategoryLookup);
+var categoryDictionary = null;
 var allHeaders = [];
-var crisisHeaders = [];
-_.each(providerObj.providers, function(provider){
-	addProviderToMap(provider.address + ", US", provider.name);
+function storeCategoryLookup(){
+	categoryDictionary = JSON.parse(this.responseText);
+	
+	_.each(categoryDictionary, function(category){
+		if (_.contains(args.categories, category.id)){
+			allHeaders.push(Ti.UI.createTableViewSection({title:category.id, headerView: Alloy.createController('TableViewHeader', {text:category.name}).getView()}));
+		}
+	});
+	
+	Alloy.Globals.sendHttpRequest("GetServiceProviders?counties=57&categories=" 
+	+ args.categories.join(), "GET", null, parseServiceProviders);
+}
+
+function parseServiceProviders(){
+	
+	var crisisHeaders = [];
+	var json = JSON.parse(this.responseText);
+	
+_.each(json, function(provider){
 	var row = Alloy.createController('serviceProviderRow', {
 			name:provider.name,
 			address:provider.address,
 			description:provider.description,
-			phone: provider.phone,
+			phone: provider.phoneNumber,
 			email: provider.email,
 			website: provider.website,
 		}).getView();	
-	if(provider.crisis){
-		crisisHeaders.push(Alloy.createController('serviceProviderRow', {
-			name:provider.name,
-			crisis: provider.crisis
-		}).getView());
-	}
-		
+	
 	_.each(provider.categories, function(category){
 		
-		var headerIndex =  -1;
-		
-		_.find(allHeaders, function(header, index){
+		_.find(allHeaders, function(header){
 			if(header.title === category){
-				headerIndex = index;
+				addProviderToMap(provider.address, provider.name);
+				header.add(row);
+				if(provider.crisisNumber){
+					crisisHeaders.push(Alloy.createController('serviceProviderRow', {
+					name:provider.name,
+					crisis: provider.crisisNumber
+					}).getView());
+				}
 				return true;
 			}
-		});
-		
-		Ti.API.info("header index: " + headerIndex);
-		if(headerIndex > -1){
-			allHeaders[headerIndex].add(row);
-			
-		}
-		else{
-			
-			var section = Ti.UI.createTableViewSection({title:category, headerView: Alloy.createController('TableViewHeader', {text:category}).getView()});
-			section.add(row);
-			allHeaders.push(section);
-		}	
+		});	
 	});
 });
 
 $.menu.setData(allHeaders);
 $.crisisMenu.setData(crisisHeaders);
+}
+
     
 function providerDetail(e){
 	Alloy.createController('providerDetail',{
@@ -94,20 +75,19 @@ function callPhoneNumber(e){
 }
 
 function addProviderToMap(address, providerName){
-	Ti.Geolocation.forwardGeocoder(address, function(evt){
-		if(evt.success && evt.latitude)
+	geocoder.forwardGeocoder(address, function(e){
+		if(e.success)
 		{
-			Ti.API.info("map success for " + providerName + evt.latitude);
 			var annotation = Map.createAnnotation({
-	            latitude: evt.latitude,
-	   			longitude: evt.longitude,
+	            latitude: e.places[0].latitude,
+	   			longitude: e.places[0].longitude,
 	            title: providerName,
 	            subtitle: address
            });
            $.map.addAnnotation(annotation);
 		}
 		else{
-				Ti.API.info("error with " + address +": "+ evt.error);
+				Ti.API.info("error with " + address +": "+ e.error);
 			}
 		
 	});	
@@ -130,3 +110,10 @@ function toggleMapListView(){
 		$.listView.visible = isMapVisible;
 	}
 }
+
+function filterResults(){
+	alert("This feature is coming soon!");
+}
+
+Alloy.Globals.addActionBarButtons($.tabGroup);
+

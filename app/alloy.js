@@ -12,6 +12,7 @@
 
 // Loads the map module, which can be referenced by Alloy.Globals.Map
 Alloy.Globals.Map = require('ti.map');
+var geocoder = require('ti.geocoder');
 
 // Global variable that checks os
 Alloy.Globals.isAndroid = (Ti.Platform.osname == "android") ? true : false;
@@ -27,7 +28,7 @@ Alloy.Globals.addActionBarButtons = function(window){
 	        showAsAction : Ti.Android.SHOW_AS_ACTION_IF_ROOM 
 	    }); 
 	    
-	    menu.add({
+	    var help = menu.add({
 	        title : "Help",
 	        icon : "/global/add126.png", 
 	        showAsAction : Ti.Android.SHOW_AS_ACTION_IF_ROOM 
@@ -35,64 +36,94 @@ Alloy.Globals.addActionBarButtons = function(window){
 	    
 	    
 	    menuItem.addEventListener("click", function(e) { 
-	        Ti.Platform.openURL("http://www.npr.org"); 
+	        Ti.Platform.openURL("http://www.news.yahoo.com"); 
 	    }); 
+	    
+	    help.addEventListener("click", function(e){
+	    	alert("Your trusted contacts have been notified to help you.");
+	    });
     };
     
 };
 
-function hide(){
-    //Either line can be commented or un-commented to show the photo gallery or camera of the device
-//Titanium.Media.openPhotoGallery({
-Titanium.Media.showCamera({
-    success:function(event) {
- // called when media returned from the camera
-        Ti.API.debug('Our type was: '+event.mediaType);
- if(event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
-            var imageView = Ti.UI.createImageView({
-                width:win.width,
-                height:win.height,
-                image:event.media
-            });
-            win.add(imageView);
-        } else {
-            alert("got the wrong type back ="+event.mediaType);
-        }
-    },
-    
-    error:function(error) {
- // called when there's an error
-        var a = Titanium.UI.createAlertDialog({title:'Camera'});
- if (error.code == Titanium.Media.NO_CAMERA) {
-            a.setMessage('Please run this test on device');
-        } else {
-            a.setMessage('Unexpected error: ' + error.code);
-        }
-        a.show();
-    },
-    saveToPhotoGallery:true,
- // allowEditing and mediaTypes are iOS-only settings
-    allowEditing:true,
-    mediaTypes:[Ti.Media.MEDIA_TYPE_VIDEO,Ti.Media.MEDIA_TYPE_PHOTO]
-});
+/**
+ * Method for sending an HTTP Request via Titanium's Ti.Network
+ * library.
+ * 
+ * The parameters are as follows:
+ * 	@param {String} url - REST URL of the request.
+ * 	@param {String} type - HTTP method type (e.g., GET, POST, PUT, etc. ).
+ * 	@param {boolean} setUserPass - true if username/password credentials need to be sent 
+ * 		              with request (i.e., url is an SSL request), 
+ *                    false otherwise.
+ *  @param {Object} customUserPass (REMOVE IN PRODUCTION) - JSON object formed as {username:'user', password:'pass'}
+ * 					  used for the wp-JSON api to pass in custom login data. FOR TESTING ONLY.
+ * 	@param {Object} data - JSON object containing any data to be sent with request, 
+ * 	           should be null if there's no data to send (JSON).
+ * 	@param {Object} onSuccess - callback function to run if request is successful.
+ *  @param {Object} onError - callback function to run if request failed
+ */
+Alloy.Globals.sendHttpRequest = function(url, type, data, onSuccess, onError){
+    if (Ti.Network.online){
+    	var client = Ti.Network.createHTTPClient({
+    		timeout: 15000,
+    		onload:onSuccess
+    	});
+    	
+    	if(onError){
+            client.onerror = onError;
+    	}
+    	else{
+    	    client.onerror = function (e){
+                Alloy.Globals.createNotificationPopup('Action cannot be completed at this time ('+this.status+') - ' + e.error, "Network Error");
+                Ti.API.error(e);
+            };
+    	}
+    	
+    	
+    	if(type == "POST"){
+    		//this property must be set BEFORE opening the connection.
+    		client.setAutoRedirect(false); //do not attempt to redirect to another URL in the event of a 302 Found response
+    	}
+    	
+    	var apiUrl = '';
+    	if (url.indexOf('http') > -1){//If the url passed into the method contains http, use that url
+    		apiUrl = url;
+    	}
+    	else{ //otherwise assume that the wooCommerce API is being used
+    		apiUrl = Alloy.CFG.apiUrl + url;
+    	}
+    	//open the connection
+    	client.open(type, apiUrl);
+        
+        if(type == "POST" || type == "PUT"){
+        	//this property must be set AFTER opening the connection
+    		client.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+    	}
+
+    	Ti.API.info("sending http request for url: "+apiUrl);
+    	
+    	//send request
+       	data == null ? client.send() : client.send(JSON.stringify(data));
+   	}
+   	else{
+   	    Alloy.Globals.createNotificationPopup("Cannot establish connection to Drinkos. Please check your network connection.", "Network Error");
+   	}
 };
 
 Alloy.Globals.estimateDistance = function(currentPos, address, callback){
 	var distance = "??? mile(s)";
 	if(currentPos){
-		Ti.Geolocation.forwardGeocoder(address, function(evt){
-			Ti.API.info("inside forward geocoder");
-			if(evt.success && evt.latitude)
-			{
-				
-				distance = getDistance(parseFloat(currentPos.latitude), parseFloat(currentPos.longitude), parseFloat(evt.latitude), parseFloat(evt.longitude)) + " mile(s)";
-				callback(distance);
-			}
-			else{
-				Ti.API.info("error with " + address +": "+ evt.error);
-			}
-		});	
-		Ti.API.info("returning distance: " + distance);
+
+		geocoder.forwardGeocoder(address, function(e){
+		    if(e.success){
+		        distance = getDistance(parseFloat(currentPos.latitude), parseFloat(currentPos.longitude), parseFloat(e.places[0].latitude), parseFloat(e.places[0].longitude)) + " mile(s)";
+				callback(distance); 
+		    }   
+		
+		    var test = JSON.stringify(e);
+		    //Ti.API.info("Forward Results stringified" + test);
+		});
 		return distance;	
 	}
 };
@@ -123,7 +154,6 @@ function getDistance(lat1,lon1,lat2,lon2){
     Math.sin(dLon/2) * Math.sin(dLon/2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     var d = R * c;
- 	Ti.API.info("miles:" +d.toFixed(2));
     return d.toFixed(2);
 }
 
