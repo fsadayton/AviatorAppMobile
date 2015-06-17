@@ -2,14 +2,14 @@
 	backgroundColor:"#fff",
 }
 ".boxContainer":{
-	height:"30%",
+	height:"28%",
 	color:"#7d7d7d"
 }
 
 "#welcomeLabel":{
 	color:"#7d7d7d",
-	bottom:"15dp",
-	top:"15dp",
+	bottom:"5dp",
+	top:"5dp",
 	textAlign:"center",
 	height:"50dp",
 	width:"85%"
@@ -20,7 +20,8 @@
 	borderWidth: 2,
 	borderColor: "#65c8c7",
 	height: "90%",
-	width: "45%"
+	width: "45%",
+	layout:"vertical"
 }
 
 ".left":{
@@ -36,17 +37,25 @@
 		fontFamily:"Quicksand-Bold",
 		fontSize:'15dp'
 	},
-	top:"12dp",
-	color:"#7d7d7d"
+	top:"1dp",
+	color:"#7d7d7d",
+	height:"30%",
+	textAlign:"center"
+}
+".icon":{
+	height: "25%",
+	top:"1dp",
+	bottom:"1dp"
 }
 
 ".description":{
 	bottom:"5dp",
 	width:"95%",
 	font:{
-		fontSize:'13dp'
+		fontSize:'10dp'
 	},
-	textAlign: "center"
+	textAlign: "center",
+	height:"30%"
 }
 "#header": {
 	backgroundColor: "#00a1ff",
@@ -77,6 +86,4 @@
 }
 
 
-".icon":{
-	width: "28%"
-}
+
