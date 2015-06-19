@@ -4,7 +4,7 @@
   <property name="acs-api-key-production" type="string">Eiu6BI6l3nK45otbsMiovn7JMvSthhy9</property>
   <property name="acs-api-key-development" type="string">SjfvIAyGzvcVmGomFN4XbjhNKFMtxKNv</property>
   <id>org.fsadayton.armorapp</id>
-  <name>ArmorApp</name>
+  <name>Armor App</name>
   <version>1.0</version>
   <publisher>errettjm</publisher>
   <url>http://www.fsadayton.org</url>
@@ -78,6 +78,8 @@
     <module platform="commonjs">ti.cloud</module>
     <module platform="iphone">ti.map</module>
     <module platform="android">ti.map</module>
+    <module platform="android" version="1.1.0">ti.geocoder</module>
+    <module platform="iphone" version="1.0.0">ti.geocoder</module>
   </modules>
   <deployment-targets>
     <target device="iphone">true</target>

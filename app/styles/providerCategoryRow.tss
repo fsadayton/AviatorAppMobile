@@ -1,0 +1,14 @@
+".icon":{
+	right: "15dp",
+	width: "45dp"
+}
+
+"#navText": {
+	left: "3%",
+	color: "#666",
+	font:{
+		fontSize: '20dp'
+	},	
+	width:"77%",
+	wordWrap:true
+}

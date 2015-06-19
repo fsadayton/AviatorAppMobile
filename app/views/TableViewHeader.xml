@@ -1,0 +1,5 @@
+<Alloy>
+	<View id="sectionHeader">
+		<Label id="sectionLabel"/>
+	</View>
+</Alloy>

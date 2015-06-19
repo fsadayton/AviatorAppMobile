@@ -1,0 +1,7 @@
+<Alloy>
+	<Window class="container" id="win" layout="vertical">
+		<View class="divider"/>
+		<TableView id="crisisLineTable" onClick="callPhoneNumber">
+		</TableView>
+	</Window>
+</Alloy>

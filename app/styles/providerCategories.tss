@@ -1,0 +1,10 @@
+".container": {
+	backgroundColor:"#fff",
+}
+
+".menu":{
+	separatorColor: "#65c8c7",
+}
+
+
+
