@@ -25,36 +25,35 @@ function parseServiceProviders(){
 	var crisisHeaders = [];
 	var json = JSON.parse(this.responseText);
 	
-_.each(json, function(provider){
-	var row = Alloy.createController('serviceProviderRow', {
-			orgName:provider.name,
-			address:provider.address,
-			description:provider.description,
-			phone: provider.phoneNumber,
-			email: provider.email,
-			website: provider.website,
-		}).getView();	
-	
-	_.each(provider.categories, function(category){
-		
-		_.find(allHeaders, function(header){
-			if(header.title === category){
-				addProviderToMap(provider.address, provider.name);
-				header.add(row);
-				if(provider.crisisNumber){
-					crisisHeaders.push(Alloy.createController('serviceProviderRow', {
-					orgName:provider.name,
-					crisis: provider.crisisNumber
-					}).getView());
+	_.each(json, function(provider){
+		addProviderToMap(provider.address, provider.name);
+		var row = Alloy.createController('serviceProviderRow', {
+				orgName:provider.name,
+				address:provider.address,
+				description:provider.description,
+				phone: provider.phoneNumber,
+				email: provider.email,
+				website: provider.website,
+			}).getView();	
+			
+		if(provider.crisisNumber){
+			crisisHeaders.push(Alloy.createController('serviceProviderRow', {
+				orgName:provider.name,
+				crisis: provider.crisisNumber
+			}).getView());
+		}
+		_.each(provider.categories, function(category){
+			_.find(allHeaders, function(header){
+				if(header.title === category){
+					header.add(row);
+					return true;
 				}
-				return true;
-			}
-		});	
+			});	
+		});
 	});
-});
-
-$.menu.setData(allHeaders);
-$.crisisMenu.setData(crisisHeaders);
+	
+	$.menu.setData(allHeaders);
+	$.crisisMenu.setData(crisisHeaders);
 }
 
     

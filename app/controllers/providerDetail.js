@@ -71,7 +71,7 @@ function callPhoneNumber(){
 
 function openEmail(){
 	var emailDialog = Ti.UI.createEmailDialog();
-	emailDialog.subject = "Request for Info: " + args.name;
+	emailDialog.subject = "Request for Info: " + args.orgName;
 	emailDialog.toRecipients = [args.email];
 	emailDialog.messageBody = "Hello, \nI'm interested in your services. At your earliest convenience, please send me information about your organization.";
 	emailDialog.open();
@@ -90,7 +90,7 @@ function shareInformation(){
 	var body = "You might be interested in this organization. \nDescription: " 
 		+ args.description + "\nPhone: " + args.phone 
 		+ "\nEmail: " + args.email + "\nWebsite: " + args.website;
-	intent.putExtra(Ti.Android.EXTRA_SUBJECT, args.name);
+	intent.putExtra(Ti.Android.EXTRA_SUBJECT, args.orgName);
 	intent.putExtra(Ti.Android.EXTRA_TEXT, body);
 	activity.startActivity(Ti.Android.createIntentChooser(intent, 'Share'));
 }
