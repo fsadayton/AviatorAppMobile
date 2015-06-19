@@ -1,9 +1,9 @@
 var args = arguments[0] || {};
 
-$.providerName.text = args.name;
-$.subtext.text = args.crisis ? "CALL " + args.crisis : Alloy.Globals.estimateDistance(Alloy.Globals.currentLocation, args.address + ", US", setSubtext);
+$.providerName.text = args.orgName;
+$.subtext.text = args.crisis ? "CALL " + args.crisis : Alloy.Globals.Location.estimateDistance(Alloy.Globals.currentLocation, args.address + ", US", setSubtext);
 
-$.row.name = args.name;
+$.row.name = args.orgName;
 $.row.address = args.address;
 $.row.description = args.description;
 $.row.phone = args.phone;

@@ -21,7 +21,7 @@ function parseServiceProviders(){
 	
 _.each(crisisProviders, function(provider){
 	crisisHeaders.push(Alloy.createController('serviceProviderRow', {
-			name:provider.name,
+			orgName:provider.name,
 			crisis: provider.crisisNumber
 		}).getView());
 });

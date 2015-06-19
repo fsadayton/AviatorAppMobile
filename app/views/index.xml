@@ -1,5 +1,5 @@
 <Alloy>
-	<Window class="container" layout="vertical">
+	<Window class="container" layout="vertical" onOpen="Alloy.Globals.updateActionBar">
 		<View id="header" platform="ios">
 			<ImageView id="headerLeft" image="/global/blind2.png" onClick="hide"></ImageView>
 			<Label id="headerText">Victim Services</Label>
@@ -9,28 +9,28 @@
 		<Label id="welcomeLabel">Welcome to Armor App - your link to information and resources</Label>
 		
 		<View class="boxContainer">
-			<View class="left box" onClick="providers">
+			<View class="left box" onClick="openProviders">
 				<View class="divider"/>
-				<Label class="name" >RESOURCES</Label>
+				<Label class="name" >PERSONAL RESOURCES</Label>
 				<ImageView class="icon" image="/global/familiar17.png" />
 				<Label class="description">View organizations that can help address your needs</Label>
 			</View>
-			<View class="right box" onClick="incarceration">
+			<View class="right box" onClick="openCorrections">
 				<View class="divider"/>
 				<Label class="name">LAW & CORRECTIONS</Label>
 				<ImageView class="icon" image="/global/hands6.png" />
-				<Label class="description">Find jail time info about an offender</Label>
+				<Label class="description">Contact local authorities or find jail time info about an offender</Label>
 			</View>
 		</View>
 		
 		<View class="boxContainer">
-			<View class="left box" onClick="providers">
+			<View class="left box" onClick="openVictimCompensation">
 				<View class="divider"/>
 				<Label class="name" >VICTIM COMPENSATION</Label>
 				<ImageView class="icon" image="/global/compensation_256.png" />
-				<Label class="description">View financial assistance options for victims of violent crime.</Label>
+				<Label class="description">Are you a victim of violent crime? View financial assistance options here.</Label>
 			</View>
-			<View class="right box" onClick="incarceration">
+			<View class="right box" onClick="openVeteranServices">
 				<View class="divider"/>
 				<Label class="name">VETERAN SERVICES</Label>
 				<ImageView class="icon" image="/global/veterans_256.png" />
@@ -39,13 +39,13 @@
 		</View>
 		
 		<View class="boxContainer">
-			<View class="left box" onClick="account">
+			<View class="left box" onClick="openAccount">
 				<View class="divider"/>
-				<Label class="name">PERSONAL</Label>
+				<Label class="name">MY ACCOUNT</Label>
 				<ImageView class="icon" image="/global/round58.png" />
 				<Label class="description">View your trusted contacts and favorite providers</Label>
 			</View>
-			<View class="right box" onClick="crisisLines">
+			<View class="right box" onClick="openCrisisLines">
 				<View class="divider"/>
 				<Label class="name">CRISIS LINES</Label>
 				<ImageView class="icon" image="/global/phone_256.png" />

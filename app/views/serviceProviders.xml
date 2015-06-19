@@ -1,5 +1,5 @@
 <Alloy>
-	<TabGroup id="tabGroup">
+	<TabGroup id="tabGroup" onOpen="Alloy.Globals.updateActionBar">
 		<Tab title="NEARBY">
 			<Window id="win">
 				<TableView id="menu" class="menu" onClick="providerDetail" visible=true>

@@ -1,5 +1,5 @@
 <Alloy>
-	<Window class="container" id="win">
+	<Window class="container" id="win" onOpen="Alloy.Globals.updateActionBar">
 		<Require src="header"></Require>
 		<View class="divider"/>
 		<Label id="providerName"/>

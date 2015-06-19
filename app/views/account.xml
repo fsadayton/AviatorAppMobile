@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="win">
+	<Window id="win" onOpen="Alloy.Globals.updateActionBar">
 		<Require src="header"></Require>
 		<View class="divider"/>
 		<ImageView id="accountImage" image="/global/user256.png" />
