@@ -1,15 +1,28 @@
 var args = arguments[0] || {};
 
-$.providerName.text = args.name;
+$.providerName.text = args.orgName;
 
-var address = args.address.split(",");
-$.address.text = address[0] + "\n" + address[1].trim() + ", " + address[2].trim();
+if(args.address){
+	var address = args.address.split(",");
+	$.address.text = address[0] + "\n" + address[1].trim() + ", " + address[2].trim();
+}
+else{
+	$.address.visible = false;
+	$.addressLabel.visible = false;
+	$.driveButton.visible = false;
+	$.providerDescription.height = "35%";
+}
+
 $.providerDescription.value = args.description;
 $.phoneLabel.text = "CALL " + args.phone;
 
 $.phoneView.visible = args.phone ? true : false;
 $.emailView.visible = args.email ? true : false;
 $.websiteView.visible = args.website ? true :false;
+
+$.phoneView.height = args.phone ? $.phoneView.height : 0;
+$.emailView.height = args.email ? $.emailView.height : 0;
+$.websiteView.height = args.website ? $.websiteView.height :0;
 
 $.win.activity.onCreateOptionsMenu = function(e){
 	var menu = e.menu;

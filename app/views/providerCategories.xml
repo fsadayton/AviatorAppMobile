@@ -1,5 +1,5 @@
 <Alloy>
-	<TabGroup id="tabGroup">
+	<TabGroup id="tabGroup" onOpen="Alloy.Globals.updateActionBar">
 		<Tab title="GENERAL">
 			<Window class="container" id="win">
 				<TableView id="generalTable" class="menu" onClick="listProviders">

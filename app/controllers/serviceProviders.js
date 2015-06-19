@@ -27,7 +27,7 @@ function parseServiceProviders(){
 	
 _.each(json, function(provider){
 	var row = Alloy.createController('serviceProviderRow', {
-			name:provider.name,
+			orgName:provider.name,
 			address:provider.address,
 			description:provider.description,
 			phone: provider.phoneNumber,
@@ -43,7 +43,7 @@ _.each(json, function(provider){
 				header.add(row);
 				if(provider.crisisNumber){
 					crisisHeaders.push(Alloy.createController('serviceProviderRow', {
-					name:provider.name,
+					orgName:provider.name,
 					crisis: provider.crisisNumber
 					}).getView());
 				}
@@ -60,7 +60,7 @@ $.crisisMenu.setData(crisisHeaders);
     
 function providerDetail(e){
 	Alloy.createController('providerDetail',{
-		name:e.row.name,
+		orgName:e.row.name,
 		address: e.row.address,
 		description: e.row.description,
 		phone: e.row.phone,
