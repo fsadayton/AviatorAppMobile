@@ -1,0 +1,15 @@
+<Alloy>		
+	<TabGroup id="tabGroup" onOpen="Alloy.Globals.updateActionBar">
+		<Tab title="LOCAL LAW">
+			<Window class="container" id="win">
+				<Label>Nothing to see here.</Label>
+			</Window>
+		</Tab>
+		<Tab title="VINE">
+			<Require src="providerDetail" 
+				description="VINE allows crime victims to obtain timely and reliable information about criminal cases and the custody status of offenders 24 hours a day."
+				website="https://www.vinelink.com/"
+				orgName="Victim Information and Notification Everyday"/>
+		</Tab>
+	</TabGroup>
+</Alloy>

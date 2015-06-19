@@ -1,0 +1,6 @@
+<Alloy>
+	<TableViewRow id="row" class="defaultRow">
+		<Label id="providerName"/>
+		<Label id="subtext"/>
+	</TableViewRow>
+</Alloy>

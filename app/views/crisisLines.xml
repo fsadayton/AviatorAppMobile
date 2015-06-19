@@ -1,0 +1,7 @@
+<Alloy>
+	<Window class="container" id="win" layout="vertical" onOpen="Alloy.Globals.updateActionBar">
+		<View class="divider"/>
+		<TableView id="crisisLineTable" onClick="callPhoneNumber">
+		</TableView>
+	</Window>
+</Alloy>
