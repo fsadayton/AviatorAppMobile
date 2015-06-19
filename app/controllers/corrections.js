@@ -1,7 +1,3 @@
-function openVine(){
-	
-}
 
-function goToWebsite(){
-	
-}
+Alloy.Globals.addActionBarButtons($.tabGroup);
+

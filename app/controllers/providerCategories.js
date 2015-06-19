@@ -1,7 +1,8 @@
+$.generalIndicator.show();
+$.crimeIndicator.show();
 
 var tableSection = Ti.UI.createTableViewSection({headerView: Alloy.createController('TableViewHeader', {text:"What can we help you with?"}).getView()});	
 var crimeTableSection = Ti.UI.createTableViewSection({headerView: Alloy.createController('TableViewHeader', {text:"What can we help you with?"}).getView()});
-
 
 Alloy.Globals.sendHttpRequest("GetFamilies", "GET", null, parseFamilies);
 Alloy.Globals.sendHttpRequest("GetCrimeTypes", "GET", null, parseCrimes);
@@ -16,7 +17,9 @@ function parseFamilies(){
 			categories: family.categoryIds 
 		}).getView());
 	});
+	$.generalIndicator.hide();
 	$.generalTable.setData([tableSection]);
+	
 }
 
 function parseCrimes(){
@@ -29,6 +32,7 @@ function parseCrimes(){
 		}).getView());
 
 	});
+	$.crimeIndicator.hide();
 	$.crimeTable.setData([crimeTableSection]);
 }
 

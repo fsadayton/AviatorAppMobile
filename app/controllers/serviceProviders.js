@@ -3,12 +3,13 @@ var args = arguments[0] || {};
 var Map = require('ti.map');
 var geocoder = require('ti.geocoder');
 
+$.activityIndicator.show();
+$.quickActivityIndicator.show();
 
 Alloy.Globals.sendHttpRequest("GetCategoryLookupIndex", "GET", null, storeCategoryLookup);
-var categoryDictionary = null;
 var allHeaders = [];
 function storeCategoryLookup(){
-	categoryDictionary = JSON.parse(this.responseText);
+	var categoryDictionary = JSON.parse(this.responseText);
 	
 	_.each(categoryDictionary, function(category){
 		if (_.contains(args.categories, category.id)){
@@ -21,39 +22,46 @@ function storeCategoryLookup(){
 }
 
 function parseServiceProviders(){
-	
-	var crisisHeaders = [];
 	var json = JSON.parse(this.responseText);
-	
-	_.each(json, function(provider){
-		addProviderToMap(provider.address, provider.name);
-		var row = Alloy.createController('serviceProviderRow', {
-				orgName:provider.name,
-				address:provider.address,
-				description:provider.description,
-				phone: provider.phoneNumber,
-				email: provider.email,
-				website: provider.website,
-			}).getView();	
-			
-		if(provider.crisisNumber){
-			crisisHeaders.push(Alloy.createController('serviceProviderRow', {
-				orgName:provider.name,
-				crisis: provider.crisisNumber
-			}).getView());
-		}
-		_.each(provider.categories, function(category){
-			_.find(allHeaders, function(header){
-				if(header.title === category){
-					header.add(row);
-					return true;
-				}
-			});	
+	if(json.length == 0){
+		$.activityIndicator.hide();
+		$.quickActivityIndicator.hide();
+		$.noResults.visible = true;
+		$.quickNoResults.visible = true;
+	}
+	else{
+		var crisisHeaders = [];
+		_.each(json, function(provider){
+			addProviderToMap(provider.address, provider.name);
+			var row = Alloy.createController('serviceProviderRow', {
+					orgName:provider.name,
+					address:provider.address,
+					description:provider.description,
+					phone: provider.phoneNumber,
+					email: provider.email,
+					website: provider.website,
+				}).getView();	
+				
+			if(provider.crisisNumber){
+				crisisHeaders.push(Alloy.createController('serviceProviderRow', {
+					orgName:provider.name,
+					crisis: provider.crisisNumber
+				}).getView());
+			}
+			_.each(provider.categories, function(category){
+				_.find(allHeaders, function(header){
+					if(header.title === category){
+						header.add(row);
+						return true;
+					}
+				});	
+			});
 		});
-	});
-	
-	$.menu.setData(allHeaders);
-	$.crisisMenu.setData(crisisHeaders);
+		$.activityIndicator.hide();
+		$.quickActivityIndicator.hide();
+		$.menu.setData(allHeaders);
+		$.crisisMenu.setData(crisisHeaders);
+	}
 }
 
     

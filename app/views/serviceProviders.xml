@@ -2,6 +2,8 @@
 	<TabGroup id="tabGroup" onOpen="Alloy.Globals.updateActionBar">
 		<Tab title="NEARBY">
 			<Window id="win">
+				<ActivityIndicator id="activityIndicator"/>
+				<Label id="noResults" zIndex=1 visible=false>No results.</Label>
 				<TableView id="menu" class="menu" onClick="providerDetail" visible=true>
 				</TableView>
 				<View id="mapModule" height="90%" visible=false top=0>
@@ -25,6 +27,8 @@
 		</Tab>
 		<Tab title="QUICK CALL">
 			<Window id="win">
+			<ActivityIndicator id="quickActivityIndicator"/>
+			<Label id="quickNoResults" zIndex=1 visible=false>No results.</Label>
 			<TableView id="crisisMenu" class="menu" onClick="callPhoneNumber">
 			</TableView>
 			</Window>

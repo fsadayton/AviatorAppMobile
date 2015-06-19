@@ -2,12 +2,14 @@
 	<TabGroup id="tabGroup" onOpen="Alloy.Globals.updateActionBar">
 		<Tab title="GENERAL">
 			<Window class="container" id="win">
+				<ActivityIndicator id="generalIndicator"/>
 				<TableView id="generalTable" class="menu" onClick="listProviders">
 				</TableView>
 			</Window>
 		</Tab>
 		<Tab title="CRIME">
 			<Window class="container" id="win">
+				<ActivityIndicator id="crimeIndicator"/>
 				<TableView id="crimeTable" class="menu" onClick="listProviders">
 				</TableView>
 			</Window>
