@@ -3,3 +3,15 @@
 		fontFamily:"QuickSand-Regular"
 	}
 }
+
+".defaultRow":{
+	height: "70dp",
+	color: "#F69C22",
+	backgroundColor: "#fff"
+}
+
+".divider":{
+	height: "10dp",
+	backgroundColor:"#f9c84d",
+	top:0
+}

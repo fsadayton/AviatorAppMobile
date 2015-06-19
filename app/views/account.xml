@@ -1,32 +1,27 @@
 <Alloy>
-	<Window id="win" class="container">
+	<Window id="win">
 		<Require src="header"></Require>
-		<View id="accountInfo"></View>
-		<View>
-			<ImageView id="accountImage" image="/global/accountImage.png" />
-			<Label id="firstNameLine">First Name</Label>
-			<Label id="firstName">Sam</Label>
-			<Label id="lastNameLine">Last Name</Label>
-			<Label id="lastName">Sparks</Label>
-			<Label id="dobLine">DOB</Label>
-			<Label id="dob">3/17/90</Label>
-			<Label id="addressLine">Current Address</Label>
-			<Label id="address">1793 S. 4th St. SanfranSokyo CA, 45789</Label>
-		</View>
-		
+		<View class="divider"/>
+		<ImageView id="accountImage" image="/global/user256.png" />
+		<Label id="name">Jane Doe</Label>
+		<Label class="headerLabel">TRUSTED CONTACTS</Label>
 		<TableView id="contactTable">
 			<TableViewRow>
-				<View>
-					<Label id="trustedContacts">Trusted Contacts</Label>
-				</View>
+				<Label>John Doe • 937.554.5767</Label>
 			</TableViewRow>
 			<TableViewRow>
-				<View>
-					<Label id="name">Name</Label>
-					<Label id="phone">Phone</Label>
-					<Label id="email">Email</Label>
-				</View>
+				<Label>Harry Smith • 419.344.5555</Label>
 			</TableViewRow>
-		</TableView>	
+			<TableViewRow>
+				<Label>Mary Thompson • 937.555.1234</Label>
+			</TableViewRow>
+
+		</TableView>
+		<Label class="headerLabel">FAVORITE SERVICES</Label>
+		<Label>No favorites have been saved.</Label>
+		
+		<Label class="headerLabel">COUNTY OF INTEREST</Label>
+		<Label>Montgomery County - Ohio</Label>
+	
 	</Window>
 </Alloy>

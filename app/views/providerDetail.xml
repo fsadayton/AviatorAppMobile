@@ -1,18 +1,36 @@
 <Alloy>
-	<Window class="container">
+	<Window class="container" id="win">
 		<Require src="header"></Require>
-		<View>
-			<Label id="providerDescription">Provides community mental health counseling, support services & services for the deaf</Label>
-			<Label id="contactContact">Contact</Label>
-			<Label id="providerAddress" html="2211 Arbor Blvd. <br>Dayton OH, 45476"></Label>
-			<Label id="driveButton">Drive</Label>
-			<Label id="providerPhone">937.222.9481</Label>
-			<Label id="providerEmail">information@fsadayton.org</Label>
-			<Label id="providerWeb">www.fsadayton.org</Label>
-			<ImageView id="favoriteIcon" image="/global/heartIcon.png" />
-			<Label id="favorite" textAlign="Titanium.UI.TEXT_ALIGNMENT_CENTER">Tag as Favorite</Label>
-			<ImageView id="shareIcon" image="/global/heartIcon.png" />
-			<Label id="share" textAlign="Titanium.UI.TEXT_ALIGNMENT_CENTER">Share with Friends</Label>
+		<View class="divider"/>
+		<Label id="providerName"/>
+		
+		<TextArea id="providerDescription"/>
+		
+		<Label id="addressLabel">ADDRESS</Label>
+		<View id="addressView">
+			<Label id="address"/>
+			<Button id="driveButton" onClick="getDirections">Get Directions</Button>
 		</View>
+		<View id="phoneView" class="actionView" onClick="callPhoneNumber">
+			<ImageView class="actionImage" image="/global/phone_256.png" />
+			<Label id="phoneLabel" class="actionLabel"/>
+		</View>
+		<View id="emailView" class="actionView" onClick="openEmail">
+			<ImageView class="actionImage" image="/global/email256.png" />
+			<Label id="emailLabel" class="actionLabel">EMAIL THIS PROVIDER</Label>
+		</View>
+		<View id="websiteView" class="actionView" onClick="openWebsite">
+			<ImageView class="actionImage" image="/global/domain256.png" />
+			<Label id="webLabel" class="actionLabel">VISIT WEBSITE</Label>
+		</View>
+			
+		<!--<View id="favorite" class="tagShare">
+			<ImageView id="favoriteIcon" class="tagShareIcon" image="/global/star256.png" />
+			<Label id="favorite" class="tagShareLabel">Tag as Favorite</Label>
+		</View>
+		<View id="share" class="tagShare">
+			<ImageView id="shareIcon" class="tagShareIcon" image="/global/share256.png" />
+			<Label id="share" class="tagShareLabel">Share with Friends</Label>
+		</View>-->
 	</Window>
 </Alloy>
