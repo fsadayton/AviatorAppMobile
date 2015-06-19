@@ -1,102 +1,99 @@
-"#header": {
-	backgroundColor: "#00a1ff",
-	opacity: 1,
-	color: "#0e4bea",
-	height: "10%",
-	top: 0,
-	zIndex: 1
+
+"Window":{
+	backgroundColor:"#fff",
+	layout:"vertical"
 }
-"#headerText":{
-	color: "#ffd400",
+
+"#providerName":{
+	backgroundColor:"#d8d8d8",
 	font:{
-		fontSize: '24dp',
-		fontWeight: 'bold'
-	}
+		fontFamily:"Quicksand-Bold",
+		fontSize: "20dp"
+	},
+	textAlign: "center",
+	color:"#fff",
+	width:"100%"
 }
 
-"#headerLeft":{
-	left: "6%",
-	width: "11%"
-}
-
-"#headerRight":{
-	right: "6.5%",
-	width: "11%"
-}
-
-//Provider Info////
 "#providerDescription":{
-left: "5%"	,
-right: "5%",
-top: "11%"
+	borderColor:"#65c8c7",
+	borderRadius: 10,
+	borderWidth: 2,
+	color:"#666",
+	editable: false,
+	focusable: false,
+	height:"20%",
+	font:{
+		fontFamily:"Quicksand-Regular",
+		fontSize: "15dp"
+	},
+	top:"10dp",
+	width: "90%"
+}
+"#addressLabel":{
+	font:{
+		fontFamily:"Quicksand-Bold",
+		fontSize: "15dp"
+	},
+	color:"#65c8c7",
+	left:"10dp",
+	top:"15dp"
+}
+"#address":{
+	left:"10dp",
+	width:"50%",
+	color:"#7d7d7d"
+}
+"#addressView":{
+	height:"55dp"
+}
+"ImageView":{
+	width:"30dp"
 }
 
-"#contactContact":{
-	left: "15%",
-	top: "30%"
+".actionView":{
+	height:"45dp",
+	width:"90%",
+	borderRadius:20,
+	borderWidth: 2,
+	borderColor:"#f9c84d",
+	top:"10dp"
 }
 
-"#providerAddress":{
-	left: "15%",
-	top: "33%"
+".actionLabel":{
+	color:"#7d7d7d",
+	textAlign: "center"
+}
+
+".actionImage":{
+	left:"5%"
 }
 
 "#driveButton":{
-	right: "15%",
-	top: "33%"
-}
-
-"#providerPhone":{
-	left: "15%",
-	top: "39%"
-}
-
-"#providerEmail":{
-	left: "15%",
-	top: "42%"
-}
-
-"#providerWeb":{
-	left: "15%",
-	top: "45%"
-}
-
-"#favorite":{
-	left: 0,
-	width: "100%",
-	height: "10%",
-	bottom: "10%",
-	backgroundColor: "#00a1ff",
+	right: "10dp",
 	font:{
-		fontSize: '18dp',
-		fontWeight: 'bold',
-	}
-}
-"#favoriteIcon":{
-	width: "8%",
-	bottom: "12.5%",
-	left: "8%",
-	zIndex: 1
+		fontFamily:"Quicksand-Light"
+	},
+	borderRadius:10
 }
 
-"#share":{
-	left: 0,
-	width: "100%",
-	height: "10%",
-	bottom: "10dp",
-	backgroundColor: "#00a1ff",
+".tagShare":{
+	backgroundColor: "#d9d9d9",
 	font:{
-		fontSize: '18dp',
-		fontWeight: 'bold'
-	}
+		fontSize: '18dp'
+	},
+	height:"45dp",
+	borderColor:"#666"
 }
 
-"#shareIcon":{
-	width: "8%",
-	bottom: "3%",
-	left: "8%",
-	zIndex: 1
+".tagShareIcon":{
+	left:"5%"
 }
+
+".tagShareLabel":{
+	left:"20%"
+}
+
 
 
 

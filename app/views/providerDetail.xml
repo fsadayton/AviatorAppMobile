@@ -1,22 +1,36 @@
 <Alloy>
-	<Window class="container">
-		<View id="header">
-			<ImageView id="headerLeft" image="/global/blind2.png"></ImageView>
-			<Label id="headerText">Providers Details</Label>
-			<ImageView id="headerRight" image="/global/add126.png"></ImageView>
+	<Window class="container" id="win" onOpen="Alloy.Globals.updateActionBar">
+		<Require src="header"></Require>
+		<View class="divider"/>
+		<Label id="providerName"/>
+		
+		<TextArea id="providerDescription"/>
+		
+		<Label id="addressLabel">ADDRESS</Label>
+		<View id="addressView">
+			<Label id="address"/>
+			<Button id="driveButton" onClick="getDirections">Get Directions</Button>
 		</View>
-		<View>
-			<Label id="providerDescription">Mario Brothers Plumbing Inc is the worlds premier service provider in Princess extrication and Bowser removal services.</Label>
-			<Label id="contactContact">Contact</Label>
-			<Label id="providerAddress" html="123 S Park Dr. <br>Dayton OH, 45476"></Label>
-			<Label id="driveButton">Drive</Label>
-			<Label id="providerPhone">provider phone</Label>
-			<Label id="providerEmail">toad@mbros.com</Label>
-			<Label id="providerWeb">www.MBrosPlumbingInc.com</Label>
-			<ImageView id="favoriteIcon" image="/global/heartIcon.png" />
-			<Label id="favorite" textAlign="Titanium.UI.TEXT_ALIGNMENT_CENTER">Tag as Favorite</Label>
-			<ImageView id="shareIcon" image="/global/heartIcon.png" />
-			<Label id="share" textAlign="Titanium.UI.TEXT_ALIGNMENT_CENTER">Share with Friends</Label>
+		<View id="phoneView" class="actionView" onClick="callPhoneNumber">
+			<ImageView class="actionImage" image="/global/phone_256.png" />
+			<Label id="phoneLabel" class="actionLabel"/>
 		</View>
+		<View id="emailView" class="actionView" onClick="openEmail">
+			<ImageView class="actionImage" image="/global/email256.png" />
+			<Label id="emailLabel" class="actionLabel">EMAIL THIS PROVIDER</Label>
+		</View>
+		<View id="websiteView" class="actionView" onClick="openWebsite">
+			<ImageView class="actionImage" image="/global/domain256.png" />
+			<Label id="webLabel" class="actionLabel">VISIT WEBSITE</Label>
+		</View>
+			
+		<!--<View id="favorite" class="tagShare">
+			<ImageView id="favoriteIcon" class="tagShareIcon" image="/global/star256.png" />
+			<Label id="favorite" class="tagShareLabel">Tag as Favorite</Label>
+		</View>
+		<View id="share" class="tagShare">
+			<ImageView id="shareIcon" class="tagShareIcon" image="/global/share256.png" />
+			<Label id="share" class="tagShareLabel">Share with Friends</Label>
+		</View>-->
 	</Window>
 </Alloy>

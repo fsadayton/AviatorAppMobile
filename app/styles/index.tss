@@ -1,6 +1,61 @@
 ".container": {
-	//backgroundColor:"#0E8FEA",
-	backgroundImage: "/global/background.png"
+	backgroundColor:"#fff",
+}
+".boxContainer":{
+	height:"28%",
+	color:"#7d7d7d"
+}
+
+"#welcomeLabel":{
+	color:"#7d7d7d",
+	bottom:"5dp",
+	top:"5dp",
+	textAlign:"center",
+	height:"50dp",
+	width:"85%"
+}
+
+".box":{
+	borderRadius: 10,
+	borderWidth: 2,
+	borderColor: "#65c8c7",
+	height: "90%",
+	width: "45%",
+	layout:"vertical"
+}
+
+".left":{
+	left:"10dp"
+}
+
+".right":{
+	right:"10dp"
+}
+
+".name":{
+	font:{
+		fontFamily:"Quicksand-Bold",
+		fontSize:'15dp'
+	},
+	top:"1dp",
+	color:"#7d7d7d",
+	height:"30%",
+	textAlign:"center"
+}
+".icon":{
+	height: "25%",
+	top:"1dp",
+	bottom:"1dp"
+}
+
+".description":{
+	bottom:"5dp",
+	width:"95%",
+	font:{
+		fontSize:'10dp'
+	},
+	textAlign: "center",
+	height:"30%"
 }
 "#header": {
 	backgroundColor: "#00a1ff",
@@ -28,49 +83,5 @@
 	width: "11%"
 }
 
-"#menu":{
-	left: "0dp",
-	width: "76.5%",
-	top: "25%",
-	opacity: 0.75,
-	backgroundColor: "transparent",
-	separatorColor: "transparent",
-}
 
-"#row":{
-	height: "40dp",
-	color: "#F69C22",
-	borderRadius: 8,
-	left: "-15dp",
-	backgroundColor: "#00a1ff",
-	width: "103.5%",
-	zIndex: 1
-}
 
- ".dropShadow":{
-    top: "3dp",
-    left: "-3dp",
-    width: "100%",
-    height: "40dp",
-    borderRadius: 8,
-    borderWidth: 1.5,
-    backgroundColor: "#000000",
-    opacity: 0.5
-}
-
-".icon":{
-	left: "11%",
-	width: "11%"
-}
-
-"#navText": {
-	left: "30%",
-	color: "#ffd400",
-	font:{
-		fontSize: '20dp'
-	},	
-}
-
-".divider":{
-	opacity: 0,
-}

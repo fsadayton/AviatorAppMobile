@@ -1,121 +1,39 @@
-".container": {
-	backgroundColor:"#0E8FEA",
-	backgroundImage: "/global/background.png"
-}
-
-"#header": {
-	backgroundColor: "#00a1ff",
-	opacity: 1,
-	color: "#0e4bea",
-	height: "10%",
-	top: 0,
-	zIndex: 1
-}
-"#headerText":{
-	color: "#ffd400",
-	font:{
-		fontSize: '24dp',
-		fontWeight: 'bold'
-	}
-}
-
-"#headerLeft":{
-	left: "6%",
-	width: "11%"
-}
-
-"#headerRight":{
-	right: "6.5%",
-	width: "11%"
-}
-
-//Profile//
-"#accountInfo":{
-	backgroundColor: "#ffd400",
-	opacity: 0.10
+"Window": {
+	backgroundColor: "#fff",
+	layout: "vertical"
 }
 
 "#accountImage":{
-	left: "35%",
-	top: "13%",
-	width: "25%",
- 	borderRadius: 40,
-}
-
-"#firstNameLine":{
-	left: "5%",
-	top: "30%",
-	color: "#ffffff",
-}
-"#firstName":{
-	left: "46.5%",
-	top: "30%",
-	color: "#ffffff",
-}
-
-"#lastNameLine":{
-	left: "5%",
-	top: "33%",
-	color: "#ffffff",
-}
-"#lastName":{
-	left: "46.5%",
-	top: "33%",
-	color: "#ffffff",
-}
-
-"#dobLine":{
-	left: "5%",
-	top: "36%",
-	color: "#ffffff",
-}
-"#dob":{
-	left: "46.5%",
-	top: "36%",
-	color: "#ffffff",
-}
-
-"#addressLine":{
-	left: "5%",
-	top: "39%",
-	color: "#ffffff",
-}
-"#address":{
-	left: "46.5%",
-	top: "39%",
-	color: "#ffffff",
-}
-
-
-//ToDo: Create IOS Specific styles for the trusted contacts table 
-///
-///
-"#contactTable":{
-	top: "50%",
-	backgroundColor: "transparent"
-}
-
-"#trustedContacts":{
-	color: "#ffffff",
+	top: "15dp",
+	width: "25%"
 }
 
 "#name":{
-	left: "5%",
-	top: "5%",
-	color: "#ffffff",
+	font:{
+		fontFamily:"Quicksand-Bold",
+		fontSize:"30dp"
+	},
+	top:"10dp",
+	bottom:"10dp",
+	color:"#65c8c7",
+	height:"35dp"
 }
 
-"#phone":{
-	left: "5%",
-	top: "33%",
-	color: "#ffffff",
+".headerLabel":{
+	color:"#65c8c7",
+	height:"15dp",
+	top:"15dp"
 }
 
-"#email":{
-	left: "5%",
-	top: "60%",
-	color: "#ffffff",
+"#contactTable":{
+	height:"30%"
 }
+
+"TableViewRow":{
+	height:"45dp",
+	color:"#666"
+}
+
 
 
 

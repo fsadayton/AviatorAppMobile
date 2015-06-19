@@ -1,0 +1,6 @@
+<Alloy>
+	<TableViewRow id="row" class="defaultRow">
+		<ImageView class="icon" image="/global/info28.png" onClick="showInfo" />
+		<Label id="navText"/>
+	</TableViewRow>
+</Alloy>

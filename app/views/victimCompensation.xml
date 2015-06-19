@@ -1,0 +1,5 @@
+<Alloy>
+	<Window class="container" id="win" onOpen="Alloy.Globals.updateActionBar">
+		<Label>Nothing to see here.</Label>
+	</Window>
+</Alloy>
