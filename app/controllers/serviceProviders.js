@@ -39,7 +39,7 @@ function parseServiceProviders(){
 					description:provider.description,
 					phone: provider.phoneNumber,
 					email: provider.email,
-					website: provider.website,
+					website: provider.website
 				}).getView();	
 				
 			if(provider.crisisNumber){
@@ -59,7 +59,7 @@ function parseServiceProviders(){
 		});
 		$.activityIndicator.hide();
 		$.quickActivityIndicator.hide();
-		$.menu.setData(allHeaders);
+		$.providerList.setData(allHeaders);
 		$.crisisMenu.setData(crisisHeaders);
 	}
 }
@@ -113,7 +113,7 @@ function toggleMapListView(){
 		$.mapModule.visible = isMapVisible;
 		$.mapView.visible = !isMapVisible;
 		
-		$.menu.visible = !isMapVisible;
+		$.providerList.visible = !isMapVisible;
 		$.listView.visible = isMapVisible;
 	}
 }
@@ -122,5 +122,48 @@ function filterResults(){
 	alert("This feature is coming soon!");
 }
 
-Alloy.Globals.addActionBarButtons($.tabGroup);
+
+if(Alloy.Globals.isAndroid){
+	var menu;
+	$.tabGroup.addEventListener("open", function(e){
+		$.providerList.search = Alloy.createController("searchView").getView();
+		$.crisisMenu.search = Alloy.createController("searchView").getView();
+			
+		$.tabGroup.activity.onCreateOptionsMenu = function(e) {
+			//e.menu.clear();
+			menu = e.menu;
+			Ti.API.info("creating opetion");
+			var item = menu.findItem(0);
+			if (item){
+				Ti.API.info("item found!");
+				item.actionView = getActionView();
+			}
+			else{
+	           	menu.add({
+		        	itemId: 0,
+		        	title: "search...",
+	            	icon: Ti.Android.R.drawable.ic_menu_search,
+	            	actionView: getActionView(),
+	           		showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
+           		});
+			}
+	        
+   		};
+	});
+	
+	$.tabGroup.addEventListener("focus", function(e) {
+		Ti.API.info("menu: " + menu);
+        //$.tabGroup.getActivity().invalidateOptionsMenu();
+   });
+   
+   function getActionView(){
+   		if($.tabGroup.activeTab.title === "NEARBY"){
+	        return $.providerList.search;
+	    }
+	    else if($.tabGroup.activeTab.title === "QUICK CALL"){
+	    	return $.crisisMenu.search;
+	    }
+   }
+}
+
 

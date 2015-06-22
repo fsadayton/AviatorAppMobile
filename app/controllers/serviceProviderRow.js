@@ -9,6 +9,7 @@ $.row.description = args.description;
 $.row.phone = args.phone;
 $.row.email = args.email;
 $.row.website = args.website;
+$.row.title = args.orgName;
  
 if(args.crisis){
 	$.row.crisis = args.crisis;
