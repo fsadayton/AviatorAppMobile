@@ -3,8 +3,11 @@ var args = arguments[0] || {};
 var Map = require('ti.map');
 var geocoder = require('ti.geocoder');
 
+var originalMapAnnotations = null;
 $.activityIndicator.show();
 $.quickActivityIndicator.show();
+
+
 
 Alloy.Globals.sendHttpRequest("GetCategoryLookupIndex", "GET", null, storeCategoryLookup);
 var allHeaders = [];
@@ -18,7 +21,7 @@ function storeCategoryLookup(){
 	});
 	
 	Alloy.Globals.sendHttpRequest("GetServiceProviders?counties=57&categories=" 
-	+ args.categories.join(), "GET", null, parseServiceProviders);
+	+ args.categories.join("&categories="), "GET", null, parseServiceProviders);
 }
 
 function parseServiceProviders(){
@@ -57,6 +60,7 @@ function parseServiceProviders(){
 				});	
 			});
 		});
+		originalMapAnnotations = $.map.annotations;
 		$.activityIndicator.hide();
 		$.quickActivityIndicator.hide();
 		$.providerList.setData(allHeaders);
@@ -126,36 +130,60 @@ function filterResults(){
 if(Alloy.Globals.isAndroid){
 	var menu;
 	$.tabGroup.addEventListener("open", function(e){
+		//set each list search property to a new serach view
 		$.providerList.search = Alloy.createController("searchView").getView();
 		$.crisisMenu.search = Alloy.createController("searchView").getView();
-			
-		$.tabGroup.activity.onCreateOptionsMenu = function(e) {
-			//e.menu.clear();
-			menu = e.menu;
-			Ti.API.info("creating opetion");
-			var item = menu.findItem(0);
-			if (item){
-				Ti.API.info("item found!");
-				item.actionView = getActionView();
-			}
-			else{
-	           	menu.add({
-		        	itemId: 0,
-		        	title: "search...",
-	            	icon: Ti.Android.R.drawable.ic_menu_search,
-	            	actionView: getActionView(),
-	           		showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
-           		});
-			}
-	        
-   		};
+		
+		//add search capability to android action bar and grab menu value.
+		//menu obj is used to change which table the search bar filters
+		//when the tab changes (i.e., apply filter to "near by" tab or "quick call" tab)	
+		Alloy.Globals.addActionBarButtons($.tabGroup, [{
+				params:{
+			        title: "search...",
+		            icon: Ti.Android.R.drawable.ic_menu_search,
+		            actionView: getActionView(),
+		           	showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
+	           	}
+        	}], 
+        	function(setMenu){menu = setMenu;});	
+        
+        //if provider list search changes, update annotations on the map. 
+        var timeout = null;	
+     	$.providerList.search.addEventListener("change", function(e){
+     		if(timeout){
+     			clearTimeout(timeout);//do not let previous timeouts run
+     		}
+     		//Using 1.2 second timeout to reduce amount of map redrawing.
+     		timeout = setTimeout(function() {
+     			if(e.source.value.length > 0){ //if search field contains a value
+     				//find map annotations whose title contains the search field value
+     				var filteredAnnotations = _.filter(originalMapAnnotations, function(annotation){return annotation.title.toLowerCase().indexOf(e.source.value.toLowerCase()) > -1;});
+     				$.map.setAnnotations(filteredAnnotations);
+     			}
+     			else{
+     				//if search is empty, put all annotations back on the map
+     				$.map.setAnnotations(originalMapAnnotations);
+     			}
+     			
+     		},1200);
+   		});
 	});
 	
+	//listen for when tab changes
 	$.tabGroup.addEventListener("focus", function(e) {
-		Ti.API.info("menu: " + menu);
-        //$.tabGroup.getActivity().invalidateOptionsMenu();
+		//find the "search" menu item
+		var item = menu == null ? null : _.findWhere(menu.getItems(), {title:"search..."});
+		if (item){
+			item.actionView = getActionView(); //set search filter to correspond to correct tab
+		}
+		else{
+			$.tabGroup.getActivity().invalidateOptionsMenu(); //remake menu
+		}
    });
    
+   /**
+    * helper function that returns the searchview associated with each tab
+    */
    function getActionView(){
    		if($.tabGroup.activeTab.title === "NEARBY"){
 	        return $.providerList.search;
@@ -164,6 +192,7 @@ if(Alloy.Globals.isAndroid){
 	    	return $.crisisMenu.search;
 	    }
    }
+   
 }
 
 

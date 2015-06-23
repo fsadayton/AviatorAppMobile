@@ -20,7 +20,7 @@ Alloy.Globals.Location = require('LocationUtils');
 
 Alloy.Globals.currentLocation = null;
 
-Alloy.Globals.addActionBarButtons = function(window){
+Alloy.Globals.addActionBarButtons = function(window, additionalButtons, callback){
     window.activity.onCreateOptionsMenu = function(e) { 
 	    var menu = e.menu; 
 	    var menuItem = menu.add({ 
@@ -42,6 +42,15 @@ Alloy.Globals.addActionBarButtons = function(window){
 	    help.addEventListener("click", function(e){
 	    	alert("Your trusted contacts have been notified to help you.");
 	    });
+	    
+	    if(additionalButtons){
+	    	_.each(additionalButtons, function(button){
+	    		menu.add(button.params);
+	    	});
+	    }
+	    if (typeof callback === 'function'){
+	    	callback(menu);
+	    }
     };
     
 };
