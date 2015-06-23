@@ -3,12 +3,16 @@ var args = arguments[0] || {};
 var Map = require('ti.map');
 var geocoder = require('ti.geocoder');
 
+var originalMapAnnotations = null;
+$.activityIndicator.show();
+$.quickActivityIndicator.show();
+
+
 
 Alloy.Globals.sendHttpRequest("GetCategoryLookupIndex", "GET", null, storeCategoryLookup);
-var categoryDictionary = null;
 var allHeaders = [];
 function storeCategoryLookup(){
-	categoryDictionary = JSON.parse(this.responseText);
+	var categoryDictionary = JSON.parse(this.responseText);
 	
 	_.each(categoryDictionary, function(category){
 		if (_.contains(args.categories, category.id)){
@@ -17,43 +21,51 @@ function storeCategoryLookup(){
 	});
 	
 	Alloy.Globals.sendHttpRequest("GetServiceProviders?counties=57&categories=" 
-	+ args.categories.join(), "GET", null, parseServiceProviders);
+	+ args.categories.join("&categories="), "GET", null, parseServiceProviders);
 }
 
 function parseServiceProviders(){
-	
-	var crisisHeaders = [];
 	var json = JSON.parse(this.responseText);
-	
-	_.each(json, function(provider){
-		addProviderToMap(provider.address, provider.name);
-		var row = Alloy.createController('serviceProviderRow', {
-				orgName:provider.name,
-				address:provider.address,
-				description:provider.description,
-				phone: provider.phoneNumber,
-				email: provider.email,
-				website: provider.website,
-			}).getView();	
-			
-		if(provider.crisisNumber){
-			crisisHeaders.push(Alloy.createController('serviceProviderRow', {
-				orgName:provider.name,
-				crisis: provider.crisisNumber
-			}).getView());
-		}
-		_.each(provider.categories, function(category){
-			_.find(allHeaders, function(header){
-				if(header.title === category){
-					header.add(row);
-					return true;
-				}
-			});	
+	if(json.length == 0){
+		$.activityIndicator.hide();
+		$.quickActivityIndicator.hide();
+		$.noResults.visible = true;
+		$.quickNoResults.visible = true;
+	}
+	else{
+		var crisisHeaders = [];
+		_.each(json, function(provider){
+			addProviderToMap(provider.address, provider.name);
+			var row = Alloy.createController('serviceProviderRow', {
+					orgName:provider.name,
+					address:provider.address,
+					description:provider.description,
+					phone: provider.phoneNumber,
+					email: provider.email,
+					website: provider.website
+				}).getView();	
+				
+			if(provider.crisisNumber){
+				crisisHeaders.push(Alloy.createController('serviceProviderRow', {
+					orgName:provider.name,
+					crisis: provider.crisisNumber
+				}).getView());
+			}
+			_.each(provider.categories, function(category){
+				_.find(allHeaders, function(header){
+					if(header.title === category){
+						header.add(row);
+						return true;
+					}
+				});	
+			});
 		});
-	});
-	
-	$.menu.setData(allHeaders);
-	$.crisisMenu.setData(crisisHeaders);
+		originalMapAnnotations = $.map.annotations;
+		$.activityIndicator.hide();
+		$.quickActivityIndicator.hide();
+		$.providerList.setData(allHeaders);
+		$.crisisMenu.setData(crisisHeaders);
+	}
 }
 
     
@@ -105,7 +117,7 @@ function toggleMapListView(){
 		$.mapModule.visible = isMapVisible;
 		$.mapView.visible = !isMapVisible;
 		
-		$.menu.visible = !isMapVisible;
+		$.providerList.visible = !isMapVisible;
 		$.listView.visible = isMapVisible;
 	}
 }
@@ -114,5 +126,73 @@ function filterResults(){
 	alert("This feature is coming soon!");
 }
 
-Alloy.Globals.addActionBarButtons($.tabGroup);
+
+if(Alloy.Globals.isAndroid){
+	var menu;
+	$.tabGroup.addEventListener("open", function(e){
+		//set each list search property to a new serach view
+		$.providerList.search = Alloy.createController("searchView").getView();
+		$.crisisMenu.search = Alloy.createController("searchView").getView();
+		
+		//add search capability to android action bar and grab menu value.
+		//menu obj is used to change which table the search bar filters
+		//when the tab changes (i.e., apply filter to "near by" tab or "quick call" tab)	
+		Alloy.Globals.addActionBarButtons($.tabGroup, [{
+				params:{
+			        title: "search...",
+		            icon: Ti.Android.R.drawable.ic_menu_search,
+		            actionView: getActionView(),
+		           	showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
+	           	}
+        	}], 
+        	function(setMenu){menu = setMenu;});	
+        
+        //if provider list search changes, update annotations on the map. 
+        var timeout = null;	
+     	$.providerList.search.addEventListener("change", function(e){
+     		if(timeout){
+     			clearTimeout(timeout);//do not let previous timeouts run
+     		}
+     		//Using 1.2 second timeout to reduce amount of map redrawing.
+     		timeout = setTimeout(function() {
+     			if(e.source.value.length > 0){ //if search field contains a value
+     				//find map annotations whose title contains the search field value
+     				var filteredAnnotations = _.filter(originalMapAnnotations, function(annotation){return annotation.title.toLowerCase().indexOf(e.source.value.toLowerCase()) > -1;});
+     				$.map.setAnnotations(filteredAnnotations);
+     			}
+     			else{
+     				//if search is empty, put all annotations back on the map
+     				$.map.setAnnotations(originalMapAnnotations);
+     			}
+     			
+     		},1200);
+   		});
+	});
+	
+	//listen for when tab changes
+	$.tabGroup.addEventListener("focus", function(e) {
+		//find the "search" menu item
+		var item = menu == null ? null : _.findWhere(menu.getItems(), {title:"search..."});
+		if (item){
+			item.actionView = getActionView(); //set search filter to correspond to correct tab
+		}
+		else{
+			$.tabGroup.getActivity().invalidateOptionsMenu(); //remake menu
+		}
+   });
+   
+   /**
+    * helper function that returns the searchview associated with each tab
+    */
+   function getActionView(){
+   		if($.tabGroup.activeTab.title === "NEARBY"){
+	        return $.providerList.search;
+	    }
+	    else if($.tabGroup.activeTab.title === "QUICK CALL"){
+	    	return $.crisisMenu.search;
+	    }
+   }
+   
+}
+
 
