@@ -7,7 +7,7 @@ var originalMapAnnotations = null;
 $.activityIndicator.show();
 $.quickActivityIndicator.show();
 
-
+var categoryNames = [];
 
 Alloy.Globals.sendHttpRequest("GetCategoryLookupIndex", "GET", null, storeCategoryLookup);
 var allHeaders = [];
@@ -16,6 +16,7 @@ function storeCategoryLookup(){
 	
 	_.each(categoryDictionary, function(category){
 		if (_.contains(args.categories, category.id)){
+			categoryNames.push({id:category.id, name:category.name});
 			allHeaders.push(Ti.UI.createTableViewSection({title:category.id, headerView: Alloy.createController('TableViewHeader', {text:category.name}).getView()}));
 		}
 	});
@@ -100,7 +101,6 @@ function addProviderToMap(address, providerName){
 		else{
 				Ti.API.info("error with " + address +": "+ e.error);
 			}
-		
 	});	
 }
 
@@ -123,7 +123,17 @@ function toggleMapListView(){
 }
 
 function filterResults(){
-	alert("This feature is coming soon!");
+	Alloy.Globals.sendHttpRequest("GetCounties", "GET", null, listCounties);
+	
+	function listCounties(){
+		Alloy.createController("serviceProviderFilter", {
+			categories:categoryNames,
+			counties: JSON.parse(this.responseText)
+		}).getView().open();
+
+	}
+
+	//Alloy.createController("serviceProviderFilter", {categories:categoryNames}).getView().open();
 }
 
 

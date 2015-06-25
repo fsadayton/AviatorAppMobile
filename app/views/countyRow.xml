@@ -1,0 +1,5 @@
+<Alloy>
+	<TableViewRow id="row" class="defaultRow">
+		<Label id="countyName" color="black"/>
+	</TableViewRow>
+</Alloy>
