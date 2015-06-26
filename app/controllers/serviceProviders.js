@@ -133,7 +133,6 @@ function filterResults(){
 
 	}
 
-	//Alloy.createController("serviceProviderFilter", {categories:categoryNames}).getView().open();
 }
 
 

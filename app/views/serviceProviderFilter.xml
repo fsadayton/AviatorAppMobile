@@ -1,23 +1,27 @@
 <Alloy>
 	<Window id="win" onOpen="Alloy.Globals.updateActionBar">
 		<View id="summaryView">
-			<Label id="summaryHeader" class="header">FILTER SUMMARY</Label>
+			<View class="header">
+				<Label>FILTER SUMMARY</Label>
+				<ImageView class="arrow" id="checkmark" right="10dp" image="/global/checkmark.png" />
+				<ImageView class="arrow" id="close" onClick="close" left="10dp" image="/global/close.png" />
+			</View>
 			<ScrollView id="summaryText">
 				<View layout="horizontal" width="95%">
 				<Label class="summary">Show me</Label>
-				<Label class="summary" id="categorySummary">ALL</Label>
+				<Label class="summary emph" id="categorySummary">all</Label>
 				<Label class="summary">services in</Label>
-				<Label class="summary" id="countySummary">ALL</Label>
-				<Label class="summary"> counties.</Label>
+				<Label class="summary emph" id="countySummary">all</Label>
+				<Label class="summary"> county(s).</Label>
 				</View>
 			</ScrollView>
 		</View>
 		
-		<ScrollableView>
+		<ScrollableView id="scrollableView">
 			<View id="categoriesContainer" class="container">
 				<View class="header">
 					<Label>CATEGORIES</Label>
-					<ImageView class="arrow" id="rightArrow" right="10dp" image="/global/right-arrow.png" />
+					<ImageView class="arrow" id="rightArrow" right="10dp" image="/global/right-arrow.png" onClick="gotoNext"/>
 				</View>
 				<ScrollView scrollType="vertical" backgroundColor="#fff">
 					<View id="categoriesPicker"/>
@@ -26,7 +30,7 @@
 			<View id="countiesContainer" class="container">
 				<View class="header">
 					<Label>COUNTIES</Label>
-					<ImageView class="arrow" id="leftArrow" left="10dp" image="/global/back-arrow.png" />
+					<ImageView class="arrow" id="leftArrow" left="10dp" image="/global/back-arrow.png" onClick="gotoPrevious" />
 				</View>
 				<!--<View id="countiesPicker">
 					<TableView id="countyList"></TableView>
@@ -36,7 +40,5 @@
 			</ScrollView>
 			</View>
 		</ScrollableView>
-		<Button id="closeButton" onClick="close">CLOSE</Button>
-		
 	</Window>
 </Alloy>

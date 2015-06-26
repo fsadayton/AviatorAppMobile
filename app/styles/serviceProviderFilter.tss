@@ -21,12 +21,8 @@
 	width:"100%"
 }
 
-"#summaryHeader":{
-	textAlign:"center"
-}
-
 "#summaryView":{
-	height:"35%",
+	height:"30%",
 	layout: "vertical"
 }
 
@@ -37,8 +33,7 @@
 }
 
 "ScrollableView":{
-	height:"65%",
-	showPagingControl: true
+	height:"70%"
 }
 
 ".arrow":{
@@ -69,4 +64,33 @@
 	bottom:"5dp",
 	left:"5dp",
 	right:"5dp"
+}
+
+".emph":{
+	font:{
+		fontFamily: "Quicksand-Bold"
+	},
+	color:"#65c8c7"
+}
+
+"#buttonBar":{
+	height:"10%",
+	backgroundColor:"#b8b8b8"
+}
+
+"Button":{
+	font:{
+		fontFamily:"Quicksand-Bold"
+	},
+	color:"#666",
+	borderColor:"#f9c84d",
+	backgroundColor:"#fff"
+}
+
+"#closeButton":{
+	left: "10dp"
+}
+
+"#submitButton":{
+	right: "10dp"
 }
