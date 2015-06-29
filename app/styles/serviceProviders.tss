@@ -6,7 +6,7 @@
 	separatorColor: "#65c8c7",
 }
 
-"#menu":{
+"#providerList":{
 	height:"90%",
 	top:0
 }

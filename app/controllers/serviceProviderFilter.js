@@ -1,16 +1,27 @@
 var args = arguments[0] || {};
+var countyFilter = [];
+var categoryFilter = [];
 
+Ti.API.info("currentCounties: " + args.currentCounties);
+Ti.API.info("categories: " + args.currentCategories);
 _.each(args.categories, function(category){
-	$.categoriesPicker.add(Alloy.createController('categoryBubble', {id:category.id, text:category.name, type:"category", callback:updateSummary}).getView());
+	var params = {id:category.id, text:category.name, type:"category", callback:updateSummary};
+	
+	if(args.categories.length != args.currentCategories.length && _.find(args.currentCategories, function(cat){return cat.id == category.id;})){
+		params.isSelected = true;
+	}
+	$.categoriesPicker.add(Alloy.createController('categoryBubble', params).getView());
 });
 
 for (var key in args.counties){
-	//$.countyList.appendRow(Alloy.createController('countyRow', {title:args.counties[key]}).getView());
-	$.countiesPicker.add(Alloy.createController('categoryBubble', {id:key, text:args.counties[key], type:"county", callback:updateSummary}).getView());
+	var params = {id:key, text:args.counties[key], type:"county", callback:updateSummary};
+	
+	if(_.contains(args.currentCounties, key)){
+		params.isSelected = true;
+		Ti.API.info("current county matches: " + key);
+	}
+	$.countiesPicker.add(Alloy.createController('categoryBubble', params).getView());
 }
-
-var countyFilter = [];
-var categoryFilter = [];
 
 function updateSummary(type, id, text, isNew){
 	if(type === "county"){
@@ -34,6 +45,16 @@ function updateSummary(type, id, text, isNew){
 }
 
 function close(){
+	$.win.close();
+}
+
+function submit(){
+	
+	var categories = categoryFilter.length > 0 ? _.pluck(categoryFilter, "id") : _.pluck(args.categories, "id");
+	var counties = countyFilter.length > 0 ? _.pluck(countyFilter, "id") : Object.keys(args.counties);
+	
+	args.filterCallback(categories, counties);
+
 	$.win.close();
 }
 

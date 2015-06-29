@@ -3,7 +3,7 @@
 		<View id="summaryView">
 			<View class="header">
 				<Label>FILTER SUMMARY</Label>
-				<ImageView class="arrow" id="checkmark" right="10dp" image="/global/checkmark.png" />
+				<ImageView class="arrow" id="checkmark" right="10dp" image="/global/checkmark.png" onClick="submit"/>
 				<ImageView class="arrow" id="close" onClick="close" left="10dp" image="/global/close.png" />
 			</View>
 			<ScrollView id="summaryText">

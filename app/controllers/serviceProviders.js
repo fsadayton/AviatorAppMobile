@@ -4,29 +4,45 @@ var Map = require('ti.map');
 var geocoder = require('ti.geocoder');
 
 var originalMapAnnotations = null;
-$.activityIndicator.show();
-$.quickActivityIndicator.show();
-
 var categoryNames = [];
+var categoryDictionary = null;
+
+var filteredCategories = null;
+var filteredCounties = null;
 
 Alloy.Globals.sendHttpRequest("GetCategoryLookupIndex", "GET", null, storeCategoryLookup);
 var allHeaders = [];
 function storeCategoryLookup(){
-	var categoryDictionary = JSON.parse(this.responseText);
+	categoryDictionary = JSON.parse(this.responseText);
+	categoryNames = getTableData(args.categories, [Alloy.Globals.countyOfInterest]);
+}
+
+function getTableData(categories, counties){
+	$.crisisMenu.visible = false;
+	$.providerList.visible = false;
+	$.noResults.visible = false;
+	$.quickNoResults.visible = false;
+	$.activityIndicator.show();
+	$.quickActivityIndicator.show();
 	
+	allHeaders = [];
+	filteredCategories = [];
 	_.each(categoryDictionary, function(category){
-		if (_.contains(args.categories, category.id)){
-			categoryNames.push({id:category.id, name:category.name});
+		if (_.contains(categories, category.id)){
+			filteredCategories.push(category);
 			allHeaders.push(Ti.UI.createTableViewSection({title:category.id, headerView: Alloy.createController('TableViewHeader', {text:category.name}).getView()}));
 		}
 	});
+	filteredCounties = counties;
+	Alloy.Globals.sendHttpRequest("GetServiceProviders?counties="+counties.join("&counties=")+"&categories=" 
+	+ categories.join("&categories="), "GET", null, parseServiceProviders);
 	
-	Alloy.Globals.sendHttpRequest("GetServiceProviders?counties=57&categories=" 
-	+ args.categories.join("&categories="), "GET", null, parseServiceProviders);
+	return filteredCategories;
 }
 
 function parseServiceProviders(){
 	var json = JSON.parse(this.responseText);
+	$.map.removeAllAnnotations();
 	if(json.length == 0){
 		$.activityIndicator.hide();
 		$.quickActivityIndicator.hide();
@@ -64,6 +80,8 @@ function parseServiceProviders(){
 		originalMapAnnotations = $.map.annotations;
 		$.activityIndicator.hide();
 		$.quickActivityIndicator.hide();
+		$.crisisMenu.visible = true;
+		$.providerList.visible = true;
 		$.providerList.setData(allHeaders);
 		$.crisisMenu.setData(crisisHeaders);
 	}
@@ -115,10 +133,10 @@ function toggleMapListView(){
 	
 	function setMapVisibility(isMapVisible){
 		$.mapModule.visible = isMapVisible;
-		$.mapView.visible = !isMapVisible;
+		$.mapButton.visible = !isMapVisible;
 		
-		$.providerList.visible = !isMapVisible;
-		$.listView.visible = isMapVisible;
+		$.listView.visible = !isMapVisible;
+		$.listButton.visible = isMapVisible;
 	}
 }
 
@@ -127,12 +145,13 @@ function filterResults(){
 	
 	function listCounties(){
 		Alloy.createController("serviceProviderFilter", {
-			categories:categoryNames,
-			counties: JSON.parse(this.responseText)
+			categories: categoryNames,
+			counties: JSON.parse(this.responseText),
+			filterCallback:getTableData,
+			currentCategories: filteredCategories,
+			currentCounties: filteredCounties
 		}).getView().open();
-
 	}
-
 }
 
 
