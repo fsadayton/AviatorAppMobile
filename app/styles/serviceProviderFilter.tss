@@ -87,10 +87,3 @@
 	backgroundColor:"#fff"
 }
 
-"#closeButton":{
-	left: "10dp"
-}
-
-"#submitButton":{
-	right: "10dp"
-}
