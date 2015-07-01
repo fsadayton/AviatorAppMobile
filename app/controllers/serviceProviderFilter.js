@@ -106,29 +106,28 @@ function gotoPrevious(){
 var timeout = null;
 var allChildren = $.countiesPicker.getChildren();
 $.searchBar.addEventListener("change", function(e){
-     		if(timeout){
-     			clearTimeout(timeout);//do not let previous timeouts run
-     		}
-     		//Using 1.2 second timeout to reduce amount of view refreshing.
-     		timeout = setTimeout(function() {
-     			if(e.source.value.length > 0){ //if search field contains a value
-     				_.each(allChildren, function(child){
-     					if(child.text.trim().toLowerCase().indexOf(e.source.value.toLowerCase()) == -1){
-     						$.countiesPicker.remove(child);
-     					}
-     					else{
-     						$.countiesPicker.add(child);
-     					}
-     				});
-     			}
-     			else{
-     				//if search is empty, put all bubbles back
-     				_.each(allChildren, function(child){
-     					$.countiesPicker.add(child);
-
-     				});
-     			}
-     		},1200);
+	if(timeout){
+		clearTimeout(timeout);//do not let previous timeouts run
+	}
+	//Using 1.2 second timeout to reduce amount of view refreshing.
+	timeout = setTimeout(function() {
+		if(e.source.value.length > 0){ //if search field contains a value
+			_.each(allChildren, function(child){
+	     		if(child.text.trim().toLowerCase().indexOf(e.source.value.toLowerCase()) == -1){
+	     			$.countiesPicker.remove(child);
+	     		}
+	     		else{
+	     			$.countiesPicker.add(child);
+	     		}
+	     	});
+	     }
+	     else{
+	     	//if search is empty, put all bubbles back
+	     	_.each(allChildren, function(child){
+	     		$.countiesPicker.add(child);
+	     	});
+	     }
+    },1200);
 });
 
 Alloy.Globals.addActionBarButtons($.win);
