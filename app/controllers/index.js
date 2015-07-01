@@ -44,11 +44,16 @@ function openVictimCompensation(){
 	Alloy.createController('victimCompensation').getView().open();
 }
 
-//open the home view
-$.index.open();
+if(!Ti.App.Properties.getBool("hasAgreedToConditions", false)){
+	Alloy.createController("ConditionsOfUse", {index:$.index}).getView().open();
+}
+else{
+	$.index.open();
+	alert("If this is an emergency, close the app and dial 911.");
 
+}
 
 Alloy.Globals.addActionBarButtons($.index);
 
-alert("If this is an emergency, close the app and dial 911.");
+
 

@@ -78,7 +78,13 @@ function openEmail(){
 }
 
 function openWebsite(){
-	Ti.Platform.openURL(args.website);
+	$.dialog.show();
+}
+
+function doClick(e){
+	if(!e.cancel){
+		Ti.Platform.openURL(args.website);
+	}
 }
 
 function shareInformation(){

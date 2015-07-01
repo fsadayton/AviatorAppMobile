@@ -23,14 +23,13 @@
 			<ImageView class="actionImage" image="/global/domain256.png" />
 			<Label id="webLabel" class="actionLabel">VISIT WEBSITE</Label>
 		</View>
-			
-		<!--<View id="favorite" class="tagShare">
-			<ImageView id="favoriteIcon" class="tagShareIcon" image="/global/star256.png" />
-			<Label id="favorite" class="tagShareLabel">Tag as Favorite</Label>
-		</View>
-		<View id="share" class="tagShare">
-			<ImageView id="shareIcon" class="tagShareIcon" image="/global/share256.png" />
-			<Label id="share" class="tagShareLabel">Share with Friends</Label>
-		</View>-->
+		
+		<AlertDialog id="dialog" onClick="doClick" title="Disclaimer" 
+			message="Since this website is not directly affiliated with Armor App, we are not responsible for the content on this 3rd party site." cancel="1">
+			<ButtonNames>
+				<ButtonName>OK</ButtonName>
+				<ButtonName>Cancel</ButtonName>
+			</ButtonNames>
+		</AlertDialog>
 	</Window>
 </Alloy>
