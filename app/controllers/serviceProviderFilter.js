@@ -104,6 +104,7 @@ function gotoPrevious(){
  * logic for county search bar
  */
 var timeout = null;
+var allChildren = $.countiesPicker.getChildren();
 $.searchBar.addEventListener("change", function(e){
      		if(timeout){
      			clearTimeout(timeout);//do not let previous timeouts run
@@ -111,28 +112,22 @@ $.searchBar.addEventListener("change", function(e){
      		//Using 1.2 second timeout to reduce amount of view refreshing.
      		timeout = setTimeout(function() {
      			if(e.source.value.length > 0){ //if search field contains a value
-     				_.each($.countiesPicker.getChildren(), function(child){
+     				_.each(allChildren, function(child){
      					if(child.text.trim().toLowerCase().indexOf(e.source.value.toLowerCase()) == -1){
-     						child.visible = false;
-     						child.height = "0dp";
-     						child.width = "0dp";
+     						$.countiesPicker.remove(child);
      					}
      					else{
-     						child.visible = true;
-     						child.height = "45dp";
-     						child.width = Ti.UI.SIZE;
+     						$.countiesPicker.add(child);
      					}
      				});
      			}
      			else{
      				//if search is empty, put all bubbles back
-     				_.each($.countiesPicker.getChildren(), function(child){
-     					child.visible = true;
-     					child.height = "45dp";
-     					child.width = Ti.UI.SIZE;
+     				_.each(allChildren, function(child){
+     					$.countiesPicker.add(child);
+
      				});
      			}
-     			
      		},1200);
 });
 
