@@ -1,0 +1,89 @@
+
+"Window" : {
+  modal: true,
+  height: "95%",
+  width: "92%",
+  layout: "vertical",
+  background: "transparent",
+  borderRadius: 10,
+  borderColor:"#f9c84d",
+  borderWidth: 2
+}
+
+".container":{
+	layout: "vertical"
+}
+
+".header":{
+	backgroundColor:"#b8b8b8",
+	height:"45dp",
+	color: "#fff",
+	width:"100%"
+}
+
+"#summaryView":{
+	height:"30%",
+	layout: "vertical"
+}
+
+"#summaryText":{
+	layout: "horizontal",
+	scrollType: "vertical",
+	backgroundColor:"#fff"
+}
+
+"ScrollableView":{
+	height:"70%"
+}
+
+".arrow":{
+	height:"30dp",
+	width: "30dp"
+}  
+
+".summary":{
+	left:"3dp",
+	right:"3dp",
+	color:"#000",
+	wordWrap:"true"
+}
+
+"#categoriesPicker":{
+	layout: "horizontal",
+	backgroundColor: "#fff",
+	top:"3dp",
+	bottom:"3dp",
+	left:"3dp",
+	right:"3dp"
+}
+
+"#countiesPicker":{
+	layout: "horizontal",
+	backgroundColor: "#fff",
+	top:"5dp",
+	bottom:"5dp",
+	left:"5dp",
+	right:"5dp"
+}
+
+".emph":{
+	font:{
+		fontFamily: "Quicksand-Bold"
+	},
+	color:"#65c8c7"
+}
+
+"#buttonBar":{
+	height:"10%",
+	backgroundColor:"#b8b8b8"
+}
+
+"Button":{
+	font:{
+		fontFamily:"Quicksand-Bold"
+	},
+	color:"#666",
+	borderColor:"#f9c84d",
+	backgroundColor:"#fff"
+}
+

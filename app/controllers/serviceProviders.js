@@ -3,29 +3,79 @@ var args = arguments[0] || {};
 var Map = require('ti.map');
 var geocoder = require('ti.geocoder');
 
-var originalMapAnnotations = null;
-$.activityIndicator.show();
-$.quickActivityIndicator.show();
+var originalMapAnnotations = null; //list of map points from original search; used to maintain original points after search
+var allHeaders = []; //list of all table headers to appear in list based on queried categories
+var categoryNames = []; //array of relevant category names; used for filtering
+var categoryDictionary = null; //dictionary of ALL category names and id's in database
+var allCounties = null;
 
+//list of categories and counties that are currently visible
+//used to pre-populate filter values 
+var filteredCategories = null;
+var filteredCounties = null;
 
-
+//get all category ID's and canonical names
 Alloy.Globals.sendHttpRequest("GetCategoryLookupIndex", "GET", null, storeCategoryLookup);
-var allHeaders = [];
+
+/**
+ * Function that stores the list of all categories and relevant category names upon
+ * successful completion of GetCategoryLookupIndex REST call.
+ */
 function storeCategoryLookup(){
-	var categoryDictionary = JSON.parse(this.responseText);
-	
-	_.each(categoryDictionary, function(category){
-		if (_.contains(args.categories, category.id)){
-			allHeaders.push(Ti.UI.createTableViewSection({title:category.id, headerView: Alloy.createController('TableViewHeader', {text:category.name}).getView()}));
-		}
-	});
-	
-	Alloy.Globals.sendHttpRequest("GetServiceProviders?counties=57&categories=" 
-	+ args.categories.join("&categories="), "GET", null, parseServiceProviders);
+	categoryDictionary = JSON.parse(this.responseText);
+	categoryNames = getTableData(args.categories, [Alloy.Globals.countyOfInterest]);
 }
 
+/**
+ * Function that iterates through category dictionary and creates a list of relevant category names
+ * based on the given list of category ID's. Once category names are solidified, method sends request
+ * to retrieve service provider data for given categories and counties. 
+ * 		@param {array <int>} categories - list of category ID's for service provider info query
+ * 		@param {array <int>} counties - list of county ID's for service provider info query
+ * 		@return {array <Object>} - list of relevant category names and ID's 
+ */
+function getTableData(categories, counties){
+	
+	//hide any data that may be visible and show activity indicators
+	$.crisisMenu.visible = false;
+	$.providerList.visible = false;
+	$.noResults.visible = false;
+	$.quickNoResults.visible = false;
+	$.activityIndicator.show();
+	$.quickActivityIndicator.show();
+	
+	//reset table headers and 
+	allHeaders = [];
+	filteredCategories = [];
+	
+	//iterate through list of all categories
+	_.each(categoryDictionary, function(category){
+		if (_.contains(categories, category.id)){
+			filteredCategories.push(category); //store list of currently selected categories, pass to filter when necessary
+			//store list of table headers
+			allHeaders.push(Ti.UI.createTableViewSection({
+				title:category.id, 
+				headerView: Alloy.createController('TableViewHeader', {text:category.name}).getView()
+			}));
+		}
+	});
+	filteredCounties = counties; //list of selected counties
+	
+	//send request to get all service providers that provide services for counties and categories
+	Alloy.Globals.sendHttpRequest("GetServiceProviders?counties="+counties.join("&counties=")+"&categories=" 
+	+ categories.join("&categories="), "GET", null, parseServiceProviders);
+	
+	return filteredCategories;
+}
+
+/**
+ * Function that populates table data upon successful completion of GetServiceProviders
+ * REST call. 
+ */
 function parseServiceProviders(){
 	var json = JSON.parse(this.responseText);
+	$.map.removeAllAnnotations(); //remove any previous map annotations
+	//if no results are returned, let user know that there are no results
 	if(json.length == 0){
 		$.activityIndicator.hide();
 		$.quickActivityIndicator.hide();
@@ -33,9 +83,11 @@ function parseServiceProviders(){
 		$.quickNoResults.visible = true;
 	}
 	else{
-		var crisisHeaders = [];
+		var crisisHeaders = []; //reset list of crisis numbers
+		//iterate through list of providers in JSON
 		_.each(json, function(provider){
-			addProviderToMap(provider.address, provider.name);
+			addProviderToMap(provider.address, provider.name); //add provider location to the map
+			//create table row with detail metadata
 			var row = Alloy.createController('serviceProviderRow', {
 					orgName:provider.name,
 					address:provider.address,
@@ -44,14 +96,17 @@ function parseServiceProviders(){
 					email: provider.email,
 					website: provider.website
 				}).getView();	
-				
+			
+			//if provider has a crisis number, add it to crisis line table	
 			if(provider.crisisNumber){
 				crisisHeaders.push(Alloy.createController('serviceProviderRow', {
 					orgName:provider.name,
 					crisis: provider.crisisNumber
 				}).getView());
 			}
+			//iterate through all of the categories that service provider specializes in
 			_.each(provider.categories, function(category){
+				//iterate through list of table headers and add service provider to header if category matches
 				_.find(allHeaders, function(header){
 					if(header.title === category){
 						header.add(row);
@@ -60,15 +115,23 @@ function parseServiceProviders(){
 				});	
 			});
 		});
-		originalMapAnnotations = $.map.annotations;
+		
+		originalMapAnnotations = $.map.annotations; //store original map points
+		//hide spinners
 		$.activityIndicator.hide();
 		$.quickActivityIndicator.hide();
+		//make tables visible
+		$.crisisMenu.visible = true;
+		$.providerList.visible = true;
+		//set table data
 		$.providerList.setData(allHeaders);
 		$.crisisMenu.setData(crisisHeaders);
 	}
 }
 
-    
+/**
+ * Passes relevant detail info to provider detail view and opens view
+ */    
 function providerDetail(e){
 	Alloy.createController('providerDetail',{
 		orgName:e.row.name,
@@ -80,11 +143,17 @@ function providerDetail(e){
 	}).getView().open();
 }
 
+/**
+ * Automatically opens phone app to call crisis line
+ */
 function callPhoneNumber(e){
     var cleanNumber = e.row.crisis.replace(/\s|-|\./g,'');
     Ti.Platform.openURL('tel:' + cleanNumber);
 }
 
+/**
+ * Helper function for adding a service provider to the map
+ */
 function addProviderToMap(address, providerName){
 	geocoder.forwardGeocoder(address, function(e){
 		if(e.success)
@@ -100,10 +169,13 @@ function addProviderToMap(address, providerName){
 		else{
 				Ti.API.info("error with " + address +": "+ e.error);
 			}
-		
 	});	
 }
 
+/**
+ * Function that either displays list of service providers or map of
+ * service providers based on user preference. 
+ */
 function toggleMapListView(){
 	if($.mapModule.visible){
 		setMapVisibility(false);
@@ -115,18 +187,47 @@ function toggleMapListView(){
 	
 	function setMapVisibility(isMapVisible){
 		$.mapModule.visible = isMapVisible;
-		$.mapView.visible = !isMapVisible;
+		$.mapButton.visible = !isMapVisible;
 		
-		$.providerList.visible = !isMapVisible;
-		$.listView.visible = isMapVisible;
+		$.listView.visible = !isMapVisible;
+		$.listButton.visible = isMapVisible;
 	}
 }
 
+/**
+ * Function that passes in all category names and counties, a callback method
+ * to be executed once filtering option have been submitted, and the 
+ * current counties and categories that users are viewing to the filter 
+ * window and opens it. 
+ */
 function filterResults(){
-	alert("This feature is coming soon!");
+	//if counties have already been retrieved, create filter
+	if (allCounties){
+		createFilter(allCounties);
+	}
+	else{
+		Alloy.Globals.sendHttpRequest("GetCounties", "GET", null, 
+		function(){
+			allCounties = JSON.parse(this.responseText);
+			createFilter(allCounties);
+		});
+	}
+	
+	/**
+	 * helper function for creating filter view
+	 */
+	function createFilter(countiesList){
+		Alloy.createController("serviceProviderFilter", {
+			categories: categoryNames,
+			counties: countiesList,
+			filterCallback:getTableData,
+			currentCategories: filteredCategories,
+			currentCounties: filteredCounties
+		}).getView().open();
+	}
 }
 
-
+//Initialize the search function for the crisis and service provider views
 if(Alloy.Globals.isAndroid){
 	var menu;
 	$.tabGroup.addEventListener("open", function(e){
@@ -194,5 +295,3 @@ if(Alloy.Globals.isAndroid){
    }
    
 }
-
-

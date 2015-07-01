@@ -20,6 +20,9 @@ Alloy.Globals.Location = require('LocationUtils');
 
 Alloy.Globals.currentLocation = null;
 
+//TODO: Add this info to model instead of global var
+Alloy.Globals.countyOfInterest = "57";
+
 Alloy.Globals.addActionBarButtons = function(window, additionalButtons, callback){
     window.activity.onCreateOptionsMenu = function(e) { 
 	    var menu = e.menu; 
