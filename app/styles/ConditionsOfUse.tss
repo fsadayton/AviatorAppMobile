@@ -1,0 +1,47 @@
+
+"#win" : {
+  modal:true,
+  layout:"vertical",
+  width:"95%",
+  height:"95%",
+  borderRadius: 10,
+  borderColor:"#f9c84d",
+  borderWidth:"2dp",
+  backgroundGradient:{
+		type:'linear',
+		startPoint: {x:'50%',y:'0%'},
+		endPoint:{x:'50%', y:'100%'},
+		colors:[{color:"#ececec", offset:0.0},{color:"#fff", offset:1.0}]
+	}
+}
+
+"TextArea":{
+	height:"75%",
+	width:"95%",
+	editable: false,
+	font:{
+		fontFamily:"Quicksand-Regular"
+	},
+	color:"#000"
+}
+
+"#conditions":{
+	font:{
+		fontFamily:"Quicksand-Bold",
+		fontSize:"17dp"
+	},
+	width:"100%",
+	height:"45dp",
+	backgroundColor:"#666",
+	color:"#fff",
+	textAlign:"center"
+}
+
+"Button":{
+	backgroundColor:"#939393",
+	font:{
+		fontFamily:"Quicksand-Bold",
+		fontSize:"15dp"
+	},
+	borderRadius:5
+}
