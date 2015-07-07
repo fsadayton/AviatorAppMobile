@@ -86,16 +86,17 @@ function parseServiceProviders(){
 		var crisisHeaders = []; //reset list of crisis numbers
 		//iterate through list of providers in JSON
 		_.each(json, function(provider){
-			addProviderToMap(provider.address, provider.name); //add provider location to the map
+			var params = {
+				orgName:provider.name,
+				address:provider.address,
+				description:provider.description,
+				phone: provider.phoneNumber,
+				email: provider.email,
+				website: provider.website
+			};
+			addProviderToMap(params); //add provider location to the map
 			//create table row with detail metadata
-			var row = Alloy.createController('serviceProviderRow', {
-					orgName:provider.name,
-					address:provider.address,
-					description:provider.description,
-					phone: provider.phoneNumber,
-					email: provider.email,
-					website: provider.website
-				}).getView();	
+			var row = Alloy.createController('serviceProviderRow', params).getView();	
 			
 			//if provider has a crisis number, add it to crisis line table	
 			if(provider.crisisNumber){
@@ -134,7 +135,7 @@ function parseServiceProviders(){
  */    
 function providerDetail(e){
 	Alloy.createController('providerDetail',{
-		orgName:e.row.name,
+		orgName:e.row.orgName,
 		address: e.row.address,
 		description: e.row.description,
 		phone: e.row.phone,
@@ -154,22 +155,37 @@ function callPhoneNumber(e){
 /**
  * Helper function for adding a service provider to the map
  */
-function addProviderToMap(address, providerName){
-	geocoder.forwardGeocoder(address, function(e){
+function addProviderToMap(params){
+	geocoder.forwardGeocoder(params.address, function(e){
 		if(e.success)
 		{
 			var annotation = Map.createAnnotation({
 	            latitude: e.places[0].latitude,
 	   			longitude: e.places[0].longitude,
-	            title: providerName,
-	            subtitle: address
+	            title: params.orgName,
+	            row: params
            });
            $.map.addAnnotation(annotation);
 		}
 		else{
-				Ti.API.info("error with " + address +": "+ e.error);
+				Ti.API.info("error with " + params.address +": "+ e.error);
 			}
 	});	
+}
+
+/**
+ * Function that displays the distance between a user and a provider when 
+ * an annotation is clicked and opens the provider detail page upon clicking 
+ * the annotation popup box. 
+ */
+function mapClick(e){
+	if(e.clicksource && e.clicksource != "pin"){
+		providerDetail(e.annotation);
+	}
+	else if(e.clicksource && e.clicksource === "pin"){
+		Alloy.Globals.Location.estimateDistance(Alloy.Globals.currentLocation, e.annotation.row.address + ", US", 
+		function(distance){e.annotation.subtitle = distance + " • click for details";});
+	}
 }
 
 /**

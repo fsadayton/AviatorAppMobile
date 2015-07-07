@@ -8,7 +8,7 @@
 					<TableView id="providerList" class="menu" onClick="providerDetail" visible=true filterAttribute="title" />
 				</View>
 				<View id="mapModule" height="90%" visible=false top=0>
-					<Module id="map" module="ti.map" />
+					<Module id="map" module="ti.map" onClick="mapClick"/>
 				</View>
 				<View id="buttonBar">
 					<View id="listButton" class="buttonBarAction" left="0" visible=false onClick="toggleMapListView">
