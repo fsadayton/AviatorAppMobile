@@ -1,111 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ti:app 
-  xmlns:ti="http://ti.appcelerator.org">
-  <property name="acs-api-key-production" type="string">Eiu6BI6l3nK45otbsMiovn7JMvSthhy9</property>
-  <property name="acs-api-key-development" type="string">SjfvIAyGzvcVmGomFN4XbjhNKFMtxKNv</property>
-  <id>org.fsadayton.armorapp</id>
-  <name>Armor App</name>
-  <version>1.0</version>
-  <publisher>errettjm</publisher>
-  <url>http://www.fsadayton.org</url>
-  <description>undefined</description>
-  <copyright>2015 by FSA</copyright>
-  <icon>appicon.png</icon>
-  <fullscreen>false</fullscreen>
-  <navbar-hidden>false</navbar-hidden>
-  <analytics>true</analytics>
-  <guid>cf1a902c-4cc1-4e9b-9444-f3f1b4a6b3d9</guid>
-  <property name="ti.ui.defaultunit" type="string">dp</property>
-  <ios>
-    <plist>
-      <dict>
-        <key>UISupportedInterfaceOrientations~iphone</key>
-        <array>
-          <string>UIInterfaceOrientationPortrait</string>
-        </array>
-        <key>UISupportedInterfaceOrientations~ipad</key>
-        <array>
-          <string>UIInterfaceOrientationPortrait</string>
-          <string>UIInterfaceOrientationPortraitUpsideDown</string>
-          <string>UIInterfaceOrientationLandscapeLeft</string>
-          <string>UIInterfaceOrientationLandscapeRight</string>
-        </array>
-        <key>UIRequiresPersistentWiFi</key>
-        <false/>
-        <key>UIPrerenderedIcon</key>
-        <false/>
-        <key>UIStatusBarHidden</key>
-        <false/>
-        <key>UIStatusBarStyle</key>
-        <string>UIStatusBarStyleDefault</string>
-      </dict>
-    </plist>
-  </ios>
-  <android 
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <manifest>
-      <!-- Allows the API to download data from Google Map servers -->
-      <uses-permission android:name="android.permission.INTERNET"/>
-      <!-- Allows the API to cache data -->
-      <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-      <!-- Use GPS for device location -->
-      <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-      <!-- Use Wi-Fi or mobile connection for device location -->
-      <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-      <!-- Allows the API to access Google web-based services -->
-      <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
-      <!-- Specify OpenGL ES 2.0 as a requirement -->
-      <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
-      <!-- Replace <com.domain.appid> with your application ID -->
-      <uses-permission android:name="org.fsadayton.armorapp.permission.MAPS_RECEIVE"/>
-      <permission android:name="org.fsadayton.armorapp.permission.MAPS_RECEIVE" android:protectionLevel="signature"/>
-      <application android:theme="@style/Theme.CustomActionBar">
-        <!-- Replace "PASTE YOUR GOOGLE MAPS API KEY HERE" with the Google API key you obtained -->
-        <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyDCmJ4lBpceIqcWtJI9QBws_-l9W6Q5arg"/>
-      </application>
-      <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="21"/>
-    </manifest>
-  </android>
-  <mobileweb>
-    <precache/>
-    <splash>
-      <enabled>true</enabled>
-      <inline-css-images>true</inline-css-images>
-    </splash>
-    <theme>default</theme>
-  </mobileweb>
-  <modules>
-    <module platform="commonjs">ti.cloud</module>
-    <module platform="iphone">ti.map</module>
-    <module platform="android">ti.map</module>
-    <module platform="android" version="1.1.0">ti.geocoder</module>
-    <module platform="iphone" version="1.0.0">ti.geocoder</module>
-    <module platform="android" version="1.6.4">com.alcoapps.actionbarextras</module>
-  </modules>
-  <deployment-targets>
-    <target device="iphone">true</target>
-    <target device="ipad">false</target>
-    <target device="android">true</target>
-    <target device="blackberry">false</target>
-    <target device="mobileweb">false</target>
-  </deployment-targets>
-  <sdk-version>4.0.0.GA</sdk-version>
-  <plugins>
-    <plugin version="1.0">ti.alloy</plugin>
-  </plugins>
-  <property name="appc-app-id" type="string">5571fedd85a48cf624b0e56d</property>
-  <property name="acs-authbase-url-development" type="string">https://secure-identity.cloud.appcelerator.com</property>
-  <property name="acs-base-url-development" type="string">https://api.cloud.appcelerator.com</property>
-  <property name="acs-oauth-secret-development" type="string">WNXKg3T8iFfPGPrhcQQ5sEkcL26CwCS1</property>
-  <property name="acs-oauth-key-development" type="string">6IeEWXwDSVnjGutNz7Hfw0GKZkYkuzRr</property>
-  <property name="acs-username-development" type="string">appc_app_user_dev</property>
-  <property name="acs-password-development" type="string">b27WLWFHEXIBALDqJb</property>
-  <property name="acs-authbase-url-production" type="string">https://secure-identity.cloud.appcelerator.com</property>
-  <property name="acs-base-url-production" type="string">https://api.cloud.appcelerator.com</property>
-  <property name="acs-oauth-secret-production" type="string">ubGBIqVRSZJn2a6eyO2gmcO22i4CHfhZ</property>
-  <property name="acs-oauth-key-production" type="string">k4SCu0geITCouJCqVUtlTzvu94f5LqhN</property>
-  <property name="acs-username-production" type="string">appc_app_user</property>
-  <property name="acs-password-production" type="string">JcZnYZ0yGVKtWRRB4I</property>
-  <property name="appc-org-id" type="string">100031111</property>
-  <property name="appc-creator-user-id" type="string">c1455f21-12e7-4e30-bafc-8b7e6a7369e1</property>
+<ti:app xmlns:ti="http://ti.appcelerator.org">
+    <property name="acs-api-key-production" type="string">Eiu6BI6l3nK45otbsMiovn7JMvSthhy9</property>
+    <property name="acs-api-key-development" type="string">SjfvIAyGzvcVmGomFN4XbjhNKFMtxKNv</property>
+    <id>org.fsadayton.armorapp</id>
+    <name>Armor App</name>
+    <version>1.0</version>
+    <publisher>errettjm</publisher>
+    <url>http://www.fsadayton.org</url>
+    <description>undefined</description>
+    <copyright>2015 by FSA</copyright>
+    <icon>appicon.png</icon>
+    <fullscreen>false</fullscreen>
+    <navbar-hidden>false</navbar-hidden>
+    <analytics>true</analytics>
+    <guid>cf1a902c-4cc1-4e9b-9444-f3f1b4a6b3d9</guid>
+    <property name="ti.ui.defaultunit" type="string">dp</property>
+    <ios>
+        <plist>
+            <dict>
+                <key>UISupportedInterfaceOrientations~iphone</key>
+                <array>
+                    <string>UIInterfaceOrientationPortrait</string>
+                </array>
+                <key>UISupportedInterfaceOrientations~ipad</key>
+                <array>
+                    <string>UIInterfaceOrientationPortrait</string>
+                    <string>UIInterfaceOrientationPortraitUpsideDown</string>
+                    <string>UIInterfaceOrientationLandscapeLeft</string>
+                    <string>UIInterfaceOrientationLandscapeRight</string>
+                </array>
+                <key>UIRequiresPersistentWiFi</key>
+                <false/>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+                <key>UIStatusBarHidden</key>
+                <false/>
+                <key>UIStatusBarStyle</key>
+                <string>UIStatusBarStyleDefault</string>
+            </dict>
+        </plist>
+    </ios>
+    <android xmlns:android="http://schemas.android.com/apk/res/android">
+        <manifest>
+            <!-- Allows the API to download data from Google Map servers -->
+            <uses-permission android:name="android.permission.INTERNET"/>
+            <!-- Allows the API to cache data -->
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+            <!-- Use GPS for device location -->
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+            <!-- Use Wi-Fi or mobile connection for device location -->
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+            <!-- Allows the API to access Google web-based services -->
+            <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+            <!-- Specify OpenGL ES 2.0 as a requirement -->
+            <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
+            <!-- Replace <com.domain.appid> with your application ID -->
+            <uses-permission android:name="org.fsadayton.armorapp.permission.MAPS_RECEIVE"/>
+            <permission
+                android:name="org.fsadayton.armorapp.permission.MAPS_RECEIVE" android:protectionLevel="signature"/>
+            <application android:theme="@style/Theme.CustomActionBar">
+                <!-- Replace "PASTE YOUR GOOGLE MAPS API KEY HERE" with the Google API key you obtained -->
+                <meta-data
+                    android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyDCmJ4lBpceIqcWtJI9QBws_-l9W6Q5arg"/>
+            </application>
+            <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="21"/>
+        </manifest>
+    </android>
+    <mobileweb>
+        <precache/>
+        <splash>
+            <enabled>true</enabled>
+            <inline-css-images>true</inline-css-images>
+        </splash>
+        <theme>default</theme>
+    </mobileweb>
+    <modules>
+        <module platform="commonjs">ti.cloud</module>
+        <module platform="iphone">ti.map</module>
+        <module platform="android">ti.map</module>
+        <module platform="android" version="1.1.0">ti.geocoder</module>
+        <module platform="iphone" version="1.0.0">ti.geocoder</module>
+        <module platform="android" version="1.6.4">com.alcoapps.actionbarextras</module>
+    </modules>
+    <deployment-targets>
+        <target device="iphone">true</target>
+        <target device="ipad">false</target>
+        <target device="android">true</target>
+        <target device="blackberry">false</target>
+        <target device="mobileweb">false</target>
+    </deployment-targets>
+    <sdk-version>4.1.0.GA</sdk-version>
+    <plugins>
+        <plugin version="1.0">ti.alloy</plugin>
+    </plugins>
+    <property name="appc-app-id" type="string">5571fedd85a48cf624b0e56d</property>
+    <property name="acs-authbase-url-development" type="string">https://secure-identity.cloud.appcelerator.com</property>
+    <property name="acs-base-url-development" type="string">https://api.cloud.appcelerator.com</property>
+    <property name="acs-oauth-secret-development" type="string">WNXKg3T8iFfPGPrhcQQ5sEkcL26CwCS1</property>
+    <property name="acs-oauth-key-development" type="string">6IeEWXwDSVnjGutNz7Hfw0GKZkYkuzRr</property>
+    <property name="acs-username-development" type="string">appc_app_user_dev</property>
+    <property name="acs-password-development" type="string">b27WLWFHEXIBALDqJb</property>
+    <property name="acs-authbase-url-production" type="string">https://secure-identity.cloud.appcelerator.com</property>
+    <property name="acs-base-url-production" type="string">https://api.cloud.appcelerator.com</property>
+    <property name="acs-oauth-secret-production" type="string">ubGBIqVRSZJn2a6eyO2gmcO22i4CHfhZ</property>
+    <property name="acs-oauth-key-production" type="string">k4SCu0geITCouJCqVUtlTzvu94f5LqhN</property>
+    <property name="acs-username-production" type="string">appc_app_user</property>
+    <property name="acs-password-production" type="string">JcZnYZ0yGVKtWRRB4I</property>
+    <property name="appc-org-id" type="string">100031111</property>
+    <property name="appc-creator-user-id" type="string">c1455f21-12e7-4e30-bafc-8b7e6a7369e1</property>
 </ti:app>

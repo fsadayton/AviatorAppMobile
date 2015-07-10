@@ -5,24 +5,24 @@
 
 "#accountImage":{
 	top: "15dp",
-	width: "25%"
+	width: "20%"
 }
 
 "#name":{
 	font:{
 		fontFamily:"Quicksand-Bold",
-		fontSize:"30dp"
+		fontSize:"25dp"
 	},
-	top:"10dp",
-	bottom:"10dp",
 	color:"#65c8c7",
-	height:"35dp"
+	width: "90%",
+	top:"5dp",
+	textAlign: "center"
 }
 
 ".headerLabel":{
 	color:"#65c8c7",
 	height:"15dp",
-	top:"15dp"
+	top:"10dp"
 }
 
 "#contactTable":{
@@ -33,6 +33,47 @@
 	height:"45dp",
 	color:"#666"
 }
+
+"#profileBar":{
+	width: "70%",
+	height:"42dp",
+	borderRadius: 20,
+	borderColor: "#65c8c7",
+	borderWidth: 2,
+	layout: "horizontal",
+	top: "5dp"
+}
+
+".profileButton":{
+	height:"30dp",
+	width:"30dp",
+	zIndex:0,
+	touchEnabled: false
+}
+
+".profileView":{
+	width: "33.3%",
+	backgroundColor: "#fff",
+	zIndex: 1,
+	borderColor: "#65c8c7",
+	borderWidth: 1
+}
+
+"TextField":{
+	font:{
+		fontFamily:"Quicksand-Bold"
+	},
+	color:"#7d7d7d"
+}
+
+".sentence":{
+	left:"1dp",
+	right:"1dp",
+	font:{
+		fontSize:"20dp"
+	}
+}
+
 
 
 

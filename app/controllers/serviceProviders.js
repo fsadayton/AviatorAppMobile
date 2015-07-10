@@ -3,6 +3,9 @@ var args = arguments[0] || {};
 var Map = require('ti.map');
 var geocoder = require('ti.geocoder');
 
+$.activityIndicator.show();
+$.quickActivityIndicator.show();
+
 var originalMapAnnotations = null; //list of map points from original search; used to maintain original points after search
 var allHeaders = []; //list of all table headers to appear in list based on queried categories
 var categoryNames = []; //array of relevant category names; used for filtering
