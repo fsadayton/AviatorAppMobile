@@ -1,0 +1,29 @@
+
+".container":{
+	layout: "vertical"
+}
+
+".header":{
+	backgroundColor:"#b8b8b8",
+	height:"45dp",
+	color: "#fff",
+	width:"100%"
+}
+
+
+".arrow":{
+	height:"30dp",
+	width: "30dp"
+}  
+
+
+"#countiesPicker":{
+	layout: "horizontal",
+	backgroundColor: "#fff",
+	top:"5dp",
+	bottom:"5dp",
+	left:"5dp",
+	right:"5dp"
+}
+
+

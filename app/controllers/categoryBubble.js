@@ -18,10 +18,14 @@ if(args.isSelected){
 function toggle(){
 	if($.bubbleText.backgroundColor == originalColor){ //value is being "selected"
 		$.bubbleText.backgroundColor = "#f9c84d";
-		args.callback(args.type, args.id, $.bubbleText.text, true); //add new value to list
+		if(typeof args.callback === "function"){
+			args.callback(args.id, $.bubbleText.text, args.type, true); //add new value to list
+		}
 	}
 	else{ //bubble is being "de-selected"
 		$.bubbleText.backgroundColor = originalColor;
-		args.callback(args.type, args.id, $.bubbleText.text, false); //remove value from list
+		if(typeof args.callback === "function"){
+			args.callback(args.id, $.bubbleText.text, args.type, false); //remove value from list
+		}
 	}
 }

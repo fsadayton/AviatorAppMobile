@@ -1,10 +1,11 @@
 var args = arguments[0] || {};
+var profileBasics = Alloy.Models.profile_basics;
 
 Alloy.Globals.addActionBarButtons($.win);
 
-Ti.API.info("hello");
+Ti.API.info("hello: " + profileBasics);
 
-function doSomething(){
+function updateProfilePic(){
 	Titanium.Media.openPhotoGallery({
 	success:function(event) {
 		// called when media returned from the camera
@@ -65,6 +66,28 @@ function editing(e){
 	Ti.API.info("editing");
 	e.source.editable = true;
 	e.source.fireEvent('focus');
+}
+var allCounties = null;
+function pickCounty(e){
+	if (allCounties){
+		createFilter(allCounties);
+	}
+	else{
+		Alloy.Globals.sendHttpRequest("GetCounties", "GET", null, 
+		function(){
+			allCounties = JSON.parse(this.responseText);
+			createPopup(allCounties);
+		});
+	}
+	
+	/**
+	 * helper function for creating filter view
+	 */
+	function createPopup(countiesList){
+		Alloy.createController("profileModal", {
+			counties: countiesList
+		}).getView().open();
+	}
 }
 
 function change(e){

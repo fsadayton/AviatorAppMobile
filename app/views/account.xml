@@ -2,7 +2,7 @@
 	<Window id="win" onOpen="Alloy.Globals.updateActionBar">
 		<!--<Require src="header"></Require>-->
 		<View class="divider"/>
-		<ImageView onClick="doSomething" id="accountImage" image="/global/user256.png" />
+		<ImageView id="accountImage" image="/global/user256.png" />
 		<Label id="name">Jane Doe</Label>
 		<View id="profileBar">
 			<View id="profile" class="profileView" backgroundColor="#e9e9e9" onClick="toggleSelection">
@@ -25,11 +25,11 @@
 					<Label class="sentence">and I want</Label>
 					<Label class="sentence">to see</Label> 
 					<Label class="sentence">services in</Label>
-					<TextField class="sentence" editable=false value="Montgomery" onClick="editing"/>
+					<TextField class="sentence" editable=false value="Montgomery" onClick="pickCounty"/>
 					<Label class="sentence">county.</Label>
 				</View>
 				
-				<Button bottom="10dp">Update Profile Picture</Button>
+				<Button bottom="10dp" onClick="updateProfilePic">Update Profile Picture</Button>
 			</View>
 			<View>
 				<Label class="headerLabel">TRUSTED CONTACTS</Label>

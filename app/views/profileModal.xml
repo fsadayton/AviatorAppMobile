@@ -1,0 +1,6 @@
+<Alloy>
+	<Window modal="true" layout="vertical">
+	<Require id="countySelector" src="countySelectorView" />
+	<Button onClick="close">CLOSE</Button>
+	</Window>
+</Alloy>

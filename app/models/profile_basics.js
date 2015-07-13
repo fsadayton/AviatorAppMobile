@@ -3,7 +3,8 @@ exports.definition = {
 		columns: {
 		    "name": "string",
 		    "county": "string",
-		    "emergency_message": "string"
+		    "emergency_message": "string",
+		    "profile_pic" : "blob"
 		},
 		adapter: {
 			type: "sql",
