@@ -10,5 +10,5 @@
   	bottom: "3dp",
   	wordWrap: false,
   	ellipsize: true,
-  	backgroundColor:"#fff"
+  	backgroundColor:"#fff",
 }

@@ -21,11 +21,11 @@
 				<Label class="headerLabel">PROFILE SUMMARY</Label>
 				<View layout="horizontal" height="60%" width="90%">
 					<Label class="sentence">My name is</Label>
-					<TextField class="sentence" editable=false value="Jane Doe" onBlur="change" onClick="editing"/>
+					<TextField class="sentence" editable=false focusable=false value="Jane Doe" onBlur="change" onClick="editing"/>
 					<Label class="sentence">and I want</Label>
 					<Label class="sentence">to see</Label> 
 					<Label class="sentence">services in</Label>
-					<TextField class="sentence" editable=false value="Montgomery" onClick="pickCounty"/>
+					<TextField class="sentence" editable=false focusable=false value="Montgomery" onClick="pickCounty"/>
 					<Label class="sentence">county.</Label>
 				</View>
 				

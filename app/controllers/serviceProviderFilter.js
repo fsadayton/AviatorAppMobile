@@ -39,10 +39,9 @@ _.each(countyKeys, function(key){
  * @param {bool} isNew - flag for determining if selection is a new addition. isNew is true 
  * 				if value should be added to category/county list; false if value should be removed
  */
-function updateSummary(id, text, type, isNew){
+function updateSummary(id, text, isNew, type){
 	if(type === "county"){ //update list of filtered counties
 		updateArray(countyFilter, $.countySummary);
-		
 	}
 	else if(type === "category"){ //update list of filtered categories
 		updateArray(categoryFilter, $.categorySummary);

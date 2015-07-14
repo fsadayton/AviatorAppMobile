@@ -37,3 +37,14 @@
 	top:"50%",
 	zIndex:1
 }
+
+".modal" : {
+  modal: true,
+  height: "95%",
+  width: "92%",
+  layout: "vertical",
+  background: "transparent",
+  borderRadius: 10,
+  borderColor:"#f9c84d",
+  borderWidth: 2
+}

@@ -2,7 +2,8 @@
 	<View id="countiesContainer" class="container">
 		<View class="header">
 			<Label>COUNTIES</Label>
-			<!--<ImageView class="arrow" id="leftArrow" left="10dp" image="/global/back-arrow.png" onClick="gotoPrevious" />-->
+			<ImageView class="arrow" id="leftImage" left="10dp" visible="false" />
+			<ImageView class="arrow" id="rightImage" right="10dp" visible="false" />
 		</View>
 		<SearchBar platform="android"  id="searchBar" height="50dp" backgroundColor="#D2B48C"/>
 		<ScrollView scrollType="vertical" backgroundColor="#fff">

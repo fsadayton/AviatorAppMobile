@@ -1,5 +1,5 @@
 <Alloy>
-	<Window modal="true" layout="vertical">
+	<Window class="modal" onOpen="Alloy.Globals.updateActionBar" id="win">
 	<Require id="countySelector" src="countySelectorView" />
 	<Button onClick="close">CLOSE</Button>
 	</Window>

@@ -70,7 +70,7 @@ function editing(e){
 var allCounties = null;
 function pickCounty(e){
 	if (allCounties){
-		createFilter(allCounties);
+		createPopup(allCounties);
 	}
 	else{
 		Alloy.Globals.sendHttpRequest("GetCounties", "GET", null, 
@@ -85,9 +85,12 @@ function pickCounty(e){
 	 */
 	function createPopup(countiesList){
 		Alloy.createController("profileModal", {
-			counties: countiesList
+			counties: countiesList,
+			leftImage:"/global/close.png",
+			rightImage:"/global/checkmark.png"
 		}).getView().open();
 	}
+	
 }
 
 function change(e){

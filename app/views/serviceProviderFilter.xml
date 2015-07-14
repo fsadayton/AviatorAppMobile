@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="win" onOpen="Alloy.Globals.updateActionBar">
+	<Window id="win" onOpen="Alloy.Globals.updateActionBar" class="modal">
 		<View id="summaryView">
 			<View class="header">
 				<Label>FILTER SUMMARY</Label>
