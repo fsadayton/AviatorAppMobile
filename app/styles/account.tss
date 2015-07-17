@@ -5,7 +5,9 @@
 
 "#accountImage":{
 	top: "15dp",
-	width: "20%"
+	height:"75dp",
+	width:"75dp",
+	borderRadius: 50
 }
 
 "#name":{

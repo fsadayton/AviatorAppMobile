@@ -1,14 +1,22 @@
 exports.definition = {
 	config: {
 		columns: {
-		    "name": "string",
-		    "county": "string",
-		    "emergency_message": "string",
-		    "profile_pic" : "blob"
+		    "name": "text",
+		    "county": "text",
+		    "emergency_message": "text",
+		    "profile_pic" : "text",
+		    "website" : "text"
+		},
+		"defaults":{
+			"name":"Your Name",
+			"county": "Montgomery",
+			"emergency_message":"Edit the emergency message sent to your trusted contacts",
+			"profile_pic":Ti.Utils.base64encode(Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, "global/user256.png").read()),
+			"website":"http://weather.com"
 		},
 		adapter: {
 			type: "sql",
-			collection_name: "profile_basics"
+			collection_name: "profileBasics"
 		}
 	},
 	extendModel: function(Model) {
