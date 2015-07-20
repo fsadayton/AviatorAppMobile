@@ -1,6 +1,18 @@
 <Alloy>
 	<Window class="modal" onOpen="Alloy.Globals.updateActionBar" id="win">
-	<Require id="countySelector" src="countySelectorView" />
-	<Button onClick="close">CLOSE</Button>
+		<View class="container">
+			<View class="header">
+				<Label id="headerLabel">COUNTIES</Label>
+				<ImageView class="arrow" image="/global/close.png" id="leftImage" left="10dp" onClick="close"/>
+				<ImageView class="arrow" image="/global/checkmark.png" id="rightImage" right="10dp" onClick="submit"/>
+			</View>
+			<Require id="countySelector" src="countySelectorView" />
+			
+			<View id="generalTextView" visible="false" class="container">
+				<Label id="description"/>
+				<TextField id="generalTextField" />
+			</View>
+		</View>
+	
 	</Window>
 </Alloy>

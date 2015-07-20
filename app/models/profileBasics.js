@@ -4,14 +4,14 @@ exports.definition = {
 		    "name": "text",
 		    "county": "text",
 		    "emergency_message": "text",
-		    "profile_pic" : "text",
+		    "profile_pic" : "blob",
 		    "website" : "text"
 		},
 		"defaults":{
 			"name":"Your Name",
 			"county": "Montgomery",
 			"emergency_message":"Edit the emergency message sent to your trusted contacts",
-			"profile_pic":Ti.Utils.base64encode(Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, "global/user256.png").read()),
+			"profile_pic":Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, "global/user256.png").read(),
 			"website":"http://weather.com"
 		},
 		adapter: {

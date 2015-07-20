@@ -6,34 +6,6 @@ var selectable = require('countySelectorUtils');
 $.init = function(obj){
 	Ti.API.info("obj: " + JSON.stringify(obj));
 	
-	if(obj.leftImage){
-		$.leftImage.image = obj.leftImage;
-		$.leftImage.visible = true;
-		
-		$.leftImage.addEventListener("click", function(){
-			Ti.API.info("left function");
-			selectable.setCountySelectable(true);
-			obj.callbacks.leftCallback();
-		});
-	}
-	
-	if(obj.rightImage){
-		$.rightImage.image = obj.rightImage;
-		$.rightImage.visible = true;
-		
-		$.rightImage.addEventListener("click", function(){
-			Ti.API.info("right click");
-			if(selectedCounty){
-				selectable.setCountySelectable(true);
-				obj.callbacks.rightCallback(selectedCounty);
-			}
-			else{
-				alert("No county selected!");
-			}
-		});
-		
-	}
-	
 	var countyKeys = Object.keys(obj.counties);
 	_.each(countyKeys, function(key){
 		//define county id, name, and callback function when clicked
@@ -50,11 +22,11 @@ $.init = function(obj){
 	
 	function updateSelection(countyId, countyName, isNew){
 		if(isNew){
-			selectedCounty = {id:countyId, name:countyName};
+			selectable.setSelectedCounty({id:countyId, name:countyName});
 			selectable.setCountySelectable(false);
 		}
 		else{
-			selectedCounty = null;
+			selectable.setSelectedCounty(null);
 			selectable.setCountySelectable(true);
 		}
 		Ti.API.info("selectable: "+ selectable.getCountySelectable());

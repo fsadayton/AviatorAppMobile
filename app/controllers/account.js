@@ -5,8 +5,8 @@ profileBasics.fetch();
 
 Alloy.Globals.addActionBarButtons($.win);
 Ti.API.info("prfoil: " + profileBasics.get('profile_pic'));
-$.accountImage.image = Ti.Utils.base64decode(profileBasics.get('profile_pic'));
-Ti.API.info("account image: " + JSON.stringify($.accountImage.image));
+$.accountImage.image = profileBasics.get('profile_pic');
+//Ti.API.info("account image: " + JSON.stringify($.accountImage.image));
 
 var allCounties = null;
 
@@ -18,7 +18,7 @@ function updateProfilePic(){
 		if(event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
 			Ti.API.info("media: "+JSON.stringify(event.media));
 			profileBasics.save({
-				profile_pic: Ti.Utils.base64encode(event.media)
+				profile_pic: event.media
 			});
 			$.accountImage.image = event.media;
 			//JS
@@ -95,8 +95,7 @@ function pickCounty(e){
 	function createPopup(countiesList){
 		Alloy.createController("profileModal", {
 			counties: countiesList,
-			leftImage:"/global/close.png",
-			rightImage:"/global/checkmark.png",
+			header: "COUNTIES",
 			updateElement: $.county
 		}).getView().open();
 	}
