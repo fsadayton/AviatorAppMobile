@@ -1,28 +1,47 @@
 var args = arguments[0] || {};
 
 $.headerLabel.text = args.header;
+var profileBasics = Alloy.Models.profileBasics;
+
 if(args.counties){
+	$.counties.visible = true;
+	$.generalTextView.visible = false;
+	
 	$.countySelector.init(args);
 	
 	var selectable = require('countySelectorUtils');
 	
 	function isSelectable(isSelectable){
 		selectable.setCountySelectable(isSelectable);
-		selectable.setCounty(null);
+		selectable.setSelectedCounty(null);
 	}
 	
-	function saveCounty(county){
-		Ti.API.info("county name: " + county.name);
-		Ti.API.info("county id: "+ county.id);
-		
-		
-		var profileBasics = Alloy.Models.profileBasics;
+	function saveCounty(){
+		var county = selectable.getSelectedCounty();
+		if(county){
+			selectable.setCountySelectable(true);
+			
+			profileBasics.save({
+				county: county.name	
+			});
+			
+			$.win.close();
+		}
+		else{
+			alert("No county selected!");
+		}
+	}
+}
+else{
+	$.counties.visible = false;
+	$.generalTextView.visible = true;
+	$.description.text = args.description;
+	
+	function saveName(){
+		//args.updateElement.value = $.generalTextField.value;
 		profileBasics.save({
-			county: county.name	
+			name: $.generalTextField.value.trim()	
 		});
-	
-		args.updateElement.value = county.name;
-	
 		$.win.close();
 	}
 }
@@ -31,19 +50,17 @@ if(args.counties){
 function close(){
 	$.win.close();
 	
-	if(isSelectable){
+	if(args.counties){
 		isSelectable(true);
 	}
 }
 
 function submit(){
-	var county = selectable.getSelectedCounty();
-	if(county){
-		selectable.setCountySelectable(true);
-		saveCounty(county);
+	if(args.counties){
+		saveCounty();
 	}
 	else{
-		alert("No county selected!");
+		saveName();
 	}
 }
 			

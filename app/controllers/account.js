@@ -5,7 +5,7 @@ profileBasics.fetch();
 
 Alloy.Globals.addActionBarButtons($.win);
 Ti.API.info("prfoil: " + profileBasics.get('profile_pic'));
-$.accountImage.image = profileBasics.get('profile_pic');
+//$.accountImage.image = profileBasics.get('profile_pic');
 //Ti.API.info("account image: " + JSON.stringify($.accountImage.image));
 
 var allCounties = null;
@@ -17,10 +17,10 @@ function updateProfilePic(){
 		Ti.API.debug('Our type was: '+event.mediaType);
 		if(event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
 			Ti.API.info("media: "+JSON.stringify(event.media));
-			profileBasics.save({
+			/*profileBasics.save({
 				profile_pic: event.media
 			});
-			$.accountImage.image = event.media;
+			$.accountImage.image = event.media;*/
 			//JS
 		} else {
 			alert("got the wrong type back ="+event.mediaType);
@@ -100,6 +100,15 @@ function pickCounty(e){
 		}).getView().open();
 	}
 	
+}
+
+function updateProfile(e){
+	Ti.API.info("source: " + e.source.id);
+	Alloy.createController("profileModal", {
+			header: "NAME",
+			description:"Enter your name",
+			updateElement: e.source
+		}).getView().open();
 }
 
 function change(e){
