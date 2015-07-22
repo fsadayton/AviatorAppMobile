@@ -37,12 +37,21 @@ else{
 	$.generalTextView.visible = true;
 	$.description.text = args.description;
 	
-	function saveName(){
-		//args.updateElement.value = $.generalTextField.value;
-		profileBasics.save({
-			name: $.generalTextField.value.trim()	
-		});
-		$.win.close();
+	if(args.sourceId === "website"){
+		function saveWebsite(){
+			profileBasics.save({
+				website:$.generalTextField.value.trim()
+			});
+			$.win.close();
+		}
+	}
+	else{
+		function saveName(){
+			profileBasics.save({
+				name: $.generalTextField.value.trim()	
+			});
+			$.win.close();
+		}
 	}
 }
 
@@ -58,6 +67,9 @@ function close(){
 function submit(){
 	if(args.counties){
 		saveCounty();
+	}
+	else if(args.sourceId === "website"){
+		saveWebsite();
 	}
 	else{
 		saveName();

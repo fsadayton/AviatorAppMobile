@@ -39,7 +39,7 @@ Alloy.Globals.addActionBarButtons = function(window, additionalButtons, callback
 	    });
 	    
 	    menuItem.addEventListener("click", function(e) { 
-	        Ti.Platform.openURL("http://www.news.yahoo.com"); 
+	        Ti.Platform.openURL(Alloy.Models.profileBasics.get('website')); 
 	    }); 
 	    
 	    help.addEventListener("click", function(e){
@@ -55,7 +55,6 @@ Alloy.Globals.addActionBarButtons = function(window, additionalButtons, callback
 	    	callback(menu);
 	    }
     };
-    
 };
 
 /**

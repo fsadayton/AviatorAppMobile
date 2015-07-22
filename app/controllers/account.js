@@ -6,7 +6,7 @@ profileBasics.fetch();
 Alloy.Globals.addActionBarButtons($.win);
 Ti.API.info("prfoil: " + profileBasics.get('profile_pic'));
 //$.accountImage.image = profileBasics.get('profile_pic');
-//Ti.API.info("account image: " + JSON.stringify($.accountImage.image));
+//Ti.API.info("account image: " + JSON.stringify(Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, "global/user256.png").read()));
 
 var allCounties = null;
 
@@ -16,12 +16,9 @@ function updateProfilePic(){
 		// called when media returned from the camera
 		Ti.API.debug('Our type was: '+event.mediaType);
 		if(event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
-			Ti.API.info("media: "+JSON.stringify(event.media));
-			/*profileBasics.save({
-				profile_pic: event.media
+			profileBasics.save({
+				profile_pic: event.media.nativePath
 			});
-			$.accountImage.image = event.media;*/
-			//JS
 		} else {
 			alert("got the wrong type back ="+event.mediaType);
 		}
@@ -104,12 +101,24 @@ function pickCounty(e){
 
 function updateProfile(e){
 	Ti.API.info("source: " + e.source.id);
-	Alloy.createController("profileModal", {
+	var params = null;
+	if(e.source.id === "website"){
+		params = {
+			header:"QUICK HIDE WEBSITE",
+			description: "Enter a website url (e.g. http://google.com) to be used as part of the 'quick-hide' feature",
+		};
+	}
+	else{
+		params = {
 			header: "NAME",
-			description:"Enter your name",
-			updateElement: e.source
-		}).getView().open();
+			description:"Enter your name"
+		};
+	}
+	params.sourceId = e.source.id;
+	Alloy.createController("profileModal", params).getView().open();
 }
+
+
 
 function change(e){
 	Ti.API.info("change: " + e.value);

@@ -20,16 +20,22 @@
 		<ScrollableView id="profileScroll">
 			<View layout="vertical">
 				<Label class="headerLabel">PROFILE SUMMARY</Label>
-				<View layout="horizontal" height="60%" width="90%">
-					<Label class="sentence">My name is</Label>
-					<TextField id="nameField" class="sentence" editable=false focusable=false value="{profileBasics.name}" onClick="updateProfile"/>
-					<Label class="sentence">and I want</Label>
-					<Label class="sentence">to see</Label> 
-					<Label class="sentence">services in</Label>
-					<TextField id="county" class="sentence" editable=false focusable=false value="{profileBasics.county}" onClick="pickCounty"/>
-					<Label class="sentence">county.</Label>
-				</View>
-				
+				<ScrollView layout="vertical" height="70%">
+					<View layout="horizontal" width="90%" height="52%">
+						<Label class="sentence">My name is</Label>
+						<TextField id="nameField" class="sentence" editable=false focusable=false value="{profileBasics.name}" onClick="updateProfile"/>
+						<Label class="sentence">and I want</Label>
+						<Label class="sentence">to see</Label> 
+						<Label class="sentence">services in</Label>
+						<TextField id="county" class="sentence" editable=false focusable=false value="{profileBasics.county}" onClick="pickCounty"/>
+						<Label class="sentence">county.</Label>
+					</View>
+					<View layout="horizontal" width="90%" height="55%" >
+						<Label class="sentence">My 'quick-hide'</Label>
+						<Label class="sentence">website is</Label>
+						<TextField id="website" class="sentence" editable=false focusable=false value="{profileBasics.website}" onClick="updateProfile"/>
+					</View>
+				</ScrollView>
 				<Button bottom="10dp" onClick="updateProfilePic">Update Profile Picture</Button>
 			</View>
 			<View>

@@ -24,7 +24,14 @@
 	font:{
 		fontFamily:"Quicksand-Regular"
 	},
-	top:"10dp"
+	top:"10dp",
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER
+}
+
+"#description":{
+	color:"black",
+	width:"90%",
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER
 }
 
 
