@@ -22,7 +22,8 @@ if(args.counties){
 			selectable.setCountySelectable(true);
 			
 			profileBasics.save({
-				county: county.name	
+				countyName: county.name,
+				countyId: county.id
 			});
 			
 			$.win.close();

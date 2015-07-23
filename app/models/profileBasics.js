@@ -2,14 +2,16 @@ exports.definition = {
 	config: {
 		columns: {
 		    "name": "text",
-		    "county": "text",
+		    "countyName": "text",
+		    "countyId":"text",
 		    "emergency_message": "text",
 		    "profile_pic" : "text",
 		    "website" : "text"
 		},
 		"defaults":{
 			"name":"Your Name",
-			"county": "Montgomery",
+			"countyName": "Montgomery",
+			"countyId":"57",
 			"emergency_message":"Edit the emergency message sent to your trusted contacts",
 			"profile_pic":"/global/user256.png",
 			"website":"http://weather.com"

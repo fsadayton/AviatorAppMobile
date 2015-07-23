@@ -53,6 +53,10 @@ else{
 
 }
 
+function profileExists(){
+	return Alloy.Models.profileBasics == undefined ? false : true;
+}
+
 Alloy.Globals.addActionBarButtons($.index);
 
 

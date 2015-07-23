@@ -26,7 +26,9 @@ Alloy.Globals.sendHttpRequest("GetCategoryLookupIndex", "GET", null, storeCatego
  */
 function storeCategoryLookup(){
 	categoryDictionary = JSON.parse(this.responseText);
-	categoryNames = getTableData(args.categories, [Alloy.Globals.countyOfInterest]);
+	var profileBasics = Alloy.Models.profileBasics;
+	Ti.API.info("profileBasics: " + profileBasics);
+	categoryNames = getTableData(args.categories, [Alloy.Models.profileBasics.get('countyId')]);
 }
 
 /**

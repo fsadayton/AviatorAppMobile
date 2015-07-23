@@ -79,6 +79,7 @@ exports.estimateDistance = function(currentPos, address, callback){
 	if(currentPos){
 		geocoder.forwardGeocoder(address, function(e){
 		    if(e.success){
+		    	Ti.API.info("place: "+ JSON.stringify(e.places[0]));
 		        distance = getDistance(parseFloat(currentPos.latitude), parseFloat(currentPos.longitude), parseFloat(e.places[0].latitude), parseFloat(e.places[0].longitude)) + " mile(s)";
 				callback(distance); 
 		    }   
