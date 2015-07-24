@@ -39,13 +39,6 @@ function updateProfilePic(){
 });
 }
 
-function viewContacts(){
-	Ti.Contacts.showContacts({
-		selectedPerson: function(e){
-			Ti.API.info("person:"+JSON.stringify(e));
-		},
-	});
-}
 var previouslySelected = $.profile;
 function toggleSelection(e){
 	
@@ -116,6 +109,16 @@ function updateProfile(e){
 	}
 	params.sourceId = e.source.id;
 	Alloy.createController("profileModal", params).getView().open();
+}
+
+function addContact(){
+	Ti.Contacts.showContacts({
+		selectedPerson: function(e){
+			Ti.API.info("person:" + JSON.stringify(e.person.phone));
+			Alloy.createController('trustedContactModal', e.person).getView().open();
+		},
+		fields:['phone', 'name']
+	});
 }
 
 

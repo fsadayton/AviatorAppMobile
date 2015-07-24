@@ -40,7 +40,7 @@
 			</View>
 			<View>
 				<Label class="headerLabel">TRUSTED CONTACTS</Label>
-				<TableView id="contactTable" onClick="viewContacts">
+				<TableView id="contactTable">
 					<TableViewRow>
 						<Label>John Doe • 937.554.5767</Label>
 					</TableViewRow>
@@ -51,6 +51,9 @@
 						<Label>Mary Thompson • 937.555.1234</Label>
 					</TableViewRow>
 				</TableView>
+				<Label>EMERGENCY MESSAGE</Label>
+				<TextField value="{profileBasics.emergency_message}"></TextField>
+				<Button onClick="addContact">Add New Contact</Button>
 			</View>
 			<View>
 				<Label class="headerLabel">FAVORITE SERVICES</Label>

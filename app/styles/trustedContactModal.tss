@@ -1,0 +1,8 @@
+
+".header":{
+	backgroundColor:"#b8b8b8",
+	height:"45dp",
+	color: "#fff",
+	width:"100%",
+	top:0
+}
