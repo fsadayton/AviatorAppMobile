@@ -3,7 +3,7 @@
 	<View class="header">
 		<Label id="headerLabel">TRUSTED CONTACT NUMBER</Label>
 	</View>
-	<Label>Pick a phone number that has texting capabilities.</Label>
-	<TableView id="table" backgroundColor="#fff"/>
+	<Label id="description">Be sure to pick a phone number that has texting capabilities.</Label>
+	<TableView id="table" backgroundColor="#fff" onClick="storeNumber"/>
 	</Window>
 </Alloy>

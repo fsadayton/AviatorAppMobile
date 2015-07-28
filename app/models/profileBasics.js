@@ -12,7 +12,7 @@ exports.definition = {
 			"name":"Your Name",
 			"countyName": "Montgomery",
 			"countyId":"57",
-			"emergency_message":"Edit the emergency message sent to your trusted contacts",
+			"emergency_message":"I need your help. Please contact me ASAP.",
 			"profile_pic":"/global/user256.png",
 			"website":"http://weather.com"
 		},

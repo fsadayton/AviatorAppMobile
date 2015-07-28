@@ -20,6 +20,8 @@ Alloy.Globals.Location = require('LocationUtils');
 
 Alloy.Globals.currentLocation = null;
 
+Alloy.Collections.trustedContacts = Alloy.createCollection('trustedContacts');
+
 Alloy.Globals.addActionBarButtons = function(window, additionalButtons, callback){
     window.activity.onCreateOptionsMenu = function(e) { 
 	    var menu = e.menu; 

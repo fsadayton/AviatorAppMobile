@@ -6,7 +6,7 @@ exports.definition = {
 		},
 		adapter: {
 			type: "sql",
-			collection_name: "trusted_contacts"
+			collection_name: "trustedContacts"
 		}
 	},
 	extendModel: function(Model) {

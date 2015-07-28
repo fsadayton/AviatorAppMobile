@@ -1,8 +1,11 @@
 var args = arguments[0] || {};
 var profileBasics = Alloy.Models.profileBasics;
 
+Alloy.Collections.trustedContacts.fetch();
 profileBasics.fetch();
 
+setHeaderWidth();
+Ti.API.info("widths: " + $.accountImage.width + " " + $.name.width);
 Alloy.Globals.addActionBarButtons($.win);
 Ti.API.info("prfoil: " + profileBasics.get('profile_pic'));
 //$.accountImage.image = profileBasics.get('profile_pic');
@@ -19,6 +22,8 @@ function updateProfilePic(){
 			profileBasics.save({
 				profile_pic: event.media.nativePath
 			});
+			setHeaderWidth();
+
 		} else {
 			alert("got the wrong type back ="+event.mediaType);
 		}
@@ -112,17 +117,45 @@ function updateProfile(e){
 }
 
 function addContact(){
-	Ti.Contacts.showContacts({
-		selectedPerson: function(e){
-			Ti.API.info("person:" + JSON.stringify(e.person.phone));
-			Alloy.createController('trustedContactModal', e.person).getView().open();
-		},
-		fields:['phone', 'name']
-	});
+	$.dialog.show();
+	
 }
 
+function doClick(e){
+	if(e.index == 0){
+		Ti.API.info("lol coming");
+	}
+	else if(e.index == 1){
+		Ti.Contacts.showContacts({
+			selectedPerson: function(e){
+				Ti.API.info("person:" + JSON.stringify(e.person.phone));
+				Alloy.createController('trustedContactModal', e.person).getView().open();
+			},
+			fields:['phone', 'name']
+		});
+	}
+}
 
+function setHeaderWidth(){
+	$.centeredView.width = parseInt($.accountImage.width) + $.name.toImage().width + "dp";
+}
 
-function change(e){
-	Ti.API.info("change: " + e.value);
+var timeout;
+function saveMessage(e){
+		Ti.API.info("set timeout");
+    	if(e.value.length <= 160){ //if search field contains a value
+     		profileBasics.save({
+				emergency_message: e.value
+			},
+			{
+				silent: true
+			});
+			$.trustedMessageEdit.blur();
+			Alloy.Globals.isAndroid ? Ti.UI.createNotification({message:"Message Saved.",
+    				duration: Ti.UI.NOTIFICATION_DURATION_LONG}).show() : alert("Message Saved.");
+     	}
+     	else{
+     		//if search is empty, put all annotations back on the map
+     		alert("Your message is greater than 160 characters.");
+     	}
 }

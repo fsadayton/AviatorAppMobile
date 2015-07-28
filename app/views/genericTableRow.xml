@@ -1,5 +1,5 @@
 <Alloy>
-	<TableViewRow id="row">
+	<TableViewRow id="row" class="defaultRow">
 		<Label id="rowContent" color="black"/>
 	</TableViewRow>
 </Alloy>
