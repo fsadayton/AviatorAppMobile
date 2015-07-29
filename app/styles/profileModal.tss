@@ -3,6 +3,11 @@
   top: "45dp"
 }
 
+".general" :{
+	visible:false,
+	backgroundColor:"#fff"
+}
+
 ".header":{
 	backgroundColor:"#b8b8b8",
 	height:"45dp",
@@ -16,7 +21,7 @@
 	width: "30dp"
 }
 
-"#generalTextField":{
+"TextField":{
 	width:"90%",
 	color:"#000",
 	borderColor:"#7d7d7d",
@@ -28,7 +33,7 @@
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER
 }
 
-"#description":{
+".description":{
 	color:"black",
 	width:"90%",
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER

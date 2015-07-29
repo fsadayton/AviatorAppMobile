@@ -47,3 +47,12 @@
   borderColor:"#f9c84d",
   borderWidth: 2
 }
+
+".gradient":{
+	backgroundGradient:{
+		type:'linear',
+		startPoint: {x:'50%',y:'0%'},
+		endPoint:{x:'50%', y:'100%'},
+		colors:[{color:"#ececec", offset:0.0},{color:"#fff", offset:1.0}]
+	}
+}

@@ -6,6 +6,7 @@ var profileBasics = Alloy.Models.profileBasics;
 if(args.counties){
 	$.counties.visible = true;
 	$.generalTextView.visible = false;
+	$.subTextView.visible = false;
 	
 	$.countySelector.init(args);
 	
@@ -46,12 +47,21 @@ else{
 			$.win.close();
 		}
 	}
-	else{
+	else if(args.sourceId === "nameField"){
 		function saveName(){
 			profileBasics.save({
 				name: $.generalTextField.value.trim()	
 			});
 			$.win.close();
+		}
+	}
+	else{
+		Ti.API.info("in the else");
+		$.subTextView.visible = true;
+		$.subDescription.text = args.subDescription;
+		if(args.name){
+			$.generalTextField.value = args.name;
+			$.subTextField.value = args.phone;
 		}
 	}
 }
@@ -72,10 +82,20 @@ function submit(){
 	else if(args.sourceId === "website"){
 		saveWebsite();
 	}
-	else{
+	else if(args.sourceId === "nameField"){
 		saveName();
+	}
+	else{
+		var modelUtils = require('modelUtils');
+		var phone = $.subTextField.value.trim();
+		var name = $.generalTextField.value.trim();
+		if(args.modelId){
+			modelUtils.updateTrustedContact(args.modelId, name, phone, $.win);
+		}
+		else{
+			modelUtils.storeTrustedContact(phone, name, $.win);
+		}		
 	}
 }
 			
 Alloy.Globals.addActionBarButtons($.win);
-

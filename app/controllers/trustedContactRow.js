@@ -10,12 +10,20 @@ if($model){
 
 function deleteContact(e){
 	e.cancelBubble = true;
-	$.dialog.message = "Remove " + contacts.get(id).name + " from your trusted contacts?";
+	$.dialog.message = "Remove " + contacts.get(id).get("name") + " from your trusted contacts?";
 	$.dialog.show();
 }
 
 function editContact(){
-	
+	var contact = contacts.get(id);
+	Alloy.createController("profileModal", {
+			header: "ADD CONTACT",
+			description: "Enter contact's name",
+			subDescription: "Enter contact's phone number",
+			name: contact.get("name"),
+			phone: contact.get("phone_number"),
+			modelId: id
+		}).getView().open();
 }
 
 function doClick(e){

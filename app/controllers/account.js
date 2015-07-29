@@ -4,7 +4,6 @@ var profileBasics = Alloy.Models.profileBasics;
 Alloy.Collections.trustedContacts.fetch();
 profileBasics.fetch();
 
-setHeaderWidth();
 Ti.API.info("widths: " + $.accountImage.width + " " + $.name.width);
 Alloy.Globals.addActionBarButtons($.win);
 Ti.API.info("prfoil: " + profileBasics.get('profile_pic'));
@@ -22,7 +21,6 @@ function updateProfilePic(){
 			profileBasics.save({
 				profile_pic: event.media.nativePath
 			});
-			setHeaderWidth();
 
 		} else {
 			alert("got the wrong type back ="+event.mediaType);
@@ -106,7 +104,7 @@ function updateProfile(e){
 			description: "Enter a website url (e.g. http://google.com) to be used as part of the 'quick-hide' feature",
 		};
 	}
-	else{
+	else if(e.source.id === "nameField"){
 		params = {
 			header: "NAME",
 			description:"Enter your name"
@@ -124,6 +122,11 @@ function addContact(){
 function doClick(e){
 	if(e.index == 0){
 		Ti.API.info("lol coming");
+		Alloy.createController("profileModal", {
+			header:"ADD CONTACT",
+			description:"Enter contact's name",
+			subDescription:"Enter contact's phone number"
+		}).getView().open();
 	}
 	else if(e.index == 1){
 		Ti.Contacts.showContacts({
@@ -158,4 +161,9 @@ function saveMessage(e){
      		//if search is empty, put all annotations back on the map
      		alert("Your message is greater than 160 characters.");
      	}
+}
+
+function destroy(){
+	Ti.API.info("destroy");
+	$.destroy();
 }

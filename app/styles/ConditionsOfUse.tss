@@ -6,13 +6,7 @@
   height:"95%",
   borderRadius: 10,
   borderColor:"#f9c84d",
-  borderWidth:"2dp",
-  backgroundGradient:{
-		type:'linear',
-		startPoint: {x:'50%',y:'0%'},
-		endPoint:{x:'50%', y:'100%'},
-		colors:[{color:"#ececec", offset:0.0},{color:"#fff", offset:1.0}]
-	}
+  borderWidth:"2dp"
 }
 
 "TextArea":{

@@ -3,7 +3,7 @@
 		<ImageView image="/global/garbage12.png" left="10dp" onClick="deleteContact" />
 		<Label id="contactName" text="{name}" />
 		<Label id="contactNumber" text="{phone_number}" />
-		<ImageView image="/global/pencil43.png" right="10dp"/>
+		<ImageView image="/global/pencil43.png" right="10dp" onClick="editContact"/>
 	</TableViewRow>
 	<AlertDialog id="dialog" onClick="doClick" title="Remove Contact" 
 			message="Are you sure that you want to remove this person from your trusted contacts?" cancel="1">

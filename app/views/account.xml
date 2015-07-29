@@ -1,6 +1,6 @@
 <Alloy>
 	<Model src="profileBasics"/>
-	<Window id="win" onOpen="Alloy.Globals.updateActionBar">
+	<Window id="win" onOpen="Alloy.Globals.updateActionBar" onClose="destroy">
 		<!--<Require src="header"></Require>-->
 		<View class="divider"/>
 		<View id="centeredView" height="15%">
@@ -46,12 +46,14 @@
 			</View>
 			<View layout="vertical">
 				<Label class="headerLabel">TRUSTED CONTACTS</Label>
-				<TableView id="contactTable" dataCollection="trustedContacts">
-					<Require src="trustedContactRow"></Require>
-				</TableView>
-				<Label class="headerLabel">EMERGENCY MESSAGE</Label>
-				<TextArea id="trustedMessageEdit" value="{profileBasics.emergency_message}" onReturn="saveMessage"></TextArea>
-				<Button onClick="addContact">Add New Contact</Button>
+				<ScrollView layout="vertical">
+					<TableView id="contactTable" dataCollection="trustedContacts">
+						<Require src="trustedContactRow"></Require>
+					</TableView>
+					<Label class="headerLabel">EMERGENCY MESSAGE</Label>
+					<TextArea id="trustedMessageEdit" bottom="10dp" value="{profileBasics.emergency_message}" onReturn="saveMessage"></TextArea>
+					<Button onClick="addContact">Add New Contact</Button>
+				</ScrollView>
 				<AlertDialog id="dialog" title="Add Contact" onClick="doClick"
 			message="How would you like to add this new trusted contact?" cancel="2">
 			<ButtonNames>
