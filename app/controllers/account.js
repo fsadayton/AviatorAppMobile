@@ -2,9 +2,10 @@ var args = arguments[0] || {};
 var profileBasics = Alloy.Models.profileBasics;
 
 Alloy.Collections.trustedContacts.fetch();
+Alloy.Collections.favorites.fetch();
 profileBasics.fetch();
 
-Ti.API.info("widths: " + $.accountImage.width + " " + $.name.width);
+Ti.API.info("length: " + $.favoriteServicesTable.getData().length + " " + $.contactTable.getData().length);
 Alloy.Globals.addActionBarButtons($.win);
 Ti.API.info("prfoil: " + profileBasics.get('profile_pic'));
 //$.accountImage.image = profileBasics.get('profile_pic');
@@ -64,12 +65,6 @@ function toggleSelection(e){
 	previouslySelected = e.source;
 }
 
-function editing(e){
-	Ti.API.info("editing");
-	e.source.editable = true;
-}
-
-
 function pickCounty(e){
 	if (allCounties){
 		createPopup(allCounties);
@@ -116,12 +111,10 @@ function updateProfile(e){
 
 function addContact(){
 	$.dialog.show();
-	
 }
 
 function doClick(e){
 	if(e.index == 0){
-		Ti.API.info("lol coming");
 		Alloy.createController("profileModal", {
 			header:"ADD CONTACT",
 			description:"Enter contact's name",
@@ -139,10 +132,6 @@ function doClick(e){
 	}
 }
 
-function setHeaderWidth(){
-	$.centeredView.width = parseInt($.accountImage.width) + $.name.toImage().width + "dp";
-}
-
 var timeout;
 function saveMessage(e){
 		Ti.API.info("set timeout");
@@ -154,8 +143,7 @@ function saveMessage(e){
 				silent: true
 			});
 			$.trustedMessageEdit.blur();
-			Alloy.Globals.isAndroid ? Ti.UI.createNotification({message:"Message Saved.",
-    				duration: Ti.UI.NOTIFICATION_DURATION_LONG}).show() : alert("Message Saved.");
+			Alloy.Globals.createNotificationPopup("Message Saved.");
      	}
      	else{
      		//if search is empty, put all annotations back on the map

@@ -1,0 +1,9 @@
+<Alloy>
+	<AlertDialog id="dialog" onClick="doClick" title="Remove Contact" 
+			message="Are you sure that you want to remove this person from your trusted contacts?" cancel="1">
+		<ButtonNames>
+			<ButtonName>Yes</ButtonName>
+			<ButtonName>Cancel</ButtonName>
+		</ButtonNames>
+	</AlertDialog>
+</Alloy>

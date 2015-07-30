@@ -21,6 +21,7 @@ Alloy.Globals.Location = require('LocationUtils');
 Alloy.Globals.currentLocation = null;
 
 Alloy.Collections.trustedContacts = Alloy.createCollection('trustedContacts');
+Alloy.Collections.favorites = Alloy.createCollection('favorites');
 
 Alloy.Globals.addActionBarButtons = function(window, additionalButtons, callback){
     window.activity.onCreateOptionsMenu = function(e) { 
@@ -63,11 +64,6 @@ Alloy.Globals.addActionBarButtons = function(window, additionalButtons, callback
  * The parameters are as follows:
  * 	@param {String} url - REST URL of the request.
  * 	@param {String} type - HTTP method type (e.g., GET, POST, PUT, etc. ).
- * 	@param {boolean} setUserPass - true if username/password credentials need to be sent 
- * 		              with request (i.e., url is an SSL request), 
- *                    false otherwise.
- *  @param {Object} customUserPass (REMOVE IN PRODUCTION) - JSON object formed as {username:'user', password:'pass'}
- * 					  used for the wp-JSON api to pass in custom login data. FOR TESTING ONLY.
  * 	@param {Object} data - JSON object containing any data to be sent with request, 
  * 	           should be null if there's no data to send (JSON).
  * 	@param {Object} onSuccess - callback function to run if request is successful.
@@ -119,6 +115,11 @@ Alloy.Globals.sendHttpRequest = function(url, type, data, onSuccess, onError){
    	else{
    	    Alloy.Globals.createNotificationPopup("Cannot establish connection to Drinkos. Please check your network connection.", "Network Error");
    	}
+};
+
+Alloy.Globals.createNotificationPopup = function(message){
+	Alloy.Globals.isAndroid ? Ti.UI.createNotification({message:message,
+    				duration: Ti.UI.NOTIFICATION_DURATION_LONG}).show() : alert(message);
 };
 Alloy.Globals.updateActionBar = function(){
 	var abx = require('com.alcoapps.actionbarextras');

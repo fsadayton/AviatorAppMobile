@@ -16,7 +16,6 @@ exports.updateTrustedContact = function(id, fullName, phone, window){
 	
 		window.close();
 	}
-	
 };
 
 exports.storeTrustedContact = function(phoneNumber, fullName, window){

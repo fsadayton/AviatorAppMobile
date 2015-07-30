@@ -1,7 +1,6 @@
 var args = arguments[0] || {};
 
 var contacts = Alloy.Collections.trustedContacts;
-
 var id;
 
 if($model){
@@ -10,8 +9,15 @@ if($model){
 
 function deleteContact(e){
 	e.cancelBubble = true;
-	$.dialog.message = "Remove " + contacts.get(id).get("name") + " from your trusted contacts?";
-	$.dialog.show();
+
+	Alloy.createController("alertDialog", {
+		title: "Remove Trusted Contact",
+		message:"Remove " + contacts.get(id).get("name") + " from your trusted contacts?",
+		callback: function(){
+			var contact = contacts.get(id);
+			contact.destroy();
+		}
+	}).getView().show();
 }
 
 function editContact(){
@@ -24,11 +30,4 @@ function editContact(){
 			phone: contact.get("phone_number"),
 			modelId: id
 		}).getView().open();
-}
-
-function doClick(e){
-	if(!e.cancel){
-		var contact = contacts.get(id);
-		contact.destroy();
-	}
 }

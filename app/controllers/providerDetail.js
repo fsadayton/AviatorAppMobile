@@ -38,7 +38,30 @@ $.win.activity.onCreateOptionsMenu = function(e){
 		icon:"/global/star256.png"
 	});
 	
-	favorite.addEventListener("click", function(e){alert("Feature coming soon!");});
+	favorite.addEventListener("click", function(e){
+		var favorites = Alloy.Collections.favorites;
+		var existingFavorite = favorites.where({name:args.orgName});
+		
+		if(existingFavorite.length > 0){
+			Alloy.Globals.createNotificationPopup(args.orgName + " is already tagged.");
+		}
+		else{
+			var favorite = Alloy.createModel('favorites', {
+				name: args.orgName,
+				address: args.address,
+				description: args.description,
+				phone_number: args.phone,
+				email: args.email,
+				website: args.website
+			});
+		
+			favorites.add(favorite);
+			favorite.save();
+			favorites.fetch();
+			
+			Alloy.Globals.createNotificationPopup("Favorite Added.");
+		}
+	});
 };
 
 function getDirections() {

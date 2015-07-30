@@ -63,9 +63,11 @@
 			</ButtonNames>
 	</AlertDialog>
 			</View>
-			<View>
+			<View layout="vertical">
 				<Label class="headerLabel">FAVORITE SERVICES</Label>
-				<Label>No favorites have been saved.</Label>
+				<TableView id="favoriteServicesTable" dataCollection="favorites">
+					<Require src="favoriteProviderRow"></Require>		
+				</TableView>
 			</View>
 		</ScrollableView>
 	</Window>
