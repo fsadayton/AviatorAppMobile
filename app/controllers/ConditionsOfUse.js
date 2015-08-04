@@ -9,9 +9,22 @@ $.textArea.value = "In using AVIATOR, I, the end-user, understand and agree to t
 			"to contact a resource.\n\n" +
 			
 			"2) I will not hold AVIATOR liable for the content of any third-party websites that are accessible through the app.";
-			
-function saveAgreement(){
+
+/**
+ * Function for saving the status of agreeing to conditions of use.
+ */			
+function saveAgreement(e){
+	e.cancelBubble = true;
 	Ti.App.Properties.setBool("hasAgreedToConditions", true);
 	args.index.open();
+	$.win.close();
+}
+
+/**
+ * Function for closing app if user does not agree to
+ * conditions of use.
+ */
+function closeApp(){
+	Ti.App.Properties.setBool("hasAgreedToConditions", false);
 	$.win.close();
 }

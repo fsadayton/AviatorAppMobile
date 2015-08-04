@@ -2,7 +2,7 @@
 	<Window id="win" class="gradient" onOpen="Alloy.Globals.updateActionBar">
 		<Label id="conditions">Conditions of Use</Label>
 		<TextArea id="textArea"/>
-			 
-		<Button onClick="saveAgreement">I agree.</Button>
+		<Button right="8%" onClick="saveAgreement">I DO agree.</Button>
+		<Button left="8%" onClick="closeApp">I do NOT agree.</Button>
 	</Window>
 </Alloy>
