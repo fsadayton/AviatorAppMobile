@@ -1,49 +1,22 @@
 var args = arguments[0] || {};
-var profileBasics = Alloy.Models.profileBasics;
 
+var profileBasics = Alloy.Models.profileBasics;
+var countySelector = require("countySelectorUtils");
+var previouslySelected = $.profile; //initialize "selected" view as profileInfo view
+
+//retrieve most recent info from collections and model
 Alloy.Collections.trustedContacts.fetch();
 Alloy.Collections.favorites.fetch();
 profileBasics.fetch();
 
-Ti.API.info("length: " + $.favoriteServicesTable.getData().length + " " + $.contactTable.getData().length);
+//initialize actions
 Alloy.Globals.addActionBarButtons($.win);
-Ti.API.info("prfoil: " + profileBasics.get('profile_pic'));
-//$.accountImage.image = profileBasics.get('profile_pic');
-//Ti.API.info("account image: " + JSON.stringify(Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, "global/user256.png").read()));
+updateHeader(); //center name and profile pic
 
-var allCounties = null;
-
-function updateProfilePic(){
-	Titanium.Media.openPhotoGallery({
-	success:function(event) {
-		// called when media returned from the camera
-		Ti.API.debug('Our type was: '+event.mediaType);
-		if(event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
-			profileBasics.save({
-				profile_pic: event.media.nativePath
-			});
-
-		} else {
-			alert("got the wrong type back ="+event.mediaType);
-		}
-	},
-	cancel:function() {
-		// called when user cancels taking a picture
-	},
-	error:function(error) {
-		// called when there's an error
-		var a = Titanium.UI.createAlertDialog({title:'Camera'});
-		if (error.code == Titanium.Media.NO_CAMERA) {
-			a.setMessage('Please run this test on device');
-		} else {
-			a.setMessage('Unexpected error: ' + error.code);
-		}
-		a.show();
-	}
-});
-}
-
-var previouslySelected = $.profile;
+/**
+ * Change view and update button colors based on which profile button was pressed.
+ * (i.e., profile info, trusted contacts, favorite services)
+ */
 function toggleSelection(e){
 	
 	if (previouslySelected){
@@ -65,17 +38,84 @@ function toggleSelection(e){
 	previouslySelected = e.source;
 }
 
-function pickCounty(e){
-	if (allCounties){
-		createPopup(allCounties);
+/**
+ * Function to center name and profile pic at top of account view.
+ */
+var timeout;
+function updateHeader(){
+	$.name.addEventListener("postlayout", function getWidth(){
+		clearTimeout(timeout);
+		$.profileHeader.width = parseInt($.name.size.width) + parseInt($.accountImage.size.width) + 10;
+		timeout = setTimeout(function(){
+			$.name.removeEventListener("postlayout", getWidth);
+		}, 1500);
+});
+
+/**
+ * Used to clean up resources after window is closed
+ */
+function destroy(){
+	$.destroy();
+}
+
+/**
+ * If no contacts or favorite services exist, make "no X selected" label visible.
+ */
+function updateLabel(e){
+	var label = e.source.id === "favoriteServicesTable" ? $.noFavorites : $.noContacts;
+	if(e.source.getData().length == 0){
+		label.visible = true;
 	}
 	else{
-		Alloy.Globals.sendHttpRequest("GetCounties", "GET", null, 
-		function(){
-			allCounties = JSON.parse(this.responseText);
-			createPopup(allCounties);
-		});
+		label.visible = false;
 	}
+}
+
+/**
+ * ******************************
+ * *** PROFILE INFO FUNCTIONS ***
+ * ******************************
+ */
+
+/**
+ * Function for choosing new profile picture.
+ */
+function updateProfilePic(){
+	Titanium.Media.openPhotoGallery({
+		success:function(event) {
+			// called when media returned from the camera
+			if(event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
+				//persist profile pic path
+				profileBasics.save({
+					profile_pic: event.media.nativePath
+				});
+	
+			} else {
+				alert("got the wrong type back ="+event.mediaType);
+			}
+		},
+		error:function(error) {
+			// called when there's an error
+			var a = Titanium.UI.createAlertDialog({title:'Camera'});
+			if (error.code == Titanium.Media.NO_CAMERA) {
+				a.setMessage('Please run this test on device');
+			} else {
+				a.setMessage('Unexpected error: ' + error.code);
+			}
+			a.show();
+		}
+	});
+}
+
+
+/**
+ * Function for retrieving counties and creating popup for searching counties.
+ */
+function pickCounty(e){
+	
+	countySelector.getCounties(function(counties){
+		createPopup(counties);
+	});
 	
 	/**
 	 * helper function for creating filter view
@@ -90,8 +130,11 @@ function pickCounty(e){
 	
 }
 
+/**
+ * Create popup with different content based on whether user wants
+ * to edit website or name.
+ */
 function updateProfile(e){
-	Ti.API.info("source: " + e.source.id);
 	var params = null;
 	if(e.source.id === "website"){
 		params = {
@@ -102,26 +145,43 @@ function updateProfile(e){
 	else if(e.source.id === "nameField"){
 		params = {
 			header: "NAME",
-			description:"Enter your name"
+			description:"Enter your name",
+			callback: updateHeader
 		};
 	}
 	params.sourceId = e.source.id;
 	Alloy.createController("profileModal", params).getView().open();
 }
 
+/**
+ * ***************************
+ * ** ADD CONTACT FUNCTIONS **
+ * ***************************
+ */
+
+/**
+ * Function that shows the alert dialog for
+ * manually adding a contact or choosing one 
+ * from the contacts list
+ */
 function addContact(){
 	$.dialog.show();
 }
 
+/**
+ * Function executed when user selects manual/contact list
+ * from alert dialog opened in addContact method.
+ * @param {Object} e - event
+ */
 function doClick(e){
-	if(e.index == 0){
+	if(e.index == 0){ //manually add was selected
 		Alloy.createController("profileModal", {
 			header:"ADD CONTACT",
 			description:"Enter contact's name",
 			subDescription:"Enter contact's phone number"
 		}).getView().open();
 	}
-	else if(e.index == 1){
+	else if(e.index == 1){ //add from contact list selected
 		Ti.Contacts.showContacts({
 			selectedPerson: function(e){
 				Ti.API.info("person:" + JSON.stringify(e.person.phone));
@@ -132,10 +192,13 @@ function doClick(e){
 	}
 }
 
-var timeout;
+/**
+ * Function that is called upon return key being pressed after editing
+ * emergency message.
+ * @param {Object} e - return event
+ */
 function saveMessage(e){
-		Ti.API.info("set timeout");
-    	if(e.value.length <= 160){ //if search field contains a value
+    if(e.value.length <= 160){ //if emergency message is less than or equal to 160 characters
      		profileBasics.save({
 				emergency_message: e.value
 			},
@@ -144,14 +207,10 @@ function saveMessage(e){
 			});
 			$.trustedMessageEdit.blur();
 			Alloy.Globals.createNotificationPopup("Message Saved.");
-     	}
-     	else{
-     		//if search is empty, put all annotations back on the map
-     		alert("Your message is greater than 160 characters.");
-     	}
+     }
+     else{
+     	//do not save until message is small enough
+     	alert("Your message is greater than 160 characters.");
+     }
 }
 
-function destroy(){
-	Ti.API.info("destroy");
-	$.destroy();
-}

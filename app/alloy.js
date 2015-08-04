@@ -22,6 +22,12 @@ Alloy.Globals.currentLocation = null;
 
 Alloy.Collections.trustedContacts = Alloy.createCollection('trustedContacts');
 Alloy.Collections.favorites = Alloy.createCollection('favorites');
+Alloy.Models.profileBasics = Alloy.createModel('profileBasics');
+
+//retrieve most current info from collections and models
+Alloy.Collections.trustedContacts.fetch();
+Alloy.Collections.favorites.fetch();
+Alloy.Models.profileBasics.fetch();
 
 Alloy.Globals.addActionBarButtons = function(window, additionalButtons, callback){
     window.activity.onCreateOptionsMenu = function(e) { 
@@ -39,7 +45,14 @@ Alloy.Globals.addActionBarButtons = function(window, additionalButtons, callback
 	    });
 	    
 	    menuItem.addEventListener("click", function(e) { 
-	        Ti.Platform.openURL(Alloy.Models.profileBasics.get('website')); 
+	    	//ensure that website url contains 'http'
+	    	var website = Alloy.Models.profileBasics.get('website');
+	    	if(website.indexOf('http://') > -1 || website.indexOf('https://') > -1){
+	    		Ti.Platform.openURL(website);
+	    	}
+	    	else{
+	    		Ti.Platform.openURL("http://" + website);
+	    	}
 	    }); 
 	    
 	    help.addEventListener("click", function(e){
@@ -117,10 +130,19 @@ Alloy.Globals.sendHttpRequest = function(url, type, data, onSuccess, onError){
    	}
 };
 
+/**
+ * Function that creates either a toast notification or alert
+ * based on whether the platform is Android or not.
+ * @param {string} message - message to appear in notification
+ */
 Alloy.Globals.createNotificationPopup = function(message){
 	Alloy.Globals.isAndroid ? Ti.UI.createNotification({message:message,
     				duration: Ti.UI.NOTIFICATION_DURATION_LONG}).show() : alert(message);
 };
+
+/**
+ * Sets the background color and font of the android action bar
+ */
 Alloy.Globals.updateActionBar = function(){
 	var abx = require('com.alcoapps.actionbarextras');
 	abx.titleFont = "Quicksand-Regular.otf";

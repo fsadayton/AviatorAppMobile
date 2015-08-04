@@ -7,6 +7,10 @@ if($model){
 	id = $model.id;
 }
 
+/**
+ * Function that creates confirm dialog for deleting a trusted contact
+ * @param {Object} e
+ */
 function deleteContact(e){
 	e.cancelBubble = true;
 
@@ -20,6 +24,9 @@ function deleteContact(e){
 	}).getView().show();
 }
 
+/**
+ * Function that opens edit dialog for trusted contact
+ */
 function editContact(){
 	var contact = contacts.get(id);
 	Alloy.createController("profileModal", {
@@ -29,5 +36,5 @@ function editContact(){
 			name: contact.get("name"),
 			phone: contact.get("phone_number"),
 			modelId: id
-		}).getView().open();
+	}).getView().open();
 }

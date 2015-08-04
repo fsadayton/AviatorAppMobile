@@ -7,6 +7,10 @@ if($model){
 	id = $model.id;
 }
 
+/**
+ * Function that creates confirm dialog for deleting a favorite service.
+ * @param {Object} e
+ */
 function deleteFavorite(e){
 	e.cancelBubble = true;
 	
@@ -20,8 +24,11 @@ function deleteFavorite(e){
 	}).getView().show();
 }
 
+/**
+ * Function for opening provider details page for a favorite service. 
+ * @param {Object} e
+ */
 function openProviderDetails(e){
-	Ti.API.info("event: " + JSON.stringify(e));
 	var favorite = favorites.get(id);
 	Alloy.createController('providerDetail',{
 		orgName:favorite.get("name"),

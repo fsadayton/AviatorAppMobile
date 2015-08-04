@@ -3,7 +3,10 @@ var args = arguments[0] || {};
 $.headerLabel.text = args.header;
 var profileBasics = Alloy.Models.profileBasics;
 
+//if counties are part of the args, initialize county selection functions
 if(args.counties){
+	
+	//set visibilities of fields
 	$.counties.visible = true;
 	$.generalTextView.visible = false;
 	$.subTextView.visible = false;
@@ -12,11 +15,9 @@ if(args.counties){
 	
 	var selectable = require('countySelectorUtils');
 	
-	function isSelectable(isSelectable){
-		selectable.setCountySelectable(isSelectable);
-		selectable.setSelectedCounty(null);
-	}
-	
+	/**
+	 * upon submission, try to persist county
+	 */
 	function saveCounty(){
 		var county = selectable.getSelectedCounty();
 		if(county){
@@ -35,11 +36,14 @@ if(args.counties){
 	}
 }
 else{
+	//set visibilities of appropriate fields
 	$.counties.visible = false;
 	$.generalTextView.visible = true;
 	$.description.text = args.description;
 	
+	//initialize save website function
 	if(args.sourceId === "website"){
+		//function that persists website url
 		function saveWebsite(){
 			profileBasics.save({
 				website:$.generalTextField.value.trim()
@@ -47,45 +51,55 @@ else{
 			$.win.close();
 		}
 	}
-	else if(args.sourceId === "nameField"){
+	else if(args.sourceId === "nameField"){ //initialize save name fucntion
+		args.callback();//used to refresh/center new name
+		
+		//function that persists new name for user
 		function saveName(){
 			profileBasics.save({
-				name: $.generalTextField.value.trim()	
+				name: $.generalTextField.value.trim()
 			});
 			$.win.close();
 		}
 	}
-	else{
-		Ti.API.info("in the else");
+	else{ //profile modal is used to add/update trusted contact
 		$.subTextView.visible = true;
 		$.subDescription.text = args.subDescription;
-		if(args.name){
+		if(args.name){ //indicates that trusted contact is being updated, not added
 			$.generalTextField.value = args.name;
 			$.subTextField.value = args.phone;
 		}
 	}
 }
 
-
+/**
+ * function executed upon closing modal window using X button
+ */
 function close(){
 	$.win.close();
 	
 	if(args.counties){
-		isSelectable(true);
+		//reset selected counties
+		selectable.setCountySelectable(true);
+		selectable.setSelectedCounty(null);
 	}
 }
 
+/**
+ * function executed upon submitting information entered into modal window
+ */
 function submit(){
 	if(args.counties){
-		saveCounty();
+		saveCounty(); //persist entered county of interest
 	}
 	else if(args.sourceId === "website"){
-		saveWebsite();
+		saveWebsite(); //persist quick-hide website
 	}
 	else if(args.sourceId === "nameField"){
-		saveName();
+		saveName(); //persist name of user
 	}
 	else{
+		//persist trusted contact info
 		var modelUtils = require('modelUtils');
 		var phone = $.subTextField.value.trim();
 		var name = $.generalTextField.value.trim();

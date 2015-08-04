@@ -1,5 +1,4 @@
 <Alloy>
-	<Model src="profileBasics"/> <!-- Initialize default model-->
 	<Window class="container" layout="vertical" onOpen="Alloy.Globals.updateActionBar">
 		<View id="header" platform="ios">
 			<ImageView id="headerLeft" image="/global/blind2.png" onClick="hide"></ImageView>
