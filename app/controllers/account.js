@@ -49,7 +49,8 @@ function updateHeader(){
 		timeout = setTimeout(function(){
 			$.name.removeEventListener("postlayout", getWidth);
 		}, 1500);
-});
+	});
+}
 
 /**
  * Used to clean up resources after window is closed
@@ -105,6 +106,7 @@ function updateProfilePic(){
 			a.show();
 		}
 	});
+	
 }
 
 
@@ -213,4 +215,3 @@ function saveMessage(e){
      	alert("Your message is greater than 160 characters.");
      }
 }
-

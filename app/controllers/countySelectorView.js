@@ -11,11 +11,6 @@ $.init = function(obj){
 		//define county id, name, and callback function when clicked
 		var params = {id:key, text:obj.counties[key], type:"county", callback:updateSelection};
 		
-		//if county is already being viewed by user, mark it as being selected
-		/*if(countyKeys.length != args.currentCounties.length && _.contains(args.currentCounties, key)){
-			params.isSelected = true;
-		}*/
-		
 		//add bubble picker
 		$.countiesPicker.add(Alloy.createController('categoryBubble', params).getView());
 	});
@@ -29,9 +24,7 @@ $.init = function(obj){
 			selectable.setSelectedCounty(null);
 			selectable.setCountySelectable(true);
 		}
-		Ti.API.info("selectable: "+ selectable.getCountySelectable());
 	}
-	
 	
 	/**
 	 * logic for county search bar
@@ -64,6 +57,3 @@ $.init = function(obj){
 	});
 	
 };
-
-
-//
