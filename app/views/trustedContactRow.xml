@@ -1,0 +1,8 @@
+<Alloy>
+	<TableViewRow id="row" class="defaultRow">
+		<ImageView image="/global/garbage12.png" left="10dp" onClick="deleteContact" />
+		<Label id="contactName" text="{name}" />
+		<Label id="contactNumber" text="{phone_number}" />
+		<ImageView image="/global/pencil43.png" right="10dp" onClick="editContact"/>
+	</TableViewRow>
+</Alloy>

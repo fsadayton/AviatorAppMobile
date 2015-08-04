@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="win" onOpen="Alloy.Globals.updateActionBar">
+	<Window id="win" class="gradient" onOpen="Alloy.Globals.updateActionBar">
 		<Label id="conditions">Conditions of Use</Label>
 		<TextArea id="textArea"/>
 			 

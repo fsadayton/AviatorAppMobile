@@ -1,0 +1,6 @@
+<Alloy>
+	<TableViewRow class="defaultRow" onClick="openProviderDetails">
+		<ImageView onClick="deleteFavorite" image="/global/garbage12.png" left="10dp" width="25dp" height="25dp"/>
+		<Label text="{name}" color="black" width="85%" right="10dp" textAlign="center"/>
+	</TableViewRow>
+</Alloy>

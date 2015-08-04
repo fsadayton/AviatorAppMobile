@@ -1,13 +1,24 @@
 exports.definition = {
 	config: {
 		columns: {
-		    "name": "string",
-		    "county": "string",
-		    "emergency_message": "string"
+		    "name": "text",
+		    "countyName": "text",
+		    "countyId":"text",
+		    "emergency_message": "text",
+		    "profile_pic" : "text",
+		    "website" : "text"
+		},
+		"defaults":{
+			"name":"Your Name",
+			"countyName": "Montgomery",
+			"countyId":"57",
+			"emergency_message":"I need your help. Please contact me ASAP.",
+			"profile_pic":"/global/user256.png",
+			"website":"http://weather.com"
 		},
 		adapter: {
 			type: "sql",
-			collection_name: "profile_basics"
+			collection_name: "profileBasics"
 		}
 	},
 	extendModel: function(Model) {

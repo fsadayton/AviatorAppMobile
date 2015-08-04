@@ -1,0 +1,21 @@
+
+"ImageView" : {
+ 	width:'25dp',
+ 	height:'25dp'
+}
+
+"#contactName":{
+	left:"40dp",
+	width:"40%",
+	font:{
+		fontFamily:"Quicksand-Bold",
+		fontSize:"17dp"
+	},
+	color:"#65c8c7"
+}
+
+"#contactNumber":{
+	right:"40dp",
+	color:"#000",
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_RIGHT
+}

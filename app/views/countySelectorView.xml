@@ -1,0 +1,6 @@
+<Alloy>
+	<SearchBar platform="android"  id="searchBar" />
+	<ScrollView scrollType="vertical" >
+		<View id="countiesPicker"/>
+	</ScrollView>
+</Alloy>

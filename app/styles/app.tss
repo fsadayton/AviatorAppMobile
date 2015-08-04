@@ -4,6 +4,12 @@
 	}
 }
 
+"Button":{
+	font:{
+		fontFamily:"QuickSand-Regular"
+	}
+}
+
 ".defaultRow":{
 	height: "70dp",
 	color: "#F69C22",
@@ -30,4 +36,23 @@
 	style:Titanium.UI.iPhone.ActivityIndicatorStyle.DARK,
 	top:"50%",
 	zIndex:1
+}
+
+".modal" : {
+  modal: true,
+  height: "95%",
+  width: "92%",
+  background: "transparent",
+  borderRadius: 10,
+  borderColor:"#f9c84d",
+  borderWidth: 2
+}
+
+".gradient":{
+	backgroundGradient:{
+		type:'linear',
+		startPoint: {x:'50%',y:'0%'},
+		endPoint:{x:'50%', y:'100%'},
+		colors:[{color:"#ececec", offset:0.0},{color:"#fff", offset:1.0}]
+	}
 }

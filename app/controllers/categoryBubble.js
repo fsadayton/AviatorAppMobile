@@ -1,5 +1,5 @@
 var args = arguments[0] || {};
-
+var selectable = require('countySelectorUtils');
 $.bubbleText.text = "  " + args.text + "  "; //set filter bubble text
 
 var originalColor = $.bubbleText.backgroundColor; //store original unselected bubble color
@@ -16,12 +16,17 @@ if(args.isSelected){
  * and call function that updates list of selected filters
  */
 function toggle(){
-	if($.bubbleText.backgroundColor == originalColor){ //value is being "selected"
+	Ti.API.info("selectable: "+ selectable.getCountySelectable());
+	if($.bubbleText.backgroundColor == originalColor && selectable.getCountySelectable()){ //value is being "selected"
 		$.bubbleText.backgroundColor = "#f9c84d";
-		args.callback(args.type, args.id, $.bubbleText.text, true); //add new value to list
+		if(typeof args.callback === "function"){
+			args.callback(args.id, $.bubbleText.text, true, args.type); //add new value to list
+		}
 	}
-	else{ //bubble is being "de-selected"
+	else if($.bubbleText.backgroundColor != originalColor){ //bubble is being "de-selected"
 		$.bubbleText.backgroundColor = originalColor;
-		args.callback(args.type, args.id, $.bubbleText.text, false); //remove value from list
+		if(typeof args.callback === "function"){
+			args.callback(args.id, $.bubbleText.text, false, args.type); //remove value from list
+		}
 	}
 }

@@ -1,0 +1,20 @@
+
+"#searchBar":{
+	height: "50dp",
+	backgroundColor: "#D2B48C"
+}  
+
+
+"#countiesPicker":{
+	layout: "horizontal",
+	backgroundColor: "#fff",
+	top:"5dp",
+	bottom:"5dp",
+	left:"5dp",
+	right:"5dp"
+}
+
+"ScrollView":{
+	backgroundColor: "#fff"
+}
+

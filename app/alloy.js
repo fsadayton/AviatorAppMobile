@@ -20,8 +20,14 @@ Alloy.Globals.Location = require('LocationUtils');
 
 Alloy.Globals.currentLocation = null;
 
-//TODO: Add this info to model instead of global var
-Alloy.Globals.countyOfInterest = "57";
+Alloy.Collections.trustedContacts = Alloy.createCollection('trustedContacts');
+Alloy.Collections.favorites = Alloy.createCollection('favorites');
+Alloy.Models.profileBasics = Alloy.createModel('profileBasics');
+
+//retrieve most current info from collections and models
+Alloy.Collections.trustedContacts.fetch();
+Alloy.Collections.favorites.fetch();
+Alloy.Models.profileBasics.fetch();
 
 Alloy.Globals.addActionBarButtons = function(window, additionalButtons, callback){
     window.activity.onCreateOptionsMenu = function(e) { 
@@ -39,7 +45,14 @@ Alloy.Globals.addActionBarButtons = function(window, additionalButtons, callback
 	    });
 	    
 	    menuItem.addEventListener("click", function(e) { 
-	        Ti.Platform.openURL("http://www.news.yahoo.com"); 
+	    	//ensure that website url contains 'http'
+	    	var website = Alloy.Models.profileBasics.get('website');
+	    	if(website.indexOf('http://') > -1 || website.indexOf('https://') > -1){
+	    		Ti.Platform.openURL(website);
+	    	}
+	    	else{
+	    		Ti.Platform.openURL("http://" + website);
+	    	}
 	    }); 
 	    
 	    help.addEventListener("click", function(e){
@@ -55,7 +68,6 @@ Alloy.Globals.addActionBarButtons = function(window, additionalButtons, callback
 	    	callback(menu);
 	    }
     };
-    
 };
 
 /**
@@ -65,11 +77,6 @@ Alloy.Globals.addActionBarButtons = function(window, additionalButtons, callback
  * The parameters are as follows:
  * 	@param {String} url - REST URL of the request.
  * 	@param {String} type - HTTP method type (e.g., GET, POST, PUT, etc. ).
- * 	@param {boolean} setUserPass - true if username/password credentials need to be sent 
- * 		              with request (i.e., url is an SSL request), 
- *                    false otherwise.
- *  @param {Object} customUserPass (REMOVE IN PRODUCTION) - JSON object formed as {username:'user', password:'pass'}
- * 					  used for the wp-JSON api to pass in custom login data. FOR TESTING ONLY.
  * 	@param {Object} data - JSON object containing any data to be sent with request, 
  * 	           should be null if there's no data to send (JSON).
  * 	@param {Object} onSuccess - callback function to run if request is successful.
@@ -122,6 +129,20 @@ Alloy.Globals.sendHttpRequest = function(url, type, data, onSuccess, onError){
    	    Alloy.Globals.createNotificationPopup("Cannot establish connection to Drinkos. Please check your network connection.", "Network Error");
    	}
 };
+
+/**
+ * Function that creates either a toast notification or alert
+ * based on whether the platform is Android or not.
+ * @param {string} message - message to appear in notification
+ */
+Alloy.Globals.createNotificationPopup = function(message){
+	Alloy.Globals.isAndroid ? Ti.UI.createNotification({message:message,
+    				duration: Ti.UI.NOTIFICATION_DURATION_LONG}).show() : alert(message);
+};
+
+/**
+ * Sets the background color and font of the android action bar
+ */
 Alloy.Globals.updateActionBar = function(){
 	var abx = require('com.alcoapps.actionbarextras');
 	abx.titleFont = "Quicksand-Regular.otf";

@@ -54,6 +54,3 @@ else{
 }
 
 Alloy.Globals.addActionBarButtons($.index);
-
-
-

@@ -1,0 +1,20 @@
+<Alloy>
+	<Window class="modal gradient" onOpen="Alloy.Globals.updateActionBar" id="win">
+		<View class="header">
+			<Label id="headerLabel"/>
+			<ImageView class="arrow" image="/global/close.png" id="leftImage" left="10dp" onClick="close"/>
+			<ImageView class="arrow" image="/global/checkmark.png" id="rightImage" right="10dp" onClick="submit"/>
+		</View>
+		<View id="counties" visible="false" class="container">
+			<Require id="countySelector" src="countySelectorView" />
+		</View>
+		<View id="generalTextView"  class="container general">
+			<Label class="description" id="description"/>
+			<TextField id="generalTextField" />
+		</View>
+		<View id="subTextView" class="container general" top="27%">
+			<Label class="description" id="subDescription" />
+			<TextField id="subTextField" keyboardType="Ti.UI.KEYBOARD_NUMBER_PAD"/>
+		</View>
+	</Window>
+</Alloy>

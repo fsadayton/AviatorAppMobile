@@ -1,0 +1,45 @@
+".container" : {
+  layout:"vertical",
+  top: "45dp"
+}
+
+".general" :{
+	visible:false,
+	backgroundColor:"#fff"
+}
+
+".header":{
+	backgroundColor:"#b8b8b8",
+	height:"45dp",
+	color: "#fff",
+	width:"100%",
+	top:0
+}
+
+".arrow":{
+	height:"30dp",
+	width: "30dp"
+}
+
+"TextField":{
+	width:"90%",
+	color:"#000",
+	borderColor:"#7d7d7d",
+	borderRadius: 10,
+	font:{
+		fontFamily:"Quicksand-Regular"
+	},
+	top:"10dp",
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER
+}
+
+".description":{
+	color:"black",
+	width:"90%",
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER
+}
+
+
+
+
+
