@@ -4,7 +4,6 @@ var selectedCounty = null;
 var selectable = require('countySelectorUtils');
 
 $.init = function(obj){
-	Ti.API.info("obj: " + JSON.stringify(obj));
 	
 	var countyKeys = Object.keys(obj.counties);
 	_.each(countyKeys, function(key){

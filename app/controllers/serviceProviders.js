@@ -161,21 +161,16 @@ function callPhoneNumber(e){
  * Helper function for adding a service provider to the map
  */
 function addProviderToMap(params){
-	geocoder.forwardGeocoder(params.address, function(e){
-		if(e.success)
-		{
-			var annotation = Map.createAnnotation({
+	Alloy.Globals.Location.runCustomFwdGeocodeFunction(params.address, addAnnotation);
+	function addAnnotation(e){
+		var annotation = Map.createAnnotation({
 	            latitude: e.places[0].latitude,
 	   			longitude: e.places[0].longitude,
 	            title: params.orgName,
 	            row: params
            });
            $.map.addAnnotation(annotation);
-		}
-		else{
-				Ti.API.info("error with " + params.address +": "+ e.error);
-			}
-	});	
+	}
 }
 
 /**
