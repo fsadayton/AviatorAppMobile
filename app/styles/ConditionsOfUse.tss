@@ -1,7 +1,6 @@
 
 "#win" : {
   modal:true,
-  layout:"vertical",
   width:"95%",
   height:"95%",
   borderRadius: 10,
@@ -16,7 +15,8 @@
 	font:{
 		fontFamily:"Quicksand-Regular"
 	},
-	color:"#000"
+	color:"#000",
+	top:"45dp"
 }
 
 "#conditions":{
@@ -28,7 +28,8 @@
 	height:"45dp",
 	backgroundColor:"#666",
 	color:"#fff",
-	textAlign:"center"
+	textAlign:"center",
+	top: 0
 }
 
 "Button":{
@@ -37,5 +38,6 @@
 		fontFamily:"Quicksand-Bold",
 		fontSize:"15dp"
 	},
-	borderRadius:5
+	borderRadius:5,
+	bottom:"5dp"
 }
