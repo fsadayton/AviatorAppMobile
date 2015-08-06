@@ -34,6 +34,10 @@ if(args.website == null){
 if(!args.hasApp){
 	$.win.remove($.downloadAppView);
 }
+
+/**
+ * Add sharing and tagging capabilities to menu bar
+ */
 Alloy.Globals.addActionBarButtons($.win, [{
 		params:{
 			title:"Share with Friends",
@@ -107,45 +111,10 @@ Alloy.Globals.addActionBarButtons($.win, [{
 	}
 );
 
-/*$.win.activity.onCreateOptionsMenu = function(e){
-	var menu = e.menu;
-	var share = menu.add({
-		
-	});
-	
-	share.addEventListener("click", shareInformation);
-	
-	var favorite = menu.add({
-		title:"Tag as Favorite",
-		icon:"/global/star256.png"
-	});
-	
-	favorite.addEventListener("click", function(e){
-		var favorites = Alloy.Collections.favorites;
-		var existingFavorite = favorites.where({name:args.orgName});
-		
-		if(existingFavorite.length > 0){
-			Alloy.Globals.createNotificationPopup(args.orgName + " is already tagged.");
-		}
-		else{
-			var favorite = Alloy.createModel('favorites', {
-				name: args.orgName,
-				address: args.address,
-				description: args.description,
-				phone_number: args.phone,
-				email: args.email,
-				website: args.website
-			});
-		
-			favorites.add(favorite);
-			favorite.save();
-			favorites.fetch();
-			
-			Alloy.Globals.createNotificationPopup("Favorite Added.");
-		}
-	});
-};*/
-
+/**
+ * Function for calculating directions between current location and
+ * provider address. Directions will open up in google maps or apple maps.
+ */
 function getDirections() {
 	if (Titanium.Geolocation.locationServicesEnabled==false) {
 	    Titanium.UI.createAlertDialog({message:'Please enable location services.'}).show();
@@ -169,11 +138,17 @@ function getDirections() {
 	}
 }
 
+/**
+ * Function that opens the call dialog for a phone number.
+ */
 function callPhoneNumber(){
     var cleanNumber = args.phone.replace(/\s|-|\./g,'');
     Ti.Platform.openURL('tel:' + cleanNumber);
 }
 
+/**
+ * Function that opens email dialog in order to email a service provider.
+ */
 function openEmail(){
 	var emailDialog = Ti.UI.createEmailDialog();
 	emailDialog.subject = "Request for Info: " + args.orgName;
@@ -182,18 +157,29 @@ function openEmail(){
 	emailDialog.open();
 }
 
+/**
+ * Function initially opens up disclaimer for navigating away from 
+ * app to a website. 
+ */
 function openWebsite(){
 	$.dialog.show();
 }
 
+/**
+ * If user understands that he/she is navigating away from the app,
+ * open the service provider's website in a browser.
+ * @param {Object} e
+ */
 function doClick(e){
 	if(!e.cancel){
 		Ti.Platform.openURL(args.website);
 	}
 }
 
-
-
+/**
+ * Function that opens up VINE mobile app in app store or google play store.
+ */
+//TODO: Look into abstracting ability for more than VINE to be used
 function downloadApp(){
 	Alloy.Globals.isAndroid ? Ti.Platform.openURL("market://details?id=com.appriss.vinemobile") : Ti.Platform.openURL("itms://itunes.apple.com/us/app/vinemobile/id625472495?mt=8");
 }
