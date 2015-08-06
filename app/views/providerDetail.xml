@@ -11,6 +11,7 @@
 			<Label id="address"/>
 			<Button id="driveButton" onClick="getDirections">Get Directions</Button>
 		</View>
+
 		<View id="phoneView" class="actionView" onClick="callPhoneNumber">
 			<ImageView class="actionImage" image="/global/phone_256.png" />
 			<Label id="phoneLabel" class="actionLabel"/>
@@ -22,6 +23,10 @@
 		<View id="websiteView" class="actionView" onClick="openWebsite">
 			<ImageView class="actionImage" image="/global/domain256.png" />
 			<Label id="webLabel" class="actionLabel">VISIT WEBSITE</Label>
+		</View>
+		<View id="downloadAppView" class="actionView" onClick="downloadApp">
+			<ImageView class="actionImage" image="/global/cellphone57.png" />
+			<Label id="downloadLabel" class="actionLabel">DOWNLOAD APP</Label>
 		</View>
 		
 		<AlertDialog id="dialog" onClick="doClick" title="Disclaimer" 

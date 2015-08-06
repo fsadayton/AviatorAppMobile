@@ -38,12 +38,6 @@ Alloy.Globals.addActionBarButtons = function(window, additionalButtons, callback
 	        showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
 	    }); 
 	    
-	    var help = menu.add({
-	    	title:"Notify trusted contacts to help you",
-	        icon : "images/add126.png", 
-	        showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
-	    });
-	    
 	    menuItem.addEventListener("click", function(e) { 
 	    	//ensure that website url contains 'http'
 	    	var website = Alloy.Models.profileBasics.get('website');
@@ -53,7 +47,13 @@ Alloy.Globals.addActionBarButtons = function(window, additionalButtons, callback
 	    	else{
 	    		Ti.Platform.openURL("http://" + website);
 	    	}
-	    }); 
+	    });
+	     
+	   	var help = menu.add({
+	    	title:"Notify trusted contacts to help you",
+	        icon : "images/add126.png", 
+	        showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
+	    });
 	    
 	    help.addEventListener("click", function(e){
 	    	alert("Your trusted contacts have been notified to help you.");

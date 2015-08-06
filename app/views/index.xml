@@ -6,7 +6,7 @@
 			<ImageView id="headerRight" image="/global/add126.png"></ImageView>
 		</View>
 		<View class="divider"/>
-		<Label id="welcomeLabel">Welcome to AVIATOR - your link to information and resources</Label>
+		<Label id="welcomeLabel">Welcome to AVIATOR - an initiative of Family Services • Dayton</Label>
 		
 		<View class="boxContainer">
 			<View class="left box" onClick="openProviders">

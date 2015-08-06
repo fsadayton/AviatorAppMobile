@@ -47,6 +47,7 @@
 "#addressView":{
 	height:"55dp"
 }
+
 "ImageView":{
 	width:"30dp"
 }

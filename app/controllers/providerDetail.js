@@ -1,34 +1,116 @@
 var args = arguments[0] || {};
 
-$.providerName.text = args.orgName;
+var menu;
 
-if(args.address){
+//set provider name and description
+$.providerName.text = args.orgName;
+$.providerDescription.value = args.description;
+
+if(args.address){ //format address
 	var address = args.address.split(",");
 	$.address.text = address[0] + "\n" + address[1].trim() + ", " + address[2].trim();
 }
-else{
-	$.address.visible = false;
-	$.addressLabel.visible = false;
-	$.driveButton.visible = false;
+else{ //no address, remove address-related views
+	$.win.remove($.addressLabel);
+	$.win.remove($.addressView);
 	$.providerDescription.height = "35%";
 }
 
-$.providerDescription.value = args.description;
-$.phoneLabel.text = "CALL " + args.phone;
+//check phone status
+if(args.phone == null){
+	$.win.remove($.phoneView);
+}
+else{
+	$.phoneLabel.text = "CALL " + args.phone;
+}
 
-$.phoneView.visible = args.phone ? true : false;
-$.emailView.visible = args.email ? true : false;
-$.websiteView.visible = args.website ? true :false;
+//remove any views that are not needed
+if(args.email == null){
+	$.win.remove($.emailView);
+}
+if(args.website == null){
+	$.win.remove($.websiteView);
+}
+if(!args.hasApp){
+	$.win.remove($.downloadAppView);
+}
+Alloy.Globals.addActionBarButtons($.win, [{
+		params:{
+			title:"Share with Friends",
+			icon: "/global/share256.png",
+			showAsAction : Ti.Android.SHOW_AS_ACTION_NEVER
+		}
+	},
+	{params:{
+		title:"Tag as Favorite",
+		icon:"/global/star256.png",
+		showAsAction : Ti.Android.SHOW_AS_ACTION_NEVER
+	}}],
+	function getMenu(menu){
+		
+		//Add functionality for sharing a service provider
+		var shareItem = _.findWhere(menu.getItems(), {title:"Share with Friends"});
+		shareItem.addEventListener("click", shareInformation);
+		
+		/**
+		 * Local function that enables a user to share info about a service provider (e.g. email, phone, etc.)
+		 * via email, SMS, or other app capable of sending text.
+		 */
+		function shareInformation(){
+			var activity = Ti.Android.currentActivity;
+			var intent = Ti.Android.createIntent({
+				action: Ti.Android.ACTION_SEND,
+				type: 'text/plain'
+			});
+			var body = "You might be interested in this organization. \nDescription: " 
+				+ args.description + "\nPhone: " + args.phone 
+				+ "\nEmail: " + args.email + "\nWebsite: " + args.website;
+			intent.putExtra(Ti.Android.EXTRA_SUBJECT, args.orgName);
+			intent.putExtra(Ti.Android.EXTRA_TEXT, body);
+			activity.startActivity(Ti.Android.createIntentChooser(intent, 'Share'));
+		}
+		
+		//Add functionality for saving a favorite service provider
+		var favoriteItem = _.findWhere(menu.getItems(), {title:"Tag as Favorite"});
+		favoriteItem.addEventListener("click", tagAsFavorite);
+		
+		/**
+		 * Function that persists a service provider if it has not already 
+		 * been saved. 
+		 */
+		function tagAsFavorite(){
+			var favorites = Alloy.Collections.favorites;
+			var existingFavorite = favorites.where({name:args.orgName});
+			
+			if(existingFavorite.length > 0){
+				//Notify user that he/she has already saved service provider
+				Alloy.Globals.createNotificationPopup(args.orgName + " is already tagged.");
+			}
+			else{
+				var favorite = Alloy.createModel('favorites', {
+					name: args.orgName,
+					address: args.address,
+					description: args.description,
+					phone_number: args.phone,
+					email: args.email,
+					website: args.website
+				});
+			
+				favorites.add(favorite);
+				favorite.save();
+				favorites.fetch();
+				
+				//Notify user that the service provider has been saved
+				Alloy.Globals.createNotificationPopup("Favorite Added.");
+			}
+		}
+	}
+);
 
-$.phoneView.height = args.phone ? $.phoneView.height : 0;
-$.emailView.height = args.email ? $.emailView.height : 0;
-$.websiteView.height = args.website ? $.websiteView.height :0;
-
-$.win.activity.onCreateOptionsMenu = function(e){
+/*$.win.activity.onCreateOptionsMenu = function(e){
 	var menu = e.menu;
 	var share = menu.add({
-		title:"Share with Friends",
-		icon: "/global/share256.png"
+		
 	});
 	
 	share.addEventListener("click", shareInformation);
@@ -62,7 +144,7 @@ $.win.activity.onCreateOptionsMenu = function(e){
 			Alloy.Globals.createNotificationPopup("Favorite Added.");
 		}
 	});
-};
+};*/
 
 function getDirections() {
 	if (Titanium.Geolocation.locationServicesEnabled==false) {
@@ -110,18 +192,8 @@ function doClick(e){
 	}
 }
 
-function shareInformation(){
-	var activity = Ti.Android.currentActivity;
-	var intent = Ti.Android.createIntent({
-		action: Ti.Android.ACTION_SEND,
-		type: 'text/plain'
-	});
-	var body = "You might be interested in this organization. \nDescription: " 
-		+ args.description + "\nPhone: " + args.phone 
-		+ "\nEmail: " + args.email + "\nWebsite: " + args.website;
-	intent.putExtra(Ti.Android.EXTRA_SUBJECT, args.orgName);
-	intent.putExtra(Ti.Android.EXTRA_TEXT, body);
-	activity.startActivity(Ti.Android.createIntentChooser(intent, 'Share'));
-}
 
-//Alloy.Globals.addActionBarButtons($.win);
+
+function downloadApp(){
+	Alloy.Globals.isAndroid ? Ti.Platform.openURL("market://details?id=com.appriss.vinemobile") : Ti.Platform.openURL("itms://itunes.apple.com/us/app/vinemobile/id625472495?mt=8");
+}
