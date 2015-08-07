@@ -2,6 +2,7 @@ var args = arguments[0] || {};
 
 var Map = require('ti.map');
 var geocoder = require('ti.geocoder');
+var countySelector = require("countySelectorUtils");
 
 $.activityIndicator.show();
 $.quickActivityIndicator.show();
@@ -27,8 +28,8 @@ Alloy.Globals.sendHttpRequest("GetCategoryLookupIndex", "GET", null, storeCatego
 function storeCategoryLookup(){
 	categoryDictionary = JSON.parse(this.responseText);
 	var profileBasics = Alloy.Models.profileBasics;
-	Ti.API.info("profileBasics: " + profileBasics);
-	categoryNames = getTableData(args.categories, [Alloy.Models.profileBasics.get('countyId')]);
+	profileBasics.fetch();
+	categoryNames = getTableData(args.categories, [profileBasics.get('countyId')]);
 }
 
 /**
@@ -217,17 +218,9 @@ function toggleMapListView(){
  * window and opens it. 
  */
 function filterResults(){
-	//if counties have already been retrieved, create filter
-	if (allCounties){
-		createFilter(allCounties);
-	}
-	else{
-		Alloy.Globals.sendHttpRequest("GetCounties", "GET", null, 
-		function(){
-			allCounties = JSON.parse(this.responseText);
-			createFilter(allCounties);
-		});
-	}
+	countySelector.getCounties(function(counties){
+		createFilter(counties);
+	});
 	
 	/**
 	 * helper function for creating filter view
@@ -309,5 +302,4 @@ if(Alloy.Globals.isAndroid){
 	    	return $.crisisMenu.search;
 	    }
    }
-   
 }

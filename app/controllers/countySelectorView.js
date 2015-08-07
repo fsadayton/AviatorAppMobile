@@ -1,29 +1,19 @@
 var args = arguments[0] || {};
 
-var selectedCounty = null;
-var selectable = require('countySelectorUtils');
-
 $.init = function(obj){
-	
 	var countyKeys = Object.keys(obj.counties);
 	_.each(countyKeys, function(key){
 		//define county id, name, and callback function when clicked
-		var params = {id:key, text:obj.counties[key], type:"county", callback:updateSelection};
+		var params = {id:key, text:obj.counties[key], type:"county", callback:obj.countyCallback};
 		
+		//if county is already being viewed by user, mark it as being selected
+		if(obj.currentCounties && countyKeys.length != obj.currentCounties.length 
+			&& _.contains(obj.currentCounties, key)){
+			params.isSelected = true;
+		}
 		//add bubble picker
 		$.countiesPicker.add(Alloy.createController('categoryBubble', params).getView());
 	});
-	
-	function updateSelection(countyId, countyName, isNew){
-		if(isNew){
-			selectable.setSelectedCounty({id:countyId, name:countyName});
-			selectable.setCountySelectable(false);
-		}
-		else{
-			selectable.setSelectedCounty(null);
-			selectable.setCountySelectable(true);
-		}
-	}
 	
 	/**
 	 * logic for county search bar
@@ -36,14 +26,12 @@ $.init = function(obj){
 		}
 		//Using 1.2 second timeout to reduce amount of view refreshing.
 		timeout = setTimeout(function() {
+			$.countiesPicker.removeAllChildren(); //ensures that children will appear in alphabetical order when added to view
 			if(e.source.value.length > 0){ //if search field contains a value
 				_.each(allChildren, function(child){
-		     		if(child.text.trim().toLowerCase().indexOf(e.source.value.toLowerCase()) == -1){
-		     			$.countiesPicker.remove(child);
-		     		}
-		     		else{
-		     			$.countiesPicker.add(child);
-		     		}
+					if(child.text.trim().toLowerCase().indexOf(e.source.value.toLowerCase()) > -1){
+						$.countiesPicker.add(child);
+					}
 		     	});
 		     }
 		     else{
@@ -54,5 +42,4 @@ $.init = function(obj){
 		     }
 	    },1200);
 	});
-	
 };

@@ -11,6 +11,7 @@ if(args.counties){
 	$.generalTextView.visible = false;
 	$.subTextView.visible = false;
 	
+	args.countyCallback = updateSelection;
 	$.countySelector.init(args);
 	
 	var selectable = require('countySelectorUtils');
@@ -32,6 +33,17 @@ if(args.counties){
 		}
 		else{
 			alert("No county selected!");
+		}
+	}
+	
+	function updateSelection(countyId, countyName, isNew){
+		if(isNew){
+			selectable.setSelectedCounty({id:countyId, name:countyName});
+			selectable.setCountySelectable(false);
+		}
+		else{
+			selectable.setSelectedCounty(null);
+			selectable.setCountySelectable(true);
 		}
 	}
 }
