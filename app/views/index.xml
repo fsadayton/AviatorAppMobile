@@ -47,7 +47,7 @@
 			</View>
 			<View class="right box" onClick="openCrisisLines">
 				<View class="divider"/>
-				<Label class="name">CRISIS LINES</Label>
+				<Label class="name">CRISIS CONTACTS</Label>
 				<ImageView class="icon" image="/global/phone_256.png" />
 				<Label class="description">View local phone numbers that match your needs</Label>
 			</View>

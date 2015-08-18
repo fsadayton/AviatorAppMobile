@@ -27,7 +27,8 @@ function deleteContact(e){
 /**
  * Function that opens edit dialog for trusted contact
  */
-function editContact(){
+function editContact(e){
+	e.cancelBubble = true;
 	var contact = contacts.get(id);
 	Alloy.createController("profileModal", {
 			header: "ADD CONTACT",
@@ -37,4 +38,9 @@ function editContact(){
 			phone: contact.get("phone_number"),
 			modelId: id
 	}).getView().open();
+}
+
+function callContact(e){
+	var cleanNumber = $.contactNumber.text.replace(/\s|-|\./g,'');
+    Ti.Platform.openURL('tel:' + cleanNumber);
 }
