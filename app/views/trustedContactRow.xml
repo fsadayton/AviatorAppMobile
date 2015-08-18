@@ -1,5 +1,5 @@
 <Alloy>
-	<TableViewRow id="row" class="defaultRow">
+	<TableViewRow id="row" class="defaultRow" onClick="callContact">
 		<ImageView image="/global/garbage12.png" left="10dp" onClick="deleteContact" />
 		<Label id="contactName" text="{name}" />
 		<Label id="contactNumber" text="{phone_number}" />

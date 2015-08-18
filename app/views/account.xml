@@ -31,7 +31,7 @@
 						<TextField id="county" class="sentence" editable=false focusable=false value="{profileBasics.countyName}" onClick="pickCounty"/>
 						<Label class="sentence">county.</Label>
 					</View>
-					<View layout="horizontal" width="90%" top="65%" height="50%">
+					<View layout="horizontal" width="90%" top="60%" height="50%">
 						<Label class="sentence">My 'quick-hide'</Label>
 						<Label class="sentence">website is</Label>
 						<TextField id="website" class="sentence" editable=false focusable=false value="{profileBasics.website}" onClick="updateProfile"/>
