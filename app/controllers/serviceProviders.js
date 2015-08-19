@@ -1,7 +1,6 @@
 var args = arguments[0] || {};
 
 var Map = require('ti.map');
-var geocoder = require('ti.geocoder');
 var countySelector = require("countySelectorUtils");
 
 $.activityIndicator.show();
@@ -274,7 +273,6 @@ if(Alloy.Globals.isAndroid){
      				//if search is empty, put all annotations back on the map
      				$.map.setAnnotations(originalMapAnnotations);
      			}
-     			
      		},1200);
    		});
 	});
@@ -294,12 +292,12 @@ if(Alloy.Globals.isAndroid){
    /**
     * helper function that returns the searchview associated with each tab
     */
-   function getActionView(){
-   		if($.tabGroup.activeTab.title === "NEARBY"){
+	function getActionView(){
+		if($.tabGroup.activeTab.title === "NEARBY"){
 	        return $.providerList.search;
 	    }
 	    else if($.tabGroup.activeTab.title === "QUICK CALL"){
 	    	return $.crisisMenu.search;
 	    }
-   }
+   	}
 }

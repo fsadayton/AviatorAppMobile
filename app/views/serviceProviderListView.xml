@@ -1,0 +1,10 @@
+<Alloy>
+	<ActivityIndicator id="activityIndicator"/>
+	<View id="listView">
+		<Label id="noResults" zIndex=1 visible=false>No results.</Label>
+		<TableView id="providerList" class="menu" onClick="providerDetail" visible=true filterAttribute="title" />
+	</View>
+	<View id="mapModule" height="90%" visible=false top=0>
+		<Module id="map" module="ti.map" onClick="mapClick"/>
+	</View>
+</Alloy>
