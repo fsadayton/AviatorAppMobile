@@ -1,12 +1,15 @@
 var args = arguments[0] || {};
+var Map = require('ti.map');
 
 var categoryNames;
 var httpCall;
 
 var filteredCategories;
 var filteredCounties;
+var originalMapAnnotations;
 
 $.activityIndicator.show();
+Ti.API.info("service provider list open");
 
 if(args.providerType === "corrections"){
 	Alloy.Globals.sendHttpRequest("GetCategoryLookupIndex", "GET", null, storeCategoryLookup);
@@ -17,6 +20,7 @@ function storeCategoryLookup(){
 	categoryDictionary = JSON.parse(this.responseText);
 	var profileBasics = Alloy.Models.profileBasics;
 	profileBasics.fetch();
+	//TODO: establish way of getting categories
 	categoryNames = getTableData([1,8,9], [profileBasics.get('countyId')]);
 }
 
@@ -85,7 +89,7 @@ function parseResponse(){
 				email: provider.email,
 				website: provider.website
 			};
-			//addProviderToMap(params); //add provider location to the map
+			addProviderToMap(params); //add provider location to the map
 			//create table row with detail metadata
 			var row = Alloy.createController('serviceProviderRow', params).getView();	
 			
@@ -109,20 +113,17 @@ function parseResponse(){
 			});
 		});
 		
-		//originalMapAnnotations = $.map.annotations; //store original map points
+		originalMapAnnotations = $.map.annotations; //store original map points
 		//hide spinners
 		$.activityIndicator.hide();
-		//$.quickActivityIndicator.hide();
 		//make tables visible
-		//$.crisisMenu.visible = true;
 		$.providerList.visible = true;
 		//set table data
 		$.providerList.setData(allHeaders);
-		//$.crisisMenu.setData(crisisHeaders);
 	}
 }
 
-function providerDetail(){
+function providerDetail(e){
 	Alloy.createController('providerDetail',{
 		orgName:e.row.orgName,
 		address: e.row.address,
@@ -167,10 +168,36 @@ function mapClick(e){
 exports.getFilterParams = function(){
 	var filterObj = {
 		categories: categoryNames,
-		counties: countiesList,
 		filterCallback:getTableData,
 		currentCategories: filteredCategories,
 		currentCounties: filteredCounties
 	};
 	return filterObj;
+};
+
+exports.getMapViews = function(){
+	return {map:$.map, mapModule:$.mapModule};
+};
+
+exports.getListView = function(){
+	return $.providerList;
+};
+var timeout = null;
+exports.searchTimeout = function(e){
+	if(timeout){
+    	clearTimeout(timeout);//do not let previous timeouts run
+    }
+    //Using 1.2 second timeout to reduce amount of map redrawing.
+    timeout = setTimeout(function() {
+    	if(e.source.value.length > 0){ //if search field contains a value
+     		//find map annotations whose title contains the search field value
+     		var filteredAnnotations = _.filter(originalMapAnnotations, function(annotation){return annotation.title.toLowerCase().indexOf(e.source.value.toLowerCase()) > -1;});
+     		$.map.setAnnotations(filteredAnnotations);
+     	}
+     	else{
+     		//if search is empty, put all annotations back on the map
+     		$.map.setAnnotations(originalMapAnnotations);
+     	}
+    },1200);
+   		
 };

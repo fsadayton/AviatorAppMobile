@@ -2,8 +2,8 @@
 	<TabGroup id="tabGroup" onOpen="Alloy.Globals.updateActionBar">
 		<Tab title="LOCAL LAW">
 			<Window class="container" id="win">
-				<Require src="serviceProviderListView" providerType="corrections"/>
-				<Require src="serviceProviderButtonBar" />
+				<Require id="providerList" src="serviceProviderListView" providerType="corrections"/>
+				<Require id="providerButtonBar" src="serviceProviderButtonBar" />
 			</Window>
 		</Tab>
 		<Tab title="VINE">

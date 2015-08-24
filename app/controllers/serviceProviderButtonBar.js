@@ -1,23 +1,10 @@
 var args = arguments[0] || {};
 var countySelector = require("countySelectorUtils");
 
-var mapModule;
-var map;
-var listView;
+var providerListObject;
 
-var filterParams;
-
-exports.setMapViews = function(mapModule, map){
-	this.mapModule = mapModule;
-	this.map = map;
-};
-
-exports.setListView = function(listView){
-	this.listView = listView;
-};
-
-exports.setFilterParams = function(paramsObj){
-	filterParams = paramsObj;
+exports.setProviderListObject = function(listObject){
+	providerListObject = listObject;
 };
 
 /**
@@ -25,19 +12,23 @@ exports.setFilterParams = function(paramsObj){
  * service providers based on user preference. 
  */
 function toggleMapListView(){
-	if($.mapModule.visible){
+	var mapModule = providerListObject.getMapViews().mapModule;
+	var map = providerListObject.getMapViews().map;
+	var listView = providerListObject.getListView();
+	
+	if(mapModule.visible){
 		setMapVisibility(false);
 	}
 	else{
 		setMapVisibility(true);
-		$.map.setRegion({latitude:39.719704, longitude:-84.219832, latitudeDelta:0.2, longitudeDelta:0.2});
+		map.setRegion({latitude:39.719704, longitude:-84.219832, latitudeDelta:0.2, longitudeDelta:0.2});
 	}
 	
 	function setMapVisibility(isMapVisible){
-		$.mapModule.visible = isMapVisible;
+		mapModule.visible = isMapVisible;
 		$.mapButton.visible = !isMapVisible;
 		
-		$.listView.visible = !isMapVisible;
+		listView.visible = !isMapVisible;
 		$.listButton.visible = isMapVisible;
 	}
 }
@@ -57,12 +48,8 @@ function filterResults(){
 	 * helper function for creating filter view
 	 */
 	function createFilter(countiesList){
-		Alloy.createController("serviceProviderFilter", {
-			categories: categoryNames,
-			counties: countiesList,
-			filterCallback:getTableData,
-			currentCategories: filteredCategories,
-			currentCounties: filteredCounties
-		}).getView().open();
+		var params = providerListObject.getFilterParams();
+		params.counties = countiesList;
+		Alloy.createController("serviceProviderFilter", params).getView().open();
 	}
 }
