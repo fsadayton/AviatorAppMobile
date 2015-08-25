@@ -12,16 +12,25 @@ $.activityIndicator.show();
 Ti.API.info("service provider list open");
 
 if(args.providerType === "corrections"){
-	Alloy.Globals.sendHttpRequest("GetCategoryLookupIndex", "GET", null, storeCategoryLookup);
-	httpCall = "GetServiceProviders";
+	httpCall = Alloy.CFG.lawEnforcementApi + "GetLawEnforcementProviders";
 }
+else if(args.providerType === "veterans"){
+	httpCall = Alloy.CFG.veteransApi + "GetVeteranProviders";
+}
+else if(args.providerType === "compensation"){
+	httpCall = Alloy.CFG.compensationApi + "GetCompensationProviders";
+}
+
+Alloy.Globals.sendHttpRequest(Alloy.CFG.appData + "GetCategoryLookupIndex", "GET", null, storeCategoryLookup);
 
 function storeCategoryLookup(){
 	categoryDictionary = JSON.parse(this.responseText);
 	var profileBasics = Alloy.Models.profileBasics;
 	profileBasics.fetch();
-	//TODO: establish way of getting categories
-	categoryNames = getTableData([1,8,9], [profileBasics.get('countyId')]);
+	
+	if(args.providerType != null){
+		categoryNames = getTableData(null, [profileBasics.get('countyId')]);
+	}
 }
 
 /**
@@ -57,9 +66,13 @@ function getTableData(categories, counties){
 	});
 	filteredCounties = counties; //list of selected counties
 	
+	var apiUrl = httpCall + "?counties="+counties.join("&counties=");
+	
+	if(categories){
+		apiUrl += "&categories=" + categories.join("&categories=");
+	}
 	//send request to get all service providers that provide services for counties and categories
-	Alloy.Globals.sendHttpRequest(httpCall + "?counties="+counties.join("&counties=")+"&categories=" 
-	+ categories.join("&categories="), "GET", null, parseResponse);
+	Alloy.Globals.sendHttpRequest(apiUrl, "GET", null, parseResponse);
 	
 	return filteredCategories;
 }

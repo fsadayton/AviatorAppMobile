@@ -18,7 +18,7 @@ var filteredCategories = null;
 var filteredCounties = null;
 
 //get all category ID's and canonical names
-Alloy.Globals.sendHttpRequest("GetCategoryLookupIndex", "GET", null, storeCategoryLookup);
+Alloy.Globals.sendHttpRequest(Alloy.CFG.appData + "GetCategoryLookupIndex", "GET", null, storeCategoryLookup);
 
 /**
  * Function that stores the list of all categories and relevant category names upon
@@ -67,7 +67,7 @@ function getTableData(categories, counties){
 	filteredCounties = counties; //list of selected counties
 	
 	//send request to get all service providers that provide services for counties and categories
-	Alloy.Globals.sendHttpRequest("GetServiceProviders?counties="+counties.join("&counties=")+"&categories=" 
+	Alloy.Globals.sendHttpRequest(Alloy.CFG.appData + "GetServiceProviders?counties="+counties.join("&counties=")+"&categories=" 
 	+ categories.join("&categories="), "GET", null, parseServiceProviders);
 	
 	return filteredCategories;
