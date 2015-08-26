@@ -54,7 +54,7 @@ function getTableData(categories, counties){
 	filteredCategories = [];
 	
 	//iterate through list of all categories
-	_.each(categoryDictionary, function(category){
+	/*_.each(categoryDictionary, function(category){
 		if (_.contains(categories, category.id)){
 			filteredCategories.push(category); //store list of currently selected categories, pass to filter when necessary
 			//store list of table headers
@@ -63,7 +63,7 @@ function getTableData(categories, counties){
 				headerView: Alloy.createController('TableViewHeader', {text:category.name}).getView()
 			}));
 		}
-	});
+	});*/
 	filteredCounties = counties; //list of selected counties
 	
 	var apiUrl = httpCall + "?counties="+counties.join("&counties=");
@@ -91,6 +91,7 @@ function parseResponse(){
 		$.noResults.visible = true;
 	}
 	else{
+		var sections = {};
 		var crisisHeaders = []; //reset list of crisis numbers
 		//iterate through list of providers in JSON
 		_.each(json, function(provider){
@@ -117,22 +118,37 @@ function parseResponse(){
 			//iterate through all of the categories that service provider specializes in
 			_.each(provider.categories, function(category){
 				//iterate through list of table headers and add service provider to header if category matches
-				_.find(allHeaders, function(header){
+				_.find(categoryDictionary, function(categoryDict){
+					if(categoryDict.id === category){
+						Ti.API.info("category: " + category);
+						if(sections[categoryDict.id] == null){
+							sections[categoryDict.id] = Ti.UI.createTableViewSection({
+								title:categoryDict.id.id, 
+								headerView: Alloy.createController('TableViewHeader', {text:categoryDict.name}).getView()
+							});
+						}
+						sections[categoryDict.id].add(row);
+						return true;
+					}
+				});
+				/*_.find(allHeaders, function(header){
 					if(header.title === category){
 						header.add(row);
 						return true;
 					}
-				});	
+				});	*/
 			});
 		});
-		
+		var keys = Object.keys(sections);
+		var myHeaders = keys.map(function(v){return sections[v];});
 		originalMapAnnotations = $.map.annotations; //store original map points
 		//hide spinners
 		$.activityIndicator.hide();
 		//make tables visible
 		$.providerList.visible = true;
 		//set table data
-		$.providerList.setData(allHeaders);
+		//$.providerList.setData(allHeaders);
+		$.providerList.setData(myHeaders);
 	}
 }
 
