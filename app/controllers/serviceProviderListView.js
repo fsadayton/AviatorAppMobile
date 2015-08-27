@@ -9,8 +9,10 @@ var filteredCounties;
 var originalMapAnnotations;
 
 $.activityIndicator.show();
-Ti.API.info("service provider list open");
 
+/**
+ * Determine type of provider list view and set the API call accordingly
+ */
 if(args.providerType === "corrections"){
 	httpCall = Alloy.CFG.lawEnforcementApi + "GetLawEnforcementProviders";
 }
@@ -42,8 +44,6 @@ function storeCategoryLookup(){
  * 		@return {array <Object>} - list of relevant category names and ID's 
  */
 function getTableData(categories, counties){
-	Ti.API.info("cats: " + categories);
-	Ti.API.info("counties: " + counties);
 	//hide any data that may be visible and show activity indicators
 	$.providerList.visible = false;
 	$.noResults.visible = false;
@@ -54,6 +54,8 @@ function getTableData(categories, counties){
 	filteredCategories = [];
 	
 	//iterate through list of all categories
+	
+	//TODO: re-work this as part of VCTMSVCS-123
 	/*_.each(categoryDictionary, function(category){
 		if (_.contains(categories, category.id)){
 			filteredCategories.push(category); //store list of currently selected categories, pass to filter when necessary
@@ -107,6 +109,7 @@ function parseResponse(){
 			//create table row with detail metadata
 			var row = Alloy.createController('serviceProviderRow', params).getView();	
 			
+			//TODO: re-work this as part of VCTMSVCS-123
 			//if provider has a crisis number, add it to crisis line table	
 			/*if(provider.crisisNumber){
 				crisisHeaders.push(Alloy.createController('serviceProviderRow', {
@@ -120,7 +123,6 @@ function parseResponse(){
 				//iterate through list of table headers and add service provider to header if category matches
 				_.find(categoryDictionary, function(categoryDict){
 					if(categoryDict.id === category){
-						Ti.API.info("category: " + category);
 						if(sections[categoryDict.id] == null){
 							sections[categoryDict.id] = Ti.UI.createTableViewSection({
 								title:categoryDict.id.id, 
@@ -131,6 +133,7 @@ function parseResponse(){
 						return true;
 					}
 				});
+				//TODO: re-work this as part of VCTMSVCS-123
 				/*_.find(allHeaders, function(header){
 					if(header.title === category){
 						header.add(row);
@@ -147,11 +150,13 @@ function parseResponse(){
 		//make tables visible
 		$.providerList.visible = true;
 		//set table data
-		//$.providerList.setData(allHeaders);
 		$.providerList.setData(myHeaders);
 	}
 }
 
+/**
+ * Function for opening provider detail page
+ */
 function providerDetail(e){
 	Alloy.createController('providerDetail',{
 		orgName:e.row.orgName,
@@ -194,6 +199,16 @@ function mapClick(e){
 	}
 }
 
+/**
+ * ************************************
+ * ******** EXPORTED FUNCTIONS ********
+ * ************************************
+ */
+
+/**
+ * Function that returns an object used as part of the
+ * provider filter.
+ */
 exports.getFilterParams = function(){
 	var filterObj = {
 		categories: categoryNames,
@@ -204,13 +219,22 @@ exports.getFilterParams = function(){
 	return filterObj;
 };
 
+/**
+ * Returns an object containing the map module and the map view
+ */
 exports.getMapViews = function(){
 	return {map:$.map, mapModule:$.mapModule};
 };
-
+/**
+ * Returns the list of providers
+ */
 exports.getListView = function(){
 	return $.providerList;
 };
+
+/**
+ * Timeout function used for searching and setting the map annotations when searching
+ */
 var timeout = null;
 exports.searchTimeout = function(e){
 	if(timeout){
