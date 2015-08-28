@@ -88,7 +88,7 @@ function parseResponse(){
 	$.map.removeAllAnnotations(); //remove any previous map annotations
 
 	//if no results are returned, let user know that there are no results
-	if(json.length == 0){
+	if(json.length === 0){
 		$.activityIndicator.hide();
 		$.noResults.visible = true;
 	}
@@ -244,7 +244,11 @@ exports.searchTimeout = function(e){
     timeout = setTimeout(function() {
     	if(e.source.value.length > 0){ //if search field contains a value
      		//find map annotations whose title contains the search field value
-     		var filteredAnnotations = _.filter(originalMapAnnotations, function(annotation){return annotation.title.toLowerCase().indexOf(e.source.value.toLowerCase()) > -1;});
+     		var filteredAnnotations = _.filter(originalMapAnnotations, 
+     				function(annotation){
+     					return annotation.title.toLowerCase().indexOf(e.source.value.toLowerCase()) > -1;
+     				}
+     			);
      		$.map.setAnnotations(filteredAnnotations);
      	}
      	else{

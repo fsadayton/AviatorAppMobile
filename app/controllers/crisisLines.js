@@ -11,8 +11,8 @@ function storeCategoryLookup(){
 	var allCats = _.pluck(categoryDictionary, 'id');
 	
 	Alloy.Globals.sendHttpRequest(Alloy.CFG.appData + "GetServiceProviders?counties=" 
-	+ Alloy.Models.profileBasics.get('countyId') + "&categories=" 
-	+ allCats.join("&categories="), "GET", null, parseServiceProviders);
+		+ Alloy.Models.profileBasics.get('countyId') + "&categories=" 
+		+ allCats.join("&categories="), "GET", null, parseServiceProviders);
 }
 
 function parseServiceProviders(){

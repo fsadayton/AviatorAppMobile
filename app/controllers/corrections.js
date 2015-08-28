@@ -6,4 +6,3 @@ if(Alloy.Globals.isAndroid){
 }
 
 $.providerButtonBar.setProviderListObject($.providerList);
-
