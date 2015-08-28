@@ -29,6 +29,10 @@ Alloy.Collections.trustedContacts.fetch();
 Alloy.Collections.favorites.fetch();
 Alloy.Models.profileBasics.fetch();
 
+var smsMod = require('ti.android.sms');
+Ti.API.info("module is => " + smsMod);
+var text = 'hello world';
+
 Alloy.Globals.addActionBarButtons = function(window, additionalButtons, callback){
     window.activity.onCreateOptionsMenu = function(e) { 
 	    var menu = e.menu; 
@@ -55,8 +59,43 @@ Alloy.Globals.addActionBarButtons = function(window, additionalButtons, callback
 	        showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
 	    });
 	    
-	    help.addEventListener("click", function(e){
-	    	alert("Your trusted contacts have been notified to help you.");
+	    help.addEventListener("click", function(evt){
+	    	var failed = false;
+	    	var contacts = Alloy.Collections.trustedContacts;
+	    	Alloy.Models.profileBasics.fetch();
+	    	var message = Alloy.Models.profileBasics.get("emergency_message");
+	    	contacts.fetch();
+	    	var timeout;
+	    	smsMod.addEventListener('complete', function isComplete(e){
+    			Ti.API.info('Result: ' + (e.success?'success':'failure') + ' msg: ' + e.resultMessage);
+    			clearTimeout(timeout);
+   		 		switch (e.result) {
+			        case smsMod.SENT: 
+			            result = 'SENT';
+			            break;
+			        case smsMod.DELIVERED: 
+			            result = 'DELIVERED';
+			            break;
+			        case smsMod.FAILED:
+			        	failed = true;
+			            result = 'FAILED';
+			            break;
+			        case smsMod.CANCELLED:
+			            result = 'CANCELLED';
+			            break;
+    			}
+    			timeout = setTimeout(function(){
+    				if(failed){
+    					alert("Trusted contact notifications are finished, but one more more numbers failed to receive message.");
+    				}
+    				else{
+    					alert("Your trusted contacts have been notified.");
+    				}
+    			}, 1000);
+			} );
+	    	contacts.each(function(contact){
+	    		smsMod.sendSMS(contact.get("phone_number"), message);
+	    	});
 	    });
 	    
 	    if(additionalButtons){
