@@ -195,7 +195,10 @@ function mapClick(e){
 	}
 	else if(e.clicksource && e.clicksource === "pin"){
 		Alloy.Globals.Location.estimateDistance(Alloy.Globals.currentLocation, e.annotation.row.address + ", US", 
-		function(distance){e.annotation.subtitle = distance + " • click for details";});
+			function(distance){
+				e.annotation.subtitle = distance + " • click for details";
+			}
+		);
 	}
 }
 

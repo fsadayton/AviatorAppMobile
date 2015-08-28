@@ -6,10 +6,10 @@ exports.createAndroidSearchBar = function(window, providerListObj){
 		Alloy.Globals.addActionBarButtons(window, [{
 			params:{
 				title: "search...",
-		        icon: Ti.Android.R.drawable.ic_menu_search,
-		        actionView: listView.search,
-		        showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
-	        }
+				icon: Ti.Android.R.drawable.ic_menu_search,
+				actionView: listView.search,
+				showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
+			}
 		}]);
 		
 		listView.search.addEventListener("change", providerListObj.searchTimeout);
