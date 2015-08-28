@@ -1,5 +1,6 @@
 <Alloy>
 	<Window class="container" id="win" onOpen="Alloy.Globals.updateActionBar">
-		<Label>Nothing to see here.</Label>
+		<Require id="providerList" src="serviceProviderListView" providerType="veterans"/>
+		<Require id="providerButtonBar" src="serviceProviderButtonBar" />
 	</Window>
 </Alloy>

@@ -1,6 +1,6 @@
 var args = arguments[0] || {};
 
-Alloy.Globals.sendHttpRequest("GetCategoryLookupIndex", "GET", null, storeCategoryLookup);
+Alloy.Globals.sendHttpRequest(Alloy.CFG.appData + "GetCategoryLookupIndex", "GET", null, storeCategoryLookup);
 var categoryDictionary = null;
 var crisisHeaders = [];
 $.activityIndicator.show();
@@ -10,9 +10,9 @@ function storeCategoryLookup(){
 	
 	var allCats = _.pluck(categoryDictionary, 'id');
 	
-	Alloy.Globals.sendHttpRequest("GetServiceProviders?counties=" 
-	+ Alloy.Models.profileBasics.get('countyId') + "&categories=" 
-	+ allCats.join("&categories="), "GET", null, parseServiceProviders);
+	Alloy.Globals.sendHttpRequest(Alloy.CFG.appData + "GetServiceProviders?counties=" 
+		+ Alloy.Models.profileBasics.get('countyId') + "&categories=" 
+		+ allCats.join("&categories="), "GET", null, parseServiceProviders);
 }
 
 function parseServiceProviders(){

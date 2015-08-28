@@ -1,3 +1,8 @@
+var args = arguments[0] || {};
+var providerSearch = require('providerSearch');
 
-Alloy.Globals.addActionBarButtons($.tabGroup);
+if(Alloy.Globals.isAndroid){
+	providerSearch.createAndroidSearchBar($.tabGroup, $.providerList);
+}
 
+$.providerButtonBar.setProviderListObject($.providerList);

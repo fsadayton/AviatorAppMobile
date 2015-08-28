@@ -1,0 +1,11 @@
+".menu":{
+	left: "0dp",
+	width: "100%",
+	backgroundColor: "#fff",
+	separatorColor: "#65c8c7",
+}
+
+"#providerList":{
+	height:"90%",
+	top:0
+}
