@@ -29,10 +29,6 @@ Alloy.Collections.trustedContacts.fetch();
 Alloy.Collections.favorites.fetch();
 Alloy.Models.profileBasics.fetch();
 
-var smsMod = require('ti.android.sms');
-Ti.API.info("module is => " + smsMod);
-var text = 'hello world';
-
 Alloy.Globals.addActionBarButtons = function(window, additionalButtons, callback){
     window.activity.onCreateOptionsMenu = function(e) { 
 	    var menu = e.menu; 
@@ -59,44 +55,7 @@ Alloy.Globals.addActionBarButtons = function(window, additionalButtons, callback
 	        showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
 	    });
 	    
-	    help.addEventListener("click", function(evt){
-	    	var failed = false;
-	    	var contacts = Alloy.Collections.trustedContacts;
-	    	Alloy.Models.profileBasics.fetch();
-	    	var message = Alloy.Models.profileBasics.get("emergency_message");
-	    	contacts.fetch();
-	    	var timeout;
-	    	smsMod.addEventListener('complete', function isComplete(e){
-    			Ti.API.info('Result: ' + (e.success?'success':'failure') + ' msg: ' + e.resultMessage);
-    			clearTimeout(timeout);
-   		 		switch (e.result) {
-			        case smsMod.SENT: 
-			            result = 'SENT';
-			            break;
-			        case smsMod.DELIVERED: 
-			            result = 'DELIVERED';
-			            break;
-			        case smsMod.FAILED:
-			        	failed = true;
-			            result = 'FAILED';
-			            break;
-			        case smsMod.CANCELLED:
-			            result = 'CANCELLED';
-			            break;
-    			}
-    			timeout = setTimeout(function(){
-    				if(failed){
-    					alert("Trusted contact notifications are finished, but one more more numbers failed to receive message.");
-    				}
-    				else{
-    					alert("Your trusted contacts have been notified.");
-    				}
-    			}, 1000);
-			} );
-	    	contacts.each(function(contact){
-	    		smsMod.sendSMS(contact.get("phone_number"), message);
-	    	});
-	    });
+	    help.addEventListener("click", sendTextMessage);
 	    
 	    if(additionalButtons){
 	    	_.each(additionalButtons, function(button){
@@ -187,4 +146,70 @@ Alloy.Globals.updateActionBar = function(){
 	abx.titleFont = "Quicksand-Regular.otf";
 	abx.setBackgroundColor("#65c8c7");
 };
+
+/**
+ * Function that composes and sends a text message to user's trusted
+ * contacts. Text message is sent automatically from Android platform.
+ * iOS requires user to push send button after fields have been pre-
+ * populated.
+ */
+function sendTextMessage(){
+	var count = 0; //flag used to determine if any of the recipients did not get message
+	
+	//get list of trusted contacts
+	var contacts = Alloy.Collections.trustedContacts;
+	contacts.fetch();
+	
+	//get emergency message
+	Alloy.Models.profileBasics.fetch();
+	var message = Alloy.Models.profileBasics.get("emergency_message");
+	
+	var timeout; //timeout used to create alert message after all texts have been sent
+	var sms; //sms module to use depending on platform
+	
+	if(Alloy.Globals.isAndroid){
+		sms = require('ti.android.sms');
+	    
+	    sms.addEventListener('complete', isComplete);
+		contacts.each(function(contact){
+			sms.sendSMS(contact.get("phone_number"), message);
+	    });
+	}
+	else{
+		var module = require('com.omorandi');
+		sms = module.createSMSDialog();
+		
+		if(!smsDialog.isSupported()){
+			alert("Required feature is not available on your device.");
+		}
+		else{
+			sms.addEventListener('complete', isComplete);
+			sms.recipients = contacts.pluck("phone_number");
+			sms.messageBody = message;
+			sms.open({animated:true});
+		}
+	}
+	
+	/**
+	 * Locally scoped function to be called once a text message has been sent. If message failed, 
+	 * user is alerted that one or more numbers may have failed. If no failed status, user is alerted
+	 * that their trusted contacts have been notified.  
+ 	 * @param {Object} e
+	 */
+	function isComplete(e){
+		clearTimeout(timeout);
+		if(e.result === sms.FAILED){
+			count++;
+		}
+		timeout = setTimeout(function(e){
+			if(count > 0){
+				alert("Operation complete, but " + count + " of your trusted contacts could not be reached.");
+			}
+			else{
+				alert("Your trusted contacts have been notified.");
+			}
+			sms.removeEventListener('complete', isComplete);
+		}, 1000);
+	}
+}
 
