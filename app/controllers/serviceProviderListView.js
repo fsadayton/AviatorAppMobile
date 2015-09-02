@@ -1,6 +1,7 @@
 var args = arguments[0] || {};
 var Map = require('ti.map');
 
+var categoryDictionary;
 var categoryNames;
 var httpCall;
 
@@ -8,12 +9,17 @@ var filteredCategories;
 var filteredCounties;
 var originalMapAnnotations;
 
+var crisisMenu;
+
 $.activityIndicator.show();
 
 /**
  * Determine type of provider list view and set the API call accordingly
  */
-if(args.providerType === "corrections"){
+if(args.providerType === "general"){
+	httpCall = Alloy.CFG.appData + "GetServiceProviders";
+}
+else if(args.providerType === "corrections"){
 	httpCall = Alloy.CFG.lawEnforcementApi + "GetLawEnforcementProviders";
 }
 else if(args.providerType === "veterans"){
@@ -31,7 +37,9 @@ function storeCategoryLookup(){
 	profileBasics.fetch();
 	
 	if(args.providerType != null){
-		categoryNames = getTableData(null, [profileBasics.get('countyId')]);
+		var categories = args.categories ? args.categories : null;
+		Ti.API.info("Cats: " + categories);
+		categoryNames = getTableData(categories, [profileBasics.get('countyId')]);
 	}
 }
 
@@ -49,30 +57,32 @@ function getTableData(categories, counties){
 	$.noResults.visible = false;
 	$.activityIndicator.show();
 	
-	//reset table headers and 
+	//reset table headers and filtered counties
 	allHeaders = [];
 	filteredCategories = [];
-	
-	//iterate through list of all categories
-	
-	//TODO: re-work this as part of VCTMSVCS-123
-	/*_.each(categoryDictionary, function(category){
-		if (_.contains(categories, category.id)){
-			filteredCategories.push(category); //store list of currently selected categories, pass to filter when necessary
-			//store list of table headers
-			allHeaders.push(Ti.UI.createTableViewSection({
-				title:category.id, 
-				headerView: Alloy.createController('TableViewHeader', {text:category.name}).getView()
-			}));
-		}
-	});*/
 	filteredCounties = counties; //list of selected counties
 	
+	//define apiUrl
 	var apiUrl = httpCall + "?counties="+counties.join("&counties=");
 	
 	if(categories){
+		//add categories to apiUrl
 		apiUrl += "&categories=" + categories.join("&categories=");
+		
+		//iterate through list of all categories to create list of defined headers
+		_.each(categoryDictionary, function(category){
+			Ti.API.info("category: " + category);
+			if (_.contains(categories, category.id)){
+				filteredCategories.push(category); //store list of currently selected categories, pass to filter when necessary
+				//store list of table headers
+				allHeaders.push(Ti.UI.createTableViewSection({
+					title:category.id, 
+					headerView: Alloy.createController('TableViewHeader', {text:category.name}).getView()
+				}));
+			}
+		});
 	}
+	
 	//send request to get all service providers that provide services for counties and categories
 	Alloy.Globals.sendHttpRequest(apiUrl, "GET", null, parseResponse);
 	
@@ -109,41 +119,29 @@ function parseResponse(){
 			//create table row with detail metadata
 			var row = Alloy.createController('serviceProviderRow', params).getView();	
 			
-			//TODO: re-work this as part of VCTMSVCS-123
 			//if provider has a crisis number, add it to crisis line table	
-			/*if(provider.crisisNumber){
+			if(provider.crisisNumber){
 				crisisHeaders.push(Alloy.createController('serviceProviderRow', {
 					orgName:provider.name,
 					crisis: provider.crisisNumber
 				}).getView());
-			}*/
-			
+			}
+			Ti.API.info("provider cats: " + provider.categories);
 			//iterate through all of the categories that service provider specializes in
 			_.each(provider.categories, function(category){
+				Ti.API.info("prov. cat: " + category);
 				//iterate through list of table headers and add service provider to header if category matches
-				_.find(categoryDictionary, function(categoryDict){
-					if(categoryDict.id === category){
-						if(sections[categoryDict.id] == null){
-							sections[categoryDict.id] = Ti.UI.createTableViewSection({
-								title:categoryDict.id.id, 
-								headerView: Alloy.createController('TableViewHeader', {text:categoryDict.name}).getView()
-							});
-						}
-						sections[categoryDict.id].add(row);
-						return true;
-					}
-				});
-				//TODO: re-work this as part of VCTMSVCS-123
-				/*_.find(allHeaders, function(header){
-					if(header.title === category){
-						header.add(row);
-						return true;
-					}
-				});	*/
+				if(args.providerType === "general"){
+					addRowToDefinedSections(category, row);
+				}
+				else{
+					addRowToDynamicSections(sections, category, row);
+				}
+
 			});
 		});
 		var keys = Object.keys(sections);
-		var myHeaders = keys.map(function(v){return sections[v];});
+		var myHeaders = allHeaders.length > 0 ?  allHeaders : keys.map(function(v){return sections[v];});
 		originalMapAnnotations = $.map.annotations; //store original map points
 		//hide spinners
 		$.activityIndicator.hide();
@@ -151,7 +149,34 @@ function parseResponse(){
 		$.providerList.visible = true;
 		//set table data
 		$.providerList.setData(myHeaders);
+		if(crisisMenu){
+			crisisMenu.setData(crisisHeaders);
+		}
 	}
+}
+
+function addRowToDynamicSections(sections, category, row){
+	_.find(categoryDictionary, function(categoryDict){
+		if(categoryDict.id === category){
+			if(sections[categoryDict.id] == null){
+				sections[categoryDict.id] = Ti.UI.createTableViewSection({
+					title:categoryDict.id, 
+					headerView: Alloy.createController('TableViewHeader', {text:categoryDict.name}).getView()
+				});
+			}
+			sections[categoryDict.id].add(row);
+			return true;
+		}
+	});
+}
+
+function addRowToDefinedSections(category, row){
+	_.find(allHeaders, function(header){
+		if(header.title === category){
+			header.add(row);
+			return true;
+		}
+	});
 }
 
 /**
@@ -233,6 +258,14 @@ exports.getMapViews = function(){
  */
 exports.getListView = function(){
 	return $.providerList;
+};
+
+exports.setCrisisMenu = function(inCrisisMenu){
+	crisisMenu = inCrisisMenu;
+};
+
+exports.setCategories = function(categories){
+	args.categories = categories;
 };
 
 /**

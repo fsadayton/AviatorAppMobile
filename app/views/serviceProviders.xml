@@ -2,28 +2,8 @@
 	<TabGroup id="tabGroup" onOpen="Alloy.Globals.updateActionBar">
 		<Tab title="NEARBY">
 			<Window id="win">
-				<ActivityIndicator id="activityIndicator"/>
-				<View id="listView">
-					<Label id="noResults" zIndex=1 visible=false>No results.</Label>
-					<TableView id="providerList" class="menu" onClick="providerDetail" visible=true filterAttribute="title" />
-				</View>
-				<View id="mapModule" height="90%" visible=false top=0>
-					<Module id="map" module="ti.map" onClick="mapClick"/>
-				</View>
-				<View id="buttonBar">
-					<View id="listButton" class="buttonBarAction" left="0" visible=false onClick="toggleMapListView">
-						<ImageView id="listImage" class="buttonBarImage" image="/global/list256.png"/>
-						<Label id="listImage" class="buttonBarLabel">LIST</Label>
-					</View>
-					<View id="mapButton" class="buttonBarAction" left="0" onClick="toggleMapListView" visible=true>
-						<ImageView id="mapImage" class="buttonBarImage" image="/global/map256.png"/>
-						<Label id="mapLabel" class="buttonBarLabel">MAP</Label>
-					</View>
-					<View id="filterButton" class="buttonBarAction" right="0" onClick="filterResults">
-						<ImageView id="mapImage" class="buttonBarImage" image="/global/filter256.png"/>
-						<Label id="mapLabel" class="buttonBarLabel">FILTER</Label>
-					</View>
-				</View>
+				<Require id="providerList" src="serviceProviderListView" providerType="general"/>
+				<Require id="providerButtonBar" src="serviceProviderButtonBar" />
 			</Window>
 		</Tab>
 		<Tab title="QUICK CALL">
