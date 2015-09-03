@@ -153,6 +153,13 @@ function parseResponse(){
 	}
 }
 
+/**
+ * Function that either creates table header if it does not exist or retrieves
+ * the table header and adds a table row to that header.
+ * sections - dictionary of current table header objects
+ * category - the current table header being retreived/created
+ * row - the table row being added to the table header object
+ */
 function addRowToDynamicSections(sections, category, row){
 	_.find(categoryDictionary, function(categoryDict){
 		if(categoryDict.id === category){
@@ -168,6 +175,12 @@ function addRowToDynamicSections(sections, category, row){
 	});
 }
 
+/**
+ * Function that finds a header from a list of pre-defined table headers and adds
+ * a table row to that header. 
+ * category - the current table header being retrieved
+ * row - the table row being added to the table header object
+ */
 function addRowToDefinedSections(category, row){
 	_.find(allHeaders, function(header){
 		if(header.title === category){
