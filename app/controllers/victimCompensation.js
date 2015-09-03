@@ -6,3 +6,10 @@ if(Alloy.Globals.isAndroid){
 }
 
 $.providerButtonBar.setProviderListObject($.providerList);
+
+/**
+ * Reset menu options to prevent java exception.
+ */
+function close(){
+	providerSearch.nullifyAndroidMenu();
+}

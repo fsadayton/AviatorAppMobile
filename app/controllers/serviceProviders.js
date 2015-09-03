@@ -18,11 +18,21 @@ function callPhoneNumber(e){
     Ti.Platform.openURL('tel:' + cleanNumber);
 }
 
+/**
+ * When tab changes, change the table with which the search function is associated. 
+ */
 $.tabGroup.addEventListener("focus", function(e) {
 	if($.tabGroup.activeTab.title === "NEARBY" && $.providerList.getListView().search != null){
-		providerSearch.changeActionView($.providerList.getListView().search);
+		providerSearch.changeSearchActionView($.providerList.getListView().search);
 	}
 	else if($.tabGroup.activeTab.title === "QUICK CALL"){
-		providerSearch.changeActionView($.crisisMenu.search);
+		providerSearch.changeSearchActionView($.crisisMenu.search);
 	}
 });
+
+/**
+ * Reset menu options to prevent java exception.
+ */
+function close(){
+	providerSearch.nullifyAndroidMenu();
+}

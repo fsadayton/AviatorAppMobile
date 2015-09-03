@@ -10,6 +10,7 @@ var filteredCounties;
 var originalMapAnnotations;
 
 var crisisMenu;
+var categorySubset;
 
 $.activityIndicator.show();
 
@@ -37,8 +38,7 @@ function storeCategoryLookup(){
 	profileBasics.fetch();
 	
 	if(args.providerType != null){
-		var categories = args.categories ? args.categories : null;
-		Ti.API.info("Cats: " + categories);
+		var categories = categorySubset ? categorySubset : null;
 		categoryNames = getTableData(categories, [profileBasics.get('countyId')]);
 	}
 }
@@ -71,7 +71,6 @@ function getTableData(categories, counties){
 		
 		//iterate through list of all categories to create list of defined headers
 		_.each(categoryDictionary, function(category){
-			Ti.API.info("category: " + category);
 			if (_.contains(categories, category.id)){
 				filteredCategories.push(category); //store list of currently selected categories, pass to filter when necessary
 				//store list of table headers
@@ -126,10 +125,8 @@ function parseResponse(){
 					crisis: provider.crisisNumber
 				}).getView());
 			}
-			Ti.API.info("provider cats: " + provider.categories);
 			//iterate through all of the categories that service provider specializes in
 			_.each(provider.categories, function(category){
-				Ti.API.info("prov. cat: " + category);
 				//iterate through list of table headers and add service provider to header if category matches
 				if(args.providerType === "general"){
 					addRowToDefinedSections(category, row);
@@ -147,6 +144,7 @@ function parseResponse(){
 		$.activityIndicator.hide();
 		//make tables visible
 		$.providerList.visible = true;
+		
 		//set table data
 		$.providerList.setData(myHeaders);
 		if(crisisMenu){
@@ -260,16 +258,24 @@ exports.getListView = function(){
 	return $.providerList;
 };
 
-exports.setCrisisMenu = function(inCrisisMenu){
-	crisisMenu = inCrisisMenu;
-};
-
-exports.setCategories = function(categories){
-	args.categories = categories;
+/**
+ * Sets crisis menu which is to be used if service providers have crisis phone numbers
+ */
+exports.setCrisisMenu = function(crisisMenuObj){
+	crisisMenu = crisisMenuObj;
 };
 
 /**
- * Timeout function used for searching and setting the map annotations when searching
+ * Sets subset of categories to appear in list view. Used when narrowing down
+ * service providers from a selected family (e.g., health, food, safety, etc.) 
+ */
+exports.setCategories = function(categories){
+	categorySubset = categories;
+};
+
+/**
+ * Timeout function used for searching and setting the map annotations when typing
+ * in search bar
  */
 var timeout = null;
 exports.searchTimeout = function(e){
