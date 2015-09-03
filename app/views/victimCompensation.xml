@@ -1,5 +1,5 @@
 <Alloy>
-	<Window class="container" id="win" onOpen="Alloy.Globals.updateActionBar">
+	<Window class="container" id="win" onOpen="Alloy.Globals.updateActionBar" onClose="close">
 		<Require id="providerList" src="serviceProviderListView" providerType="compensation"/>
 		<Require id="providerButtonBar" src="serviceProviderButtonBar" />
 	</Window>

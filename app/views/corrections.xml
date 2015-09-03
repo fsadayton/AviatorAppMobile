@@ -1,5 +1,5 @@
 <Alloy>		
-	<TabGroup id="tabGroup" onOpen="Alloy.Globals.updateActionBar">
+	<TabGroup id="tabGroup" onOpen="Alloy.Globals.updateActionBar" onClose="close">
 		<Tab title="LOCAL LAW">
 			<Window class="container" id="win">
 				<Require id="providerList" src="serviceProviderListView" providerType="corrections"/>
