@@ -1,0 +1,6 @@
+<Alloy>
+	<Window class="container" id="win" onOpen="Alloy.Globals.updateActionBar">
+		<TableView id="generalTable" class="menu" onClick="listProviders">
+		</TableView>
+	</Window>
+</Alloy>

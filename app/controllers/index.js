@@ -31,10 +31,10 @@ function openCrisisLines(){
 }
 
 /**
- * Function that opens the veteran services view.
+ * Function that opens the specialized services view.
  */
-function openVeteranServices(){
-	Alloy.createController('veteranServices').getView().open();
+function openSpecialServices(){
+	Alloy.createController('specializedServicesMenu').getView().open();
 }
 
 /**
