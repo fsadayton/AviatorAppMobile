@@ -62,6 +62,10 @@ function getTableData(categories, counties){
 	filteredCategories = [];
 	filteredCounties = counties; //list of selected counties
 	
+	if(args.providerType != "general"){
+		categoryNames = [];
+	}
+	
 	//define apiUrl
 	var apiUrl = httpCall + "?counties="+counties.join("&counties=");
 	
@@ -164,6 +168,7 @@ function addRowToDynamicSections(sections, category, row){
 	_.find(categoryDictionary, function(categoryDict){
 		if(categoryDict.id === category){
 			if(sections[categoryDict.id] == null){
+				categoryNames.push(categoryDict);
 				sections[categoryDict.id] = Ti.UI.createTableViewSection({
 					title:categoryDict.id, 
 					headerView: Alloy.createController('TableViewHeader', {text:categoryDict.name}).getView()
