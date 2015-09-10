@@ -106,7 +106,6 @@ function parseResponse(){
 		$.noResults.visible = true;
 	}
 	else{
-		
 		var sections = {};
 		var crisisHeaders = []; //reset list of crisis numbers
 		//iterate through list of providers in JSON
