@@ -5,9 +5,9 @@ var tableSection = Ti.UI.createTableViewSection({headerView: Alloy.createControl
 //create veterans row
 //TODO: Create and use API call for getting specialty groups
 tableSection.add(Alloy.createController('providerCategoryRow',{
-			text: "Veterans", 
-			info: "View services that are dedicated to serving veterans, military personnel, and their families."
-		}).getView());
+	text: "Veterans", 
+	info: "View services that are dedicated to serving veterans, military personnel, and their families."
+}).getView());
 		
 $.generalTable.setData([tableSection]);
 
