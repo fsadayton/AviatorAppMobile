@@ -10,7 +10,7 @@ _.each(args.categories, function(category){
 	
 	//if category exists in currently selected categories, mark category as being selected
 	if(args.categories.length != args.currentCategories.length 
-		&& _.find(args.currentCategories, function(cat){return cat.id == category.id;})){
+		&& _.find(args.currentCategories, function(cat){return cat.id === category.id;})){
 		params.isSelected = true;
 	}
 	//add bubble picker
