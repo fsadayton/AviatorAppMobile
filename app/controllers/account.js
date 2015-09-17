@@ -114,10 +114,17 @@ function updateProfilePic(){
  * Function for retrieving counties and creating popup for searching counties.
  */
 function pickCounty(e){
-	var plzWait = Alloy.createController("pleaseWait").getView();
-	plzWait.open();
+	var plzWait = null;
+	if(countySelector.isCountiesNull()){
+		plzWait = Alloy.createController("pleaseWait").getView();
+		plzWait.open();
+	}
+	
 	countySelector.getCounties(function(counties){
-		plzWait.close();
+		if(plzWait){
+			plzWait.close();
+		}
+		
 		createPopup(counties);
 	});
 	
@@ -130,7 +137,6 @@ function pickCounty(e){
 			header: "COUNTIES",
 			updateElement: $.county
 		}).getView().open();
-		plzWait.close();
 	}
 	
 }

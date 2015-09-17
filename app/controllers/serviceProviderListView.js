@@ -61,8 +61,8 @@ function getTableData(categories, counties){
 	
 	if(filteredCounties == null || (filteredCounties != null && (filteredCounties.length != counties.length) 
 		|| _.difference(filteredCounties, counties).length > 0)){
-		Ti.API.info("hit the API");
-			//reset table headers and filtered counties
+		
+		//reset table headers and filtered counties
 		allHeaders = [];
 		filteredCategories = [];
 		filteredCounties = counties; //list of selected counties
@@ -107,19 +107,22 @@ function getTableData(categories, counties){
 	return filteredCategories;
 }
 
+/**
+ * Function that only shows list of service providers associated with given categories.
+ */
 function filterCategories(categories){
 	var localFilter = [];
-		filteredCategories = [];
-		_.each(categories, function(category){
-			filteredCategories.push({id:category});
-			var index = _.find(allHeaders, function(header){
-				return header.title === category;	
-			});
-			localFilter.push(index);
-			$.providerList.setData(localFilter);
-			$.providerList.visible = true;
-			$.activityIndicator.hide();
+	filteredCategories = [];
+	_.each(categories, function(category){
+		filteredCategories.push({id:category});
+		var index = _.find(allHeaders, function(header){
+			return header.title === category;	
 		});
+		localFilter.push(index);
+		$.providerList.setData(localFilter);
+		$.providerList.visible = true;
+		$.activityIndicator.hide();
+	});
 }
 
 /**
@@ -182,7 +185,6 @@ function parseResponse(){
 		
 		//set table data
 		if(cats == null){
-			Ti.API.info("CATS NULL");
 			$.providerList.setData(allHeaders);
 		}
 		else{
