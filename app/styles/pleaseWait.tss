@@ -1,0 +1,9 @@
+
+"Window" : {
+  height:"40%",
+  width:"80%",
+  modal:true,
+  borderRadius:10,
+  borderColor:"#65c8c7",
+  borderWidth: 2
+}

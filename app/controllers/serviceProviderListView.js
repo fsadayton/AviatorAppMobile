@@ -81,7 +81,6 @@ function getTableData(categories, counties){
 				cats = categories;
 			}
 			
-			Ti.API.info("url: " + apiUrl);
 			//iterate through list of all categories to create list of defined headers
 			_.each(categoryDictionary, function(category){
 				if (_.contains(currentCategories, category.id)){
@@ -167,7 +166,6 @@ function parseResponse(){
 					addRowToDefinedSections(category, row);
 				}
 				else{
-					Ti.API.info("provider: " + provider.name);
 					addRowToDynamicSections(sections, category, row);
 				}
 

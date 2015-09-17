@@ -1,0 +1,5 @@
+<Alloy>
+	<Window class="gradient">
+		<ActivityIndicator id="activityIndicator" message="Please Wait..."/>
+	</Window>
+</Alloy>
