@@ -114,8 +114,17 @@ function updateProfilePic(){
  * Function for retrieving counties and creating popup for searching counties.
  */
 function pickCounty(e){
+	var plzWait = null;
+	if(countySelector.isCountiesNull()){
+		plzWait = Alloy.createController("pleaseWait").getView();
+		plzWait.open();
+	}
 	
 	countySelector.getCounties(function(counties){
+		if(plzWait){
+			plzWait.close();
+		}
+		
 		createPopup(counties);
 	});
 	

@@ -41,7 +41,15 @@ function toggleMapListView(){
  * window and opens it. 
  */
 function filterResults(){
+	var plzWait = null;
+	if(countySelector.isCountiesNull()){
+		plzWait = Alloy.createController("pleaseWait").getView();
+		plzWait.open();
+	}
 	countySelector.getCounties(function(counties){
+		if(plzWait){
+			plzWait.close();
+		}
 		createFilter(counties);
 	});
 	

@@ -33,4 +33,8 @@ exports.getCounties = function(callback){
 	}
 };
 
+exports.isCountiesNull = function(){
+	return _counties === null;
+};
+
 exports.selectable = _selectable;

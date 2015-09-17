@@ -12,6 +12,8 @@ var originalMapAnnotations;
 var crisisMenu;
 var categorySubset;
 
+var cats;
+
 $.activityIndicator.show();
 
 /**
@@ -57,39 +59,70 @@ function getTableData(categories, counties){
 	$.noResults.visible = false;
 	$.activityIndicator.show();
 	
-	//reset table headers and filtered counties
-	allHeaders = [];
-	filteredCategories = [];
-	filteredCounties = counties; //list of selected counties
-	
-	if(args.providerType != "general"){
-		categoryNames = [];
-	}
-	
-	//define apiUrl
-	var apiUrl = httpCall + "?counties="+counties.join("&counties=");
-	
-	if(categories){
-		//add categories to apiUrl
-		apiUrl += "&categories=" + categories.join("&categories=");
+	if(filteredCounties == null || (filteredCounties != null && (filteredCounties.length != counties.length) 
+		|| _.difference(filteredCounties, counties).length > 0)){
 		
-		//iterate through list of all categories to create list of defined headers
-		_.each(categoryDictionary, function(category){
-			if (_.contains(categories, category.id)){
-				filteredCategories.push(category); //store list of currently selected categories, pass to filter when necessary
-				//store list of table headers
-				allHeaders.push(Ti.UI.createTableViewSection({
-					title:category.id, 
-					headerView: Alloy.createController('TableViewHeader', {text:category.name}).getView()
-				}));
+		//reset table headers and filtered counties
+		allHeaders = [];
+		filteredCategories = [];
+		filteredCounties = counties; //list of selected counties
+		
+		if(args.providerType != "general"){
+			categoryNames = [];
+		}
+		
+		var apiUrl = httpCall + "?counties="+counties.join("&counties=");
+		if(categories && args.providerType === "general"){
+			//add categories to apiUrl
+			var currentCategories = categorySubset ? categorySubset : categories;
+			apiUrl += "&categories=" + currentCategories.join("&categories=");
+			
+			if(_.difference(categorySubset, categories).length > 0){
+				cats = categories;
 			}
-		});
-	}
+			
+			//iterate through list of all categories to create list of defined headers
+			_.each(categoryDictionary, function(category){
+				if (_.contains(currentCategories, category.id)){
+					filteredCategories.push(category); //store list of currently selected categories, pass to filter when necessary
+					//store list of table headers
+					allHeaders.push(Ti.UI.createTableViewSection({
+						title:category.id, 
+						headerView: Alloy.createController('TableViewHeader', {text:category.name}).getView()
+					}));
+				}
+			});
+		}
+		else if(categories && args.providerType != "general"){
+			cats = categories;
+		}
 	
-	//send request to get all service providers that provide services for counties and categories
-	Alloy.Globals.sendHttpRequest(apiUrl, "GET", null, parseResponse);
+		//send request to get all service providers that provide services for counties and categories
+		Alloy.Globals.sendHttpRequest(apiUrl, "GET", null, parseResponse);
+	}
+	else{
+		filterCategories(categories);
+	}
 	
 	return filteredCategories;
+}
+
+/**
+ * Function that only shows list of service providers associated with given categories.
+ */
+function filterCategories(categories){
+	var localFilter = [];
+	filteredCategories = [];
+	_.each(categories, function(category){
+		filteredCategories.push({id:category});
+		var index = _.find(allHeaders, function(header){
+			return header.title === category;	
+		});
+		localFilter.push(index);
+		$.providerList.setData(localFilter);
+		$.providerList.visible = true;
+		$.activityIndicator.hide();
+	});
 }
 
 /**
@@ -142,7 +175,8 @@ function parseResponse(){
 			});
 		});
 		var keys = Object.keys(sections);
-		var myHeaders = allHeaders.length > 0 ?  allHeaders : keys.map(function(v){return sections[v];});
+		allHeaders = allHeaders.length > 0 ?  allHeaders : keys.map(function(v){return sections[v];});
+		
 		originalMapAnnotations = $.map.annotations; //store original map points
 		//hide spinners
 		$.activityIndicator.hide();
@@ -150,7 +184,13 @@ function parseResponse(){
 		$.providerList.visible = true;
 		
 		//set table data
-		$.providerList.setData(myHeaders);
+		if(cats == null){
+			$.providerList.setData(allHeaders);
+		}
+		else{
+			filterCategories(cats);
+		}
+		
 		if(crisisMenu){
 			crisisMenu.setData(crisisHeaders);
 		}
