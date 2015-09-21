@@ -50,7 +50,6 @@ if(!Ti.App.Properties.getBool("hasAgreedToConditions", false)){
 else{
 	$.index.open();
 	alert("If this is an emergency, close the app and dial 911.");
-
 }
 
 Alloy.Globals.addActionBarButtons($.index);

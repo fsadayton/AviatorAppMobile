@@ -6,7 +6,7 @@
 				<Require id="providerButtonBar" src="serviceProviderButtonBar" />
 			</Window>
 		</Tab>
-		<Tab title="VINE">
+		<Tab title="VINE" icon="/tabs/vine.png">
 			<Require src="providerDetail" 
 				description="VINE allows crime victims to obtain timely and reliable information about criminal cases and the custody status of offenders 24 hours a day."
 				website="https://www.vinelink.com/"

@@ -38,7 +38,8 @@ if(!args.hasApp){
 /**
  * Add sharing and tagging capabilities to menu bar
  */
-Alloy.Globals.addActionBarButtons($.win, [{
+if(Alloy.Globals.isAndroid){
+	Alloy.Globals.addActionBarButtons($.win, [{
 		params:{
 			title:"Share with Friends",
 			icon: "/global/share256.png",
@@ -110,6 +111,8 @@ Alloy.Globals.addActionBarButtons($.win, [{
 		}
 	}
 );
+}
+
 
 /**
  * Function for calculating directions between current location and

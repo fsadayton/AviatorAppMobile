@@ -1,12 +1,12 @@
 <Alloy>
 	<TabGroup id="tabGroup" onOpen="Alloy.Globals.updateActionBar" onClose="close">
-		<Tab title="NEARBY">
+		<Tab title="NEARBY" icon="/tabs/building78.png">
 			<Window id="win">
 				<Require id="providerList" src="serviceProviderListView" providerType="general"/>
 				<Require id="providerButtonBar" src="serviceProviderButtonBar" />
 			</Window>
 		</Tab>
-		<Tab title="QUICK CALL">
+		<Tab title="QUICK CALL" icon="/tabs/quickcall.png">
 			<Window id="win">
 			<ActivityIndicator id="quickActivityIndicator"/>
 			<Label id="quickNoResults" zIndex=1 visible=false>No results.</Label>

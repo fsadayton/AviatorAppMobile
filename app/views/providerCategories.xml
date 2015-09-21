@@ -1,19 +1,18 @@
 <Alloy>
-	<TabGroup id="tabGroup" onOpen="Alloy.Globals.updateActionBar">
-		<Tab title="GENERAL">
+	<TabGroup id="tabGroup" onOpen="Alloy.Globals.updateActionBar" activeTabIconTint="#65c8c7">
+		<Tab title="GENERAL" icon="/tabs/home63.png">
 			<Window class="container" id="win">
 				<ActivityIndicator id="generalIndicator"/>
 				<TableView id="generalTable" class="menu" onClick="listProviders">
 				</TableView>
 			</Window>
 		</Tab>
-		<Tab title="CRIME">
+		<Tab title="CRIME" icon="/tabs/criminal.png" >
 			<Window class="container" id="win">
 				<ActivityIndicator id="crimeIndicator"/>
 				<TableView id="crimeTable" class="menu" onClick="listProviders">
 				</TableView>
 			</Window>
-			
 		</Tab>
 	</TabGroup>
 	

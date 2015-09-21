@@ -112,17 +112,25 @@ function getTableData(categories, counties){
  */
 function filterCategories(categories){
 	var localFilter = [];
+	var localMap = [];
 	filteredCategories = [];
 	_.each(categories, function(category){
 		filteredCategories.push({id:category});
-		var index = _.find(allHeaders, function(header){
+		var header = _.find(allHeaders, function(header){
 			return header.title === category;	
 		});
-		localFilter.push(index);
-		$.providerList.setData(localFilter);
-		$.providerList.visible = true;
-		$.activityIndicator.hide();
+		localFilter.push(header);
 	});
+	$.providerList.setData(localFilter);
+	$.providerList.visible = true;
+	$.activityIndicator.hide();
+	
+	/*var filteredAnnotations = _.filter(originalMapAnnotations, 
+     				function(annotation){
+     					return annotation.title.toLowerCase().indexOf(e.source.value.toLowerCase()) > -1;
+     				}
+     			);
+     		$.map.setAnnotations(filteredAnnotations);*/
 }
 
 /**

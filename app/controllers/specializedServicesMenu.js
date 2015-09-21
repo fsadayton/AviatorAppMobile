@@ -1,4 +1,6 @@
 var args = arguments[0] || {};
+//initialize actions
+Alloy.Globals.addActionBarButtons($.win);
 
 var tableSection = Ti.UI.createTableViewSection({headerView: Alloy.createController('TableViewHeader', {text:"Select a Specialty Group"}).getView()});
 

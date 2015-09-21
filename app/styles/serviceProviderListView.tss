@@ -9,3 +9,8 @@
 	height:"90%",
 	top:0
 }
+
+"#map":{
+	mapType: Alloy.Globals.Map.NORMAL_TYPE,
+	userLocation: true
+}

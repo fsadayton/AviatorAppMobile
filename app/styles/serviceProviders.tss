@@ -61,10 +61,4 @@
 }
 
 
-"#map":{
-	mapType: Alloy.Globals.Map.NORMAL_TYPE,
-	userLocation: true
-}
-
-
 

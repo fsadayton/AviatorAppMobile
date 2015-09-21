@@ -30,42 +30,44 @@ Alloy.Collections.favorites.fetch();
 Alloy.Models.profileBasics.fetch();
 
 Alloy.Globals.addActionBarButtons = function(window, additionalButtons, callback){
-    window.activity.onCreateOptionsMenu = function(e) { 
-	    var menu = e.menu; 
-	    var menuItem = menu.add({ 
-	    	title:"Hide App",
-	        icon : "images/blind2.png", 
-	        showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
-	    }); 
-	    
-	    menuItem.addEventListener("click", function(e) { 
-	    	//ensure that website url contains 'http'
-	    	var website = Alloy.Models.profileBasics.get('website');
-	    	if(website.indexOf('http://') > -1 || website.indexOf('https://') > -1){
-	    		Ti.Platform.openURL(website);
-	    	}
-	    	else{
-	    		Ti.Platform.openURL("http://" + website);
-	    	}
-	    });
-	     
-	   	var help = menu.add({
-	    	title:"Notify trusted contacts to help you",
-	        icon : "images/add126.png", 
-	        showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
-	    });
-	    
-	    help.addEventListener("click", sendTextMessage);
-	    
-	    if(additionalButtons){
-	    	_.each(additionalButtons, function(button){
-	    		menu.add(button.params);
-	    	});
-	    }
-	    if (typeof callback === 'function'){
-	    	callback(menu);
-	    }
-    };
+	if(Alloy.Globals.isAndroid){
+	    window.activity.onCreateOptionsMenu = function(e) { 
+		    var menu = e.menu; 
+		    var menuItem = menu.add({ 
+		    	title:"Hide App",
+		        icon : "images/blind2.png", 
+		        showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
+		    }); 
+		    
+		    menuItem.addEventListener("click", function(e) { 
+		    	//ensure that website url contains 'http'
+		    	var website = Alloy.Models.profileBasics.get('website');
+		    	if(website.indexOf('http://') > -1 || website.indexOf('https://') > -1){
+		    		Ti.Platform.openURL(website);
+		    	}
+		    	else{
+		    		Ti.Platform.openURL("http://" + website);
+		    	}
+		    });
+		     
+		   	var help = menu.add({
+		    	title:"Notify trusted contacts to help you",
+		        icon : "images/add126.png", 
+		        showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
+		    });
+		    
+		    help.addEventListener("click", sendTextMessage);
+		    
+		    if(additionalButtons){
+		    	_.each(additionalButtons, function(button){
+		    		menu.add(button.params);
+		    	});
+		    }
+		    if (typeof callback === 'function'){
+		    	callback(menu);
+		    }
+	    };
+	}
 };
 
 /**
@@ -142,9 +144,11 @@ Alloy.Globals.createNotificationPopup = function(message){
  * Sets the background color and font of the android action bar
  */
 Alloy.Globals.updateActionBar = function(){
-	var abx = require('com.alcoapps.actionbarextras');
-	abx.titleFont = "Quicksand-Regular.otf";
-	abx.setBackgroundColor("#65c8c7");
+	if (Alloy.Globals.isAndroid){
+		var abx = require('com.alcoapps.actionbarextras');
+		abx.titleFont = "Quicksand-Regular.otf";
+		abx.setBackgroundColor("#65c8c7");
+	}
 };
 
 /**
