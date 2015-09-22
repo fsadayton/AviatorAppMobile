@@ -40,4 +40,8 @@ function listProviders(e){
 	Alloy.createController('serviceProviders', {categories:e.row.categories}).getView().open();
 }
 
+function closeWindow(){
+	$.tabGroup.close({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT});
+}
+
 Alloy.Globals.addActionBarButtons($.tabGroup);

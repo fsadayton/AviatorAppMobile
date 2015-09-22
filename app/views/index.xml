@@ -1,5 +1,5 @@
 <Alloy>
-	<Window class="container" layout="vertical" onOpen="Alloy.Globals.updateActionBar">
+	<Window class="container" title="AVIATOR" layout="vertical" onOpen="Alloy.Globals.updateActionBar">
 		<View class="divider"/>
 		<Label id="welcomeLabel">Welcome to AVIATOR - an initiative of Family Services • Dayton, Ohio</Label>
 		
