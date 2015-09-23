@@ -59,7 +59,7 @@
 	font:{
 		fontFamily: "Quicksand-Bold"
 	},
-	color:"#65c8c7"
+	color:"#009579"
 }
 
 "#buttonBar":{

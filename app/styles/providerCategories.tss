@@ -1,18 +1,9 @@
 ".container": {
-	backgroundColor:"#fff",
-	title: "AVIATOR",
-	barColor: "#65c8c7",
-	titleAttributes:{
-		font: {
-        	fontFamily:"Quicksand-Regular",
-        	fontSize: '25dp'
-      },
-      color:"#fff"
-    }
+	backgroundColor:"#fff"
 }
 
 ".menu":{
-	separatorColor: "#65c8c7",
+	separatorColor: "#009579"
 }
 
 

@@ -1,14 +1,8 @@
 <Alloy>
-	<TabGroup id="tabGroup" onOpen="Alloy.Globals.updateActionBar" activeTabIconTint="#65c8c7" title="AVIATOR">
+	<TabGroup id="tabGroup" onOpen="Alloy.Globals.updateActionBar">
 		<Tab title="GENERAL" icon="/tabs/home63.png">
 			<Window class="container" id="win">
-				<LeftNavButton platform="ios">
-					<Button backgroundImage="left224.png" onClick="closeWindow" />
-				</LeftNavButton>
-				<RightNavButtons width="50%">
-					<Button backgroundImage="/global/add126.png" right="5dp"/>
-					<Button backgroundImage="/global/blind2.png" left="50%"/>
-				</RightNavButtons>
+				<Require id="iosNavGeneral" src="iosNavigation" platform="ios"/>
 				<ActivityIndicator id="generalIndicator"/>
 				<TableView id="generalTable" class="menu" onClick="listProviders">
 				</TableView>
@@ -16,6 +10,7 @@
 		</Tab>
 		<Tab title="CRIME" icon="/tabs/criminal.png" >
 			<Window class="container" id="win">
+				<Require id="iosNavCrime" src="iosNavigation" platform="ios"/>
 				<ActivityIndicator id="crimeIndicator"/>
 				<TableView id="crimeTable" class="menu" onClick="listProviders">
 				</TableView>

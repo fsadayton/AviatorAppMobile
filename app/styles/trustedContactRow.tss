@@ -11,7 +11,7 @@
 		fontFamily:"Quicksand-Bold",
 		fontSize:"17dp"
 	},
-	color:"#65c8c7"
+	color:"#009579"
 }
 
 "#contactNumber":{

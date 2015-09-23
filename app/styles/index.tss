@@ -18,7 +18,7 @@
 ".box":{
 	borderRadius: 10,
 	borderWidth: 2,
-	borderColor: "#65c8c7",
+	borderColor: "#009579",
 	height: "90%",
 	width: "45%",
 	layout:"vertical"

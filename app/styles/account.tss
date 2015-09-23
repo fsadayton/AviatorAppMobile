@@ -14,13 +14,13 @@
 		fontFamily:"Quicksand-Bold",
 		fontSize:"25dp"
 	},
-	color:"#65c8c7",
+	color:"#009579",
 	textAlign: "center",
 	left:"5dp"
 }
 
 ".headerLabel":{
-	color:"#65c8c7",
+	color:"#009579",
 	height:"15dp",
 	top:"10dp"
 }
@@ -38,7 +38,7 @@
 	width: "70%",
 	height:"42dp",
 	borderRadius: 20,
-	borderColor: "#65c8c7",
+	borderColor: "#009579",
 	borderWidth: 2,
 	layout: "horizontal",
 	top: "5dp"
@@ -55,7 +55,7 @@
 	width: "33.3%",
 	backgroundColor: "#fff",
 	zIndex: 1,
-	borderColor: "#65c8c7",
+	borderColor: "#009579",
 	borderWidth: 1
 }
 

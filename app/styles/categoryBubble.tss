@@ -2,7 +2,7 @@
 	color:"#666",
 	borderRadius:20,
   	borderWidth: 2,
-  	borderColor: "#65c8c7",
+  	borderColor: "#009579",
   	height:"45dp",
   	left: "3dp",
   	right: "3dp",

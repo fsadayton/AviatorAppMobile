@@ -1,6 +1,6 @@
 
 "#sectionHeader" : {
-  backgroundColor:'#939393',
+  backgroundColor:'#D5D5D5',
   width:Ti.UI.FILL,
   height:'40dp' 
 }
@@ -10,5 +10,5 @@
 		fontFamily:"Quicksand-Bold",
 		fontSize:'17dp'
 	},
-	color:"#fff"
+	color:"#3D3D3D"
 }

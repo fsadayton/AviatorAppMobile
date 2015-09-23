@@ -2,7 +2,7 @@
 	left: "0dp",
 	width: "100%",
 	backgroundColor: "#fff",
-	separatorColor: "#65c8c7",
+	separatorColor: "#009579",
 }
 
 "#providerList":{

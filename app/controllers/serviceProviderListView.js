@@ -16,6 +16,8 @@ var cats;
 
 $.activityIndicator.show();
 
+$.providerList.filterAttribute = Alloy.Globals.isAndroid ? "title" : "orgName";
+
 /**
  * Determine type of provider list view and set the API call accordingly
  */

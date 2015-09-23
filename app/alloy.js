@@ -147,7 +147,8 @@ Alloy.Globals.updateActionBar = function(){
 	if (Alloy.Globals.isAndroid){
 		var abx = require('com.alcoapps.actionbarextras');
 		abx.titleFont = "Quicksand-Regular.otf";
-		abx.setBackgroundColor("#65c8c7");
+		abx.setBackgroundColor("#009579");
+		 //65c8c7
 	}
 };
 

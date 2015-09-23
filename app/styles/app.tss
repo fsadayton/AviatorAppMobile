@@ -10,6 +10,17 @@
 	}
 }
 
+"TabGroup":{
+	activeTabIconTint:"#009579"
+}
+
+"Window[platform=ios]":{
+	barColor: "#009579",
+	titleAttributes:{
+		color:"#fff"
+    }
+}
+
 ".defaultRow":{
 	height: "70dp",
 	color: "#F69C22",
@@ -18,7 +29,7 @@
 
 ".divider":{
 	height: "10dp",
-	backgroundColor:"#f9c84d",
+	backgroundColor:"#203444",
 	top:0
 }
 
@@ -44,7 +55,7 @@
   width: "92%",
   background: "transparent",
   borderRadius: 10,
-  borderColor:"#f9c84d",
+  borderColor:"#009579",
   borderWidth: 2
 }
 

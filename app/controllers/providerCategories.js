@@ -1,6 +1,10 @@
 $.generalIndicator.show();
 $.crimeIndicator.show();
 
+if(!Alloy.Globals.isAndroid){
+	$.iosNavGeneral.setWindow($.tabGroup);
+	$.iosNavCrime.setWindow($.tabGroup);
+}
 var tableSection = Ti.UI.createTableViewSection({headerView: Alloy.createController('TableViewHeader', {text:"What can we help you with?"}).getView()});	
 var crimeTableSection = Ti.UI.createTableViewSection({headerView: Alloy.createController('TableViewHeader', {text:"What can we help you with?"}).getView()});
 
@@ -38,10 +42,6 @@ function parseCrimes(){
 
 function listProviders(e){
 	Alloy.createController('serviceProviders', {categories:e.row.categories}).getView().open();
-}
-
-function closeWindow(){
-	$.tabGroup.close({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT});
 }
 
 Alloy.Globals.addActionBarButtons($.tabGroup);

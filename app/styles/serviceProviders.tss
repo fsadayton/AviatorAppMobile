@@ -3,7 +3,7 @@
 	left: "0dp",
 	width: "100%",
 	backgroundColor: "#fff",
-	separatorColor: "#65c8c7",
+	separatorColor: "#009579",
 }
 
 "#providerList":{
@@ -18,7 +18,7 @@
 }
 
 ".buttonBarAction":{
-	backgroundColor:"#65c8c7",
+	backgroundColor:"#009579",
 	width:"49.7%",
 }
 
@@ -38,7 +38,7 @@
 
 "Tab":{
 	backgroundColor:"#fff",
-	color:"#65c8c7",
+	color:"#009579",
 	titleAttributes:{
 		font: {
         	fontFamily:"Quicksand-Regular",
