@@ -27,7 +27,7 @@
 	borderColor:"#7d7d7d",
 	borderRadius: 10,
 	font:{
-		fontFamily:"Quicksand-Regular"
+		fontFamily:"Dosis-Regular"
 	},
 	top:"10dp",
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER

@@ -1,12 +1,12 @@
 <Alloy>		
 	<TabGroup id="tabGroup" onOpen="Alloy.Globals.updateActionBar" onClose="close">
-		<Tab title="LOCAL LAW">
+		<Tab title="LOCAL LAW" icon="/tabs/justice4.png">
 			<Window class="container" id="win">
 				<Require id="providerList" src="serviceProviderListView" providerType="corrections"/>
 				<Require id="providerButtonBar" src="serviceProviderButtonBar" />
 			</Window>
 		</Tab>
-		<Tab title="VINE" icon="/tabs/vine.png">
+		<Tab icon="/tabs/vine.png">
 			<Require src="providerDetail" 
 				description="VINE allows crime victims to obtain timely and reliable information about criminal cases and the custody status of offenders 24 hours a day."
 				website="https://www.vinelink.com/"

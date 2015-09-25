@@ -13,7 +13,7 @@
 	width:"95%",
 	editable: false,
 	font:{
-		fontFamily:"Quicksand-Regular"
+		fontFamily:"Dosis-Regular"
 	},
 	color:"#000",
 	top:"45dp"
@@ -21,7 +21,7 @@
 
 "#conditions":{
 	font:{
-		fontFamily:"Quicksand-Bold",
+		fontFamily:"Dosis-Bold",
 		fontSize:"17dp"
 	},
 	width:"100%",
@@ -35,7 +35,7 @@
 "Button":{
 	backgroundColor:"#939393",
 	font:{
-		fontFamily:"Quicksand-Bold",
+		fontFamily:"Dosis-Bold",
 		fontSize:"15dp"
 	},
 	borderRadius:5,

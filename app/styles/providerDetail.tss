@@ -7,7 +7,7 @@
 "#providerName":{
 	backgroundColor:"#D5D5D5",
 	font:{
-		fontFamily:"Quicksand-Bold",
+		fontFamily:"Dosis-Bold",
 		fontSize: "20dp"
 	},
 	textAlign: "center",
@@ -16,7 +16,7 @@
 }
 
 "#providerDescription":{
-	borderColor:"#009579",
+	borderColor:"#009577",
 	borderRadius: 10,
 	borderWidth: 2,
 	color:"#666",
@@ -24,7 +24,7 @@
 	focusable: false,
 	height:"20%",
 	font:{
-		fontFamily:"Quicksand-Regular",
+		fontFamily:"Dosis-Regular",
 		fontSize: "15dp"
 	},
 	top:"10dp",
@@ -32,17 +32,17 @@
 }
 "#addressLabel":{
 	font:{
-		fontFamily:"Quicksand-Bold",
+		fontFamily:"Dosis-Bold",
 		fontSize: "15dp"
 	},
-	color:"#009579",
+	color:"#009577",
 	left:"10dp",
 	top:"15dp"
 }
 "#address":{
 	left:"10dp",
 	width:"50%",
-	color:"#203444"
+	color:"#143963"
 }
 "#addressView":{
 	height:"55dp"
@@ -73,7 +73,7 @@
 "#driveButton":{
 	right: "10dp",
 	font:{
-		fontFamily:"Quicksand-Light"
+		fontFamily:"Dosis-Light"
 	},
 	borderRadius:10
 }

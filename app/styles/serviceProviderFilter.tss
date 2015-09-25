@@ -57,9 +57,9 @@
 
 ".emph":{
 	font:{
-		fontFamily: "Quicksand-Bold"
+		fontFamily: "Dosis-Bold"
 	},
-	color:"#009579"
+	color:"#009577"
 }
 
 "#buttonBar":{
@@ -69,7 +69,7 @@
 
 "Button":{
 	font:{
-		fontFamily:"Quicksand-Bold"
+		fontFamily:"Dosis-Bold"
 	},
 	color:"#666",
 	borderColor:"#f9c84d",

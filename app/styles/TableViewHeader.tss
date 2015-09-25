@@ -7,7 +7,7 @@
 
 "#sectionLabel":{
 	font:{
-		fontFamily:"Quicksand-Bold",
+		fontFamily:"Dosis-Bold",
 		fontSize:'17dp'
 	},
 	color:"#3D3D3D"

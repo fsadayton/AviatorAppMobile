@@ -11,16 +11,16 @@
 
 "#name":{
 	font:{
-		fontFamily:"Quicksand-Bold",
+		fontFamily:"Dosis-Bold",
 		fontSize:"25dp"
 	},
-	color:"#009579",
+	color:"#009577",
 	textAlign: "center",
 	left:"5dp"
 }
 
 ".headerLabel":{
-	color:"#009579",
+	color:"#009577",
 	height:"15dp",
 	top:"10dp"
 }
@@ -38,7 +38,7 @@
 	width: "70%",
 	height:"42dp",
 	borderRadius: 20,
-	borderColor: "#009579",
+	borderColor: "#009577",
 	borderWidth: 2,
 	layout: "horizontal",
 	top: "5dp"
@@ -55,13 +55,13 @@
 	width: "33.3%",
 	backgroundColor: "#fff",
 	zIndex: 1,
-	borderColor: "#009579",
+	borderColor: "#009577",
 	borderWidth: 1
 }
 
 "TextField":{
 	font:{
-		fontFamily:"Quicksand-Bold"
+		fontFamily:"Dosis-Bold"
 	},
 	color:"#7d7d7d"
 }
@@ -80,7 +80,7 @@
 	borderColor: "#666",
 	font:{
 		fontSize:"15dp",
-		fontFamily:"Quicksand-Regular"
+		fontFamily:"Dosis-Regular"
 	},
 	height:"20%",
 	top:"5dp"

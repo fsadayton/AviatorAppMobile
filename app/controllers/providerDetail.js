@@ -5,6 +5,11 @@ var menu;
 //set provider name and description
 $.providerName.text = args.orgName;
 $.providerDescription.value = args.description;
+Ti.API.info("desc: " + JSON.stringify(args.description));
+
+if(!Alloy.Globals.isAndroid){
+	$.iosNav.setWindow($.navWin);
+}
 
 if(args.address){ //format address
 	var address = args.address.split(",");

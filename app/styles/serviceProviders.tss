@@ -3,7 +3,7 @@
 	left: "0dp",
 	width: "100%",
 	backgroundColor: "#fff",
-	separatorColor: "#009579",
+	separatorColor: "#009577",
 }
 
 "#providerList":{
@@ -18,7 +18,7 @@
 }
 
 ".buttonBarAction":{
-	backgroundColor:"#009579",
+	backgroundColor:"#009577",
 	width:"49.7%",
 }
 
@@ -31,17 +31,17 @@
 	color:"#fff",
 	left:"45%",
 	font:{
-		fontFamily:"Quicksand-Bold",
+		fontFamily:"Dosis-Bold",
 		fontSize:"17dp"
 	}
 }
 
 "Tab":{
 	backgroundColor:"#fff",
-	color:"#009579",
+	color:"#009577",
 	titleAttributes:{
 		font: {
-        	fontFamily:"Quicksand-Regular",
+        	fontFamily:"Dosis-Regular",
         	fontSize: '25dp'
       }
    }

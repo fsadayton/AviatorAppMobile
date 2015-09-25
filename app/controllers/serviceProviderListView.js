@@ -7,7 +7,7 @@ var httpCall;
 
 var filteredCategories;
 var filteredCounties;
-var originalMapAnnotations;
+var originalMapAnnotations = [];
 
 var crisisMenu;
 var categorySubset;
@@ -151,6 +151,7 @@ function parseResponse(){
 	else{
 		var sections = {};
 		var crisisHeaders = []; //reset list of crisis numbers
+		originalMapAnnotations = []; //TODO remove?
 		//iterate through list of providers in JSON
 		_.each(json, function(provider){
 			var params = {
@@ -187,7 +188,8 @@ function parseResponse(){
 		var keys = Object.keys(sections);
 		allHeaders = allHeaders.length > 0 ?  allHeaders : keys.map(function(v){return sections[v];});
 		
-		originalMapAnnotations = $.map.annotations; //store original map points
+		//originalMapAnnotations = $.map.annotations; //store original map points
+		
 		//hide spinners
 		$.activityIndicator.hide();
 		//make tables visible
@@ -272,6 +274,8 @@ function addProviderToMap(params){
 	            row: params
            });
            $.map.addAnnotation(annotation);
+           originalMapAnnotations.push(annotation);
+           
 	}
 }
 
@@ -341,30 +345,40 @@ exports.setCategories = function(categories){
 	categorySubset = categories;
 };
 
+if(!Alloy.Globals.isAndroid){
+	$.mapSearch.addEventListener('change', searchTimeout);
+}
 /**
  * Timeout function used for searching and setting the map annotations when typing
  * in search bar
  */
 var timeout = null;
-exports.searchTimeout = function(e){
+function searchTimeout(e){
 	if(timeout){
     	clearTimeout(timeout);//do not let previous timeouts run
     }
     //Using 1.2 second timeout to reduce amount of map redrawing.
     timeout = setTimeout(function() {
+    	Ti.API.info("RAWR: " + e.source.value);
     	if(e.source.value.length > 0){ //if search field contains a value
+    		
+    		Ti.API.info("in the if + orig map...: " + originalMapAnnotations);
      		//find map annotations whose title contains the search field value
      		var filteredAnnotations = _.filter(originalMapAnnotations, 
      				function(annotation){
+     					Ti.API.info("ann title" + annotation.title);
      					return annotation.title.toLowerCase().indexOf(e.source.value.toLowerCase()) > -1;
      				}
      			);
      		$.map.setAnnotations(filteredAnnotations);
      	}
      	else{
+     		Ti.API.info("in the else wtf");
      		//if search is empty, put all annotations back on the map
      		$.map.setAnnotations(originalMapAnnotations);
      	}
     },1200);
    		
-};
+}
+
+exports.searchTimeout = searchTimeout;

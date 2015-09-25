@@ -7,7 +7,7 @@
 }
 
 "#welcomeLabel":{
-	color:"#7d7d7d",
+	color:"#143963",
 	bottom:"5dp",
 	top:"5dp",
 	textAlign:"center",
@@ -18,7 +18,7 @@
 ".box":{
 	borderRadius: 10,
 	borderWidth: 2,
-	borderColor: "#009579",
+	borderColor: "#143963",
 	height: "90%",
 	width: "45%",
 	layout:"vertical"
@@ -34,11 +34,11 @@
 
 ".name":{
 	font:{
-		fontFamily:"Quicksand-Bold",
-		fontSize:'15dp'
+		fontFamily:"Dosis-Bold",
+		fontSize:'17dp'
 	},
 	top:"1dp",
-	color:"#7d7d7d",
+	color:"#143963",
 	height:"30%",
 	textAlign:"center"
 }
@@ -52,15 +52,16 @@
 	bottom:"5dp",
 	width:"95%",
 	font:{
-		fontSize:'10dp'
+		fontSize:'12dp'
 	},
 	textAlign: "center",
-	height:"30%"
+	height:"30%",
+	color:"#143963"
 }
 "#header": {
 	backgroundColor: "#00a1ff",
 	opacity: 1,
-	color: "#0e4bea",
+	color: "#143963",
 	height: "8%",
 	top: 0
 }

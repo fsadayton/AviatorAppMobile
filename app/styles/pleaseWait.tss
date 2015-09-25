@@ -3,6 +3,6 @@
   width:"80%",
   modal:true,
   borderRadius:10,
-  borderColor:"#009579",
+  borderColor:"#009577",
   borderWidth: 2
 }
