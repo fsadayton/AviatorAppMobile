@@ -23,7 +23,7 @@
 				<View class="divider"/>
 				<Label class="name" >VICTIM COMPENSATION</Label>
 				<ImageView class="icon" image="/global/compensation_256.png" />
-				<Label class="description">Are you a victim of violent crime? View financial assistance options here.</Label>
+				<Label class="description">Victim of a violent crime? View financial assistance options here.</Label>
 			</View>
 			<View class="right box" onClick="openSpecialServices">
 				<View class="divider"/>

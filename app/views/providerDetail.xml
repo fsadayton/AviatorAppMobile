@@ -5,30 +5,32 @@
 			<View class="divider"/>
 			<Label id="providerName"/>
 			
-			<TextArea id="providerDescription"/>
+			<View id="textGroup">
+				<TextArea id="providerDescription"/>
+			</View>
 			
-			<Label id="addressLabel">ADDRESS</Label>
 			<View id="addressView">
+				<Label id="addressLabel">ADDRESS</Label>
 				<Label id="address"/>
 				<Button id="driveButton" onClick="getDirections">Get Directions</Button>
 			</View>
 	
-			<View id="phoneView" class="actionView" onClick="callPhoneNumber">
-				<ImageView class="actionImage" image="/global/phone_256.png" />
-				<Label id="phoneLabel" class="actionLabel"/>
-			</View>
-			<View id="emailView" class="actionView" onClick="openEmail">
-				<ImageView class="actionImage" image="/global/email256.png" />
-				<Label id="emailLabel" class="actionLabel">EMAIL THIS PROVIDER</Label>
-			</View>
-			<View id="websiteView" class="actionView" onClick="openWebsite">
-				<ImageView class="actionImage" image="/global/domain256.png" />
-				<Label id="webLabel" class="actionLabel">VISIT WEBSITE</Label>
-			</View>
-			<View id="downloadAppView" class="actionView" onClick="downloadApp">
-				<ImageView class="actionImage" image="/global/cellphone57.png" />
-				<Label id="downloadLabel" class="actionLabel">DOWNLOAD APP</Label>
-			</View>
+				<View id="phoneView" class="actionView" onClick="callPhoneNumber">
+					<ImageView class="actionImage" image="/global/phone72.png" />
+					<Label id="phoneLabel" class="actionLabel"/>
+				</View>
+				<View id="emailView" class="actionView" onClick="openEmail">
+					<ImageView class="actionImage" image="/global/email256.png" />
+					<Label id="emailLabel" class="actionLabel">EMAIL THIS PROVIDER</Label>
+				</View>
+				<View id="websiteView" class="actionView" onClick="openWebsite">
+					<ImageView class="actionImage" image="/global/web58.png" />
+					<Label id="webLabel" class="actionLabel">VISIT WEBSITE</Label>
+				</View>
+				<View id="downloadAppView" class="actionView" onClick="downloadApp">
+					<ImageView class="actionImage" image="/global/cellphone57.png" />
+					<Label id="downloadLabel" class="actionLabel">DOWNLOAD APP</Label>
+				</View>
 			
 			<AlertDialog id="dialog" onClick="doClick" title="Disclaimer" 
 				message="Since this website is not directly affiliated with AVIATOR, we are not responsible for the content on this 3rd party site." cancel="1">
@@ -45,16 +47,18 @@
 		<View class="divider"/>
 		<Label id="providerName"/>
 		
-		<TextArea id="providerDescription"/>
+		<View id="textGroup">
+			<TextArea id="providerDescription"/>
+		</View>
 		
-		<Label id="addressLabel">ADDRESS</Label>
 		<View id="addressView">
+			<Label id="addressLabel">ADDRESS</Label>
 			<Label id="address"/>
 			<Button id="driveButton" onClick="getDirections">Get Directions</Button>
 		</View>
 
 		<View id="phoneView" class="actionView" onClick="callPhoneNumber">
-			<ImageView class="actionImage" image="/global/phone_256.png" />
+			<ImageView class="actionImage" image="/global/phone72.png" />
 			<Label id="phoneLabel" class="actionLabel"/>
 		</View>
 		<View id="emailView" class="actionView" onClick="openEmail">
@@ -62,7 +66,7 @@
 			<Label id="emailLabel" class="actionLabel">EMAIL THIS PROVIDER</Label>
 		</View>
 		<View id="websiteView" class="actionView" onClick="openWebsite">
-			<ImageView class="actionImage" image="/global/domain256.png" />
+			<ImageView class="actionImage" image="/global/web58.png" />
 			<Label id="webLabel" class="actionLabel">VISIT WEBSITE</Label>
 		</View>
 		<View id="downloadAppView" class="actionView" onClick="downloadApp">

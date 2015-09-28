@@ -35,7 +35,7 @@
 ".name":{
 	font:{
 		fontFamily:"Dosis-Bold",
-		fontSize:'17dp'
+		fontSize:'14dp'
 	},
 	top:"1dp",
 	color:"#143963",
@@ -52,7 +52,7 @@
 	bottom:"5dp",
 	width:"95%",
 	font:{
-		fontSize:'12dp'
+		fontSize:'10dp'
 	},
 	textAlign: "center",
 	height:"30%",

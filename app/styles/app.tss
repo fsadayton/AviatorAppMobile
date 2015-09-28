@@ -23,7 +23,8 @@
 
 ".defaultRow":{
 	height: "70dp",
-	backgroundColor: "#fff"
+	backgroundColor: "#fff",
+	selectedBackgroundColor: "#b2dfd6"
 }
 
 ".divider":{
