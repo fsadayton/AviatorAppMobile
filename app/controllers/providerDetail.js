@@ -4,8 +4,8 @@ var menu;
 
 //set provider name and description
 $.providerName.text = args.orgName;
-$.providerDescription.value = args.description.description ? args.description.description : args.description;
-Ti.API.info("desc: " + args.description.description);
+$.providerDescription.value = args.description;
+Ti.API.info("args: " + JSON.stringify(args));
 
 if(!Alloy.Globals.isAndroid){
 	$.iosNav.setWindow($.navWin);

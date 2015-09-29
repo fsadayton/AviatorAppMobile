@@ -1,8 +1,20 @@
-"Window" : {
+"Window[platform=android]" : {
   height:"40%",
   width:"80%",
   modal:true,
   borderRadius:10,
   borderColor:"#009577",
   borderWidth: 2
+}
+
+"Window[platform=ios]" : {
+  modal:true
+}
+
+"#activityIndicator[platform=ios]":{
+	style: Ti.UI.iPhone.ActivityIndicatorStyle.DARK,
+	zIndex: 1,
+	font:{
+		fontFamily:"Dosis-Regular"
+	}
 }

@@ -71,7 +71,9 @@
 	right:"1dp",
 	font:{
 		fontSize:"20dp"
-	}
+	},
+	width:Titanium.UI.SIZE,
+	horizontalWrap:true
 }
 
 "#trustedMessageEdit":{

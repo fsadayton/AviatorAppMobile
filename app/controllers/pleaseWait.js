@@ -1,3 +1,7 @@
 var args = arguments[0] || {};
 
-$.activityIndicator.show();
+function initWin(){
+	Alloy.Globals.updateActionBar();
+	$.activityIndicator.show();
+}
+

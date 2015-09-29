@@ -11,4 +11,6 @@
   	wordWrap: false,
   	ellipsize: true,
   	backgroundColor:"#fff",
+  	width:Ti.UI.SIZE,
+  	horizontalWrap:true
 }

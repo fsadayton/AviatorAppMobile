@@ -27,9 +27,11 @@
 	borderColor:"#7d7d7d",
 	borderRadius: 10,
 	font:{
-		fontFamily:"Dosis-Regular"
+		fontFamily:"Dosis-Regular",
+		fontSize:"17dp"
 	},
 	top:"10dp",
+	height:"50dp",
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER
 }
 

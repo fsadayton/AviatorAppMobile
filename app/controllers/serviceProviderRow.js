@@ -3,9 +3,11 @@ var args = arguments[0] || {};
 $.providerName.text = args.orgName;
 $.subtext.text = args.crisis ? "CALL " + args.crisis : Alloy.Globals.Location.estimateDistance(Alloy.Globals.currentLocation, args.address + ", US", setSubtext);
 
+Ti.API.info("list args:" + JSON.stringify(args));
+
 $.row.orgName = args.orgName;
 $.row.address = args.address;
-$.row.description = args.description;
+$.row.orgDesc = args.orgDesc;
 $.row.phone = args.phone;
 $.row.email = args.email;
 $.row.website = args.website;

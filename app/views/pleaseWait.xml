@@ -1,5 +1,5 @@
 <Alloy>
-	<Window class="gradient" onOpen="Alloy.Globals.updateActionBar">
+	<Window class="gradient" onOpen="initWin">
 		<ActivityIndicator id="activityIndicator" message="Please Wait..."/>
 	</Window>
 </Alloy>

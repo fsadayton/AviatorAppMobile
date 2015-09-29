@@ -157,7 +157,7 @@ function parseResponse(){
 			var params = {
 				orgName:provider.name,
 				address:provider.address,
-				description:provider.description,
+				orgDesc:provider.description,
 				phone: provider.phoneNumber,
 				email: provider.email,
 				website: provider.website
@@ -251,10 +251,11 @@ function addRowToDefinedSections(category, row){
  * Function for opening provider detail page
  */
 function providerDetail(e){
+	Ti.API.info("provider detail desc: " + e.row.orgDesc);
 	Alloy.createController('providerDetail',{
 		orgName:e.row.orgName,
 		address: e.row.address,
-		description: e.row.description,
+		description: e.row.orgDesc,
 		phone: e.row.phone,
 		email: e.row.email,
 		website: e.row.website
@@ -267,14 +268,18 @@ function providerDetail(e){
 function addProviderToMap(params){
 	Alloy.Globals.Location.runCustomFwdGeocodeFunction(params.address, addAnnotation);
 	function addAnnotation(e){
-		var annotation = Map.createAnnotation({
-	            latitude: e.places[0].latitude,
-	   			longitude: e.places[0].longitude,
-	            title: params.orgName,
-	            row: params
-           });
-           $.map.addAnnotation(annotation);
-           originalMapAnnotations.push(annotation);
+		var annotationParams = {
+			latitude: e.places[0].latitude,
+	   		longitude: e.places[0].longitude,
+	        title: params.orgName,
+	        row: params	
+		};
+		if(!Alloy.Globals.isAndroid){
+			annotationParams.leftButton = Ti.UI.iPhone.SystemButton.INFO_DARK;
+		}
+		var annotation = Map.createAnnotation(annotationParams);
+        $.map.addAnnotation(annotation);
+        originalMapAnnotations.push(annotation);
            
 	}
 }
@@ -285,13 +290,14 @@ function addProviderToMap(params){
  * the annotation popup box. 
  */
 function mapClick(e){
-	if(e.clicksource && e.clicksource != "pin"){
+	Ti.API.info("clicksource: " + e.clicksource);
+	if(e.clicksource && e.clicksource != "pin" && e.clicksource != "map"){
 		providerDetail(e.annotation);
 	}
 	else if(e.clicksource && e.clicksource === "pin"){
 		Alloy.Globals.Location.estimateDistance(Alloy.Globals.currentLocation, e.annotation.row.address + ", US", 
 			function(distance){
-				e.annotation.subtitle = distance + " • click for details";
+				e.annotation.subtitle = Alloy.Globals.isAndroid ? distance + " • click for details" : distance;
 			}
 		);
 	}
