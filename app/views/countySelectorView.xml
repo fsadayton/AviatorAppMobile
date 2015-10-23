@@ -1,5 +1,5 @@
 <Alloy>
-	<SearchBar id="searchBar" />
+	<SearchBar id="searchBar" hintText="Search"/>
 	<ScrollView scrollType="vertical" >
 		<View id="countiesPicker"/>
 	</ScrollView>

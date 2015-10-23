@@ -52,7 +52,7 @@
 	width:"30dp"
 }
 
-"#textGroup":{
+"#descGroup":{
 	backgroundColor:"#fff",
 	height:"25%"
 }

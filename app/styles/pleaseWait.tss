@@ -18,3 +18,11 @@
 		fontFamily:"Dosis-Regular"
 	}
 }
+
+"#activityIndicator[platform=android]":{
+	font:{
+		fontFamily:"Dosis-Bold",
+		fontSize: "20dp"
+	},
+	color:"#143963"
+}

@@ -30,12 +30,21 @@ function deleteFavorite(e){
  */
 function openProviderDetails(e){
 	var favorite = favorites.get(id);
-	Alloy.createController('providerDetail',{
+	var args = {
 		orgName:favorite.get("name"),
 		address: favorite.get("address"),
 		description: favorite.get("description"),
 		phone: favorite.get("phone_number"),
 		email: favorite.get("email"),
 		website: favorite.get("website")
-	}).getView().open();
+	};
+	Alloy.Globals.open('providerDetail', args);
+	/*Alloy.createController('providerDetail',{
+		orgName:favorite.get("name"),
+		address: favorite.get("address"),
+		description: favorite.get("description"),
+		phone: favorite.get("phone_number"),
+		email: favorite.get("email"),
+		website: favorite.get("website")
+	}).getView().open();*/
 }

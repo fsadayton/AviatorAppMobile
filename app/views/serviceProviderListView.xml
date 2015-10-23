@@ -8,7 +8,7 @@
 	</View>
 	<View id="mapModule" height="90%" visible=false top=0>
 		<Module id="map" module="ti.map" onClick="mapClick">
-			<SearchBar id="mapSearch" platform="ios" top=0/>
+			<SearchBar id="mapSearch" platform="ios" hintText="Search" top=0/>
 		</Module>
 	</View>
 </Alloy>

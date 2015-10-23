@@ -2,7 +2,8 @@
 	<Window class="container" id="win" onOpen="Alloy.Globals.updateActionBar">
 		<View class="divider"/>
 		<ActivityIndicator id="activityIndicator"/>
-		<TableView id="crisisLineTable" onClick="callPhoneNumber" filterAttribute="title">
+		<TableView id="crisisLineTable" onClick="callPhoneNumber">
+			<SearchBar platform=ios />
 		</TableView>
 		
 	</Window>

@@ -18,5 +18,6 @@ $.generalTable.setData([tableSection]);
  * been incorporated. 
  */
 function listProviders(){
-	Alloy.createController('veteranServices').getView().open();
+	//Alloy.createController('veteranServices').getView().open();
+	Alloy.Globals.open('veteranServices');
 }

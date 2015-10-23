@@ -12,13 +12,20 @@ exports.createAndroidSearchBar = function(window, providerListObj){
 		Alloy.Globals.addActionBarButtons(window, [{
 			params:{
 				title: "search...",
-				icon: Ti.Android.R.drawable.ic_menu_search,
+				icon: "images/magnifying47.png",
 				actionView: listView.search,
 				showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
 			}
 		}],
 		function(setMenu){
 			_menu = setMenu;
+			var abx = require('com.alcoapps.actionbarextras');
+			abx.setSearchView({
+				searchView: listView.search,
+				textColor:"#fff",
+				hintColor:"#b2dfd6",
+				searchIcon:"images/magnifying47.png"
+			});
 		});
 		listView.search.addEventListener("change", providerListObj.searchTimeout);
 	});

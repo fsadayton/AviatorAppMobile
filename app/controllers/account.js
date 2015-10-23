@@ -115,7 +115,7 @@ function updateProfilePic(){
  */
 function pickCounty(e){
 	var plzWait = null;
-	if(countySelector.isCountiesNull()){
+	if(Alloy.Globals.isAndroid && countySelector.isCountiesNull()){
 		plzWait = Alloy.createController("pleaseWait").getView();
 		plzWait.open();
 	}
@@ -185,14 +185,14 @@ function addContact(){
  * @param {Object} e - event
  */
 function doClick(e){
-	if(e.index == 0){ //manually add was selected
+	if(e.index == 1){ //manually add was selected
 		Alloy.createController("profileModal", {
 			header:"ADD CONTACT",
 			description:"Enter contact's name",
 			subDescription:"Enter contact's phone number"
 		}).getView().open();
 	}
-	else if(e.index == 1){ //add from contact list selected
+	else if(e.index == 2){ //add from contact list selected
 		Ti.Contacts.showContacts({
 			selectedPerson: function(e){
 				Ti.API.info("person:" + JSON.stringify(e.person.phone));

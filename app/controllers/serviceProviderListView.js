@@ -252,14 +252,24 @@ function addRowToDefinedSections(category, row){
  */
 function providerDetail(e){
 	Ti.API.info("provider detail desc: " + e.row.orgDesc);
-	Alloy.createController('providerDetail',{
+	var args = {
 		orgName:e.row.orgName,
 		address: e.row.address,
 		description: e.row.orgDesc,
 		phone: e.row.phone,
 		email: e.row.email,
 		website: e.row.website
-	}).getView().open();
+	};
+	/*Alloy.createController('providerDetail',{
+		orgName:e.row.orgName,
+		address: e.row.address,
+		description: e.row.orgDesc,
+		phone: e.row.phone,
+		email: e.row.email,
+		website: e.row.website
+	}).getView().open();*/
+	
+	Alloy.Globals.open('providerDetail', args);
 }
 
 /**

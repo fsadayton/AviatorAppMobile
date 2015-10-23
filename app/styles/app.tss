@@ -17,8 +17,10 @@
 "Window[platform=ios]":{
 	barColor: "#009577",
 	titleAttributes:{
-		color:"#fff"
-    }
+		color:"#fff",
+		font:{fontFamily:"Dosis-Bold", fontSize:20}
+   },
+   backgroundColor:"#fff"
 }
 
 ".defaultRow":{
@@ -43,9 +45,9 @@
 "#ActivityIndicator[platform=ios]":{
 	message: "Loading...",
 	font:{fontSize:17, fontFamily:"Dosis-Light"},
-	color:"#8f8f8f",
+	//color:"#8f8f8f",
 	style:Titanium.UI.iPhone.ActivityIndicatorStyle.DARK,
-	top:"50%",
+	//top:"50%",
 	zIndex:1
 }
 

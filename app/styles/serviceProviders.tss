@@ -1,39 +1,7 @@
 
-".menu":{
-	left: "0dp",
-	width: "100%",
-	backgroundColor: "#fff",
-	separatorColor: "#E9EBEA",
-}
-
 "#providerList":{
 	height:"90%",
 	top:0
-}
-
-"#buttonBar":{
-	bottom:0,
-	height:"10%",
-	backgroundColor:"#fff"
-}
-
-".buttonBarAction":{
-	backgroundColor:"#009577",
-	width:"49.7%",
-}
-
-".buttonBarImage":{
-	width:"18%",
-	left:"20%"
-}
-
-".buttonBarLabel":{
-	color:"#fff",
-	left:"45%",
-	font:{
-		fontFamily:"Dosis-Bold",
-		fontSize:"17dp"
-	}
 }
 
 "Tab":{
@@ -59,6 +27,3 @@
 	right: "9%",
 	width: "24dp"
 }
-
-
-

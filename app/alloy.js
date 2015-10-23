@@ -126,7 +126,7 @@ Alloy.Globals.sendHttpRequest = function(url, type, data, onSuccess, onError){
        	data == null ? client.send() : client.send(JSON.stringify(data));
    	}
    	else{
-   	    Alloy.Globals.createNotificationPopup("Cannot establish connection to Drinkos. Please check your network connection.", "Network Error");
+   	    Alloy.Globals.createNotificationPopup("Please check your network connection.", "Network Error");
    	}
 };
 
@@ -148,7 +148,7 @@ Alloy.Globals.updateActionBar = function(){
 		var abx = require('com.alcoapps.actionbarextras');
 		abx.titleFont = "Dosis-Regular.otf";
 		abx.setBackgroundColor("#009577");
-		 //65c8c7 - 009577
+		abx.titleColor = "#fff";
 	}
 };
 
@@ -173,9 +173,13 @@ function sendTextMessage(){
 	var sms; //sms module to use depending on platform
 	
 	if(Alloy.Globals.isAndroid){
+		if(contacts.length == 0){
+			alert("You do not have any trusted contacts. Go to 'My Account' to add trusted contacts.");
+			return;
+		}
 		sms = require('ti.android.sms');
-	    
 	    sms.addEventListener('complete', isComplete);
+	    
 		contacts.each(function(contact){
 			sms.sendSMS(contact.get("phone_number"), message);
 	    });
@@ -217,4 +221,3 @@ function sendTextMessage(){
 		}, 1000);
 	}
 }
-

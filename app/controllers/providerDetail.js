@@ -7,18 +7,17 @@ $.providerName.text = args.orgName;
 $.providerDescription.value = args.description;
 Ti.API.info("args: " + JSON.stringify(args));
 
-if(!Alloy.Globals.isAndroid){
+/*if(!Alloy.Globals.isAndroid){
 	$.iosNav.setWindow($.navWin);
-}
+}*/
 
 if(args.address){ //format address
 	var address = args.address.split(",");
 	$.address.text = address[0] + "\n" + address[1].trim() + ", " + address[2].trim();
 }
-else{ //no address, remove address-related views
-	$.win.remove($.addressLabel);
+else{ //no address, remove address view
 	$.win.remove($.addressView);
-	$.providerDescription.height = "35%";
+	$.descGroup.setHeight("35%");
 }
 
 //check phone status

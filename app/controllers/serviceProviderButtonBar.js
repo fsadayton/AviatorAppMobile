@@ -42,7 +42,7 @@ function toggleMapListView(){
  */
 function filterResults(){
 	var plzWait = null;
-	if(countySelector.isCountiesNull()){
+	if(Alloy.Globals.isAndroid && countySelector.isCountiesNull()){
 		plzWait = Alloy.createController("pleaseWait").getView();
 		plzWait.open();
 	}
