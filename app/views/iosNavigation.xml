@@ -1,15 +1,19 @@
 <Alloy>
-	<LeftNavButton>
+	<!--<LeftNavButton>
 		<Button backgroundImage="left224.png" onClick="closeWindow" />
-	</LeftNavButton>
-	<!--<RightNavButton>
-		<View layout="horizontal" height="Ti.UI.SIZE">
+</LeftNavButton>-->
+
+	<RightNavButton platform="ios">
+			<!--<Button backgroundImage="/images/add126.png"/>
+			<Button backgroundImage="/images/blind2.png"/>-->
+		<!--<View layout="horizontal" height="Ti.UI.SIZE">-->
 			<View height="Ti.UI.SIZE">
 				<Button backgroundImage="/images/add126.png"/>
 			</View>
 			<View width=55 height="Ti.UI.SIZE">
 				<Button backgroundImage="/images/blind2.png"/>
 			</View>
-		</View>
-</RightNavButton>-->
+		<!--</View>-->
+	</RightNavButton>
+
 </Alloy>

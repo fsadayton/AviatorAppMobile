@@ -16,7 +16,8 @@
 	},
 	color:"#009577",
 	textAlign: "center",
-	left:"5dp"
+	left:"5dp",
+	width: Ti.UI.SIZE
 }
 
 ".headerLabel":{
@@ -41,7 +42,8 @@
 	borderColor: "#009577",
 	borderWidth: 2,
 	layout: "horizontal",
-	top: "5dp"
+	top: "5dp",
+	backgroundColor:"red"
 }
 
 ".profileButton":{
@@ -52,7 +54,7 @@
 }
 
 ".profileView":{
-	width: "33.3%",
+	width: "33%",
 	backgroundColor: "#fff",
 	zIndex: 1,
 	borderColor: "#009577",
@@ -86,6 +88,19 @@
 	},
 	height:"20%",
 	top:"5dp"
+}
+
+"#contactButton[platform=ios]":{
+	backgroundColor:"#939393",
+	font:{
+		fontFamily:"Dosis-Bold",
+		fontSize:"15dp"
+	},
+	borderRadius:5,
+	bottom:"10dp",
+	width:"40%",
+	height:"50dp",
+	color:"#fff"
 }
 
 

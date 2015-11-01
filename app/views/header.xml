@@ -1,7 +1,0 @@
-<Alloy>
-	<View id="header" platform="ios">
-		<ImageView id="headerLeft" image="/global/blind2.png"></ImageView>
-		<Label id="headerText">Victim Services</Label>
-		<ImageView id="headerRight" image="/global/add126.png"></ImageView>
-	</View>
-</Alloy>

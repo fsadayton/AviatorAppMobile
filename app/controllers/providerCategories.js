@@ -1,10 +1,6 @@
 $.generalIndicator.show();
 $.crimeIndicator.show();
 
-if(!Alloy.Globals.isAndroid){
-	$.iosNavGeneral.setWindow($.tabGroup);
-	$.iosNavCrime.setWindow($.tabGroup);
-}
 var tableSection = Ti.UI.createTableViewSection({headerView: Alloy.createController('TableViewHeader', {text:"What can we help you with?"}).getView()});	
 var crimeTableSection = Ti.UI.createTableViewSection({headerView: Alloy.createController('TableViewHeader', {text:"What can we help you with?"}).getView()});
 

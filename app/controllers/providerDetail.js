@@ -7,10 +7,6 @@ $.providerName.text = args.orgName;
 $.providerDescription.value = args.description;
 Ti.API.info("args: " + JSON.stringify(args));
 
-/*if(!Alloy.Globals.isAndroid){
-	$.iosNav.setWindow($.navWin);
-}*/
-
 if(args.address){ //format address
 	var address = args.address.split(",");
 	$.address.text = address[0] + "\n" + address[1].trim() + ", " + address[2].trim();
@@ -83,36 +79,6 @@ if(Alloy.Globals.isAndroid){
 		var favoriteItem = _.findWhere(menu.getItems(), {title:"Tag as Favorite"});
 		favoriteItem.addEventListener("click", tagAsFavorite);
 		
-		/**
-		 * Function that persists a service provider if it has not already 
-		 * been saved. 
-		 */
-		function tagAsFavorite(){
-			var favorites = Alloy.Collections.favorites;
-			var existingFavorite = favorites.where({name:args.orgName});
-			
-			if(existingFavorite.length > 0){
-				//Notify user that he/she has already saved service provider
-				Alloy.Globals.createNotificationPopup(args.orgName + " is already tagged.");
-			}
-			else{
-				var favorite = Alloy.createModel('favorites', {
-					name: args.orgName,
-					address: args.address,
-					description: args.description,
-					phone_number: args.phone,
-					email: args.email,
-					website: args.website
-				});
-			
-				favorites.add(favorite);
-				favorite.save();
-				favorites.fetch();
-				
-				//Notify user that the service provider has been saved
-				Alloy.Globals.createNotificationPopup("Favorite Added.");
-			}
-		}
 	}
 );
 }
@@ -178,7 +144,7 @@ function openWebsite(){
  * @param {Object} e
  */
 function doClick(e){
-	if(!e.cancel){
+	if(!e.cancel || (!Alloy.Globals.isAndroid && e.index === 0)){
 		Ti.Platform.openURL(args.website);
 	}
 }
@@ -190,3 +156,34 @@ function doClick(e){
 function downloadApp(){
 	Alloy.Globals.isAndroid ? Ti.Platform.openURL("market://details?id=com.appriss.vinemobile") : Ti.Platform.openURL("itms://itunes.apple.com/us/app/vinemobile/id625472495?mt=8");
 }
+
+/**
+		 * Function that persists a service provider if it has not already 
+		 * been saved. 
+		 */
+		function tagAsFavorite(){
+			var favorites = Alloy.Collections.favorites;
+			var existingFavorite = favorites.where({name:args.orgName});
+			
+			if(existingFavorite.length > 0){
+				//Notify user that he/she has already saved service provider
+				Alloy.Globals.createNotificationPopup(args.orgName + " is already tagged.");
+			}
+			else{
+				var favorite = Alloy.createModel('favorites', {
+					name: args.orgName,
+					address: args.address,
+					description: args.description,
+					phone_number: args.phone,
+					email: args.email,
+					website: args.website
+				});
+			
+				favorites.add(favorite);
+				favorite.save();
+				favorites.fetch();
+				
+				//Notify user that the service provider has been saved
+				Alloy.Globals.createNotificationPopup("Favorite Added.");
+			}
+		}

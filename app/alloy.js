@@ -39,16 +39,7 @@ Alloy.Globals.addActionBarButtons = function(window, additionalButtons, callback
 		        showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
 		    }); 
 		    
-		    menuItem.addEventListener("click", function(e) { 
-		    	//ensure that website url contains 'http'
-		    	var website = Alloy.Models.profileBasics.get('website');
-		    	if(website.indexOf('http://') > -1 || website.indexOf('https://') > -1){
-		    		Ti.Platform.openURL(website);
-		    	}
-		    	else{
-		    		Ti.Platform.openURL("http://" + website);
-		    	}
-		    });
+		    menuItem.addEventListener("click", Alloy.Globals.hideScreen);
 		     
 		   	var help = menu.add({
 		    	title:"Notify trusted contacts to help you",
@@ -56,7 +47,7 @@ Alloy.Globals.addActionBarButtons = function(window, additionalButtons, callback
 		        showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
 		    });
 		    
-		    help.addEventListener("click", sendTextMessage);
+		    help.addEventListener("click", Alloy.Globals.sendTextMessage);
 		    
 		    if(additionalButtons){
 		    	_.each(additionalButtons, function(button){
@@ -98,7 +89,6 @@ Alloy.Globals.sendHttpRequest = function(url, type, data, onSuccess, onError){
                 Ti.API.error(e);
             };
     	}
-    	
     	
     	if(type == "POST"){
     		//this property must be set BEFORE opening the connection.
@@ -153,12 +143,24 @@ Alloy.Globals.updateActionBar = function(){
 };
 
 /**
+ * Function that hides the apps current screen 
+ */
+Alloy.Globals.hideScreen = function(){
+	var website = Alloy.Models.profileBasics.get('website');
+	if(website.indexOf('http://') > -1 || website.indexOf('https://') > -1){
+		Ti.Platform.openURL(website);
+	}
+	else{
+		Ti.Platform.openURL("http://" + website);
+	}
+};
+/**
  * Function that composes and sends a text message to user's trusted
  * contacts. Text message is sent automatically from Android platform.
  * iOS requires user to push send button after fields have been pre-
  * populated.
  */
-function sendTextMessage(){
+Alloy.Globals.sendTextMessage = function(){
 	var count = 0; //flag used to determine if any of the recipients did not get message
 	
 	//get list of trusted contacts
@@ -188,7 +190,7 @@ function sendTextMessage(){
 		var module = require('com.omorandi');
 		sms = module.createSMSDialog();
 		
-		if(!smsDialog.isSupported()){
+		if(!sms.isSupported()){
 			alert("Required feature is not available on your device.");
 		}
 		else{
@@ -220,4 +222,4 @@ function sendTextMessage(){
 			sms.removeEventListener('complete', isComplete);
 		}, 1000);
 	}
-}
+};

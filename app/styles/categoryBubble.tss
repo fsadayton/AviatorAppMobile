@@ -1,3 +1,8 @@
+"#bubbleText[platform=ios]":{
+	width:Ti.UI.FILL,
+	textAlign: 'center'
+}
+
 "#bubbleText":{
 	color:"#666",
 	borderRadius:20,
@@ -8,9 +13,9 @@
   	right: "3dp",
   	top: "3dp",
   	bottom: "3dp",
-  	//wordWrap: false,
-  	//ellipsize: true,
   	backgroundColor:"#fff",
-  	width:Ti.UI.SIZE,
-  	horizontalWrap:true
+  	width:Titanium.UI.SIZE,
+  	horizontalWrap:true,
+  	wordWrap: false,
+  	ellipsize: true
 }

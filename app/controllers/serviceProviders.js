@@ -6,10 +6,7 @@ $.crisisMenu.search = Alloy.createController("searchView").getView();
 if(Alloy.Globals.isAndroid){
 	providerSearch.createAndroidSearchBar($.tabGroup, $.providerList);
 }
-else{
-	$.iosNavNearby.setWindow($.tabGroup);
-	$.iosNavQuickCall.setWindow($.tabGroup);
-}
+
 $.providerList.setCategories(args.categories);
 $.providerList.setCrisisMenu($.crisisMenu);
 $.providerButtonBar.setProviderListObject($.providerList);
