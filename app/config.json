@@ -1,21 +1,21 @@
 {
-	"global": {
-		"apiUrl": "http://vision21.cloudapp.net/api/",
-		"appData" : "AppData/",
-		"lawEnforcementApi" : "AppLawEnforcement/",
-		"veteransApi" : "AppVeterans/",
-		"compensationApi" : "AppCompensation/"
-	}, 
-	"env:development": {}, 
-	"env:test": {}, 
-	"env:production": {}, 
-	"os:android": {
-		"mapUrl": "http://maps.google.com/maps/"
-	},
-	"os:blackberry": {},
-	"os:ios": {
-		"mapUrl": "http://maps.apple.com/"
-	},
-	"os:mobileweb": {},
-	"dependencies": {}
+  "global": {
+    "apiUrl": "http://vision21.cloudapp.net/api/",
+    "appData": "AppData/",
+    "lawEnforcementApi": "AppLawEnforcement/",
+    "veteransApi": "AppVeterans/",
+    "compensationApi": "AppCompensation/"
+  },
+  "env:development": {},
+  "env:test": {},
+  "env:production": {},
+  "os:android": {
+    "mapUrl": "http://maps.google.com/maps/"
+  },
+  "os:blackberry": {},
+  "os:ios": {
+    "mapUrl": "http://maps.apple.com/"
+  },
+  "os:mobileweb": {},
+  "dependencies": {}
 }

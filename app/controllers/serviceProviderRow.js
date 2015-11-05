@@ -12,11 +12,11 @@ $.row.phone = args.phone;
 $.row.email = args.email;
 $.row.website = args.website;
 
+
 if(Alloy.Globals.isAndroid){
 	$.row.title = args.orgName;
 }
 
- 
 if(args.crisis){
 	$.row.crisis = args.crisis;
 }

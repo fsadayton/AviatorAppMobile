@@ -6,7 +6,6 @@ if(!Ti.App.Properties.getBool("hasAgreedToConditions", false)){
 }
 else{
 	win.open();
-	$.nav.setRightNavButton($.navHelp);
 	alert("If this is an emergency, close the app and dial 911.");
 }
 

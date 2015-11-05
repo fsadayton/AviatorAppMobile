@@ -189,15 +189,16 @@ function doClick(e){
 			});
 		}
 		else{
+			var selectedName = "";
 			Ti.Contacts.showContacts({
 				selectedProperty: function(e){
-					//Ti.API.info("person:" + JSON.stringify(e));
-					e.value;
+					Ti.API.info("person:" + JSON.stringify(e));
+					var modelUtils = require('modelUtils');
+					modelUtils.storeTrustedContact(e.value, "Name");
 				},
-				fields:['phone']
+				fields:['phone','name']
 			});
 		}
-		
 	}
 }
 

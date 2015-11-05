@@ -13,8 +13,11 @@ exports.updateTrustedContact = function(id, fullName, phone, window){
 			name: fullName,
 			phone_number: phone
 		});
-	
-		window.close();
+		
+		if(window){
+			window.close();
+		}
+		
 	}
 };
 
@@ -39,7 +42,9 @@ exports.storeTrustedContact = function(phoneNumber, fullName, window){
 	
 	    // reload the tasks
 	    contacts.fetch();
-	    window.close();
+	    if(window){
+			window.close();
+		}
 	}
 	else{
 		alert("You can only have 3 trusted contacts. Remove a current contact if this person should be added.");

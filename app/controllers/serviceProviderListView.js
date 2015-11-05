@@ -90,6 +90,7 @@ function getTableData(categories, counties){
 					//store list of table headers
 					allHeaders.push(Ti.UI.createTableViewSection({
 						title:category.id, 
+						catName: category.name,
 						headerView: Alloy.createController('TableViewHeader', {text:category.name}).getView()
 					}));
 				}
@@ -127,12 +128,16 @@ function filterCategories(categories){
 	$.providerList.visible = true;
 	$.activityIndicator.hide();
 	
-	/*var filteredAnnotations = _.filter(originalMapAnnotations, 
-     				function(annotation){
-     					return annotation.title.toLowerCase().indexOf(e.source.value.toLowerCase()) > -1;
-     				}
-     			);
-     		$.map.setAnnotations(filteredAnnotations);*/
+	_.each(originalMapAnnotations, 
+    	function(annotation){
+    		_.each(localFilter, function(header){
+    			if(_.contains(annotation.row.categories, header.title)){
+    				localMap.push(annotation);
+    			}
+    		});
+     	}
+	);
+     $.map.setAnnotations(localMap);
 }
 
 /**
@@ -142,9 +147,11 @@ function filterCategories(categories){
 function parseResponse(){
 	var json = JSON.parse(this.responseText);
 	$.map.removeAllAnnotations(); //remove any previous map annotations
+	$.providerList.visible = true;
 
 	//if no results are returned, let user know that there are no results
 	if(json.length === 0){
+		$.providerList.setData([]);
 		$.activityIndicator.hide();
 		$.noResults.visible = true;
 	}
@@ -160,7 +167,8 @@ function parseResponse(){
 				orgDesc:provider.description,
 				phone: provider.phoneNumber,
 				email: provider.email,
-				website: provider.website
+				website: provider.website,
+				categories: provider.categories
 			};
 			addProviderToMap(params); //add provider location to the map
 			//create table row with detail metadata
@@ -260,14 +268,6 @@ function providerDetail(e){
 		email: e.row.email,
 		website: e.row.website
 	};
-	/*Alloy.createController('providerDetail',{
-		orgName:e.row.orgName,
-		address: e.row.address,
-		description: e.row.orgDesc,
-		phone: e.row.phone,
-		email: e.row.email,
-		website: e.row.website
-	}).getView().open();*/
 	
 	Alloy.Globals.open('providerDetail', args);
 }

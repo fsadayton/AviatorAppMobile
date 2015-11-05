@@ -149,6 +149,17 @@ function doClick(e){
 	}
 }
 
+
+function iosShare(e){
+    socialWidget=require('com.alcoapps.socialshare');
+    var body = "You might be interested in this organization. \nDescription: " 
+				+ args.description + "\nPhone: " + args.phone 
+				+ "\nEmail: " + args.email + "\nWebsite: " + args.website;
+    socialWidget.share({
+        status: body
+    });
+
+}
 /**
  * Function that opens up VINE mobile app in app store or google play store.
  */
