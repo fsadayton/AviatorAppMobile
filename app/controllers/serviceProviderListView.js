@@ -99,7 +99,6 @@ function getTableData(categories, counties){
 		else if(categories && args.providerType != "general"){
 			cats = categories;
 		}
-	
 		//send request to get all service providers that provide services for counties and categories
 		Alloy.Globals.sendHttpRequest(apiUrl, "GET", null, parseResponse);
 	}
@@ -171,8 +170,9 @@ function parseResponse(){
 				categories: provider.categories
 			};
 			addProviderToMap(params); //add provider location to the map
+			
 			//create table row with detail metadata
-			var row = Alloy.createController('serviceProviderRow', params).getView();	
+			var row = Alloy.Globals.isAndroid ? Alloy.createController('serviceProviderRow', params).getView() : params;
 			
 			//if provider has a crisis number, add it to crisis line table	
 			if(provider.crisisNumber){
@@ -195,8 +195,6 @@ function parseResponse(){
 		});
 		var keys = Object.keys(sections);
 		allHeaders = allHeaders.length > 0 ?  allHeaders : keys.map(function(v){return sections[v];});
-		
-		//originalMapAnnotations = $.map.annotations; //store original map points
 		
 		//hide spinners
 		$.activityIndicator.hide();
@@ -234,7 +232,8 @@ function addRowToDynamicSections(sections, category, row){
 					headerView: Alloy.createController('TableViewHeader', {text:categoryDict.name}).getView()
 				});
 			}
-			sections[categoryDict.id].add(row);
+			var rowAddition = Alloy.Globals.isAndroid ? row : Alloy.createController('serviceProviderRow', row).getView();
+			sections[categoryDict.id].add(rowAddition);
 			return true;
 		}
 	});
@@ -249,7 +248,8 @@ function addRowToDynamicSections(sections, category, row){
 function addRowToDefinedSections(category, row){
 	_.find(allHeaders, function(header){
 		if(header.title === category){
-			header.add(row);
+			var rowAddition = Alloy.Globals.isAndroid ? row : Alloy.createController('serviceProviderRow', row).getView();
+			header.add(rowAddition);
 			return true;
 		}
 	});
@@ -259,7 +259,6 @@ function addRowToDefinedSections(category, row){
  * Function for opening provider detail page
  */
 function providerDetail(e){
-	Ti.API.info("provider detail desc: " + e.row.orgDesc);
 	var args = {
 		orgName:e.row.orgName,
 		address: e.row.address,
@@ -300,7 +299,6 @@ function addProviderToMap(params){
  * the annotation popup box. 
  */
 function mapClick(e){
-	Ti.API.info("clicksource: " + e.clicksource);
 	if(e.clicksource && e.clicksource != "pin" && e.clicksource != "map"){
 		providerDetail(e.annotation);
 	}
