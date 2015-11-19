@@ -265,9 +265,9 @@ function providerDetail(e){
 		description: e.row.orgDesc,
 		phone: e.row.phone,
 		email: e.row.email,
-		website: e.row.website
+		website: e.row.website,
+		title: "Provider Details"
 	};
-	
 	Alloy.Globals.open('providerDetail', args);
 }
 

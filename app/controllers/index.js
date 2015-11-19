@@ -13,6 +13,7 @@ else{
 Alloy.Globals.open = function(controllerName, args){
 	var view = Alloy.createController(controllerName, (args || {})).getView();
 	if(Alloy.Globals.isAndroid){
+		view.title = args == null || args.title == null  ? "" : args.title;
 		view.open();
 	}
 	else{

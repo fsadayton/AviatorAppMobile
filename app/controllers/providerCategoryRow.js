@@ -13,3 +13,4 @@ function showInfo(e){
 }
 
 $.row.categories = args.categories;
+$.row.family = args.text;

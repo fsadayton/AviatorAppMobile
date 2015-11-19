@@ -9,7 +9,7 @@
 				</View>
 		</RightNavButtons>
 		<View class="divider"/>
-		<Label id="welcomeLabel">Welcome to AVIATOR - an initiative of Family Services • Dayton, Ohio</Label>
+		<ImageView id="welcomeLabel" image="/global/AVIATOR_Logo_COLOR.png"/>
 		
 		<View class="boxContainer">
 			<View class="left box" onClick="openProviders" >

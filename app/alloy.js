@@ -136,7 +136,7 @@ Alloy.Globals.createNotificationPopup = function(message){
 Alloy.Globals.updateActionBar = function(){
 	if (Alloy.Globals.isAndroid){
 		var abx = require('com.alcoapps.actionbarextras');
-		abx.titleFont = "Dosis-Regular.otf";
+		abx.titleFont = "Dosis-Bold.otf";
 		abx.setBackgroundColor("#009577");
 		abx.titleColor = "#fff";
 	}

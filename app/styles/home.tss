@@ -6,13 +6,21 @@
 	color:"#7d7d7d"
 }
 
-"#welcomeLabel":{
+"#welcomeLabel[platform=android]":{
 	color:"#143963",
 	bottom:"5dp",
-	top:"5dp",
+	top:"7dp",
 	textAlign:"center",
-	height:"50dp",
-	width:"85%"
+	height: "10%"
+}
+
+"#welcomeLabel[platform=ios]":{
+	color:"#143963",
+	bottom:"5dp",
+	top:"9dp",
+	textAlign:"center",
+	height: "80px",
+	width: "381px"
 }
 
 ".box":{
