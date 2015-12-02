@@ -5,7 +5,7 @@
 }
 
 "#contactName":{
-	left:"40dp",
+	left:"60dp",
 	width:"40%",
 	font:{
 		fontFamily:"Dosis-Bold",
@@ -15,7 +15,12 @@
 }
 
 "#contactNumber":{
-	right:"40dp",
+	right:"60dp",
 	color:"#000",
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_RIGHT
+}
+
+".imageWrapper":{
+	height: "55dp",
+	width: "55dp"
 }

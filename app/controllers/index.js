@@ -11,12 +11,20 @@ else{
 
 
 Alloy.Globals.open = function(controllerName, args){
+	Ti.API.info("open");
 	var view = Alloy.createController(controllerName, (args || {})).getView();
+	Ti.API.info(view.tabs == null);
 	if(Alloy.Globals.isAndroid){
-		view.title = args == null || args.title == null  ? "" : args.title;
+		view.title = args == null || args.title == null  ? "" : args.title; //shows tile name at top of window
 		view.open();
 	}
 	else{
 		$.nav.openWindow(view);
+		/*if(view.tabs == null){
+			$.nav.openWindow(view);
+		}
+		else{
+			view.open();
+		}*/
 	}
 };

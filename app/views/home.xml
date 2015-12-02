@@ -18,7 +18,7 @@
 				<ImageView class="icon" image="/global/familiar17.png" />
 				<Label class="description">View organizations that can help address your needs</Label>
 			</View>
-			<View class="right box" onClick="openCorrections">
+			<View class="right box" onClick="openCorrections" > 
 				<View class="divider"/>
 				<Label class="name">LAW & CORRECTIONS</Label>
 				<ImageView class="icon" image="/global/hands6.png" />
@@ -43,13 +43,13 @@
 		
 		<View class="boxContainer">
 			<View class="left box" onClick="openAccount">
-				<View class="divider"/>
+				<View class="divider" />
 				<Label class="name">MY ACCOUNT</Label>
 				<ImageView class="icon" image="/global/round58.png" />
 				<Label class="description">View your trusted contacts and favorite providers</Label>
 			</View>
-			<View class="right box" onClick="openCrisisLines">
-				<View class="divider"/>
+			<View class="right box" onClick="openCrisisLines" >
+				<View class="divider" />
 				<Label class="name">CRISIS CONTACTS</Label>
 				<ImageView class="icon" image="/global/phone_256.png" />
 				<Label class="description">View local phone numbers that match your needs</Label>

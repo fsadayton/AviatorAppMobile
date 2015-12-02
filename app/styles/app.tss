@@ -31,7 +31,7 @@
 
 ".divider":{
 	height: "10dp",
-	backgroundColor:"#006e58",
+	backgroundColor: "#006e58",
 	top:0
 }
 

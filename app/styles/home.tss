@@ -24,9 +24,9 @@
 }
 
 ".box":{
-	borderRadius: 10,
-	borderWidth: 2,
-	borderColor: "#143963",
+	borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#203444",
 	height: "90%",
 	width: "45%",
 	layout:"vertical"
@@ -46,7 +46,7 @@
 		fontSize:'14dp'
 	},
 	top:"1dp",
-	color:"#143963",
+	color:"#203444",
 	height:"30%",
 	textAlign:"center"
 }
@@ -64,33 +64,5 @@
 	},
 	textAlign: "center",
 	height:"30%",
-	color:"#143963"
+	color:"#203444"
 }
-"#header": {
-	backgroundColor: "#00a1ff",
-	opacity: 1,
-	color: "#143963",
-	height: "8%",
-	top: 0
-}
-
-"#headerText":{
-	color: "#ffd400",
-	font:{
-		fontSize: '24dp',
-		fontWeight: 'bold'
-	}
-}
-
-"#headerLeft":{
-	left: "6%",
-	width: "11%"
-}
-
-"#headerRight":{
-	right: "6.5%",
-	width: "11%"
-}
-
-
-

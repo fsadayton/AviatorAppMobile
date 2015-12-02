@@ -284,7 +284,7 @@ function addProviderToMap(params){
 	        row: params	
 		};
 		if(!Alloy.Globals.isAndroid){
-			annotationParams.leftButton = Ti.UI.iPhone.SystemButton.INFO_DARK;
+			annotationParams.leftButton = "/global/info28_small.png";
 		}
 		var annotation = Map.createAnnotation(annotationParams);
         $.map.addAnnotation(annotation);
