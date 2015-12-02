@@ -1,0 +1,3 @@
+<Alloy>
+	<Label id="bubbleText" onClick="toggle"/>
+</Alloy>

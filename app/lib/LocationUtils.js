@@ -37,7 +37,7 @@ if (Ti.Geolocation.locationServicesEnabled){
 		}
 		else 
 		{
-			Ti.API.info(Ti.API.info('coords:' + JSON.stringify(e.coords)));
+			//Ti.API.info(Ti.API.info('coords:' + JSON.stringify(e.coords)));
 			Alloy.Globals.currentLocation = e.coords;
 		}
 	};
@@ -74,11 +74,17 @@ function getDistance(lat1,lon1,lat2,lon2){
     return d.toFixed(2);
 }
 
+/**
+ * Function that estimates distance between given address and current position
+ * @param {Object} currentPos - lat/long of current position
+ * @param {Object} address - address of the potential destination
+ * @param {Object} callback - used to retrieve calculated distance between currentPos and address
+ */
 exports.estimateDistance = function(currentPos, address, callback){
 	var distance = "??? mile(s)";
 	if(currentPos){
 		geocoder.forwardGeocoder(address, function(e){
-		    if(e.success){
+		    if(e.success && e.places.length > 0){
 		        distance = getDistance(parseFloat(currentPos.latitude), parseFloat(currentPos.longitude), parseFloat(e.places[0].latitude), parseFloat(e.places[0].longitude)) + " mile(s)";
 				callback(distance); 
 		    }   
@@ -87,6 +93,20 @@ exports.estimateDistance = function(currentPos, address, callback){
 	}
 };
 
+/**
+ * Function for retrieving lat/long information for a given
+ * address and manipulating information through a given callback method.
+ * @param {Object} address - address to be converted into lat/long
+ * @param {Object} callback - callback to execute upon successful conversion of
+ * 							address to lat/long
+ */
+exports.runCustomFwdGeocodeFunction = function(address, callback){
+	geocoder.forwardGeocoder(address, function(e){
+		if(e.success && e.places.length > 0){
+			callback(e);
+		}
+	});
+};
 
 
 

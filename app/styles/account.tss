@@ -4,35 +4,105 @@
 }
 
 "#accountImage":{
-	top: "15dp",
-	width: "25%"
+	height:"45dp",
+	width:"45dp",
+	borderRadius: 20
 }
 
 "#name":{
 	font:{
-		fontFamily:"Quicksand-Bold",
-		fontSize:"30dp"
+		fontFamily:"Dosis-Bold",
+		fontSize:"25dp"
 	},
-	top:"10dp",
-	bottom:"10dp",
-	color:"#65c8c7",
-	height:"35dp"
+	color:"#009577",
+	textAlign: "center",
+	left:"5dp",
+	width: Ti.UI.SIZE
 }
 
 ".headerLabel":{
-	color:"#65c8c7",
+	color:"#009577",
 	height:"15dp",
-	top:"15dp"
+	top:"10dp"
 }
 
-"#contactTable":{
-	height:"30%"
+"#contactTableView":{
+	height:"45%"
 }
 
 "TableViewRow":{
 	height:"45dp",
 	color:"#666"
 }
+
+"#profileBar":{
+	width: "70%",
+	height:"42dp",
+	borderRadius: 20,
+	borderColor: "#009577",
+	borderWidth: 2,
+	layout: "horizontal",
+	top: "5dp",
+	backgroundColor:"red"
+}
+
+".profileButton":{
+	height:"30dp",
+	width:"30dp",
+	zIndex:0,
+	touchEnabled: false
+}
+
+".profileView":{
+	width: "33%",
+	backgroundColor: "#fff",
+	zIndex: 1,
+	borderColor: "#009577",
+	borderWidth: 1
+}
+
+"TextField":{
+	font:{
+		fontFamily:"Dosis-Bold"
+	},
+	color:"#7d7d7d"
+}
+
+".sentence":{
+	left:"1dp",
+	right:"1dp",
+	font:{
+		fontSize:"20dp"
+	},
+	width:Titanium.UI.SIZE,
+	horizontalWrap:true
+}
+
+"#trustedMessageEdit":{
+	width:"90%",
+	borderRadius:15,
+	borderColor: "#666",
+	font:{
+		fontSize:"15dp",
+		fontFamily:"Dosis-Regular"
+	},
+	height:"20%",
+	top:"5dp"
+}
+
+"#contactButton[platform=ios]":{
+	backgroundColor:"#939393",
+	font:{
+		fontFamily:"Dosis-Bold",
+		fontSize:"15dp"
+	},
+	borderRadius:5,
+	bottom:"10dp",
+	width:"40%",
+	height:"50dp",
+	color:"#fff"
+}
+
 
 
 

@@ -1,0 +1,23 @@
+{
+  "name": "AVIATOR",
+  "version": "1.0.0",
+  "description": "AVIATOR Mobile App Project",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "UDRI",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-jscs": "^1.5.0",
+    "jscs": "^1.11.3",
+    "jscs-html-reporter": "0.0.4",
+    "jshint": "2.8.0"
+  },
+  "dependencies": {
+    "jscs-html-reporter": "0.0.4",
+    "jshint-html-reporter": "^0.2.3"
+  }
+}

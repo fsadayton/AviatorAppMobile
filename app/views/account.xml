@@ -1,27 +1,94 @@
 <Alloy>
-	<Window id="win" onOpen="Alloy.Globals.updateActionBar">
-		<Require src="header"></Require>
+	<Window id="win" onOpen="Alloy.Globals.updateActionBar" onClose="destroy">
+		<RightNavButtons platform="ios">
+				<View height="Ti.UI.SIZE">
+					<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
+				</View>
+				<View width=55 height="Ti.UI.SIZE">
+					<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
+				</View>
+		</RightNavButtons>
 		<View class="divider"/>
-		<ImageView id="accountImage" image="/global/user256.png" />
-		<Label id="name">Jane Doe</Label>
-		<Label class="headerLabel">TRUSTED CONTACTS</Label>
-		<TableView id="contactTable">
-			<TableViewRow>
-				<Label>John Doe • 937.554.5767</Label>
-			</TableViewRow>
-			<TableViewRow>
-				<Label>Harry Smith • 419.344.5555</Label>
-			</TableViewRow>
-			<TableViewRow>
-				<Label>Mary Thompson • 937.555.1234</Label>
-			</TableViewRow>
-
-		</TableView>
-		<Label class="headerLabel">FAVORITE SERVICES</Label>
-		<Label>No favorites have been saved.</Label>
-		
-		<Label class="headerLabel">COUNTY OF INTEREST</Label>
-		<Label>Montgomery County - Ohio</Label>
-	
+		<View id="centeredView" height="15%">
+			<View id="profileHeader" layout="horizontal" bottom="10dp" top="10dp"  width=Ti.UI.SIZE>
+				<ImageView id="accountImage" image="{profileBasics.profile_pic}" platform="android"/>
+				<Label id="name" text="{profileBasics.name}"/>
+			</View>
+		</View>
+		<View id="profileBar">
+			<View id="profile" class="profileView" backgroundColor="#e9e9e9" onClick="toggleSelection">
+				<ImageView class="profileButton" image="/global/round58.png" />
+			</View>
+			<View id="trustedContacts" class="profileView" onClick="toggleSelection">			
+				<ImageView class="profileButton" image="/global/add126.png" />
+			</View>
+			<View id="favorites" class="profileView" onClick="toggleSelection">			
+				<ImageView class="profileButton" image="/global/star256.png" />
+			</View>
+		</View>
+		<ScrollableView id="profileScroll" scrollingEnabled="false">
+			<View layout="vertical">
+				<Label class="headerLabel">PROFILE SUMMARY</Label>
+				<ScrollView height="70%" layout="vertical" showVerticalScrollIndicator=true>
+					<View layout="horizontal" width="90%" top="5dp" height=Ti.UI.SIZE platform="android">
+						<Label class="sentence">My name is</Label>
+						<TextField id="nameField" class="sentence" editable=false focusable=false value="{profileBasics.name}" onClick="updateProfile"/>
+						<Label class="sentence">and</Label><Label class="sentence">I</Label><Label class="sentence">want</Label>
+						<Label class="sentence">to</Label><Label class="sentence">see</Label>
+						<Label class="sentence">services</Label><Label class="sentence">in</Label>
+						<TextField id="county" class="sentence" editable=false focusable=false value="{profileBasics.countyName}" onClick="pickCounty"/>
+						<Label class="sentence">county.</Label>
+					</View>
+					<View platform="ios" width="90%" top="5dp" height=Ti.UI.SIZE layout="vertical">
+						<View layout="horizontal" height=Ti.UI.SIZE>
+							<Label class="sentence">My name is</Label>
+							<TextField id="nameField" class="sentence" editable=false focusable=false value="{profileBasics.name}" onClick="updateProfile"/>
+						</View>
+						<View layout="horizontal" height=Ti.UI.SIZE>
+							<Label class="sentence">My preferred county is</Label>
+							<TextField id="county" class="sentence" editable=false focusable=false value="{profileBasics.countyName}" onClick="pickCounty"/>
+						</View>
+					</View>
+					<View layout="horizontal" width="90%" top="15dp" height=Ti.UI.SIZE>
+						<Label class="sentence">My 'quick-hide'</Label>
+						<Label class="sentence">website is</Label>
+						<TextField id="website" class="sentence" editable=false focusable=false value="{profileBasics.website}" onClick="updateProfile"/>
+					</View>
+				</ScrollView>
+				<Button bottom="10dp" onClick="updateProfilePic" platform="android">Update Profile Picture</Button>
+			</View>
+			<View layout="vertical">
+				<Label class="headerLabel">TRUSTED CONTACTS</Label>
+				<ScrollView layout="vertical">
+					<View id="contactTableView">
+						<TableView id="contactTable" dataCollection="trustedContacts" onPostlayout="updateLabel">
+							<Require src="trustedContactRow"></Require>
+						</TableView>
+						<Label id="noContacts" platform="android" visible=false>No trusted contacts added.</Label>
+					</View>
+					
+					<Label class="headerLabel">EMERGENCY MESSAGE</Label>
+					<TextArea id="trustedMessageEdit" bottom="10dp" value="{profileBasics.emergency_message}" onReturn="saveMessage"></TextArea>
+					<Button id="contactButton" onClick="addContact">Add New Contact</Button>
+				</ScrollView>
+				<AlertDialog id="dialog" title="Add Contact" onClick="doClick"
+					message="How would you like to add this new trusted contact?" cancel="0">
+					<ButtonNames>
+						<ButtonName>Close</ButtonName>
+						<ButtonName>Manually</ButtonName>
+						<ButtonName>Contacts</ButtonName>
+					</ButtonNames>
+				</AlertDialog>
+			</View>
+			<View layout="vertical">
+				<Label class="headerLabel">FAVORITE SERVICES</Label>
+				<View id="favoriteServicesTableView">
+					<TableView id="favoriteServicesTable" dataCollection="favorites" onPostlayout="updateLabel">
+						<Require src="favoriteProviderRow"></Require>		
+					</TableView>
+					<Label id="noFavorites" platform="android" top="25%" visible="false">No favorites added.</Label>
+				</View>
+			</View>
+		</ScrollableView>
 	</Window>
 </Alloy>

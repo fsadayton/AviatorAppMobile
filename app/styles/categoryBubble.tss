@@ -1,0 +1,21 @@
+"#bubbleText[platform=ios]":{
+	width:Ti.UI.FILL,
+	textAlign: 'center'
+}
+
+"#bubbleText":{
+	color:"#666",
+	borderRadius:20,
+  	borderWidth: 2,
+  	borderColor: "#009577",
+  	height:"45dp",
+  	left: "3dp",
+  	right: "3dp",
+  	top: "3dp",
+  	bottom: "3dp",
+  	backgroundColor:"#fff",
+  	width:Titanium.UI.SIZE,
+  	horizontalWrap:true,
+  	wordWrap: false,
+  	ellipsize: true
+}

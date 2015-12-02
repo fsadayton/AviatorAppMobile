@@ -1,0 +1,25 @@
+"#buttonBar":{
+	bottom:0,
+	height:"10%",
+	backgroundColor:"#fff"
+}
+
+".buttonBarAction":{
+	backgroundColor:"#009577",
+	width:"49.7%",
+}
+
+".buttonBarImage":{
+	width:"18%",
+	left:"20%"
+}
+
+".buttonBarLabel":{
+	color:"#fff",
+	left:"45%",
+	font:{
+		fontFamily:"Dosis-Bold",
+		fontSize:"17dp"
+	}
+}
+  

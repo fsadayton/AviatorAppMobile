@@ -1,118 +1,39 @@
 var args = arguments[0] || {};
+var providerSearch = require('providerSearch');
 
-var Map = require('ti.map');
-var geocoder = require('ti.geocoder');
+$.crisisMenu.search = Alloy.createController("searchView").getView();
 
-
-Alloy.Globals.sendHttpRequest("GetCategoryLookupIndex", "GET", null, storeCategoryLookup);
-var categoryDictionary = null;
-var allHeaders = [];
-function storeCategoryLookup(){
-	categoryDictionary = JSON.parse(this.responseText);
-	
-	_.each(categoryDictionary, function(category){
-		if (_.contains(args.categories, category.id)){
-			allHeaders.push(Ti.UI.createTableViewSection({title:category.id, headerView: Alloy.createController('TableViewHeader', {text:category.name}).getView()}));
-		}
-	});
-	
-	Alloy.Globals.sendHttpRequest("GetServiceProviders?counties=57&categories=" 
-	+ args.categories.join(), "GET", null, parseServiceProviders);
+if(Alloy.Globals.isAndroid){
+	providerSearch.createAndroidSearchBar($.tabGroup, $.providerList);
 }
 
-function parseServiceProviders(){
-	
-	var crisisHeaders = [];
-	var json = JSON.parse(this.responseText);
-	
-	_.each(json, function(provider){
-		addProviderToMap(provider.address, provider.name);
-		var row = Alloy.createController('serviceProviderRow', {
-				orgName:provider.name,
-				address:provider.address,
-				description:provider.description,
-				phone: provider.phoneNumber,
-				email: provider.email,
-				website: provider.website,
-			}).getView();	
-			
-		if(provider.crisisNumber){
-			crisisHeaders.push(Alloy.createController('serviceProviderRow', {
-				orgName:provider.name,
-				crisis: provider.crisisNumber
-			}).getView());
-		}
-		_.each(provider.categories, function(category){
-			_.find(allHeaders, function(header){
-				if(header.title === category){
-					header.add(row);
-					return true;
-				}
-			});	
-		});
-	});
-	
-	$.menu.setData(allHeaders);
-	$.crisisMenu.setData(crisisHeaders);
-}
+$.providerList.setCategories(args.categories);
+$.providerList.setCrisisMenu($.crisisMenu);
+$.providerButtonBar.setProviderListObject($.providerList);
 
-    
-function providerDetail(e){
-	Alloy.createController('providerDetail',{
-		orgName:e.row.name,
-		address: e.row.address,
-		description: e.row.description,
-		phone: e.row.phone,
-		email: e.row.email,
-		website: e.row.website
-	}).getView().open();
-}
-
+/**
+ * Automatically opens phone app to call crisis line
+ */
 function callPhoneNumber(e){
     var cleanNumber = e.row.crisis.replace(/\s|-|\./g,'');
     Ti.Platform.openURL('tel:' + cleanNumber);
 }
 
-function addProviderToMap(address, providerName){
-	geocoder.forwardGeocoder(address, function(e){
-		if(e.success)
-		{
-			var annotation = Map.createAnnotation({
-	            latitude: e.places[0].latitude,
-	   			longitude: e.places[0].longitude,
-	            title: providerName,
-	            subtitle: address
-           });
-           $.map.addAnnotation(annotation);
-		}
-		else{
-				Ti.API.info("error with " + address +": "+ e.error);
-			}
-		
-	});	
-}
-
-function toggleMapListView(){
-	if($.mapModule.visible){
-		setMapVisibility(false);
+/**
+ * When tab changes, change the table with which the search function is associated. 
+ */
+$.tabGroup.addEventListener("focus", function(e) {
+	if($.tabGroup.activeTab.title === "NEARBY" && $.providerList.getListView().search != null){
+		providerSearch.changeSearchActionView($.providerList.getListView().search);
 	}
-	else{
-		setMapVisibility(true);
-		$.map.setRegion({latitude:39.719704, longitude:-84.219832, latitudeDelta:0.2, longitudeDelta:0.2});
+	else if($.tabGroup.activeTab.title === "QUICK CALL"){
+		providerSearch.changeSearchActionView($.crisisMenu.search);
 	}
-	
-	function setMapVisibility(isMapVisible){
-		$.mapModule.visible = isMapVisible;
-		$.mapView.visible = !isMapVisible;
-		
-		$.menu.visible = !isMapVisible;
-		$.listView.visible = isMapVisible;
-	}
+});
+
+/**
+ * Reset menu options to prevent java exception.
+ */
+function close(){
+	providerSearch.nullifyAndroidMenu();
 }
-
-function filterResults(){
-	alert("This feature is coming soon!");
-}
-
-Alloy.Globals.addActionBarButtons($.tabGroup);
-

@@ -1,0 +1,17 @@
+"Window":{
+	backgroundColor:"#fff"
+}
+".header":{
+	backgroundColor:"#b8b8b8",
+	height:"45dp",
+	color: "#fff",
+	width:"100%",
+	top:0
+}
+
+"#description":{
+	color:"#000",
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
+	width: "90%"
+}
+

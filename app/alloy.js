@@ -20,30 +20,45 @@ Alloy.Globals.Location = require('LocationUtils');
 
 Alloy.Globals.currentLocation = null;
 
-Alloy.Globals.addActionBarButtons = function(window){
-    window.activity.onCreateOptionsMenu = function(e) { 
-	    var menu = e.menu; 
-	    var menuItem = menu.add({ 
-	    	title:"Hide App",
-	        icon : "images/blind2.png", 
-	        showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
-	    }); 
-	    
-	    var help = menu.add({
-	    	title:"Notify trusted contacts to help you",
-	        icon : "images/add126.png", 
-	        showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
-	    });
-	    
-	    menuItem.addEventListener("click", function(e) { 
-	        Ti.Platform.openURL("http://www.news.yahoo.com"); 
-	    }); 
-	    
-	    help.addEventListener("click", function(e){
-	    	alert("Your trusted contacts have been notified to help you.");
-	    });
-    };
-    
+Alloy.Collections.trustedContacts = Alloy.createCollection('trustedContacts');
+Alloy.Collections.favorites = Alloy.createCollection('favorites');
+Alloy.Models.profileBasics = Alloy.createModel('profileBasics');
+
+//retrieve most current info from collections and models
+Alloy.Collections.trustedContacts.fetch();
+Alloy.Collections.favorites.fetch();
+Alloy.Models.profileBasics.fetch();
+
+Alloy.Globals.addActionBarButtons = function(window, additionalButtons, callback){
+	if(Alloy.Globals.isAndroid){
+	    window.activity.onCreateOptionsMenu = function(e) { 
+		    var menu = e.menu; 
+		    var menuItem = menu.add({ 
+		    	title:"Hide App",
+		        icon : "images/blind2.png", 
+		        showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
+		    }); 
+		    
+		    menuItem.addEventListener("click", Alloy.Globals.hideScreen);
+		     
+		   	var help = menu.add({
+		    	title:"Notify trusted contacts to help you",
+		        icon : "images/add126.png", 
+		        showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
+		    });
+		    
+		    help.addEventListener("click", Alloy.Globals.sendTextMessage);
+		    
+		    if(additionalButtons){
+		    	_.each(additionalButtons, function(button){
+		    		menu.add(button.params);
+		    	});
+		    }
+		    if (typeof callback === 'function'){
+		    	callback(menu);
+		    }
+	    };
+	}
 };
 
 /**
@@ -53,11 +68,6 @@ Alloy.Globals.addActionBarButtons = function(window){
  * The parameters are as follows:
  * 	@param {String} url - REST URL of the request.
  * 	@param {String} type - HTTP method type (e.g., GET, POST, PUT, etc. ).
- * 	@param {boolean} setUserPass - true if username/password credentials need to be sent 
- * 		              with request (i.e., url is an SSL request), 
- *                    false otherwise.
- *  @param {Object} customUserPass (REMOVE IN PRODUCTION) - JSON object formed as {username:'user', password:'pass'}
- * 					  used for the wp-JSON api to pass in custom login data. FOR TESTING ONLY.
  * 	@param {Object} data - JSON object containing any data to be sent with request, 
  * 	           should be null if there's no data to send (JSON).
  * 	@param {Object} onSuccess - callback function to run if request is successful.
@@ -79,7 +89,6 @@ Alloy.Globals.sendHttpRequest = function(url, type, data, onSuccess, onError){
                 Ti.API.error(e);
             };
     	}
-    	
     	
     	if(type == "POST"){
     		//this property must be set BEFORE opening the connection.
@@ -107,12 +116,110 @@ Alloy.Globals.sendHttpRequest = function(url, type, data, onSuccess, onError){
        	data == null ? client.send() : client.send(JSON.stringify(data));
    	}
    	else{
-   	    Alloy.Globals.createNotificationPopup("Cannot establish connection to Drinkos. Please check your network connection.", "Network Error");
+   	    Alloy.Globals.createNotificationPopup("Please check your network connection.", "Network Error");
    	}
 };
-Alloy.Globals.updateActionBar = function(){
-	var abx = require('com.alcoapps.actionbarextras');
-	abx.titleFont = "Quicksand-Regular.otf";
-	abx.setBackgroundColor("#65c8c7");
+
+/**
+ * Function that creates either a toast notification or alert
+ * based on whether the platform is Android or not.
+ * @param {string} message - message to appear in notification
+ */
+Alloy.Globals.createNotificationPopup = function(message){
+	Alloy.Globals.isAndroid ? Ti.UI.createNotification({message:message,
+    				duration: Ti.UI.NOTIFICATION_DURATION_LONG}).show() : alert(message);
 };
 
+/**
+ * Sets the background color and font of the android action bar
+ */
+Alloy.Globals.updateActionBar = function(){
+	if (Alloy.Globals.isAndroid){
+		var abx = require('com.alcoapps.actionbarextras');
+		abx.titleFont = "Dosis-Bold.otf";
+		abx.setBackgroundColor("#009577");
+		abx.titleColor = "#fff";
+	}
+};
+
+/**
+ * Function that hides the apps current screen 
+ */
+Alloy.Globals.hideScreen = function(){
+	var website = Alloy.Models.profileBasics.get('website');
+	if(website.indexOf('http://') > -1 || website.indexOf('https://') > -1){
+		Ti.Platform.openURL(website);
+	}
+	else{
+		Ti.Platform.openURL("http://" + website);
+	}
+};
+/**
+ * Function that composes and sends a text message to user's trusted
+ * contacts. Text message is sent automatically from Android platform.
+ * iOS requires user to push send button after fields have been pre-
+ * populated.
+ */
+Alloy.Globals.sendTextMessage = function(){
+	var count = 0; //flag used to determine if any of the recipients did not get message
+	
+	//get list of trusted contacts
+	var contacts = Alloy.Collections.trustedContacts;
+	contacts.fetch();
+	
+	//get emergency message
+	Alloy.Models.profileBasics.fetch();
+	var message = Alloy.Models.profileBasics.get("emergency_message");
+	
+	var timeout; //timeout used to create alert message after all texts have been sent
+	var sms; //sms module to use depending on platform
+	
+	if(Alloy.Globals.isAndroid){
+		if(contacts.length == 0){
+			alert("You do not have any trusted contacts. Go to 'My Account' to add trusted contacts.");
+			return;
+		}
+		sms = require('ti.android.sms');
+	    sms.addEventListener('complete', isComplete);
+	    
+		contacts.each(function(contact){
+			sms.sendSMS(contact.get("phone_number"), message);
+	    });
+	}
+	else{
+		var module = require('com.omorandi');
+		sms = module.createSMSDialog();
+		
+		if(!sms.isSupported()){
+			alert("Required feature is not available on your device.");
+		}
+		else{
+			sms.addEventListener('complete', isComplete);
+			sms.recipients = contacts.pluck("phone_number");
+			sms.messageBody = message;
+			sms.open({animated:true});
+		}
+	}
+	
+	/**
+	 * Locally scoped function to be called once a text message has been sent. If message failed, 
+	 * user is alerted that one or more numbers may have failed. If no failed status, user is alerted
+	 * that their trusted contacts have been notified.  
+ 	 * @param {Object} e
+	 */
+	function isComplete(e){
+		clearTimeout(timeout);
+		if(e.result === sms.FAILED){
+			count++;
+		}
+		timeout = setTimeout(function(e){
+			if(count > 0){
+				alert("Operation complete, but " + count + " of your trusted contacts could not be reached.");
+			}
+			else{
+				alert("Your trusted contacts have been notified.");
+			}
+			sms.removeEventListener('complete', isComplete);
+		}, 1000);
+	}
+};

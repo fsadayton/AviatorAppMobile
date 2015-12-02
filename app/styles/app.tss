@@ -1,17 +1,84 @@
 "Label":{
 	font:{
-		fontFamily:"QuickSand-Regular"
+		fontFamily:"Dosis-Regular"
 	}
+}
+
+"Button":{
+	font:{
+		fontFamily:"Dosis-Regular"
+	}
+}
+
+"TabGroup":{
+	activeTabIconTint:"#009577"
+}
+
+"Window[platform=ios]":{
+	barColor: "#009577",
+	titleAttributes:{
+		color:"#fff",
+		font:{fontFamily:"Dosis-Bold", fontSize:20}
+   },
+   backgroundColor:"#fff"
 }
 
 ".defaultRow":{
 	height: "70dp",
-	color: "#F69C22",
-	backgroundColor: "#fff"
+	backgroundColor: "#fff",
+	selectedBackgroundColor: "#b2dfd6"
 }
 
 ".divider":{
 	height: "10dp",
-	backgroundColor:"#f9c84d",
+	backgroundColor: "#006e58",
 	top:0
+}
+
+"ActivityIndicator[platform=android]":{
+	message: "Loading...",
+	font:{fontSize:17, fontFamily:"Dosis-Light"},
+	style:Ti.UI.ActivityIndicatorStyle.BIG_DARK,
+	zIndex:1
+}
+
+"#ActivityIndicator[platform=ios]":{
+	message: "Loading...",
+	font:{fontSize:17, fontFamily:"Dosis-Light"},
+	//color:"#8f8f8f",
+	style:Titanium.UI.iPhone.ActivityIndicatorStyle.DARK,
+	//top:"50%",
+	zIndex:1
+}
+
+".modal[platform=android]" : {
+  modal: true,
+  height: "95%",
+  width: "92%",
+  background: "transparent",
+  borderRadius: 10,
+  borderColor:"#009577",
+  borderWidth: 2
+}
+
+".modal[platform=ios]" : {
+  modal: true,
+  background: "transparent",
+  fullscreen: true
+}
+
+".gradient":{
+	backgroundGradient:{
+		type:'linear',
+		startPoint: {x:'50%',y:'0%'},
+		endPoint:{x:'50%', y:'100%'},
+		colors:[{color:"#ececec", offset:0.0},{color:"#fff", offset:1.0}]
+	}
+}
+
+"TableView[platform=ios]":{
+	separatorInsets: {
+        left:0,
+        right:0
+    }
 }

@@ -1,0 +1,26 @@
+
+"ImageView" : {
+ 	width:'25dp',
+ 	height:'25dp'
+}
+
+"#contactName":{
+	left:"60dp",
+	width:"40%",
+	font:{
+		fontFamily:"Dosis-Bold",
+		fontSize:"17dp"
+	},
+	color:"#009577"
+}
+
+"#contactNumber":{
+	right:"60dp",
+	color:"#000",
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_RIGHT
+}
+
+".imageWrapper":{
+	height: "55dp",
+	width: "55dp"
+}

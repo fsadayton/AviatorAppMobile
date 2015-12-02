@@ -11,10 +11,10 @@
 "#subtext":{
 	left: "20dp",
 	bottom: "5dp",
-	color: "#65c8c7",
+	color: "#009577",
 	font:{
 		fontSize: '13dp',
-		fontFamily:"Quicksand-Bold"
+		fontFamily:"Dosis-Bold"
 	},
 	height:"30%"
 }
