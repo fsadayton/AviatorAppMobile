@@ -5,6 +5,8 @@ var categoryDictionary = null;
 var crisisHeaders = [];
 $.activityIndicator.show();
 
+$.crisisLineTable.filterAttribute = Alloy.Globals.isAndroid ? "title" : "orgName";
+
 function storeCategoryLookup(){
 	categoryDictionary = JSON.parse(this.responseText);
 	
@@ -38,11 +40,14 @@ function callPhoneNumber(e){
 }
 
 $.crisisLineTable.search = Alloy.createController("searchView").getView();
-Alloy.Globals.addActionBarButtons($.win, [{
+
+if(Alloy.Globals.isAndroid){
+	Alloy.Globals.addActionBarButtons($.win, [{
 	params:{
 		title: "search...",
 		icon: Ti.Android.R.drawable.ic_menu_search,
 		actionView: $.crisisLineTable.search,
 		showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
 	}
-}]);
+}]);	
+}

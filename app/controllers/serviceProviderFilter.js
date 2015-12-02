@@ -13,6 +13,7 @@ _.each(args.categories, function(category){
 		&& _.find(args.currentCategories, function(cat){return cat.id === category.id;})){
 		params.isSelected = true;
 	}
+	
 	//add bubble picker
 	$.categoriesPicker.add(Alloy.createController('categoryBubble', params).getView());
 });

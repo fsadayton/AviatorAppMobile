@@ -1,9 +1,9 @@
 ".container": {
-	backgroundColor:"#fff",
+	backgroundColor:"#fff"
 }
 
 ".menu":{
-	separatorColor: "#65c8c7",
+	separatorColor: "#E9EBEA"
 }
 
 

@@ -2,9 +2,13 @@
 	<ActivityIndicator id="activityIndicator"/>
 	<View id="listView">
 		<Label id="noResults" zIndex=1 visible=false>No results.</Label>
-		<TableView id="providerList" class="menu" onClick="providerDetail" visible=true filterAttribute="title" />
+		<TableView id="providerList" class="menu" onClick="providerDetail" visible=true>
+			<SearchBar platform="ios"/>
+		</TableView>
 	</View>
 	<View id="mapModule" height="90%" visible=false top=0>
-		<Module id="map" module="ti.map" onClick="mapClick"/>
+		<Module id="map" module="ti.map" onClick="mapClick">
+			<SearchBar id="mapSearch" platform="ios" hintText="Search" top=0/>
+		</Module>
 	</View>
 </Alloy>

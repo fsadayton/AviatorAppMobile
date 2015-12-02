@@ -1,4 +1,6 @@
 var args = arguments[0] || {};
+//initialize actions
+Alloy.Globals.addActionBarButtons($.win);
 
 var tableSection = Ti.UI.createTableViewSection({headerView: Alloy.createController('TableViewHeader', {text:"Select a Specialty Group"}).getView()});
 
@@ -16,5 +18,6 @@ $.generalTable.setData([tableSection]);
  * been incorporated. 
  */
 function listProviders(){
-	Alloy.createController('veteranServices').getView().open();
+	//Alloy.createController('veteranServices').getView().open();
+	Alloy.Globals.open('veteranServices');
 }

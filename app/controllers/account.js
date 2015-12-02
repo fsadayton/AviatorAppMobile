@@ -11,7 +11,6 @@ profileBasics.fetch();
 
 //initialize actions
 Alloy.Globals.addActionBarButtons($.win);
-updateHeader(); //center name and profile pic
 
 /**
  * Change view and update button colors based on which profile button was pressed.
@@ -39,20 +38,6 @@ function toggleSelection(e){
 }
 
 /**
- * Function to center name and profile pic at top of account view.
- */
-var timeout;
-function updateHeader(){
-	$.name.addEventListener("postlayout", function getWidth(){
-		clearTimeout(timeout);
-		$.profileHeader.width = parseInt($.name.size.width) + parseInt($.accountImage.size.width) + 10;
-		timeout = setTimeout(function(){
-			$.name.removeEventListener("postlayout", getWidth);
-		}, 1500);
-	});
-}
-
-/**
  * Used to clean up resources after window is closed
  */
 function destroy(){
@@ -63,12 +48,14 @@ function destroy(){
  * If no contacts or favorite services exist, make "no X selected" label visible.
  */
 function updateLabel(e){
-	var label = e.source.id === "favoriteServicesTable" ? $.noFavorites : $.noContacts;
-	if(e.source.getData().length == 0){
-		label.visible = true;
-	}
-	else{
-		label.visible = false;
+	if(Alloy.Globals.isAndroid){
+		var label = e.source.id === "favoriteServicesTable" ? $.noFavorites : $.noContacts;
+		if(e.source.getData().length == 0){
+			label.visible = true;
+		}
+		else{
+			label.visible = false;
+		}
 	}
 }
 
@@ -115,7 +102,7 @@ function updateProfilePic(){
  */
 function pickCounty(e){
 	var plzWait = null;
-	if(countySelector.isCountiesNull()){
+	if(Alloy.Globals.isAndroid && countySelector.isCountiesNull()){
 		plzWait = Alloy.createController("pleaseWait").getView();
 		plzWait.open();
 	}
@@ -156,8 +143,7 @@ function updateProfile(e){
 	else if(e.source.id === "nameField"){
 		params = {
 			header: "NAME",
-			description:"Enter your name",
-			callback: updateHeader
+			description:"Enter your name"
 		};
 	}
 	params.sourceId = e.source.id;
@@ -185,21 +171,31 @@ function addContact(){
  * @param {Object} e - event
  */
 function doClick(e){
-	if(e.index == 0){ //manually add was selected
+	if(e.index == 1){ //manually add was selected
 		Alloy.createController("profileModal", {
 			header:"ADD CONTACT",
 			description:"Enter contact's name",
 			subDescription:"Enter contact's phone number"
 		}).getView().open();
 	}
-	else if(e.index == 1){ //add from contact list selected
-		Ti.Contacts.showContacts({
-			selectedPerson: function(e){
-				Ti.API.info("person:" + JSON.stringify(e.person.phone));
-				Alloy.createController('trustedContactModal', e.person).getView().open();
-			},
-			fields:['phone', 'name']
-		});
+	else if(e.index == 2){ //add from contact list selected
+		if(Alloy.Globals.isAndroid){
+			Ti.Contacts.showContacts({
+				selectedPerson: function(e){
+					Ti.API.info("person:" + JSON.stringify(e.person.phone));
+					Alloy.createController('trustedContactModal', e.person).getView().open();
+				},
+				fields:['phone', 'name']
+			});
+		}
+		else{
+			Ti.Contacts.showContacts({
+				selectedProperty: function(e){
+					var modelUtils = require('modelUtils');
+					modelUtils.storeTrustedContact(e.value, e.person.fullName);
+				}
+			});
+		}
 	}
 }
 

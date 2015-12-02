@@ -5,17 +5,22 @@
 }
 
 "#contactName":{
-	left:"40dp",
+	left:"60dp",
 	width:"40%",
 	font:{
-		fontFamily:"Quicksand-Bold",
+		fontFamily:"Dosis-Bold",
 		fontSize:"17dp"
 	},
-	color:"#65c8c7"
+	color:"#009577"
 }
 
 "#contactNumber":{
-	right:"40dp",
+	right:"60dp",
 	color:"#000",
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_RIGHT
+}
+
+".imageWrapper":{
+	height: "55dp",
+	width: "55dp"
 }

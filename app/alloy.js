@@ -30,42 +30,35 @@ Alloy.Collections.favorites.fetch();
 Alloy.Models.profileBasics.fetch();
 
 Alloy.Globals.addActionBarButtons = function(window, additionalButtons, callback){
-    window.activity.onCreateOptionsMenu = function(e) { 
-	    var menu = e.menu; 
-	    var menuItem = menu.add({ 
-	    	title:"Hide App",
-	        icon : "images/blind2.png", 
-	        showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
-	    }); 
-	    
-	    menuItem.addEventListener("click", function(e) { 
-	    	//ensure that website url contains 'http'
-	    	var website = Alloy.Models.profileBasics.get('website');
-	    	if(website.indexOf('http://') > -1 || website.indexOf('https://') > -1){
-	    		Ti.Platform.openURL(website);
-	    	}
-	    	else{
-	    		Ti.Platform.openURL("http://" + website);
-	    	}
-	    });
-	     
-	   	var help = menu.add({
-	    	title:"Notify trusted contacts to help you",
-	        icon : "images/add126.png", 
-	        showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
-	    });
-	    
-	    help.addEventListener("click", sendTextMessage);
-	    
-	    if(additionalButtons){
-	    	_.each(additionalButtons, function(button){
-	    		menu.add(button.params);
-	    	});
-	    }
-	    if (typeof callback === 'function'){
-	    	callback(menu);
-	    }
-    };
+	if(Alloy.Globals.isAndroid){
+	    window.activity.onCreateOptionsMenu = function(e) { 
+		    var menu = e.menu; 
+		    var menuItem = menu.add({ 
+		    	title:"Hide App",
+		        icon : "images/blind2.png", 
+		        showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
+		    }); 
+		    
+		    menuItem.addEventListener("click", Alloy.Globals.hideScreen);
+		     
+		   	var help = menu.add({
+		    	title:"Notify trusted contacts to help you",
+		        icon : "images/add126.png", 
+		        showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
+		    });
+		    
+		    help.addEventListener("click", Alloy.Globals.sendTextMessage);
+		    
+		    if(additionalButtons){
+		    	_.each(additionalButtons, function(button){
+		    		menu.add(button.params);
+		    	});
+		    }
+		    if (typeof callback === 'function'){
+		    	callback(menu);
+		    }
+	    };
+	}
 };
 
 /**
@@ -97,7 +90,6 @@ Alloy.Globals.sendHttpRequest = function(url, type, data, onSuccess, onError){
             };
     	}
     	
-    	
     	if(type == "POST"){
     		//this property must be set BEFORE opening the connection.
     		client.setAutoRedirect(false); //do not attempt to redirect to another URL in the event of a 302 Found response
@@ -124,7 +116,7 @@ Alloy.Globals.sendHttpRequest = function(url, type, data, onSuccess, onError){
        	data == null ? client.send() : client.send(JSON.stringify(data));
    	}
    	else{
-   	    Alloy.Globals.createNotificationPopup("Cannot establish connection to Drinkos. Please check your network connection.", "Network Error");
+   	    Alloy.Globals.createNotificationPopup("Please check your network connection.", "Network Error");
    	}
 };
 
@@ -142,18 +134,33 @@ Alloy.Globals.createNotificationPopup = function(message){
  * Sets the background color and font of the android action bar
  */
 Alloy.Globals.updateActionBar = function(){
-	var abx = require('com.alcoapps.actionbarextras');
-	abx.titleFont = "Quicksand-Regular.otf";
-	abx.setBackgroundColor("#65c8c7");
+	if (Alloy.Globals.isAndroid){
+		var abx = require('com.alcoapps.actionbarextras');
+		abx.titleFont = "Dosis-Bold.otf";
+		abx.setBackgroundColor("#009577");
+		abx.titleColor = "#fff";
+	}
 };
 
+/**
+ * Function that hides the apps current screen 
+ */
+Alloy.Globals.hideScreen = function(){
+	var website = Alloy.Models.profileBasics.get('website');
+	if(website.indexOf('http://') > -1 || website.indexOf('https://') > -1){
+		Ti.Platform.openURL(website);
+	}
+	else{
+		Ti.Platform.openURL("http://" + website);
+	}
+};
 /**
  * Function that composes and sends a text message to user's trusted
  * contacts. Text message is sent automatically from Android platform.
  * iOS requires user to push send button after fields have been pre-
  * populated.
  */
-function sendTextMessage(){
+Alloy.Globals.sendTextMessage = function(){
 	var count = 0; //flag used to determine if any of the recipients did not get message
 	
 	//get list of trusted contacts
@@ -168,9 +175,13 @@ function sendTextMessage(){
 	var sms; //sms module to use depending on platform
 	
 	if(Alloy.Globals.isAndroid){
+		if(contacts.length == 0){
+			alert("You do not have any trusted contacts. Go to 'My Account' to add trusted contacts.");
+			return;
+		}
 		sms = require('ti.android.sms');
-	    
 	    sms.addEventListener('complete', isComplete);
+	    
 		contacts.each(function(contact){
 			sms.sendSMS(contact.get("phone_number"), message);
 	    });
@@ -179,7 +190,7 @@ function sendTextMessage(){
 		var module = require('com.omorandi');
 		sms = module.createSMSDialog();
 		
-		if(!smsDialog.isSupported()){
+		if(!sms.isSupported()){
 			alert("Required feature is not available on your device.");
 		}
 		else{
@@ -211,5 +222,4 @@ function sendTextMessage(){
 			sms.removeEventListener('complete', isComplete);
 		}, 1000);
 	}
-}
-
+};

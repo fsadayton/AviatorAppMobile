@@ -7,7 +7,7 @@ var httpCall;
 
 var filteredCategories;
 var filteredCounties;
-var originalMapAnnotations;
+var originalMapAnnotations = [];
 
 var crisisMenu;
 var categorySubset;
@@ -15,6 +15,8 @@ var categorySubset;
 var cats;
 
 $.activityIndicator.show();
+
+$.providerList.filterAttribute = Alloy.Globals.isAndroid ? "title" : "orgName";
 
 /**
  * Determine type of provider list view and set the API call accordingly
@@ -88,6 +90,7 @@ function getTableData(categories, counties){
 					//store list of table headers
 					allHeaders.push(Ti.UI.createTableViewSection({
 						title:category.id, 
+						catName: category.name,
 						headerView: Alloy.createController('TableViewHeader', {text:category.name}).getView()
 					}));
 				}
@@ -96,7 +99,6 @@ function getTableData(categories, counties){
 		else if(categories && args.providerType != "general"){
 			cats = categories;
 		}
-	
 		//send request to get all service providers that provide services for counties and categories
 		Alloy.Globals.sendHttpRequest(apiUrl, "GET", null, parseResponse);
 	}
@@ -112,17 +114,29 @@ function getTableData(categories, counties){
  */
 function filterCategories(categories){
 	var localFilter = [];
+	var localMap = [];
 	filteredCategories = [];
 	_.each(categories, function(category){
 		filteredCategories.push({id:category});
-		var index = _.find(allHeaders, function(header){
+		var header = _.find(allHeaders, function(header){
 			return header.title === category;	
 		});
-		localFilter.push(index);
-		$.providerList.setData(localFilter);
-		$.providerList.visible = true;
-		$.activityIndicator.hide();
+		localFilter.push(header);
 	});
+	$.providerList.setData(localFilter);
+	$.providerList.visible = true;
+	$.activityIndicator.hide();
+	
+	_.each(originalMapAnnotations, 
+    	function(annotation){
+    		_.each(localFilter, function(header){
+    			if(_.contains(annotation.row.categories, header.title)){
+    				localMap.push(annotation);
+    			}
+    		});
+     	}
+	);
+     $.map.setAnnotations(localMap);
 }
 
 /**
@@ -132,28 +146,33 @@ function filterCategories(categories){
 function parseResponse(){
 	var json = JSON.parse(this.responseText);
 	$.map.removeAllAnnotations(); //remove any previous map annotations
+	$.providerList.visible = true;
 
 	//if no results are returned, let user know that there are no results
 	if(json.length === 0){
+		$.providerList.setData([]);
 		$.activityIndicator.hide();
 		$.noResults.visible = true;
 	}
 	else{
 		var sections = {};
 		var crisisHeaders = []; //reset list of crisis numbers
+		originalMapAnnotations = []; //TODO remove?
 		//iterate through list of providers in JSON
 		_.each(json, function(provider){
 			var params = {
 				orgName:provider.name,
 				address:provider.address,
-				description:provider.description,
+				orgDesc:provider.description,
 				phone: provider.phoneNumber,
 				email: provider.email,
-				website: provider.website
+				website: provider.website,
+				categories: provider.categories
 			};
 			addProviderToMap(params); //add provider location to the map
+			
 			//create table row with detail metadata
-			var row = Alloy.createController('serviceProviderRow', params).getView();	
+			var row = Alloy.Globals.isAndroid ? Alloy.createController('serviceProviderRow', params).getView() : params;
 			
 			//if provider has a crisis number, add it to crisis line table	
 			if(provider.crisisNumber){
@@ -177,7 +196,6 @@ function parseResponse(){
 		var keys = Object.keys(sections);
 		allHeaders = allHeaders.length > 0 ?  allHeaders : keys.map(function(v){return sections[v];});
 		
-		originalMapAnnotations = $.map.annotations; //store original map points
 		//hide spinners
 		$.activityIndicator.hide();
 		//make tables visible
@@ -214,7 +232,8 @@ function addRowToDynamicSections(sections, category, row){
 					headerView: Alloy.createController('TableViewHeader', {text:categoryDict.name}).getView()
 				});
 			}
-			sections[categoryDict.id].add(row);
+			var rowAddition = Alloy.Globals.isAndroid ? row : Alloy.createController('serviceProviderRow', row).getView();
+			sections[categoryDict.id].add(rowAddition);
 			return true;
 		}
 	});
@@ -229,7 +248,8 @@ function addRowToDynamicSections(sections, category, row){
 function addRowToDefinedSections(category, row){
 	_.find(allHeaders, function(header){
 		if(header.title === category){
-			header.add(row);
+			var rowAddition = Alloy.Globals.isAndroid ? row : Alloy.createController('serviceProviderRow', row).getView();
+			header.add(rowAddition);
 			return true;
 		}
 	});
@@ -239,14 +259,16 @@ function addRowToDefinedSections(category, row){
  * Function for opening provider detail page
  */
 function providerDetail(e){
-	Alloy.createController('providerDetail',{
+	var args = {
 		orgName:e.row.orgName,
 		address: e.row.address,
-		description: e.row.description,
+		description: e.row.orgDesc,
 		phone: e.row.phone,
 		email: e.row.email,
-		website: e.row.website
-	}).getView().open();
+		website: e.row.website,
+		title: "Provider Details"
+	};
+	Alloy.Globals.open('providerDetail', args);
 }
 
 /**
@@ -255,13 +277,19 @@ function providerDetail(e){
 function addProviderToMap(params){
 	Alloy.Globals.Location.runCustomFwdGeocodeFunction(params.address, addAnnotation);
 	function addAnnotation(e){
-		var annotation = Map.createAnnotation({
-	            latitude: e.places[0].latitude,
-	   			longitude: e.places[0].longitude,
-	            title: params.orgName,
-	            row: params
-           });
-           $.map.addAnnotation(annotation);
+		var annotationParams = {
+			latitude: e.places[0].latitude,
+	   		longitude: e.places[0].longitude,
+	        title: params.orgName,
+	        row: params	
+		};
+		if(!Alloy.Globals.isAndroid){
+			annotationParams.leftButton = "/global/info28_small.png";
+		}
+		var annotation = Map.createAnnotation(annotationParams);
+        $.map.addAnnotation(annotation);
+        originalMapAnnotations.push(annotation);
+           
 	}
 }
 
@@ -271,13 +299,13 @@ function addProviderToMap(params){
  * the annotation popup box. 
  */
 function mapClick(e){
-	if(e.clicksource && e.clicksource != "pin"){
+	if(e.clicksource && e.clicksource != "pin" && e.clicksource != "map"){
 		providerDetail(e.annotation);
 	}
 	else if(e.clicksource && e.clicksource === "pin"){
 		Alloy.Globals.Location.estimateDistance(Alloy.Globals.currentLocation, e.annotation.row.address + ", US", 
 			function(distance){
-				e.annotation.subtitle = distance + " • click for details";
+				e.annotation.subtitle = Alloy.Globals.isAndroid ? distance + " • click for details" : distance;
 			}
 		);
 	}
@@ -331,30 +359,40 @@ exports.setCategories = function(categories){
 	categorySubset = categories;
 };
 
+if(!Alloy.Globals.isAndroid){
+	$.mapSearch.addEventListener('change', searchTimeout);
+}
 /**
  * Timeout function used for searching and setting the map annotations when typing
  * in search bar
  */
 var timeout = null;
-exports.searchTimeout = function(e){
+function searchTimeout(e){
 	if(timeout){
     	clearTimeout(timeout);//do not let previous timeouts run
     }
     //Using 1.2 second timeout to reduce amount of map redrawing.
     timeout = setTimeout(function() {
+    	Ti.API.info("RAWR: " + e.source.value);
     	if(e.source.value.length > 0){ //if search field contains a value
+    		
+    		Ti.API.info("in the if + orig map...: " + originalMapAnnotations);
      		//find map annotations whose title contains the search field value
      		var filteredAnnotations = _.filter(originalMapAnnotations, 
      				function(annotation){
+     					Ti.API.info("ann title" + annotation.title);
      					return annotation.title.toLowerCase().indexOf(e.source.value.toLowerCase()) > -1;
      				}
      			);
      		$.map.setAnnotations(filteredAnnotations);
      	}
      	else{
+     		Ti.API.info("in the else wtf");
      		//if search is empty, put all annotations back on the map
      		$.map.setAnnotations(originalMapAnnotations);
      	}
     },1200);
    		
-};
+}
+
+exports.searchTimeout = searchTimeout;

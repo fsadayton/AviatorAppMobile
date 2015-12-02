@@ -37,7 +37,7 @@ function parseCrimes(){
 }
 
 function listProviders(e){
-	Alloy.createController('serviceProviders', {categories:e.row.categories}).getView().open();
+	Alloy.Globals.open('serviceProviders', {categories:e.row.categories, title:e.row.family});
 }
 
 Alloy.Globals.addActionBarButtons($.tabGroup);

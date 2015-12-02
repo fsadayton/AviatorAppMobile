@@ -1,14 +1,14 @@
 
 "#sectionHeader" : {
-  backgroundColor:'#939393',
+  backgroundColor:'#D5D5D5',
   width:Ti.UI.FILL,
   height:'40dp' 
 }
 
 "#sectionLabel":{
 	font:{
-		fontFamily:"Quicksand-Bold",
+		fontFamily:"Dosis-Bold",
 		fontSize:'17dp'
 	},
-	color:"#fff"
+	color:"#3D3D3D"
 }

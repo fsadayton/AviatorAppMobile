@@ -5,7 +5,7 @@
 }
 
 ".buttonBarAction":{
-	backgroundColor:"#65c8c7",
+	backgroundColor:"#009577",
 	width:"49.7%",
 }
 
@@ -18,7 +18,7 @@
 	color:"#fff",
 	left:"45%",
 	font:{
-		fontFamily:"Quicksand-Bold",
+		fontFamily:"Dosis-Bold",
 		fontSize:"17dp"
 	}
 }

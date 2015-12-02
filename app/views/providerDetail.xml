@@ -1,19 +1,34 @@
 <Alloy>
-	<Window class="container" id="win" onOpen="Alloy.Globals.updateActionBar">
-		<Require src="header"></Require>
+	<Window id="win" onOpen="Alloy.Globals.updateActionBar">
+		<RightNavButtons platform="ios">
+			<View height="Ti.UI.SIZE">
+				<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
+			</View>
+			<View width=55 height="Ti.UI.SIZE">
+				<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
+			</View>
+			<View width=45 height="Ti.UI.SIZE">
+				<Button id="navShare" backgroundImage="/images/social24.png" onClick="iosShare"  />
+			</View>
+			<View width=45 height="Ti.UI.SIZE">
+				<Button id="navFavorite" backgroundImage="/images/star129.png" onClick="tagAsFavorite"  />
+			</View>
+		</RightNavButtons>
 		<View class="divider"/>
 		<Label id="providerName"/>
 		
-		<TextArea id="providerDescription"/>
+		<View id="descGroup">
+			<TextArea id="providerDescription"/>
+		</View>
 		
-		<Label id="addressLabel">ADDRESS</Label>
 		<View id="addressView">
+			<Label id="addressLabel">ADDRESS</Label>
 			<Label id="address"/>
 			<Button id="driveButton" onClick="getDirections">Get Directions</Button>
 		</View>
 
 		<View id="phoneView" class="actionView" onClick="callPhoneNumber">
-			<ImageView class="actionImage" image="/global/phone_256.png" />
+			<ImageView class="actionImage" image="/global/phone72.png" />
 			<Label id="phoneLabel" class="actionLabel"/>
 		</View>
 		<View id="emailView" class="actionView" onClick="openEmail">
@@ -21,7 +36,7 @@
 			<Label id="emailLabel" class="actionLabel">EMAIL THIS PROVIDER</Label>
 		</View>
 		<View id="websiteView" class="actionView" onClick="openWebsite">
-			<ImageView class="actionImage" image="/global/domain256.png" />
+			<ImageView class="actionImage" image="/global/web58.png" />
 			<Label id="webLabel" class="actionLabel">VISIT WEBSITE</Label>
 		</View>
 		<View id="downloadAppView" class="actionView" onClick="downloadApp">
