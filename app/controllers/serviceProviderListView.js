@@ -99,6 +99,7 @@ function getTableData(categories, counties){
 		else if(categories && args.providerType != "general"){
 			cats = categories;
 		}
+		
 		//send request to get all service providers that provide services for counties and categories
 		Alloy.Globals.sendHttpRequest(apiUrl, "GET", null, parseResponse);
 	}
@@ -167,7 +168,8 @@ function parseResponse(){
 				phone: provider.phoneNumber,
 				email: provider.email,
 				website: provider.website,
-				categories: provider.categories
+				categories: provider.categories,
+				catNames: categoryNames
 			};
 			addProviderToMap(params); //add provider location to the map
 			
@@ -249,6 +251,7 @@ function addRowToDefinedSections(category, row){
 	_.find(allHeaders, function(header){
 		if(header.title === category){
 			var rowAddition = Alloy.Globals.isAndroid ? row : Alloy.createController('serviceProviderRow', row).getView();
+			Ti.API.info("row args:" + rowAddition.args + ":" + rowAddition.);
 			header.add(rowAddition);
 			return true;
 		}

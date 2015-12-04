@@ -1,7 +1,10 @@
 var args = arguments[0] || {};
 
 $.providerName.text = args.orgName;
-$.subtext.text = args.crisis ? "CALL " + args.crisis : Alloy.Globals.Location.estimateDistance(Alloy.Globals.currentLocation, args.address + ", US", setSubtext);
+
+$.subtext.text = args.crisis ? "CALL " + args.crisis : args.catNames.toString();
+
+$.miles.text = args.crisis == null ? Alloy.Globals.Location.estimateDistance(Alloy.Globals.currentLocation, args.address + ", US", setMilesAway) : "";
 
 $.row.orgName = args.orgName;
 $.row.address = args.address;
@@ -19,8 +22,8 @@ if(args.crisis){
 	$.row.crisis = args.crisis;
 }
 
-function setSubtext(distance){
-	$.subtext.text = distance;
+function setMilesAway(distance){
+	$.miles.text = distance;
 }
 
 

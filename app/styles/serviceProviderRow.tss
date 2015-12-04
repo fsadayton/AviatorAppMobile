@@ -1,16 +1,17 @@
 "#providerName": {
-	left: "20dp",
+	left: "10dp",
 	top:0,
 	color: "#666",
 	font:{
 		fontSize: '17dp'
 	},
 	height:"70%",
+	width:"78%"
 }
 
 "#subtext":{
-	left: "20dp",
-	bottom: "5dp",
+	left: "10dp",
+	bottom: "3dp",
 	color: "#009577",
 	font:{
 		fontSize: '13dp',
@@ -18,3 +19,14 @@
 	},
 	height:"30%"
 }
+
+"#miles":{
+	right:"10dp",
+	textAlign:"center",
+	color: "red",
+	width:"15%",
+	font:{
+		fontSize:'13dp'
+	}
+}
+
