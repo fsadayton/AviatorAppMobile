@@ -2,7 +2,7 @@ var args = arguments[0] || {};
 
 $.providerName.text = args.orgName;
 
-$.subtext.text = args.crisis ? "CALL " + args.crisis : args.catNames.toString();
+$.subtext.text = args.crisis ? "CALL " + args.crisis : args.catNames.join(", ");
 
 $.miles.text = args.crisis == null ? Alloy.Globals.Location.estimateDistance(Alloy.Globals.currentLocation, args.address + ", US", setMilesAway) : "";
 
@@ -12,6 +12,7 @@ $.row.orgDesc = args.orgDesc;
 $.row.phone = args.phone;
 $.row.email = args.email;
 $.row.website = args.website;
+$.row.categories = args.categories;
 
 
 if(Alloy.Globals.isAndroid){
