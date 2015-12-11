@@ -2,7 +2,7 @@ var args = arguments[0] || {};
 var Map = require('ti.map');
 
 var categoryDictionary;
-var categoryNames;
+var categoryNames; //used for filter bubbles
 var httpCall;
 
 var filteredCategories;
@@ -89,12 +89,6 @@ function getTableData(categories, counties){
 			_.each(categoryDictionary, function(category){
 				if (_.contains(currentCategories, category.id)){
 					filteredCategories.push(category); //store list of currently selected categories, pass to filter when necessary
-					//store list of table headers
-					/*allHeaders.push(Ti.UI.createTableViewSection({
-						title:category.id, 
-						catName: category.name,
-						headerView: Alloy.createController('TableViewHeader', {text:category.name}).getView()
-					}));*/
 					allHeaders[category.id] = category.name;
 				}
 			});
@@ -120,15 +114,11 @@ function filterCategories(categories){
 	var localFilter = [];
 	var localMap = [];
 	filteredCategories = [];
-	Ti.API.info("filter t data: " + tableData);
-	Ti.API.info("cats: " + categories);
-	_.each(categories, function(category){
-		filteredCategories.push({id:category});
-		_.each(tableData, function(tableRow){
-			if(_.contains(tableRow.args.categories, category)){
-				localFilter.push(tableRow.getView());
-			}
-		});
+	_.each(tableData, function(data){
+		var match = _.find(categories, function(category){return _.contains(data.args.categories, category);});
+		if(match != null){
+			localFilter.push(data.getView());
+		}
 	});
 	
 	$.providerList.setData(localFilter);
@@ -138,6 +128,7 @@ function filterCategories(categories){
 	_.each(originalMapAnnotations, 
     	function(annotation){
     		_.each(categories, function(category){
+    			filteredCategories.push({id:category});
     			if(_.contains(annotation.row.categories, category)){
     				localMap.push(annotation);
     			}
@@ -181,9 +172,6 @@ function parseResponse(){
 			};
 			addProviderToMap(params); //add provider location to the map
 			
-			//create table row with detail metadata
-			//var row = Alloy.Globals.isAndroid ? Alloy.createController('serviceProviderRow', params).getView() : params;
-			
 			//if provider has a crisis number, add it to crisis line table	
 			if(provider.crisisNumber){
 				crisisHeaders.push(Alloy.createController('serviceProviderRow', {
@@ -194,15 +182,15 @@ function parseResponse(){
 			//iterate through all of the categories that service provider specializes in
 			_.each(provider.categories, function(category){
 				//iterate through list of table headers and add service provider to header if category matches
-				if(allHeaders[category] != null){
-					params.catNames.push(allHeaders[category]);
-				}
-				/**if(args.providerType === "general"){
-					addRowToDefinedSections(category, row);
+				if(args.providerType === "general"){
+					if(allHeaders[category] != null){
+						params.catNames.push(allHeaders[category]);
+					}
 				}
 				else{
-					addRowToDynamicSections(sections, category, row);
-				}**/
+					var row = Alloy.createController('serviceProviderRow', params).getView();
+					addRowToDynamicSections(params.catNames, category, row);
+				}
 
 			});
 			var rowData = Alloy.createController('serviceProviderRow', params);
@@ -210,7 +198,6 @@ function parseResponse(){
 			allRows.push(rowData.getView());
 		});
 		var keys = Object.keys(sections);
-		//allHeaders = allHeaders.length > 0 ?  allHeaders : keys.map(function(v){return sections[v];});
 		
 		//hide spinners
 		$.activityIndicator.hide();
@@ -219,8 +206,6 @@ function parseResponse(){
 		
 		//set table data
 		if(cats == null){
-			Ti.API.info("table data: " + JSON.stringify(tableData[0].row));
-			//$.providerList.setData(allHeaders);
 			$.providerList.setData(allRows);
 		}
 		else{
@@ -243,7 +228,14 @@ function parseResponse(){
 function addRowToDynamicSections(sections, category, row){
 	_.find(categoryDictionary, function(categoryDict){
 		if(categoryDict.id === category){
-			if(sections[categoryDict.id] == null){
+			sections.push(categoryDict.name);
+			if(!_.contains(categoryNames, categoryDict)){
+				categoryNames.push(categoryDict);
+			}
+			
+			
+			return true;
+			/*if(sections[categoryDict.id] == null){
 				categoryNames.push(categoryDict);
 				sections[categoryDict.id] = Ti.UI.createTableViewSection({
 					title:categoryDict.id, 
@@ -252,7 +244,7 @@ function addRowToDynamicSections(sections, category, row){
 			}
 			var rowAddition = Alloy.Globals.isAndroid ? row : Alloy.createController('serviceProviderRow', row).getView();
 			sections[categoryDict.id].add(rowAddition);
-			return true;
+			return true;*/
 		}
 	});
 }
@@ -394,7 +386,6 @@ function searchTimeout(e){
     	Ti.API.info("RAWR: " + e.source.value);
     	if(e.source.value.length > 0){ //if search field contains a value
     		
-    		Ti.API.info("in the if + orig map...: " + originalMapAnnotations);
      		//find map annotations whose title contains the search field value
      		var filteredAnnotations = _.filter(originalMapAnnotations, 
      				function(annotation){

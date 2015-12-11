@@ -11,19 +11,22 @@
 
 "#subtext":{
 	left: "10dp",
+	right: "10dp",
 	bottom: "3dp",
 	color: "#009577",
 	font:{
 		fontSize: '13dp',
 		fontFamily:"Dosis-Bold"
 	},
-	height:"30%"
+	height:"16dp",
+	wordWrap: false,
+	ellipsize: Titanium.UI.TEXT_ELLIPSIZE_TRUNCATE_END
 }
 
 "#miles":{
 	right:"10dp",
 	textAlign:"center",
-	color: "red",
+	color: "#203444",
 	width:"15%",
 	font:{
 		fontSize:'13dp'
