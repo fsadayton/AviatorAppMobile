@@ -13,13 +13,13 @@
 		
 		<View class="boxContainer">
 			<View class="left box" onClick="openProviders" >
-				<View class="divider" backgroundColor="#d06503"/>
+				<View class="divider" />
 				<Label class="name" >PERSONAL RESOURCES</Label>
 				<ImageView class="icon" image="/global/familiar17.png" />
 				<Label class="description">View organizations that can help address your needs</Label>
 			</View>
 			<View class="right box" onClick="openCorrections" > 
-				<View class="divider" backgroundColor="#e9931a"/>
+				<View class="divider" />
 				<Label class="name">LAW & CORRECTIONS</Label>
 				<ImageView class="icon" image="/global/hands6.png" />
 				<Label class="description">Contact local authorities or find jail time info about an offender</Label>
@@ -28,13 +28,13 @@
 		
 		<View class="boxContainer">
 			<View class="left box" onClick="openVictimCompensation">
-				<View class="divider" backgroundColor="#9d9fa2"/>
+				<View class="divider" />
 				<Label class="name" >VICTIM COMPENSATION</Label>
 				<ImageView class="icon" image="/global/compensation_256.png" />
 				<Label class="description">Victim of a violent crime? View financial assistance options here.</Label>
 			</View>
 			<View class="right box" onClick="openSpecialServices">
-				<View class="divider" backgroundColor="#577590"/>
+				<View class="divider" />
 				<Label class="name">SPECIALIZED SERVICES</Label>
 				<ImageView class="icon" image="/global/disabled8.png" />
 				<Label class="description">Find specialized resources for veterans, the elderly, and more</Label>
@@ -43,13 +43,13 @@
 		
 		<View class="boxContainer">
 			<View class="left box" onClick="openAccount">
-				<View class="divider" backgroundColor="#009577"/>
+				<View class="divider" />
 				<Label class="name">MY ACCOUNT</Label>
 				<ImageView class="icon" image="/global/round58.png" />
 				<Label class="description">View your trusted contacts and favorite providers</Label>
 			</View>
 			<View class="right box" onClick="openCrisisLines" >
-				<View class="divider" backgroundColor="#203444"/>
+				<View class="divider" />
 				<Label class="name">CRISIS CONTACTS</Label>
 				<ImageView class="icon" image="/global/phone_256.png" />
 				<Label class="description">View local phone numbers that match your needs</Label>
