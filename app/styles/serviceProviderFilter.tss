@@ -30,11 +30,16 @@
 	width: "30dp"
 }  
 
+".summary[platform=ios]":{
+	height: "20dp"
+}
+
 ".summary":{
 	left:"3dp",
 	right:"3dp",
 	color:"#000",
-	wordWrap:"true"
+	width:Titanium.UI.SIZE,
+	wordWrap: true
 }
 
 "#categoriesPicker":{
@@ -55,11 +60,15 @@
 	right:"5dp"
 }
 
+".emph[platform=ios]":{
+	height:'auto'
+}
+
 ".emph":{
 	font:{
-		fontFamily: "Quicksand-Bold"
+		fontFamily: "Dosis-Bold"
 	},
-	color:"#65c8c7"
+	color:"#009577"
 }
 
 "#buttonBar":{
@@ -69,7 +78,7 @@
 
 "Button":{
 	font:{
-		fontFamily:"Quicksand-Bold"
+		fontFamily:"Dosis-Bold"
 	},
 	color:"#666",
 	borderColor:"#f9c84d",

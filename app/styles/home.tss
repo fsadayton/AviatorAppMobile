@@ -1,0 +1,68 @@
+".container": {
+	backgroundColor:"#fff",
+}
+".boxContainer":{
+	height:"28%",
+	color:"#7d7d7d"
+}
+
+"#welcomeLabel[platform=android]":{
+	color:"#143963",
+	bottom:"5dp",
+	top:"7dp",
+	textAlign:"center",
+	height: "10%"
+}
+
+"#welcomeLabel[platform=ios]":{
+	color:"#143963",
+	bottom:"5dp",
+	top:"9dp",
+	textAlign:"center",
+	height: "80px",
+	width: "381px"
+}
+
+".box":{
+	borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#203444",
+	height: "90%",
+	width: "45%",
+	layout:"vertical"
+}
+
+".left":{
+	left:"10dp"
+}
+
+".right":{
+	right:"10dp"
+}
+
+".name":{
+	font:{
+		fontFamily:"Dosis-Bold",
+		fontSize:'14dp'
+	},
+	top:"1dp",
+	color:"#203444",
+	height:"30%",
+	textAlign:"center"
+}
+".icon":{
+	height: "25%",
+	top:"1dp",
+	bottom:"1dp"
+}
+
+".description":{
+	bottom:"5dp",
+	width:"95%",
+	font:{
+		fontSize:'10dp'
+	},
+	textAlign: "center",
+	height:"30%",
+	color:"#203444"
+}

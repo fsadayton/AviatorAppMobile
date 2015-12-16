@@ -1,20 +1,62 @@
 <Alloy>
-	<TabGroup id="tabGroup" onOpen="Alloy.Globals.updateActionBar">
-		<Tab title="GENERAL">
+	<TabGroup id="tabGroup" onOpen="Alloy.Globals.updateActionBar" platform="android">
+		<Tab title="GENERAL" icon="/tabs/home63.png">
 			<Window class="container" id="win">
 				<ActivityIndicator id="generalIndicator"/>
 				<TableView id="generalTable" class="menu" onClick="listProviders">
 				</TableView>
+				<RightNavButtons platform="ios" top=50>
+					<View height="Ti.UI.SIZE" backgroundColor="green">
+						<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
+					</View>
+					<View width=55 height="Ti.UI.SIZE">
+						<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
+					</View>
+				</RightNavButtons>
 			</Window>
 		</Tab>
-		<Tab title="CRIME">
+		<Tab title="CRIME" icon="/tabs/criminal.png" >
 			<Window class="container" id="win">
+				<RightNavButtons platform="ios">
+					<View height="Ti.UI.SIZE">
+						<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
+					</View>
+					<View width=55 height="Ti.UI.SIZE">
+						<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
+					</View>
+				</RightNavButtons>
 				<ActivityIndicator id="crimeIndicator"/>
 				<TableView id="crimeTable" class="menu" onClick="listProviders">
 				</TableView>
 			</Window>
-			
 		</Tab>
 	</TabGroup>
+	
+	<Window id="tabGroup" platform="ios">
+		<RightNavButtons platform="ios">
+			<View height="Ti.UI.SIZE">
+				<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
+			</View>
+			<View width=55 height="Ti.UI.SIZE">
+				<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
+			</View>
+		</RightNavButtons>
+		<View id="container" bottom="50" top="0" left="0" right="0">
+			<View id="tab1" visible="true">
+				<ActivityIndicator id="generalIndicator"/>
+				<TableView id="generalTable" class="menu" onClick="listProviders">
+				</TableView>
+			</View>
+			<View id="tab2" visible="false">
+				<ActivityIndicator id="crimeIndicator"/>
+				<TableView id="crimeTable" class="menu" onClick="listProviders">
+				</TableView>
+			</View>
+		</View>
+		<View bottom="0" height=Ti.UI.SIZE>
+			<Button id="leftTab" left="0" class="iosTab" width="50%" title=" GENERAL" image="/tabs/home63.png" onClick="onLeftTabClick" tintColor="#009577"/>
+			<Button id="rightTab" right="0" class="iosTab" width="50%" title="CRIME" image="/tabs/criminal.png" onClick="onRightTabClick" tintColor="#929292"/>
+		</View>
+	</Window>
 	
 </Alloy>

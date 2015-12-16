@@ -1,6 +1,7 @@
 var args = arguments[0] || {};
 
 var contacts = Alloy.Collections.trustedContacts;
+//contacts.fetch();
 var id;
 
 if($model){
@@ -12,6 +13,7 @@ if($model){
  * @param {Object} e
  */
 function deleteContact(e){
+	
 	e.cancelBubble = true;
 
 	Alloy.createController("alertDialog", {

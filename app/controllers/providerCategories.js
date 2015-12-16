@@ -4,8 +4,8 @@ $.crimeIndicator.show();
 var tableSection = Ti.UI.createTableViewSection({headerView: Alloy.createController('TableViewHeader', {text:"What can we help you with?"}).getView()});	
 var crimeTableSection = Ti.UI.createTableViewSection({headerView: Alloy.createController('TableViewHeader', {text:"What can we help you with?"}).getView()});
 
-Alloy.Globals.sendHttpRequest("GetFamilies", "GET", null, parseFamilies);
-Alloy.Globals.sendHttpRequest("GetCrimeTypes", "GET", null, parseCrimes);
+Alloy.Globals.sendHttpRequest(Alloy.CFG.appData + "GetFamilies", "GET", null, parseFamilies);
+Alloy.Globals.sendHttpRequest(Alloy.CFG.appData + "GetCrimeTypes", "GET", null, parseCrimes);
 
 function parseFamilies(){
 	var json = JSON.parse(this.responseText);
@@ -37,7 +37,23 @@ function parseCrimes(){
 }
 
 function listProviders(e){
-	Alloy.createController('serviceProviders', {categories:e.row.categories}).getView().open();
+	Alloy.Globals.open('serviceProviders', {categories:e.row.categories, title:e.row.family});
+}
+
+function onLeftTabClick(){
+	$.tab1.visible = true;
+	$.tab2.visible = false;
+	
+	$.leftTab.tintColor = "#009577";
+	$.rightTab.tintColor = "#929292";
+}
+
+function onRightTabClick(){
+	$.tab1.visible = false;
+	$.tab2.visible = true;
+	
+	$.rightTab.tintColor = "#009577";
+	$.leftTab.tintColor = "#929292";;
 }
 
 Alloy.Globals.addActionBarButtons($.tabGroup);

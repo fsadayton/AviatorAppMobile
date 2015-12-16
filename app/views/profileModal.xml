@@ -12,7 +12,7 @@
 			<Label class="description" id="description"/>
 			<TextField id="generalTextField" />
 		</View>
-		<View id="subTextView" class="container general" top="27%">
+		<View id="subTextView" class="container general" top="30%">
 			<Label class="description" id="subDescription" />
 			<TextField id="subTextField" keyboardType="Ti.UI.KEYBOARD_NUMBER_PAD"/>
 		</View>

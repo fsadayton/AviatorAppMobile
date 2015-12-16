@@ -1,68 +1,72 @@
-
-"Window":{
-	backgroundColor:"#fff",
+"#win":{
+	backgroundColor:"#203444",
 	layout:"vertical"
 }
 
 "#providerName":{
-	backgroundColor:"#d8d8d8",
+	backgroundColor:"#D5D5D5",
 	font:{
-		fontFamily:"Quicksand-Bold",
+		fontFamily:"Dosis-Bold",
 		fontSize: "20dp"
 	},
 	textAlign: "center",
-	color:"#fff",
+	color:"#3D3D3D",
 	width:"100%"
 }
 
 "#providerDescription":{
-	borderColor:"#65c8c7",
-	borderRadius: 10,
-	borderWidth: 2,
 	color:"#666",
 	editable: false,
 	focusable: false,
-	height:"20%",
+	height:"90%",
 	font:{
-		fontFamily:"Quicksand-Regular",
+		fontFamily:"Dosis-Regular",
 		fontSize: "15dp"
 	},
 	top:"10dp",
-	width: "90%"
+	width: "90%",
+	backgroundColor: "#fff",
+	textAlign: "center"
 }
 "#addressLabel":{
 	font:{
-		fontFamily:"Quicksand-Bold",
+		fontFamily:"Dosis-Bold",
 		fontSize: "15dp"
 	},
-	color:"#65c8c7",
+	color:"#203444",
 	left:"10dp",
-	top:"15dp"
+	top:"5dp"
 }
 "#address":{
 	left:"10dp",
 	width:"50%",
-	color:"#7d7d7d"
+	color:"#203444",
+	top:"25dp"
 }
 "#addressView":{
-	height:"55dp"
+	height:"75dp",
+	backgroundColor:"#E9EBEA"//"#cecfd0"
 }
 
 "ImageView":{
 	width:"30dp"
 }
 
+"#descGroup":{
+	backgroundColor:"#fff",
+	height:"25%"
+}
+
 ".actionView":{
 	height:"45dp",
 	width:"90%",
-	borderRadius:20,
-	borderWidth: 2,
-	borderColor:"#f9c84d",
-	top:"10dp"
+	borderRadius:10,
+	backgroundColor:"#009577",
+	top:"15dp"
 }
 
 ".actionLabel":{
-	color:"#7d7d7d",
+	color:"#fff",
 	textAlign: "center"
 }
 
@@ -73,7 +77,8 @@
 "#driveButton":{
 	right: "10dp",
 	font:{
-		fontFamily:"Quicksand-Light"
+		fontFamily:"Dosis-Light"
 	},
-	borderRadius:10
+	borderRadius:10,
+	color: "#203444"
 }

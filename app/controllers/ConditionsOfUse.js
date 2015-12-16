@@ -26,5 +26,11 @@ function saveAgreement(e){
  */
 function closeApp(){
 	Ti.App.Properties.setBool("hasAgreedToConditions", false);
-	$.win.close();
+	if(Alloy.Globals.isAndroid){
+		$.win.close();
+	}
+	else{
+		alert("You cannot proceed to the app unless you agree to the Conditions of Use.");
+	}
+	
 }

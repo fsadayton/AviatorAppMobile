@@ -1,0 +1,14 @@
+<Alloy>
+	<Window class="container" id="win" onOpen="Alloy.Globals.updateActionBar">
+		<RightNavButtons platform="ios">
+			<View height="Ti.UI.SIZE">
+				<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
+			</View>
+			<View width=55 height="Ti.UI.SIZE">
+				<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
+			</View>
+		</RightNavButtons>
+		<TableView id="generalTable" class="menu" onClick="listProviders">
+		</TableView>
+	</Window>
+</Alloy>

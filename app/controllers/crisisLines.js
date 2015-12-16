@@ -1,18 +1,20 @@
 var args = arguments[0] || {};
 
-Alloy.Globals.sendHttpRequest("GetCategoryLookupIndex", "GET", null, storeCategoryLookup);
+Alloy.Globals.sendHttpRequest(Alloy.CFG.appData + "GetCategoryLookupIndex", "GET", null, storeCategoryLookup);
 var categoryDictionary = null;
 var crisisHeaders = [];
 $.activityIndicator.show();
+
+$.crisisLineTable.filterAttribute = Alloy.Globals.isAndroid ? "title" : "orgName";
 
 function storeCategoryLookup(){
 	categoryDictionary = JSON.parse(this.responseText);
 	
 	var allCats = _.pluck(categoryDictionary, 'id');
 	
-	Alloy.Globals.sendHttpRequest("GetServiceProviders?counties=" 
-	+ Alloy.Models.profileBasics.get('countyId') + "&categories=" 
-	+ allCats.join("&categories="), "GET", null, parseServiceProviders);
+	Alloy.Globals.sendHttpRequest(Alloy.CFG.appData + "GetServiceProviders?counties=" 
+		+ Alloy.Models.profileBasics.get('countyId') + "&categories=" 
+		+ allCats.join("&categories="), "GET", null, parseServiceProviders);
 }
 
 function parseServiceProviders(){
@@ -38,11 +40,14 @@ function callPhoneNumber(e){
 }
 
 $.crisisLineTable.search = Alloy.createController("searchView").getView();
-Alloy.Globals.addActionBarButtons($.win, [{
+
+if(Alloy.Globals.isAndroid){
+	Alloy.Globals.addActionBarButtons($.win, [{
 	params:{
 		title: "search...",
 		icon: Ti.Android.R.drawable.ic_menu_search,
 		actionView: $.crisisLineTable.search,
 		showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
 	}
-}]);
+}]);	
+}

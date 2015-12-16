@@ -1,11 +1,20 @@
 <Alloy>		
-	<TabGroup id="tabGroup" onOpen="Alloy.Globals.updateActionBar">
-		<Tab title="LOCAL LAW">
+	<TabGroup id="tabGroup" onOpen="Alloy.Globals.updateActionBar" onClose="close" platform="android">
+		<Tab title="LOCAL LAW" icon="/tabs/justice4.png">
 			<Window class="container" id="win">
-				<Label>Nothing to see here.</Label>
+				<RightNavButtons platform="ios">
+					<View height="Ti.UI.SIZE">
+						<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
+					</View>
+					<View width=55 height="Ti.UI.SIZE">
+						<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
+					</View>
+				</RightNavButtons>
+				<Require id="providerList" src="serviceProviderListView" providerType="corrections"/>
+				<Require id="providerButtonBar" src="serviceProviderButtonBar" />
 			</Window>
 		</Tab>
-		<Tab title="VINE">
+		<Tab icon="/tabs/vine.png" title="VINE">
 			<Require src="providerDetail" 
 				description="VINE allows crime victims to obtain timely and reliable information about criminal cases and the custody status of offenders 24 hours a day."
 				website="https://www.vinelink.com/"
@@ -13,4 +22,28 @@
 				orgName="Victim Information and Notification Everyday"/>
 		</Tab>
 	</TabGroup>
+	
+	<Window id="tabGroup" platform="ios">
+		<RightNavButtons platform="ios">
+			<View height="Ti.UI.SIZE">
+				<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
+			</View>
+			<View width=55 height="Ti.UI.SIZE">
+				<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
+			</View>
+		</RightNavButtons>
+		<View id="container" bottom="50" top="0" left="0" right="0">
+			<View id="tab1" icon="/tabs/justice4.png" visible="true">
+					<Require id="providerList" src="serviceProviderListView" providerType="corrections"/>
+					<Require id="providerButtonBar" src="serviceProviderButtonBar" />
+			</View>
+			<View id="tab2" visible="false" backgroundColor="#203444">
+				<!-- View is added in the controller-->
+			</View>
+		</View>
+		<View bottom="0" height=Ti.UI.SIZE>
+			<Button id="leftTab" left="0" class="iosTab" width="50%" title="  LOCAL LAW" image="/tabs/justice4.png" onClick="onLeftTabClick" tintColor="#009577"/>
+			<Button id="rightTab" right="0" class="iosTab" width="50%" title=" VINE" image="/tabs/vine.png" onClick="onRightTabClick" tintColor="#929292"/>
+		</View>
+	</Window>
 </Alloy>

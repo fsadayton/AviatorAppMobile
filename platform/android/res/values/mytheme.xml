@@ -13,7 +13,7 @@
         <item name="android:titleTextStyle">@style/MyActionBarTitleText</item>
  
         <!-- For Android 3.x and later, you can specify either a color or background image -->
-        <item name="android:background">#65c8c7</item>
+        <item name="android:background">#009577</item>
  
         <!-- These item are required for Android 2.3.x support -->
         <item name="titleTextStyle">@style/MyActionBarTitleText</item>

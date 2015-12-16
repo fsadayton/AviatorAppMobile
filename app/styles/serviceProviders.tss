@@ -1,47 +1,15 @@
 
-".menu":{
-	left: "0dp",
-	width: "100%",
-	backgroundColor: "#fff",
-	separatorColor: "#65c8c7",
-}
-
 "#providerList":{
 	height:"90%",
 	top:0
 }
 
-"#buttonBar":{
-	bottom:0,
-	height:"10%",
-	backgroundColor:"#fff"
-}
-
-".buttonBarAction":{
-	backgroundColor:"#65c8c7",
-	width:"49.7%",
-}
-
-".buttonBarImage":{
-	width:"18%",
-	left:"20%"
-}
-
-".buttonBarLabel":{
-	color:"#fff",
-	left:"45%",
-	font:{
-		fontFamily:"Quicksand-Bold",
-		fontSize:"17dp"
-	}
-}
-
 "Tab":{
 	backgroundColor:"#fff",
-	color:"#65c8c7",
+	color:"#009577",
 	titleAttributes:{
 		font: {
-        	fontFamily:"Quicksand-Regular",
+        	fontFamily:"Dosis-Regular",
         	fontSize: '25dp'
       }
    }
@@ -59,12 +27,3 @@
 	right: "9%",
 	width: "24dp"
 }
-
-
-"#map":{
-	mapType: Alloy.Globals.Map.NORMAL_TYPE,
-	userLocation: true
-}
-
-
-

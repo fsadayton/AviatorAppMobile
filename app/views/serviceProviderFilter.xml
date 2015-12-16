@@ -8,11 +8,11 @@
 			</View>
 			<ScrollView id="summaryText">
 				<View layout="horizontal" width="95%">
-				<Label class="summary">Show me</Label>
-				<Label class="summary emph" id="categorySummary">all</Label>
-				<Label class="summary">services in</Label>
-				<Label class="summary emph" id="countySummary">all</Label>
-				<Label class="summary"> county(s).</Label>
+					<Label class="summary">Show</Label><Label class="summary">me</Label>
+					<Label class="summary emph" id="categorySummary">all</Label>
+					<Label class="summary">services</Label><Label class="summary">in</Label>
+					<Label class="summary emph" id="countySummary">all</Label>
+					<Label class="summary"> county(s).</Label>
 				</View>
 			</ScrollView>
 		</View>

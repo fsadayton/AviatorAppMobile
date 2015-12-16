@@ -1,38 +1,62 @@
 <Alloy>
-	<TabGroup id="tabGroup" onOpen="Alloy.Globals.updateActionBar">
-		<Tab title="NEARBY">
+	<TabGroup id="tabGroup" onOpen="Alloy.Globals.updateActionBar" onClose="close" platform="android">
+		<Tab title="LOCATE" icon="/tabs/building78.png">
 			<Window id="win">
-				<ActivityIndicator id="activityIndicator"/>
-				<View id="listView">
-					<Label id="noResults" zIndex=1 visible=false>No results.</Label>
-					<TableView id="providerList" class="menu" onClick="providerDetail" visible=true filterAttribute="title" />
-				</View>
-				<View id="mapModule" height="90%" visible=false top=0>
-					<Module id="map" module="ti.map" onClick="mapClick"/>
-				</View>
-				<View id="buttonBar">
-					<View id="listButton" class="buttonBarAction" left="0" visible=false onClick="toggleMapListView">
-						<ImageView id="listImage" class="buttonBarImage" image="/global/list256.png"/>
-						<Label id="listImage" class="buttonBarLabel">LIST</Label>
+				<RightNavButtons platform="ios">
+					<View height="Ti.UI.SIZE">
+						<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
 					</View>
-					<View id="mapButton" class="buttonBarAction" left="0" onClick="toggleMapListView" visible=true>
-						<ImageView id="mapImage" class="buttonBarImage" image="/global/map256.png"/>
-						<Label id="mapLabel" class="buttonBarLabel">MAP</Label>
+					<View width=55 height="Ti.UI.SIZE">
+						<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
 					</View>
-					<View id="filterButton" class="buttonBarAction" right="0" onClick="filterResults">
-						<ImageView id="mapImage" class="buttonBarImage" image="/global/filter256.png"/>
-						<Label id="mapLabel" class="buttonBarLabel">FILTER</Label>
-					</View>
-				</View>
+				</RightNavButtons>
+				<Require id="providerList" src="serviceProviderListView" providerType="general"/>
+				<Require id="providerButtonBar" src="serviceProviderButtonBar" />
 			</Window>
 		</Tab>
-		<Tab title="QUICK CALL">
+		<Tab title="QUICK CALL" icon="/tabs/quickcall.png">
 			<Window id="win">
-			<ActivityIndicator id="quickActivityIndicator"/>
-			<Label id="quickNoResults" zIndex=1 visible=false>No results.</Label>
-			<TableView id="crisisMenu" class="menu" onClick="callPhoneNumber" filterAttribute="title">
-			</TableView>
+				<RightNavButtons platform="ios">
+					<View height="Ti.UI.SIZE">
+						<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
+					</View>
+					<View width=55 height="Ti.UI.SIZE">
+						<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
+					</View>
+				</RightNavButtons>
+				<ActivityIndicator id="quickActivityIndicator"/>
+				<Label id="quickNoResults" zIndex=1 visible=false>No results.</Label>
+				<TableView id="crisisMenu" class="menu" onClick="callPhoneNumber" filterAttribute="title">
+				</TableView>
 			</Window>
 		</Tab>
 	</TabGroup>
+	
+	<Window id="tabGroup" platform="ios">
+		<RightNavButtons platform="ios">
+			<View height="Ti.UI.SIZE">
+				<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
+			</View>
+			<View width=55 height="Ti.UI.SIZE">
+				<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
+			</View>
+		</RightNavButtons>
+		<View id="container" bottom="50" top="0" left="0" right="0">
+			<View id="tab1" visible="true">
+				<Require id="providerList" src="serviceProviderListView" providerType="general"/>
+				<Require id="providerButtonBar" src="serviceProviderButtonBar" />
+			</View>
+			<View id="tab2" visible="false">
+				<ActivityIndicator id="quickActivityIndicator"/>
+				<Label id="quickNoResults" zIndex=1 visible=false>No results.</Label>
+				<TableView id="crisisMenu" class="menu" onClick="callPhoneNumber">
+					<SearchBar hintText="Search"></SearchBar>
+				</TableView>
+			</View>
+		</View>
+		<View bottom="0" height=Ti.UI.SIZE backgroundColor="green">
+			<Button left="0" width="50%" id="leftTab" image="/tabs/building78.png" title="  LOCATE" class="iosTab" onClick="onLeftTabClick" tintColor="#009577"/>
+			<Button right="0" width="50%" id="rightTab" image="/tabs/quickcall.png" title="  QUICK CALL" class="iosTab" onClick="onRightTabClick" tintColor="#929292"/>
+		</View>
+	</Window>
 </Alloy>

@@ -21,7 +21,7 @@ exports.getSelectedCounty = function(){
 exports.getCounties = function(callback){
 
 	if (_counties == null){
-		Alloy.Globals.sendHttpRequest("GetCounties", "GET", null, 
+		Alloy.Globals.sendHttpRequest(Alloy.CFG.appData + "GetCounties", "GET", null, 
 			function(){
 				_counties = JSON.parse(this.responseText);
 				callback(_counties);
@@ -31,6 +31,10 @@ exports.getCounties = function(callback){
 	else{
 		callback(_counties);
 	}
+};
+
+exports.isCountiesNull = function(){
+	return _counties === null;
 };
 
 exports.selectable = _selectable;

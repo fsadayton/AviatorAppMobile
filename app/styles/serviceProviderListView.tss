@@ -1,0 +1,16 @@
+".menu":{
+	left: "0dp",
+	width: "100%",
+	backgroundColor: "#fff",
+	separatorColor: "#E9EBEA",
+}
+
+"#providerList":{
+	height:"90%",
+	top:0
+}
+
+"#map":{
+	mapType: Alloy.Globals.Map.NORMAL_TYPE,
+	userLocation: true
+}

@@ -37,7 +37,7 @@ if (Ti.Geolocation.locationServicesEnabled){
 		}
 		else 
 		{
-			Ti.API.info(Ti.API.info('coords:' + JSON.stringify(e.coords)));
+			//Ti.API.info(Ti.API.info('coords:' + JSON.stringify(e.coords)));
 			Alloy.Globals.currentLocation = e.coords;
 		}
 	};

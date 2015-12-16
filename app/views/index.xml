@@ -1,56 +1,16 @@
 <Alloy>
-	<Window class="container" layout="vertical" onOpen="Alloy.Globals.updateActionBar">
-		<View id="header" platform="ios">
-			<ImageView id="headerLeft" image="/global/blind2.png" onClick="hide"></ImageView>
-			<Label id="headerText">Victim Services</Label>
-			<ImageView id="headerRight" image="/global/add126.png"></ImageView>
-		</View>
-		<View class="divider"/>
-		<Label id="welcomeLabel">Welcome to AVIATOR - an initiative of Family Services • Dayton</Label>
-		
-		<View class="boxContainer">
-			<View class="left box" onClick="openProviders">
-				<View class="divider"/>
-				<Label class="name" >PERSONAL RESOURCES</Label>
-				<ImageView class="icon" image="/global/familiar17.png" />
-				<Label class="description">View organizations that can help address your needs</Label>
+	<Require id="index" src="home" platform="android" />
+	<NavigationWindow id="nav" platform="ios">
+		<Require src="home" />
+	</NavigationWindow>
+	
+	<View id="rightNavs" platform="ios">
+			<View height="Ti.UI.SIZE">
+				<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
 			</View>
-			<View class="right box" onClick="openCorrections">
-				<View class="divider"/>
-				<Label class="name">LAW & CORRECTIONS</Label>
-				<ImageView class="icon" image="/global/hands6.png" />
-				<Label class="description">Contact local authorities or find jail time info about an offender</Label>
+			<View width=55 height="Ti.UI.SIZE">
+				<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
 			</View>
-		</View>
-		
-		<View class="boxContainer">
-			<View class="left box" onClick="openVictimCompensation">
-				<View class="divider"/>
-				<Label class="name" >VICTIM COMPENSATION</Label>
-				<ImageView class="icon" image="/global/compensation_256.png" />
-				<Label class="description">Are you a victim of violent crime? View financial assistance options here.</Label>
-			</View>
-			<View class="right box" onClick="openVeteranServices">
-				<View class="divider"/>
-				<Label class="name">VETERAN SERVICES</Label>
-				<ImageView class="icon" image="/global/veterans_256.png" />
-				<Label class="description">Find specialized resources for veterans and military personnel</Label>
-			</View>
-		</View>
-		
-		<View class="boxContainer">
-			<View class="left box" onClick="openAccount">
-				<View class="divider"/>
-				<Label class="name">MY ACCOUNT</Label>
-				<ImageView class="icon" image="/global/round58.png" />
-				<Label class="description">View your trusted contacts and favorite providers</Label>
-			</View>
-			<View class="right box" onClick="openCrisisLines">
-				<View class="divider"/>
-				<Label class="name">CRISIS CONTACTS</Label>
-				<ImageView class="icon" image="/global/phone_256.png" />
-				<Label class="description">View local phone numbers that match your needs</Label>
-			</View>
-		</View>
-	</Window>
+	</View>
+	
 </Alloy>
