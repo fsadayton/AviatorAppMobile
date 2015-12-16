@@ -2,12 +2,13 @@ var args = arguments[0] || {};
 var Map = require('ti.map');
 
 var categoryDictionary;
-var categoryNames;
+var categoryNames; //used for filter bubbles
 var httpCall;
 
 var filteredCategories;
 var filteredCounties;
 var originalMapAnnotations = [];
+var tableData = [];
 
 var crisisMenu;
 var categorySubset;
@@ -65,7 +66,8 @@ function getTableData(categories, counties){
 		|| _.difference(filteredCounties, counties).length > 0)){
 		
 		//reset table headers and filtered counties
-		allHeaders = [];
+		allHeaders = {};
+		tableData = [];
 		filteredCategories = [];
 		filteredCounties = counties; //list of selected counties
 		
@@ -87,18 +89,14 @@ function getTableData(categories, counties){
 			_.each(categoryDictionary, function(category){
 				if (_.contains(currentCategories, category.id)){
 					filteredCategories.push(category); //store list of currently selected categories, pass to filter when necessary
-					//store list of table headers
-					allHeaders.push(Ti.UI.createTableViewSection({
-						title:category.id, 
-						catName: category.name,
-						headerView: Alloy.createController('TableViewHeader', {text:category.name}).getView()
-					}));
+					allHeaders[category.id] = category.name;
 				}
 			});
 		}
 		else if(categories && args.providerType != "general"){
 			cats = categories;
 		}
+		
 		//send request to get all service providers that provide services for counties and categories
 		Alloy.Globals.sendHttpRequest(apiUrl, "GET", null, parseResponse);
 	}
@@ -116,21 +114,22 @@ function filterCategories(categories){
 	var localFilter = [];
 	var localMap = [];
 	filteredCategories = [];
-	_.each(categories, function(category){
-		filteredCategories.push({id:category});
-		var header = _.find(allHeaders, function(header){
-			return header.title === category;	
-		});
-		localFilter.push(header);
+	_.each(tableData, function(data){
+		var match = _.find(categories, function(category){return _.contains(data.args.categories, category);});
+		if(match != null){
+			localFilter.push(data.getView());
+		}
 	});
+	
 	$.providerList.setData(localFilter);
 	$.providerList.visible = true;
 	$.activityIndicator.hide();
 	
 	_.each(originalMapAnnotations, 
     	function(annotation){
-    		_.each(localFilter, function(header){
-    			if(_.contains(annotation.row.categories, header.title)){
+    		_.each(categories, function(category){
+    			filteredCategories.push({id:category});
+    			if(_.contains(annotation.row.categories, category)){
     				localMap.push(annotation);
     			}
     		});
@@ -158,6 +157,7 @@ function parseResponse(){
 		var sections = {};
 		var crisisHeaders = []; //reset list of crisis numbers
 		originalMapAnnotations = []; //TODO remove?
+		var allRows = [];
 		//iterate through list of providers in JSON
 		_.each(json, function(provider){
 			var params = {
@@ -167,12 +167,10 @@ function parseResponse(){
 				phone: provider.phoneNumber,
 				email: provider.email,
 				website: provider.website,
-				categories: provider.categories
+				categories: provider.categories,
+				catNames: []
 			};
 			addProviderToMap(params); //add provider location to the map
-			
-			//create table row with detail metadata
-			var row = Alloy.Globals.isAndroid ? Alloy.createController('serviceProviderRow', params).getView() : params;
 			
 			//if provider has a crisis number, add it to crisis line table	
 			if(provider.crisisNumber){
@@ -185,16 +183,21 @@ function parseResponse(){
 			_.each(provider.categories, function(category){
 				//iterate through list of table headers and add service provider to header if category matches
 				if(args.providerType === "general"){
-					addRowToDefinedSections(category, row);
+					if(allHeaders[category] != null){
+						params.catNames.push(allHeaders[category]);
+					}
 				}
 				else{
-					addRowToDynamicSections(sections, category, row);
+					var row = Alloy.createController('serviceProviderRow', params).getView();
+					addRowToDynamicSections(params.catNames, category, row);
 				}
 
 			});
+			var rowData = Alloy.createController('serviceProviderRow', params);
+			tableData.push(rowData);
+			allRows.push(rowData.getView());
 		});
 		var keys = Object.keys(sections);
-		allHeaders = allHeaders.length > 0 ?  allHeaders : keys.map(function(v){return sections[v];});
 		
 		//hide spinners
 		$.activityIndicator.hide();
@@ -203,7 +206,7 @@ function parseResponse(){
 		
 		//set table data
 		if(cats == null){
-			$.providerList.setData(allHeaders);
+			$.providerList.setData(allRows);
 		}
 		else{
 			filterCategories(cats);
@@ -225,7 +228,14 @@ function parseResponse(){
 function addRowToDynamicSections(sections, category, row){
 	_.find(categoryDictionary, function(categoryDict){
 		if(categoryDict.id === category){
-			if(sections[categoryDict.id] == null){
+			sections.push(categoryDict.name);
+			if(!_.contains(categoryNames, categoryDict)){
+				categoryNames.push(categoryDict);
+			}
+			
+			
+			return true;
+			/*if(sections[categoryDict.id] == null){
 				categoryNames.push(categoryDict);
 				sections[categoryDict.id] = Ti.UI.createTableViewSection({
 					title:categoryDict.id, 
@@ -234,7 +244,7 @@ function addRowToDynamicSections(sections, category, row){
 			}
 			var rowAddition = Alloy.Globals.isAndroid ? row : Alloy.createController('serviceProviderRow', row).getView();
 			sections[categoryDict.id].add(rowAddition);
-			return true;
+			return true;*/
 		}
 	});
 }
@@ -376,7 +386,6 @@ function searchTimeout(e){
     	Ti.API.info("RAWR: " + e.source.value);
     	if(e.source.value.length > 0){ //if search field contains a value
     		
-    		Ti.API.info("in the if + orig map...: " + originalMapAnnotations);
      		//find map annotations whose title contains the search field value
      		var filteredAnnotations = _.filter(originalMapAnnotations, 
      				function(annotation){

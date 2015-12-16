@@ -1,20 +1,35 @@
 "#providerName": {
-	left: "20dp",
+	left: "10dp",
 	top:0,
 	color: "#666",
 	font:{
 		fontSize: '17dp'
 	},
 	height:"70%",
+	width:"78%"
 }
 
 "#subtext":{
-	left: "20dp",
-	bottom: "5dp",
+	left: "10dp",
+	right: "10dp",
+	bottom: "3dp",
 	color: "#009577",
 	font:{
 		fontSize: '13dp',
 		fontFamily:"Dosis-Bold"
 	},
-	height:"30%"
+	height:"16dp",
+	wordWrap: false,
+	ellipsize: Titanium.UI.TEXT_ELLIPSIZE_TRUNCATE_END
 }
+
+"#miles":{
+	right:"10dp",
+	textAlign:"center",
+	color: "#203444",
+	width:"15%",
+	font:{
+		fontSize:'13dp'
+	}
+}
+

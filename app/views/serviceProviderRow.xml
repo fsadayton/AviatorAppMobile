@@ -2,5 +2,6 @@
 	<TableViewRow id="row" class="defaultRow">
 		<Label id="providerName"/>
 		<Label id="subtext"/>
+		<Label id="miles" />
 	</TableViewRow>
 </Alloy>
