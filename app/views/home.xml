@@ -8,7 +8,7 @@
 					<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
 				</View>
 		</RightNavButtons>
-		<View class="divider"/>
+		<View class="divider yellow" />
 		<ImageView id="welcomeLabel" image="/global/AVIATOR_Logo_COLOR.png"/>
 		
 		<View class="boxContainer">
