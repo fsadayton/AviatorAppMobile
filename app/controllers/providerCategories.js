@@ -40,4 +40,20 @@ function listProviders(e){
 	Alloy.Globals.open('serviceProviders', {categories:e.row.categories, title:e.row.family});
 }
 
+function onLeftTabClick(){
+	$.tab1.visible = true;
+	$.tab2.visible = false;
+	
+	$.leftTab.tintColor = "#009577";
+	$.rightTab.tintColor = "#929292";
+}
+
+function onRightTabClick(){
+	$.tab1.visible = false;
+	$.tab2.visible = true;
+	
+	$.rightTab.tintColor = "#009577";
+	$.leftTab.tintColor = "#929292";;
+}
+
 Alloy.Globals.addActionBarButtons($.tabGroup);

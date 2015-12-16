@@ -14,7 +14,9 @@
 				<Button id="navFavorite" backgroundImage="/images/star129.png" onClick="tagAsFavorite"  />
 			</View>
 		</RightNavButtons>
-		<View class="divider"/>
+		
+		<View id="container" layout="vertical">
+		<View class="divider yellow"/>
 		<Label id="providerName"/>
 		
 		<View id="descGroup">
@@ -51,5 +53,6 @@
 				<ButtonName>Cancel</ButtonName>
 			</ButtonNames>
 		</AlertDialog>
+		</View>
 	</Window>
 </Alloy>

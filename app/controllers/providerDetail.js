@@ -12,13 +12,13 @@ if(args.address){ //format address
 	$.address.text = address[0] + "\n" + address[1].trim() + ", " + address[2].trim();
 }
 else{ //no address, remove address view
-	$.win.remove($.addressView);
+	$.container.remove($.addressView);
 	$.descGroup.setHeight("35%");
 }
 
 //check phone status
 if(args.phone == null){
-	$.win.remove($.phoneView);
+	$.container.remove($.phoneView);
 }
 else{
 	$.phoneLabel.text = "CALL " + args.phone;
@@ -26,13 +26,13 @@ else{
 
 //remove any views that are not needed
 if(args.email == null){
-	$.win.remove($.emailView);
+	$.container.remove($.emailView);
 }
 if(args.website == null){
-	$.win.remove($.websiteView);
+	$.container.remove($.websiteView);
 }
 if(!args.hasApp){
-	$.win.remove($.downloadAppView);
+	$.container.remove($.downloadAppView);
 }
 
 /**

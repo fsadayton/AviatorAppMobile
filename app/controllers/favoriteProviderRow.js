@@ -39,12 +39,4 @@ function openProviderDetails(e){
 		website: favorite.get("website")
 	};
 	Alloy.Globals.open('providerDetail', args);
-	/*Alloy.createController('providerDetail',{
-		orgName:favorite.get("name"),
-		address: favorite.get("address"),
-		description: favorite.get("description"),
-		phone: favorite.get("phone_number"),
-		email: favorite.get("email"),
-		website: favorite.get("website")
-	}).getView().open();*/
 }

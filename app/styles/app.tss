@@ -35,6 +35,10 @@
 	top:0
 }
 
+".yellow":{
+	backgroundColor:"#e9931a"
+}
+
 "ActivityIndicator[platform=android]":{
 	message: "Loading...",
 	font:{fontSize:17, fontFamily:"Dosis-Light"},
@@ -81,4 +85,14 @@
         left:0,
         right:0
     }
+}
+
+".iosTab":{
+	backgroundColor:"#dfdfdf",
+	titleAttributes:{
+		color:"#fff",
+		font:{fontFamily:"Dosis-Bold"},
+		left:"10"
+  },
+  height:50
 }
