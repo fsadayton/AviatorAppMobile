@@ -64,8 +64,6 @@ else{
 		}
 	}
 	else if(args.sourceId === "nameField"){ //initialize save name fucntion
-		args.callback();//used to refresh/center new name
-		
 		//function that persists new name for user
 		function saveName(){
 			profileBasics.save({

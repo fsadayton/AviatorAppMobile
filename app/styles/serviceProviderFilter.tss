@@ -42,7 +42,7 @@
 	wordWrap: true
 }
 
-"#categoriesPicker":{
+"#categoriesPicker[platform=android]":{
 	layout: "horizontal",
 	backgroundColor: "#fff",
 	top:"3dp",
@@ -51,13 +51,12 @@
 	right:"3dp"
 }
 
-"#countiesPicker":{
+"#categoriesPicker[platform=ios]":{
 	layout: "horizontal",
 	backgroundColor: "#fff",
-	top:"5dp",
-	bottom:"5dp",
-	left:"5dp",
-	right:"5dp"
+	top:"3dp",
+	left:"3dp",
+	right:"3dp"
 }
 
 ".emph[platform=ios]":{
