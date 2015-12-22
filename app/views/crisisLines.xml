@@ -13,6 +13,5 @@
 		<TableView id="crisisLineTable" onClick="callPhoneNumber">
 			<SearchBar platform=ios />
 		</TableView>
-		
 	</Window>
 </Alloy>

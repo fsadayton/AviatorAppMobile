@@ -1,4 +1,7 @@
-
 "#crisisLineTable" : {
 	top:"10dp" 
+}
+
+"#win":{
+	backgroundColor:"#fff"
 }

@@ -38,7 +38,7 @@
 "#profileBar":{
 	width: "70%",
 	height:"42dp",
-	borderRadius: 20,
+	borderRadius: 5,
 	borderColor: "#009577",
 	borderWidth: 2,
 	layout: "horizontal",
@@ -80,7 +80,7 @@
 
 "#trustedMessageEdit":{
 	width:"90%",
-	borderRadius:15,
+	borderRadius:5,
 	borderColor: "#666",
 	font:{
 		fontSize:"15dp",

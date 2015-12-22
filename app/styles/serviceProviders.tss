@@ -27,3 +27,7 @@
 	right: "9%",
 	width: "24dp"
 }
+
+"Window":{
+	backgroundColor:"#fff"
+}
