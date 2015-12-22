@@ -9,7 +9,7 @@ Alloy.Collections.trustedContacts.fetch();
 Alloy.Collections.favorites.fetch();
 profileBasics.fetch();
 
-//initialize actions
+//initialize android actions
 Alloy.Globals.addActionBarButtons($.win);
 
 /**

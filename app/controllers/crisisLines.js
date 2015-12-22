@@ -1,12 +1,19 @@
 var args = arguments[0] || {};
 
-Alloy.Globals.sendHttpRequest(Alloy.CFG.appData + "GetCategoryLookupIndex", "GET", null, storeCategoryLookup);
+//send request to get all categories
+Alloy.Globals.sendHttpRequest(Alloy.CFG.appData + "GetCategoryLookupIndex", "GET", null, storeCategoryLookup); 
+
 var categoryDictionary = null;
 var crisisHeaders = [];
 $.activityIndicator.show();
 
+//set search filter attribute based on platform
 $.crisisLineTable.filterAttribute = Alloy.Globals.isAndroid ? "title" : "orgName";
 
+/**
+ * Processes call to get all categories and then sends another request to get 
+ * service providers in preferred county.
+ */
 function storeCategoryLookup(){
 	categoryDictionary = JSON.parse(this.responseText);
 	
@@ -17,6 +24,10 @@ function storeCategoryLookup(){
 		+ allCats.join("&categories="), "GET", null, parseServiceProviders);
 }
 
+/**
+ * Parses all service providers and only displays service providers with 
+ * crisis numbers. 
+ */
 function parseServiceProviders(){
 	
 	var crisisHeaders = [];
@@ -34,14 +45,18 @@ function parseServiceProviders(){
 	$.crisisLineTable.setData(crisisHeaders);
 }
 
+/**
+ * Function that brings up a phone dialog to call the pressed phone number
+ * @param {Object} e
+ */
 function callPhoneNumber(e){
     var cleanNumber = e.row.crisis.replace(/\s|-|\./g,'');
     Ti.Platform.openURL('tel:' + cleanNumber);
 }
 
-$.crisisLineTable.search = Alloy.createController("searchView").getView();
-
+//set search for android
 if(Alloy.Globals.isAndroid){
+	$.crisisLineTable.search = Alloy.createController("searchView").getView();
 	Alloy.Globals.addActionBarButtons($.win, [{
 	params:{
 		title: "search...",

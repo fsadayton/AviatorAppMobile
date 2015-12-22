@@ -90,4 +90,5 @@ function gotoPrevious(){
 	$.scrollableView.movePrevious();
 }
 
+//add action bar buttons for android platform
 Alloy.Globals.addActionBarButtons($.win);

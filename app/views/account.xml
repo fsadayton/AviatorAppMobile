@@ -8,7 +8,7 @@
 					<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
 				</View>
 		</RightNavButtons>
-		<View class="divider"/>
+		<View class="divider yellow"/>
 		<View id="centeredView" height="15%">
 			<View id="profileHeader" layout="horizontal" bottom="10dp" top="10dp"  width=Ti.UI.SIZE>
 				<ImageView id="accountImage" image="{profileBasics.profile_pic}" platform="android"/>
@@ -23,7 +23,7 @@
 				<ImageView class="profileButton" image="/global/add126.png" />
 			</View>
 			<View id="favorites" class="profileView" onClick="toggleSelection">			
-				<ImageView class="profileButton" image="/global/star256.png" />
+				<ImageView class="profileButton" image="/global/star174.png" />
 			</View>
 		</View>
 		<ScrollableView id="profileScroll" scrollingEnabled="false">

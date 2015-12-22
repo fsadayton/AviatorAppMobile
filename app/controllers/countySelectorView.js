@@ -1,5 +1,6 @@
 var args = arguments[0] || {};
 
+//init function for passing data to county selector view 
 $.init = function(obj){
 	var countyKeys = Object.keys(obj.counties);
 	_.each(countyKeys, function(key){

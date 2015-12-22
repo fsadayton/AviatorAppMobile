@@ -9,6 +9,8 @@
 				</View>
 		</RightNavButtons>
 		<View class="divider yellow" />
+		
+		<!--TODO: REPLACE AVIATOR LOGO WITH OWN CUSTOM LOGO-->
 		<ImageView id="welcomeLabel" image="/global/AVIATOR_Logo_COLOR.png"/>
 		
 		<View class="boxContainer">
@@ -21,7 +23,7 @@
 			<View class="right box" onClick="openCorrections" > 
 				<View class="divider" />
 				<Label class="name">LAW & CORRECTIONS</Label>
-				<ImageView class="icon" image="/global/hands6.png" />
+				<ImageView class="icon" image="/global/justice4blue.png" />
 				<Label class="description">Contact local authorities or find jail time info about an offender</Label>
 			</View>
 		</View>
@@ -30,7 +32,7 @@
 			<View class="left box" onClick="openVictimCompensation">
 				<View class="divider" />
 				<Label class="name" >VICTIM COMPENSATION</Label>
-				<ImageView class="icon" image="/global/compensation_256.png" />
+				<ImageView class="icon" image="/global/payment7.png" />
 				<Label class="description">Victim of a violent crime? View financial assistance options here.</Label>
 			</View>
 			<View class="right box" onClick="openSpecialServices">
@@ -45,13 +47,13 @@
 			<View class="left box" onClick="openAccount">
 				<View class="divider" />
 				<Label class="name">MY ACCOUNT</Label>
-				<ImageView class="icon" image="/global/round58.png" />
+				<ImageView class="icon" image="/global/user42.png" />
 				<Label class="description">View your trusted contacts and favorite providers</Label>
 			</View>
 			<View class="right box" onClick="openCrisisLines" >
 				<View class="divider" />
 				<Label class="name">CRISIS CONTACTS</Label>
-				<ImageView class="icon" image="/global/phone_256.png" />
+				<ImageView class="icon" image="/global/2440.png" />
 				<Label class="description">View local phone numbers that match your needs</Label>
 			</View>
 		</View>

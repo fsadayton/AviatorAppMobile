@@ -1,6 +1,7 @@
 
 var win = Alloy.Globals.isAndroid ? $.index.getView() : $.nav;
 
+//Only open app home screen if user has agreen to the conditions of use
 if(!Ti.App.Properties.getBool("hasAgreedToConditions", false)){
 	Alloy.createController("ConditionsOfUse", {index:win}).getView().open();
 }
@@ -11,20 +12,12 @@ else{
 
 
 Alloy.Globals.open = function(controllerName, args){
-	Ti.API.info("open");
 	var view = Alloy.createController(controllerName, (args || {})).getView();
-	Ti.API.info(view.tabs == null);
 	if(Alloy.Globals.isAndroid){
 		view.title = args == null || args.title == null  ? "" : args.title; //shows tile name at top of window
 		view.open();
 	}
-	else{
+	else{ //if iOS, open window in navigation window
 		$.nav.openWindow(view);
-		/*if(view.tabs == null){
-			$.nav.openWindow(view);
-		}
-		else{
-			view.open();
-		}*/
 	}
 };

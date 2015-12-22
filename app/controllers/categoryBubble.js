@@ -1,5 +1,5 @@
 var args = arguments[0] || {};
-var selectable = require('countySelectorUtils');
+var selectable = require('countySelectorUtils'); //maintains whether or not a county is selectable
 $.bubbleText.text = "  " + args.text + "  "; //set filter bubble text
 
 var originalColor = $.bubbleText.backgroundColor; //store original unselected bubble color

@@ -37,6 +37,9 @@ else if(args.providerType === "compensation"){
 
 Alloy.Globals.sendHttpRequest(Alloy.CFG.appData + "GetCategoryLookupIndex", "GET", null, storeCategoryLookup);
 
+/**
+ * Function that parses service provider categories
+ */
 function storeCategoryLookup(){
 	categoryDictionary = JSON.parse(this.responseText);
 	var profileBasics = Alloy.Models.profileBasics;

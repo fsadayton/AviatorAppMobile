@@ -5,7 +5,7 @@ Alloy.Globals.addActionBarButtons($.win);
 var tableSection = Ti.UI.createTableViewSection({headerView: Alloy.createController('TableViewHeader', {text:"Select a Specialty Group"}).getView()});
 
 //create veterans row
-//TODO: Create and use API call for getting specialty groups
+//FIXME: Create and use API call for getting specialty groups
 tableSection.add(Alloy.createController('providerCategoryRow',{
 	text: "Veterans", 
 	info: "View services that are dedicated to serving veterans, military personnel, and their families."
@@ -18,6 +18,5 @@ $.generalTable.setData([tableSection]);
  * been incorporated. 
  */
 function listProviders(){
-	//Alloy.createController('veteranServices').getView().open();
 	Alloy.Globals.open('veteranServices');
 }

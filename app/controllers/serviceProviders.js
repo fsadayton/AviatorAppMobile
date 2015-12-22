@@ -32,6 +32,11 @@ function callPhoneNumber(e){
     Ti.Platform.openURL('tel:' + cleanNumber);
 }
 
+/**
+ * Specific iOS function that makes the content associated
+ * with the left tab visible, and changes the color of the 
+ * active tab
+ */
 function onLeftTabClick(){
 	$.tab1.visible = true;
 	$.tab2.visible = false;
@@ -40,6 +45,11 @@ function onLeftTabClick(){
 	$.rightTab.tintColor = "#929292";
 }
 
+/**
+ * Specific iOS function that makes the content associated
+ * with the right tab visible, and changes the color of the 
+ * active tab
+ */
 function onRightTabClick(){
 	$.tab1.visible = false;
 	$.tab2.visible = true;

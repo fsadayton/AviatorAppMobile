@@ -23,6 +23,7 @@
 		</Tab>
 	</TabGroup>
 	
+	<!--IN ORDER FOR QUICK HIDE AND TRUSTED CONTACT BUTTONS TO BE VISIBLE, A CUSTOM TAB SYSTEM IS USED FOR THE IOS PLATFORM-->
 	<Window id="tabGroup" platform="ios">
 		<RightNavButtons platform="ios">
 			<View height="Ti.UI.SIZE">

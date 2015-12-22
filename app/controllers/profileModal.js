@@ -36,6 +36,10 @@ if(args.counties){
 		}
 	}
 	
+	/**
+	 * Function for updating selected county if only one county can be 
+	 * selected at a time.
+	 */
 	function updateSelection(countyId, countyName, isNew){
 		if(isNew){
 			selectable.setSelectedCounty({id:countyId, name:countyName});

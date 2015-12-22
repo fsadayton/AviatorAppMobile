@@ -1,5 +1,6 @@
 var args = arguments[0] || {};
 
+//TODO: REPLACE WITH OWN USER AGREEMENT VERBIAGE
 $.textArea.value = "In using AVIATOR, I, the end-user, understand and agree to the following conditions:\n\n" + 
 			
 			"1) Although a resource (i.e., service provider) may be listed in the app, " +  
