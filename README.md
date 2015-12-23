@@ -53,7 +53,7 @@ Once your development environment is setup, the following code changes will need
 ```c++
 The MIT License (MIT)
 
-Copyright (c) 2016 Family Services of Dayton - UDRI
+Copyright (c) 2016 Family Services of Dayton - University of Dayton Research Institute
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
