@@ -24,7 +24,7 @@ For Android development, you will need:
  - Genymotion Emulator
    - Although not technically required, the Genymotion Android emulators are much faster than the stock Android emulators that come with the Android SDK. Instructions on using Genymotion with Appcelerator can be found [here](http://docs.appcelerator.com/platform/latest/#!/guide/Installing_Genymotion).   
  - Google Account
-   - Used for deploying an app to the Google Play Store. It should be noted that in order to keep an app in the Google Play Store, you will need to pay $25/year. Details regarding the Google Play deployment process can be found [here](http://docs.appcelerator.com/platform/latest/#!/guide/Distributing_Android_apps). 
+   - Used for deploying an app to the Google Play Store. It should be noted that in order to keep an app in the Google Play Store, you will need to pay $25/year. Details regarding the Google Play deployment process can be found [here](http://docs.appcelerator.com/platform/latest/#!/guide/Distributing_Android_apps).
 ##### iOS Development
 For iOS Development, you will need:
  - Macintosh Computer
@@ -34,7 +34,7 @@ For iOS Development, you will need:
  - iOS Device
    - Not all features are available via the iOS Simulator. In order to test these features, the app will need to be [loaded onto a real device](http://docs.appcelerator.com/platform/latest/#!/guide/Deploying_to_iOS_devices). 
  - Apple Developer Certificate
-   - Used for deploying an app to the App Store. It should be noted that in order to keep an app in the App Store, you will beed to pay $99/year. Details regarding the App Store deployment process can be found [here](http://docs.appcelerator.com/platform/latest/#!/guide/Distributing_iOS_apps); 
+   - Used for deploying an app to the App Store. It should be noted that in order to keep an app in the App Store, you will beed to pay $99/year. Details regarding the App Store deployment process can be found [here](http://docs.appcelerator.com/platform/latest/#!/guide/Distributing_iOS_apps).
 ##### Other
 Once your development environment is setup, the following code changes will need to take place:
  - Update any TODO's in the app folder of the codebase
