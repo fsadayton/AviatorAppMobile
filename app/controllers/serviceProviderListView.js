@@ -159,7 +159,7 @@ function parseResponse(){
 	else{
 		var sections = {};
 		var crisisHeaders = []; //reset list of crisis numbers
-		originalMapAnnotations = []; //TODO remove?
+		originalMapAnnotations = []; //FIXME: remove?
 		var allRows = [];
 		//iterate through list of providers in JSON
 		_.each(json, function(provider){
