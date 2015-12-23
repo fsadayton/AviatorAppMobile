@@ -35,7 +35,7 @@ For iOS Development, you will need:
    - Not all features are available via the iOS Simulator. In order to test these features, the app will need to be [loaded onto a real device](http://docs.appcelerator.com/platform/latest/#!/guide/Deploying_to_iOS_devices). 
  - Apple Developer Certificate
    - Used for deploying an app to the App Store. It should be noted that in order to keep an app in the App Store, you will beed to pay $99/year. Details regarding the App Store deployment process can be found [here](http://docs.appcelerator.com/platform/latest/#!/guide/Distributing_iOS_apps); 
- ##### Other
+##### Other
 Once your development environment is setup, the following code changes will need to take place:
  - Update any TODO's in the app folder of the codebase
    - This includes changing the logo and replacing the user agreement with own verbiage
