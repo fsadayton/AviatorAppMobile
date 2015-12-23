@@ -148,7 +148,7 @@ function filterCategories(categories){
 function parseResponse(){
 	var json = JSON.parse(this.responseText);
 	$.map.removeAllAnnotations(); //remove any previous map annotations
-	$.providerList.visible = true;
+	$.providerList.visible = false;
 
 	//if no results are returned, let user know that there are no results
 	if(json.length === 0){

@@ -7,12 +7,22 @@
 				<ImageView class="arrow" id="close" onClick="close" left="10dp" image="/global/close.png" />
 			</View>
 			<ScrollView id="summaryText">
-				<View layout="horizontal" width="95%">
+				<View layout="horizontal" width="95%" platform="android">
 					<Label class="summary">Show</Label><Label class="summary">me</Label>
 					<Label class="summary emph" id="categorySummary">all</Label>
 					<Label class="summary">services</Label><Label class="summary">in</Label>
 					<Label class="summary emph" id="countySummary">all</Label>
 					<Label class="summary"> county(s).</Label>
+				</View>
+				<View layout="vertical" width="95%" platform="ios">
+					<View layout="horizontal" height=Ti.UI.SIZE>
+						<Label class="summary">Selected Categories: </Label>
+						<Label class="summary emph" id="categorySummary">all</Label>
+					</View>
+					<View layout="horizontal" height=Ti.UI.SIZE>
+						<Label class="summary">Selected Counties: </Label>
+						<Label class="summary emph" id="countySummary">all</Label>
+					</View>	
 				</View>
 			</ScrollView>
 		</View>

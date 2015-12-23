@@ -16,9 +16,13 @@
 }
 
 "#summaryText":{
-	layout: "horizontal",
 	scrollType: "vertical",
 	backgroundColor:"#fff"
+
+}
+
+"#summaryText[platform=ios]":{
+	contentHeight: "600px"
 }
 
 "ScrollableView":{
@@ -39,7 +43,8 @@
 	right:"3dp",
 	color:"#000",
 	width:Titanium.UI.SIZE,
-	wordWrap: true
+	wordWrap: true,
+	horizontalWrap: true
 }
 
 "#categoriesPicker[platform=android]":{
@@ -60,7 +65,7 @@
 }
 
 ".emph[platform=ios]":{
-	height:'auto'
+	height:Ti.UI.SIZE
 }
 
 ".emph":{

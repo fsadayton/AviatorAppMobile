@@ -60,7 +60,7 @@
   height: "95%",
   width: "92%",
   background: "transparent",
-  borderRadius: 10,
+  borderRadius: 5,
   borderColor:"#009577",
   borderWidth: 2
 }
