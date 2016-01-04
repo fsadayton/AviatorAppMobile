@@ -37,6 +37,13 @@ For iOS Development, you will need:
  - Apple Developer Certificate
    - Used for deploying an app to the App Store. It should be noted that in order to keep an app in the App Store, you will need to pay $99/year. Details regarding the App Store deployment process can be found [here](http://docs.appcelerator.com/platform/latest/#!/guide/Distributing_iOS_apps).
 
+#### Using/Importing the AVIATOR Code
+To begin using the AVIATOR code base, [create an empty Appcelerator Alloy project using the Appcelerator Studio IDE](http://docs.appcelerator.com/platform/latest/#!/guide/Alloy_Quick_Start-section-34636229_AlloyQuickStart-UsingStudio). *NOTE: You can tie this project to your own Git repository, if desired.*
+
+Next, download the AVIATOR code using the **Download ZIP** button in GitHub and copy all of the contents **EXCEPT FOR tiapp.xml** to the new, empty Alloy project created above. 
+
+Finally, copy and paste parts of the AVIATOR tiapp.xml into the new tiapp.xml. 
+
 #### Code Modifications
 Once your development environment is setup, the following code changes will need to take place:
  - Update any TODO's in the app folder of the codebase
@@ -47,7 +54,7 @@ Once your development environment is setup, the following code changes will need
    - #006e58 - dark green
    - #e9931a - yellow
  - Change the REST URLs in config.json
- - Modify the tiapp.xml with own production/development keys
+ - Modify the tiapp.xml with [own Google Maps API Key](http://docs.appcelerator.com/platform/latest/#!/api/Modules.Map) 
 
 # License
 ```c++
