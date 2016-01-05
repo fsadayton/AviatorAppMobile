@@ -67,7 +67,6 @@ function close(){
  * Requery service providers based on selected filter values. 
  */
 function submit(){
-	
 	//if no categories or counties are specifically selected, then query all counties and categories
 	var categories = categoryFilter.length > 0 ? _.pluck(categoryFilter, "id") : _.pluck(args.categories, "id");
 	var counties = countyFilter.length > 0 ? _.pluck(countyFilter, "id") : Object.keys(args.counties);

@@ -9,6 +9,7 @@ var filteredCategories;
 var filteredCounties;
 var originalMapAnnotations = [];
 var tableData = [];
+var numberOfProviders = 0;
 
 var crisisMenu;
 var categorySubset;
@@ -127,11 +128,13 @@ function filterCategories(categories){
 	$.providerList.setData(localFilter);
 	$.providerList.visible = true;
 	$.activityIndicator.hide();
-	
+
 	_.each(originalMapAnnotations, 
     	function(annotation){
     		_.each(categories, function(category){
-    			filteredCategories.push({id:category});
+    			if (filteredCategories.length != categories.length){
+    				filteredCategories.push({id:category});
+    			}
     			if(_.contains(annotation.row.categories, category)){
     				localMap.push(annotation);
     			}
@@ -149,9 +152,9 @@ function parseResponse(){
 	var json = JSON.parse(this.responseText);
 	$.map.removeAllAnnotations(); //remove any previous map annotations
 	$.providerList.visible = false;
-
+	numberOfProviders = json.length;
 	//if no results are returned, let user know that there are no results
-	if(json.length === 0){
+	if(numberOfProviders === 0){
 		$.providerList.setData([]);
 		$.activityIndicator.hide();
 		$.noResults.visible = true;
@@ -212,7 +215,17 @@ function parseResponse(){
 			$.providerList.setData(allRows);
 		}
 		else{
-			filterCategories(cats);
+			if(Alloy.Globals.isAndroid){
+				filterCategories(cats);
+			}
+			else{ //used to properly update filter selections for iOS
+				$.activityIndicator.addEventListener('updated', function updateFilter(e){
+					if(numberOfProviders === 0){
+						$.activityIndicator.removeEventListener('updated', updateFilter);
+						filterCategories(cats);
+					}
+				});
+			}
 		}
 		
 		if(crisisMenu){
@@ -290,19 +303,26 @@ function providerDetail(e){
 function addProviderToMap(params){
 	Alloy.Globals.Location.runCustomFwdGeocodeFunction(params.address, addAnnotation);
 	function addAnnotation(e){
-		var annotationParams = {
-			latitude: e.places[0].latitude,
-	   		longitude: e.places[0].longitude,
-	        title: params.orgName,
-	        row: params	
-		};
-		if(!Alloy.Globals.isAndroid){
-			annotationParams.leftButton = "/global/info28_small.png";
+		if(e.success && e.places.length > 0){
+			var annotationParams = {
+				latitude: e.places[0].latitude,
+		   		longitude: e.places[0].longitude,
+		        title: params.orgName,
+		        row: params	
+			};
+			if(!Alloy.Globals.isAndroid){
+				annotationParams.leftButton = "/global/info28_small.png";
+			}
+			var annotation = Map.createAnnotation(annotationParams);
+	        $.map.addAnnotation(annotation);
+	        originalMapAnnotations.push(annotation);
 		}
-		var annotation = Map.createAnnotation(annotationParams);
-        $.map.addAnnotation(annotation);
-        originalMapAnnotations.push(annotation);
-           
+		
+		//fire filter update event if iOS
+		if(!Alloy.Globals.isAndroid){
+			numberOfProviders--;
+        	$.activityIndicator.fireEvent('updated');
+		}
 	}
 }
 
@@ -386,20 +406,17 @@ function searchTimeout(e){
     }
     //Using 1.2 second timeout to reduce amount of map redrawing.
     timeout = setTimeout(function() {
-    	Ti.API.info("RAWR: " + e.source.value);
     	if(e.source.value.length > 0){ //if search field contains a value
     		
      		//find map annotations whose title contains the search field value
      		var filteredAnnotations = _.filter(originalMapAnnotations, 
      				function(annotation){
-     					Ti.API.info("ann title" + annotation.title);
      					return annotation.title.toLowerCase().indexOf(e.source.value.toLowerCase()) > -1;
      				}
      			);
      		$.map.setAnnotations(filteredAnnotations);
      	}
      	else{
-     		Ti.API.info("in the else wtf");
      		//if search is empty, put all annotations back on the map
      		$.map.setAnnotations(originalMapAnnotations);
      	}

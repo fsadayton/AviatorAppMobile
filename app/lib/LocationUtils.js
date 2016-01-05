@@ -102,9 +102,7 @@ exports.estimateDistance = function(currentPos, address, callback){
  */
 exports.runCustomFwdGeocodeFunction = function(address, callback){
 	geocoder.forwardGeocoder(address, function(e){
-		if(e.success && e.places.length > 0){
-			callback(e);
-		}
+		callback(e);
 	});
 };
 
