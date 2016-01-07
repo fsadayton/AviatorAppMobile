@@ -37,7 +37,7 @@
 			</View>
 			<View class="right box" onClick="openSpecialServices">
 				<View class="divider" />
-				<Label class="name">SPECIALIZED SERVICES</Label>
+				<Label class="name">SPECIAL POPULATIONS</Label>
 				<ImageView class="icon" image="/global/disabled8.png" />
 				<Label class="description">Find specialized resources for veterans, the elderly, and more</Label>
 			</View>
