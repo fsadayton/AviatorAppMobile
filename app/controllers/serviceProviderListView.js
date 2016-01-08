@@ -295,6 +295,7 @@ function providerDetail(e){
 		title: "Provider Details"
 	};
 	Alloy.Globals.open('providerDetail', args);
+	Ti.Analytics.featureEvent('personalResources.select.providerDetail');
 }
 
 /**

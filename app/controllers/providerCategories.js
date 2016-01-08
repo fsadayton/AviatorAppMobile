@@ -50,6 +50,23 @@ function parseCrimes(){
  */
 function listProviders(e){
 	Alloy.Globals.open('serviceProviders', {categories:e.row.categories, title:e.row.family});
+	
+	if(Alloy.Globals.isAndroid){
+		if($.tabGroup.activeTab.title === "GENERAL"){
+			Ti.Analytics.featureEvent('personalResources.category.general');
+		}
+		else{
+			Ti.Analytics.featureEvent('personalResources.category.crime');
+		}
+	}
+	else{
+		if($.tab1.visible){
+			Ti.Analytics.featureEvent('personalResources.category.general');
+		}
+		else{
+			Ti.Analytics.featureEvent('personalResources.category.crime');
+		}
+	}
 }
 
 /**
@@ -63,6 +80,7 @@ function onLeftTabClick(){
 	
 	$.leftTab.tintColor = "#009577";
 	$.rightTab.tintColor = "#929292";
+	
 }
 
 /**
@@ -75,7 +93,8 @@ function onRightTabClick(){
 	$.tab2.visible = true;
 	
 	$.rightTab.tintColor = "#009577";
-	$.leftTab.tintColor = "#929292";;
+	$.leftTab.tintColor = "#929292";
+	
 }
 
 //on android, make the action bar buttons visible

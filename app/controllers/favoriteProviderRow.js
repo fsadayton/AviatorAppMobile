@@ -39,4 +39,5 @@ function openProviderDetails(e){
 		website: favorite.get("website")
 	};
 	Alloy.Globals.open('providerDetail', args);
+	Ti.Analytics.featureEvent('myAccount.select.providerDetail');
 }

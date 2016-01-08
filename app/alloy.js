@@ -153,6 +153,8 @@ Alloy.Globals.hideScreen = function(){
 	else{
 		Ti.Platform.openURL("http://" + website);
 	}
+	Ti.Analytics.featureEvent('navBar.select.quickHide');
+
 };
 /**
  * Function that composes and sends a text message to user's trusted

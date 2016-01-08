@@ -28,7 +28,7 @@ if(args.counties){
 				countyName: county.name,
 				countyId: county.id
 			});
-			
+			Ti.Analytics.featureEvent('myAccount.county.' + county.name);
 			$.win.close();
 		}
 		else{

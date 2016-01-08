@@ -30,6 +30,7 @@ $.providerButtonBar.setProviderListObject($.providerList);
 function callPhoneNumber(e){
     var cleanNumber = e.row.crisis.replace(/\s|-|\./g,'');
     Ti.Platform.openURL('tel:' + cleanNumber);
+    Ti.Analytics.featureEvent('personalResources.select.quickCall');
 }
 
 /**

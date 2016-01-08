@@ -15,7 +15,7 @@
 				</RightNavButtons>
 			</Window>
 		</Tab>
-		<Tab title="CRIME" icon="/tabs/criminal.png" >
+		<Tab title="CRIME" icon="/tabs/criminal.png">
 			<Window class="container" id="win">
 				<RightNavButtons platform="ios">
 					<View height="Ti.UI.SIZE">

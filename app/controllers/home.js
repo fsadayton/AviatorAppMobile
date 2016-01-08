@@ -7,6 +7,7 @@
  */
 function openProviders(){
 	Alloy.Globals.open('providerCategories', {title: "Personal Resources"});
+	Ti.Analytics.featureEvent('home.select.personalResources');
 }
 
 /**
@@ -14,6 +15,7 @@ function openProviders(){
  */
 function openCorrections(){
 	Alloy.Globals.open('corrections', {title: "Law & Corrections"});
+	Ti.Analytics.featureEvent('home.select.corrections');
 }
 
 /**
@@ -21,6 +23,8 @@ function openCorrections(){
  */
 function openAccount(){
 	Alloy.Globals.open('account', {title: "My Account"});
+		Ti.Analytics.featureEvent('home.select.myAccount');
+
 }
 
 /**
@@ -28,6 +32,8 @@ function openAccount(){
  */
 function openCrisisLines(){
 	Alloy.Globals.open('crisisLines', {title: "Crisis Contacts"});
+		Ti.Analytics.featureEvent('home.select.crisisContacts');
+
 }
 
 /**
@@ -35,6 +41,8 @@ function openCrisisLines(){
  */
 function openSpecialServices(){
 	Alloy.Globals.open('specializedServicesMenu', {title: "Specialized Services"});
+		Ti.Analytics.featureEvent('home.select.specialPopulations');
+
 }
 
 /**
@@ -42,6 +50,8 @@ function openSpecialServices(){
  */
 function openVictimCompensation(){
 	Alloy.Globals.open('victimCompensation', {title: "Compensation"});
+		Ti.Analytics.featureEvent('home.select.victimCompensation');
+
 }
 
 Alloy.Globals.addActionBarButtons($.win);
