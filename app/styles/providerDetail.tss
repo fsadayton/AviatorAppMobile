@@ -60,7 +60,7 @@
 ".actionView":{
 	height:"45dp",
 	width:"90%",
-	borderRadius:10,
+	borderRadius:5,
 	backgroundColor:"#009577",
 	top:"15dp"
 }

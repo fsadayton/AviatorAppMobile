@@ -118,12 +118,26 @@ function filterCategories(categories){
 	var localFilter = [];
 	var localMap = [];
 	filteredCategories = [];
-	_.each(tableData, function(data){
-		var match = _.find(categories, function(category){return _.contains(data.args.categories, category);});
-		if(match != null){
-			localFilter.push(data.getView());
-		}
-	});
+	
+	if(args.providerType === "general"){
+		_.each(tableData, function(data){
+			var match = _.find(categories, function(category){return _.contains(data.args.categories, category);});
+			if(match != null){
+				localFilter.push(data.getView());
+			}
+		});
+	}
+	else{
+		_.each(categories, function(category){
+			filteredCategories.push({id:category});
+			var header = _.find(allHeaders, function(header){
+				return header.title === category;	
+			});
+			localFilter.push(header);
+		});
+
+	}
+
 	
 	$.providerList.setData(localFilter);
 	$.providerList.visible = true;
@@ -194,8 +208,10 @@ function parseResponse(){
 					}
 				}
 				else{
-					var row = Alloy.createController('serviceProviderRow', params).getView();
-					addRowToDynamicSections(params.catNames, category, row);
+					//var row = Alloy.createController('serviceProviderRow', params).getView();
+					//addRowToDynamicSections(params.catNames, category, row);
+					var row = Alloy.Globals.isAndroid ? Alloy.createController('serviceProviderRow', params).getView() : params;
+					addRowToDynamicSections(sections, category, row);
 				}
 
 			});
@@ -204,7 +220,9 @@ function parseResponse(){
 			allRows.push(rowData.getView());
 		});
 		var keys = Object.keys(sections);
-		
+		Ti.API.info("keys length: " + keys.length);
+		allHeaders = keys.length > 0 ? keys.map(function(v){return sections[v];}) : allRows;
+
 		//hide spinners
 		$.activityIndicator.hide();
 		//make tables visible
@@ -212,7 +230,7 @@ function parseResponse(){
 		
 		//set table data
 		if(cats == null){
-			$.providerList.setData(allRows);
+			$.providerList.setData(allHeaders);
 		}
 		else{
 			if(Alloy.Globals.isAndroid){
@@ -244,14 +262,12 @@ function parseResponse(){
 function addRowToDynamicSections(sections, category, row){
 	_.find(categoryDictionary, function(categoryDict){
 		if(categoryDict.id === category){
-			sections.push(categoryDict.name);
+			/*sections.push(categoryDict.name);
 			if(!_.contains(categoryNames, categoryDict)){
 				categoryNames.push(categoryDict);
 			}
-			
-			
-			return true;
-			/*if(sections[categoryDict.id] == null){
+			return true;*/
+			if(sections[categoryDict.id] == null){
 				categoryNames.push(categoryDict);
 				sections[categoryDict.id] = Ti.UI.createTableViewSection({
 					title:categoryDict.id, 
@@ -260,7 +276,7 @@ function addRowToDynamicSections(sections, category, row){
 			}
 			var rowAddition = Alloy.Globals.isAndroid ? row : Alloy.createController('serviceProviderRow', row).getView();
 			sections[categoryDict.id].add(rowAddition);
-			return true;*/
+			return true;
 		}
 	});
 }
@@ -271,7 +287,7 @@ function addRowToDynamicSections(sections, category, row){
  * category - the current table header being retrieved
  * row - the table row being added to the table header object
  */
-function addRowToDefinedSections(category, row){
+/*function addRowToDefinedSections(category, row){
 	_.find(allHeaders, function(header){
 		if(header.title === category){
 			var rowAddition = Alloy.Globals.isAndroid ? row : Alloy.createController('serviceProviderRow', row).getView();
@@ -279,7 +295,7 @@ function addRowToDefinedSections(category, row){
 			return true;
 		}
 	});
-}
+}*/
 
 /**
  * Function for opening provider detail page
