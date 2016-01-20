@@ -26,7 +26,7 @@ function toggleMapListView(){
 	else{
 		setMapVisibility(true);
 		//FIXME: Find better alternative to setting map region
-		map.setRegion({latitude:39.719704, longitude:-84.219832, latitudeDelta:5.0, longitudeDelta:.5});
+		map.setRegion({latitude:39.9611111, longitude:-82.9988889, latitudeDelta:5.0, longitudeDelta:.5});
 	}
 	
 	function setMapVisibility(isMapVisible){
