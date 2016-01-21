@@ -5,7 +5,7 @@ $.providerName.text = args.orgName;
 $.subtext.text = args.crisis ? "CALL " + args.crisis : args.catNames.join(", ") + "";
 $.miles.text = args.crisis == null ? Alloy.Globals.Location.estimateDistance(Alloy.Globals.currentLocation, args.address + ", US", setMilesAway) : "";
 
-var tags = args.catNames ? "\n\nTAGS: " + args.catNames.join(", ") : ""; //if category names exist, add them to the description
+var tags = args.catNames && args.catNames.length > 0 ? "\n\nTAGS: " + args.catNames.join(", ") : ""; //if category names exist, add them to the description
 
 $.row.orgName = args.orgName;
 $.row.address = args.address;
