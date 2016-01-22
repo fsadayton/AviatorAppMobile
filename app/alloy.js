@@ -85,7 +85,7 @@ Alloy.Globals.sendHttpRequest = function(url, type, data, onSuccess, onError){
     	}
     	else{
     	    client.onerror = function (e){
-                Alloy.Globals.createNotificationPopup('Action cannot be completed at this time ('+this.status+') - ' + e.error, "Network Error");
+                Alloy.Globals.createNotificationPopup('Action cannot be completed at this time - ' + e.error, "Network Error");
                 Ti.API.error(e);
             };
     	}
@@ -116,7 +116,7 @@ Alloy.Globals.sendHttpRequest = function(url, type, data, onSuccess, onError){
        	data == null ? client.send() : client.send(JSON.stringify(data));
    	}
    	else{
-   	    Alloy.Globals.createNotificationPopup("Please check your network connection.", "Network Error");
+   	    Alloy.Globals.createNotificationPopup("Cannot retrieve data. Please check your network connection and try again.", "Network Error");
    	}
 };
 
