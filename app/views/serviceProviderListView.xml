@@ -1,7 +1,7 @@
 <Alloy>
 	<ActivityIndicator id="activityIndicator"/>
 	<View id="listView">
-		<Label id="noResults" zIndex=1 visible=false>No results.</Label>
+		<Label id="noResults" visible=false>No results found. Try updating the filter or your preferred county.</Label>
 		<TableView id="providerList" class="menu" onClick="providerDetail" visible=true>
 			<SearchBar platform="ios"/>
 		</TableView>

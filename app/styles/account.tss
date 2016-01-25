@@ -43,7 +43,7 @@
 	borderWidth: 2,
 	layout: "horizontal",
 	top: "5dp",
-	backgroundColor:"red"
+	backgroundColor:"#fff"
 }
 
 ".profileButton":{
