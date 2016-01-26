@@ -12,5 +12,11 @@
 				<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
 			</View>
 	</View>
-	
+	<AlertDialog id="dialog" title="Call 911?" onClick="doClick"
+					message="If this is an emergency, press the 'Call 911' button below. Otherwise, press the 'Close' button." cancel="0">
+		<ButtonNames>
+			<ButtonName>Close</ButtonName>
+			<ButtonName>Call 911</ButtonName>
+		</ButtonNames>
+	</AlertDialog>
 </Alloy>

@@ -7,7 +7,7 @@ if(!Ti.App.Properties.getBool("hasAgreedToConditions", false)){
 }
 else{
 	win.open();
-	alert("If this is an emergency, close the app and dial 911.");
+	$.dialog.show();
 }
 
 
@@ -21,3 +21,9 @@ Alloy.Globals.open = function(controllerName, args){
 		$.nav.openWindow(view);
 	}
 };
+
+function doClick(e){
+	if(e.index == 1){ //manually add was selected
+		Ti.Platform.openURL('tel:911');
+	}
+}
