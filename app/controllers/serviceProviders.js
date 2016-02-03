@@ -11,10 +11,12 @@ if(Alloy.Globals.isAndroid){
  	* When tab changes, change the table with which the search function is associated. 
  	*/
 	$.tabGroup.addEventListener("focus", function(e) {
-		if($.tabGroup.activeTab.title === "NEARBY" && $.providerList.getListView().search != null){
+		if($.tabGroup.activeTab.title === "LOCATE" && $.providerList.getListView().search != null){
+			Ti.API.info("change search to providerlist");
 			providerSearch.changeSearchActionView($.providerList.getListView().search);
 		}
 		else if($.tabGroup.activeTab.title === "QUICK CALL"){
+			Ti.API.info("change search to quick call");
 			providerSearch.changeSearchActionView($.crisisMenu.search);
 		}
 	});

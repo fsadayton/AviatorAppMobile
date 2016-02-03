@@ -97,5 +97,31 @@ function onRightTabClick(){
 	
 }
 
+function openMessage(){
+	Alloy.createController("alertDialog", {
+		title: "Help",
+		message:"Find local resources by clicking on the category that aligns with your needs. If you are a victim of crime, use the Crime tab, otherwise use the General tab. Would you like to visit our YouTube channel for a complete tutorial?",
+		callback: function(){
+			Ti.Platform.openURL("https://www.youtube.com/playlist?list=PL5h6KCzb5JtT3n7fjEvtRrhlVk1aEEP20");
+		}}).getView().show();
+}
+		
 //on android, make the action bar buttons visible
-Alloy.Globals.addActionBarButtons($.tabGroup);
+if(Alloy.Globals.isAndroid){
+	Alloy.Globals.addActionBarButtons($.tabGroup, [{
+	params:{
+		title:"Help",
+		icon: "images/question30.png",
+		showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
+	}
+	}], 
+	function getMenu(menu){
+		//Add functionality for sharing a service provider
+		var shareItem = _.findWhere(menu.getItems(), {title:"Help"});
+		shareItem.addEventListener("click", openMessage);
+	}
+);
+}
+
+		
+

@@ -47,7 +47,9 @@ function storeCategoryLookup(){
 	profileBasics.fetch();
 	
 	if(args.providerType != null){
+		
 		var categories = categorySubset ? categorySubset : null;
+		Ti.API.info("categories: " + categories);
 		categoryNames = getTableData(categories, [profileBasics.get('countyId')]);
 	}
 }
@@ -138,7 +140,6 @@ function filterCategories(categories){
 
 	}
 
-	
 	$.providerList.setData(localFilter);
 	$.providerList.visible = true;
 	$.activityIndicator.hide();
@@ -181,7 +182,7 @@ function parseResponse(){
 		//iterate through list of providers in JSON
 		_.each(json, function(provider){
 			var params = {
-				orgName:provider.name,
+				orgName: provider.locationName != null && provider.locationName != "Location Name Here" ? provider.name + " • " + provider.locationName : provider.name,
 				address:provider.address,
 				orgDesc:provider.description,
 				phone: provider.phoneNumber,
@@ -199,12 +200,17 @@ function parseResponse(){
 					crisis: provider.crisisNumber
 				}).getView());
 			}
+			var headerKeys = Object.keys(allHeaders);
 			//iterate through all of the categories that service provider specializes in
 			_.each(provider.categories, function(category){
 				//iterate through list of table headers and add service provider to header if category matches
 				if(args.providerType === "general"){
-					if(allHeaders[category] != null){
+					if(allHeaders[category] != null && headerKeys.length > 1){
 						params.catNames.push(allHeaders[category]);
+					}
+					else if(allHeaders[category] != null && headerKeys.length === 1){
+						var row = Alloy.Globals.isAndroid ? Alloy.createController('serviceProviderRow', params).getView() : params;
+						addRowToDynamicSections(sections, category, row);
 					}
 				}
 				else{
@@ -320,10 +326,10 @@ function providerDetail(e){
 function addProviderToMap(params){
 	Alloy.Globals.Location.runCustomFwdGeocodeFunction(params.address, addAnnotation);
 	function addAnnotation(e){
-		if(e.success && e.places.length > 0){
+		if(e.success){
 			var annotationParams = {
-				latitude: e.places[0].latitude,
-		   		longitude: e.places[0].longitude,
+				latitude: e.latitude,
+		   		longitude: e.longitude,
 		        title: params.orgName,
 		        row: params	
 			};

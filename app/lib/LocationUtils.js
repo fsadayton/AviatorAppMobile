@@ -83,11 +83,17 @@ function getDistance(lat1,lon1,lat2,lon2){
 exports.estimateDistance = function(currentPos, address, callback){
 	var distance = "??? mile(s)";
 	if(currentPos){
-		geocoder.forwardGeocoder(address, function(e){
+		/*geocoder.forwardGeocoder(address, function(e){
 		    if(e.success && e.places.length > 0){
 		        distance = getDistance(parseFloat(currentPos.latitude), parseFloat(currentPos.longitude), parseFloat(e.places[0].latitude), parseFloat(e.places[0].longitude)) + " mile(s)";
 				callback(distance); 
 		    }   
+		});*/
+		Ti.Geolocation.forwardGeocoder(address, function(e){
+			if(e.success){
+				distance = getDistance(parseFloat(currentPos.latitude), parseFloat(currentPos.longitude), parseFloat(e.latitude), parseFloat(e.longitude)) + " mile(s)";
+				callback(distance);
+			}
 		});
 		return distance;	
 	}
@@ -101,7 +107,7 @@ exports.estimateDistance = function(currentPos, address, callback){
  * 							address to lat/long
  */
 exports.runCustomFwdGeocodeFunction = function(address, callback){
-	geocoder.forwardGeocoder(address, function(e){
+	Ti.Geolocation.forwardGeocoder(address, function(e){
 		callback(e);
 	});
 };

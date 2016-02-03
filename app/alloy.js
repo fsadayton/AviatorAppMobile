@@ -225,3 +225,15 @@ Alloy.Globals.sendTextMessage = function(){
 		}, 1000);
 	}
 };
+
+if(!Alloy.Globals.isAndroid){
+	Alloy.Globals.openProviderMessage = function(){
+				Alloy.createController("alertDialog", {
+					title: "Help",
+					message:"These providers are best suited to help you based on your unique needs. Use the Map button to see which providers are closest to you. Use the Filter button to see providers by county or category. Would you like to visit our YouTube channel for a complete tutorial?",					
+					callback: function(){
+						Ti.Platform.openURL("https://www.youtube.com/playlist?list=PL5h6KCzb5JtT3n7fjEvtRrhlVk1aEEP20");
+					}
+				}).getView().show();
+			};
+}

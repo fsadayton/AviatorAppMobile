@@ -36,11 +36,15 @@
 	<Window id="tabGroup" platform="ios">
 		<RightNavButtons platform="ios">
 			<View height="Ti.UI.SIZE">
-				<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
+				<Button id="navInfo" backgroundImage="/images/question30.png" onClick="openMessage" />
 			</View>
 			<View width=55 height="Ti.UI.SIZE">
+				<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
+			</View>
+			<View height="Ti.UI.SIZE">
 				<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
 			</View>
+			
 		</RightNavButtons>
 		<View id="container" bottom="50" top="0" left="0" right="0">
 			<View id="tab1" visible="true">

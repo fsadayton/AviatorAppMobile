@@ -10,7 +10,34 @@ Alloy.Collections.favorites.fetch();
 profileBasics.fetch();
 
 //initialize android actions
-Alloy.Globals.addActionBarButtons($.win);
+if(Alloy.Globals.isAndroid){
+	Alloy.Globals.addActionBarButtons($.win, [{
+		params:{
+			title:"Help",
+			icon: "images/question30.png",
+			showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
+		}
+		}], 
+		function getMenu(menu){
+			//Add functionality for sharing a service provider
+			var shareItem = _.findWhere(menu.getItems(), {title:"Help"});
+			shareItem.addEventListener("click", openMessage);
+		}
+	);
+}
+
+/**
+ * Message that is displayed when help question mark is clicked.
+ */
+function openMessage(){
+	Alloy.createController("alertDialog", {
+		title: "Help",
+		message:"Customize your app settings here. Set your preferred county, quick-hide site, add trusted contacts, and view your favorite providers. Would you like to visit our YouTube channel for a complete tutorial?",
+		callback: function(){
+			Ti.Platform.openURL("https://www.youtube.com/playlist?list=PL5h6KCzb5JtT3n7fjEvtRrhlVk1aEEP20");
+		}
+	}).getView().show();
+}
 
 /**
  * Change view and update button colors based on which profile button was pressed.
