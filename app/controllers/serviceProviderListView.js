@@ -109,7 +109,7 @@ function getTableData(categories, counties){
 	else{
 		filterCategories(categories);
 	}
-	
+	Ti.API.info("returning filtered cats: " + filteredCategories.length);
 	return filteredCategories;
 }
 
@@ -274,6 +274,7 @@ function addRowToDynamicSections(sections, category, row){
 			}
 			return true;*/
 			if(sections[categoryDict.id] == null){
+				Ti.API.info("pushing category names");
 				categoryNames.push(categoryDict);
 				sections[categoryDict.id] = Ti.UI.createTableViewSection({
 					title:categoryDict.id, 
@@ -379,7 +380,7 @@ function mapClick(e){
  */
 exports.getFilterParams = function(){
 	var filterObj = {
-		categories: categoryNames,
+		categories: _.uniq(categoryNames),
 		filterCallback:getTableData,
 		currentCategories: filteredCategories,
 		currentCounties: filteredCounties

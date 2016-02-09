@@ -40,7 +40,7 @@ function openCrisisLines(){
  * Function that opens the specialized services view.
  */
 function openSpecialServices(){
-	Alloy.Globals.open('specializedServicesMenu', {title: "Specialized Services"});
+	Alloy.Globals.open('specializedServicesMenu', {title: "Special Populations"});
 		Ti.Analytics.featureEvent('home.select.specialPopulations');
 
 }

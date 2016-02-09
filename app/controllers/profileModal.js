@@ -61,19 +61,30 @@ else{
 	if(args.sourceId === "website"){
 		//function that persists website url
 		function saveWebsite(){
-			profileBasics.save({
-				website:$.generalTextField.value.trim()
-			});
-			$.win.close();
+			if($.generalTextField.value.trim().length == 0){
+				alert("Please enter a value before saving");
+			}
+			else{
+				profileBasics.save({
+					website:$.generalTextField.value.trim()
+				});
+				$.win.close();
+			}
+			
 		}
 	}
 	else if(args.sourceId === "nameField"){ //initialize save name fucntion
 		//function that persists new name for user
 		function saveName(){
-			profileBasics.save({
-				name: $.generalTextField.value.trim()
-			});
-			$.win.close();
+			if($.generalTextField.value.trim().length == 0){
+				alert("Please enter a value before saving");
+			}
+			else{
+				profileBasics.save({
+					name: $.generalTextField.value.trim()
+				});
+				$.win.close();
+			}
 		}
 	}
 	else{ //profile modal is used to add/update trusted contact
@@ -117,12 +128,15 @@ function submit(){
 		var modelUtils = require('modelUtils');
 		var phone = $.subTextField.value.trim();
 		var name = $.generalTextField.value.trim();
-		if(args.modelId){
+		if(args.modelId && phone.length > 0 && name.length > 0){
 			modelUtils.updateTrustedContact(args.modelId, name, phone, $.win);
 		}
-		else{
+		else if(phone.length > 0 && name.length > 0){
 			modelUtils.storeTrustedContact(phone, name, $.win);
 		}		
+		else{
+			alert("Please enter a value before saving.");
+		}
 	}
 }
 			
