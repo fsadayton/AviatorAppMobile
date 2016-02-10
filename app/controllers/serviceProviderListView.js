@@ -1,20 +1,20 @@
 var args = arguments[0] || {};
 var Map = require('ti.map');
 
-var categoryDictionary;
-var categoryNames; //used for filter bubbles
+var categoryDictionary = null;
+var categoryNames = null; //used for filter bubbles
 var httpCall;
 
-var filteredCategories;
-var filteredCounties;
+var filteredCategories = null;
+var filteredCounties = null;
 var originalMapAnnotations = [];
 var tableData = [];
 var numberOfProviders = 0;
 
-var crisisMenu;
-var categorySubset;
+var crisisMenu = null;
+var categorySubset = null;
 
-var cats;
+var cats = null;
 
 $.activityIndicator.show();
 
@@ -49,7 +49,6 @@ function storeCategoryLookup(){
 	if(args.providerType != null){
 		
 		var categories = categorySubset ? categorySubset : null;
-		Ti.API.info("categories: " + categories);
 		categoryNames = getTableData(categories, [profileBasics.get('countyId')]);
 	}
 }
@@ -109,7 +108,6 @@ function getTableData(categories, counties){
 	else{
 		filterCategories(categories);
 	}
-	Ti.API.info("returning filtered cats: " + filteredCategories.length);
 	return filteredCategories;
 }
 
@@ -122,10 +120,12 @@ function filterCategories(categories){
 	filteredCategories = [];
 	
 	if(args.providerType === "general"){
+		var tmpCat = {};
 		_.each(tableData, function(data){
-			var match = _.find(categories, function(category){return _.contains(data.args.categories, category);});
+			var match = _.find(categories, function(category){tmpCat={id:category}; return _.contains(data.args.categories, category);});
 			if(match != null){
 				localFilter.push(data.getView());
+				filteredCategories.push(tmpCat);
 			}
 		});
 	}
@@ -139,7 +139,6 @@ function filterCategories(categories){
 		});
 
 	}
-
 	$.providerList.setData(localFilter);
 	$.providerList.visible = true;
 	$.activityIndicator.hide();
@@ -226,7 +225,6 @@ function parseResponse(){
 			allRows.push(rowData.getView());
 		});
 		var keys = Object.keys(sections);
-		Ti.API.info("keys length: " + keys.length);
 		allHeaders = keys.length > 0 ? keys.map(function(v){return sections[v];}) : allRows;
 
 		//hide spinners
@@ -235,7 +233,7 @@ function parseResponse(){
 		$.providerList.visible = true;
 		
 		//set table data
-		if(cats == null){
+		if(cats == null || cats.length == 0){
 			$.providerList.setData(allHeaders);
 		}
 		else{
@@ -274,7 +272,6 @@ function addRowToDynamicSections(sections, category, row){
 			}
 			return true;*/
 			if(sections[categoryDict.id] == null){
-				Ti.API.info("pushing category names");
 				categoryNames.push(categoryDict);
 				sections[categoryDict.id] = Ti.UI.createTableViewSection({
 					title:categoryDict.id, 

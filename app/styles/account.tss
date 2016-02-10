@@ -23,7 +23,7 @@
 ".headerLabel":{
 	color:"#009577",
 	height:"15dp",
-	top:"10dp"
+	top:"7dp"
 }
 
 "#contactTableView":{

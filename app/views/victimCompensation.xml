@@ -1,13 +1,13 @@
 <Alloy>
 	<Window class="container" id="win" onOpen="Alloy.Globals.updateActionBar" onClose="close">
 		<RightNavButtons platform="ios">
-			<View height="Ti.UI.SIZE">
+			<View>
 				<Button id="navInfo" backgroundImage="/images/question30.png" onClick="Alloy.Globals.openProviderMessage" />
 			</View>
-			<View width=55 height="Ti.UI.SIZE">
+			<View width=55>
 				<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
 			</View>
-			<View height="Ti.UI.SIZE">
+			<View>
 				<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
 			</View>
 		</RightNavButtons>

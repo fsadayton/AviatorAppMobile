@@ -126,9 +126,9 @@ function submit(){
 	else{
 		//persist trusted contact info
 		var modelUtils = require('modelUtils');
-		var phone = $.subTextField.value.trim();
+		var phone = $.subTextField.value.trim() === args.phone ? null : $.subTextField.value.trim();
 		var name = $.generalTextField.value.trim();
-		if(args.modelId && phone.length > 0 && name.length > 0){
+		if(args.modelId && ((phone != null && phone.length > 0) || phone == null) && name.length > 0){
 			modelUtils.updateTrustedContact(args.modelId, name, phone, $.win);
 		}
 		else if(phone.length > 0 && name.length > 0){

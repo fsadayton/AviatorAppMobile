@@ -2,22 +2,32 @@ var contacts = Alloy.Collections.trustedContacts;
 
 exports.updateTrustedContact = function(id, fullName, phone, window){
 	
-	var existingNumber = contacts.where({phone_number:phone});
-
-	if(existingNumber.length > 0){
-		alert("That number is already listed as a trusted contact.");
-	}
-	else{
+	if(phone == null){
 		var contact = contacts.get(id);
 		contact.save({
-			name: fullName,
-			phone_number: phone
+			name: fullName
 		});
 		
 		if(window){
 			window.close();
 		}
+	}
+	else{
+		var existingNumber = contacts.where({phone_number:phone});
 		
+		if(existingNumber.length > 0){
+			alert("That number is already listed as a trusted contact.");
+		}
+		else{
+			var contact = contacts.get(id);
+			contact.save({
+				name: fullName,
+				phone_number: phone
+			});
+			if(window){
+				window.close();
+			}
+		}
 	}
 };
 

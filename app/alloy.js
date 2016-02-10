@@ -211,17 +211,22 @@ Alloy.Globals.sendTextMessage = function(){
 	 */
 	function isComplete(e){
 		clearTimeout(timeout);
+		Ti.API.info("e.result: " + e.result + sms.SENT + sms.DELIVERED);
 		if(e.result === sms.FAILED){
 			count++;
+		}
+		else if(e.result === sms.CANCELLED){
+			count = -1;
 		}
 		timeout = setTimeout(function(e){
 			if(count > 0){
 				alert("Operation complete, but " + count + " of your trusted contacts could not be reached.");
 			}
-			else{
+			else if(count == 0){
 				alert("Your trusted contacts have been notified.");
 			}
 			sms.removeEventListener('complete', isComplete);
+			count = 0;
 		}, 1000);
 	}
 };

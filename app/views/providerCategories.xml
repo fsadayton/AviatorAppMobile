@@ -5,26 +5,10 @@
 				<ActivityIndicator id="generalIndicator"/>
 				<TableView id="generalTable" class="menu" onClick="listProviders">
 				</TableView>
-				<RightNavButtons platform="ios" top=50>
-					<View height="Ti.UI.SIZE" backgroundColor="green">
-						<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
-					</View>
-					<View width=55 height="Ti.UI.SIZE">
-						<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
-					</View>
-				</RightNavButtons>
 			</Window>
 		</Tab>
 		<Tab title="CRIME" icon="/tabs/criminal.png">
 			<Window class="container" id="win">
-				<RightNavButtons platform="ios">
-					<View height="Ti.UI.SIZE">
-						<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
-					</View>
-					<View width=55 height="Ti.UI.SIZE">
-						<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
-					</View>
-				</RightNavButtons>
 				<ActivityIndicator id="crimeIndicator"/>
 				<TableView id="crimeTable" class="menu" onClick="listProviders">
 				</TableView>
@@ -35,16 +19,15 @@
 	<!--IN ORDER FOR QUICK HIDE AND TRUSTED CONTACT BUTTONS TO BE VISIBLE, A CUSTOM TAB SYSTEM IS USED FOR THE IOS PLATFORM-->
 	<Window id="tabGroup" platform="ios">
 		<RightNavButtons platform="ios">
-			<View height="Ti.UI.SIZE">
+			<View>
 				<Button id="navInfo" backgroundImage="/images/question30.png" onClick="openMessage" />
 			</View>
-			<View width=55 height="Ti.UI.SIZE">
+			<View width=55>
 				<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
 			</View>
-			<View height="Ti.UI.SIZE">
+			<View>
 				<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
 			</View>
-			
 		</RightNavButtons>
 		<View id="container" bottom="50" top="0" left="0" right="0">
 			<View id="tab1" visible="true">
