@@ -20,7 +20,7 @@ function toggleMapListView(){
 	var map = providerListObject.getMapViews().map;
 	var listView = providerListObject.getListView();
 	
-	if(mapModule.visible){
+	if(mapModule.visible == true){
 		setMapVisibility(false);
 	}
 	else{

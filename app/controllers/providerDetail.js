@@ -88,17 +88,14 @@ if(Alloy.Globals.isAndroid){
  * Function for calculating directions between current location and
  * provider address. Directions will open up in google maps or apple maps.
  */
-function getDirections() {
-	if (Titanium.Geolocation.locationServicesEnabled==false) {
-	    Titanium.UI.createAlertDialog({message:'Please enable location services.'}).show();
-	} else {        
+function getDirections() {       
         // Get Address of order without the name
 	    var destination = args.address;
 
 	    Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 	       
 	    // Get Driver's location from GPS
-        var url = Alloy.CFG.mapUrl+"?&daddr="+destination;
+        var url = Alloy.CFG.mapUrl+"?daddr="+destination;
         if(Alloy.Globals.isAndroid) {
 			var mapIntent = Ti.Android.createIntent({
 				action : Ti.Android.ACTION_VIEW,
@@ -108,7 +105,7 @@ function getDirections() {
 		} else {
 			Ti.Platform.openURL(url);
 		}
-	}
+	
 }
 
 /**
