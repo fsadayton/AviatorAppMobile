@@ -1,20 +1,14 @@
-var geocoder = require('ti.geocoder');
-Ti.API.info("geocoder: "+ geocoder);
+ var geolocationInitialized = false;
+ var permissionAlertShown = false;
 
-
-/**
- * Initialize/configure location services so that delivery distances can be calculated
- * as well as sending location updates to interested customers. 
- */	
-if (Ti.Geolocation.locationServicesEnabled){	
-	
+function initializeGeolocation(){
 	//configure geolocation for android platform
 	if (Alloy.Globals.isAndroid) {
 		
 		//provider that triggers location notification every 50 meters
 		var gpsProvider = Ti.Geolocation.Android.createLocationProvider({
 			name: Ti.Geolocation.PROVIDER_GPS,
-			minUpdateDistance: 50.0,//meters
+			minUpdateDistance: 100.0,//meters
 			minUpdateTime: 0 //seconds
 		});
 		
@@ -37,14 +31,11 @@ if (Ti.Geolocation.locationServicesEnabled){
 		}
 		else 
 		{
-			//Ti.API.info(Ti.API.info('coords:' + JSON.stringify(e.coords)));
 			Alloy.Globals.currentLocation = e.coords;
 		}
 	};
 	Titanium.Geolocation.addEventListener('location', locationCallback);
-}	
-else{
-	alert('Location services must be enabled in order to estimate the distance between you and a potential service provider.');
+	geolocationInitialized = true;
 }
 
 /**
@@ -111,6 +102,27 @@ exports.runCustomFwdGeocodeFunction = function(address, callback){
 		callback(e);
 	});
 };
+
+/**
+ * Initialize/configure location services so that service provider distances can be calculated 
+ */	
+exports.requestLocationPermissions = function(){
+	if (Ti.Geolocation.hasLocationPermissions(Ti.Geolocation.AUTHORIZATION_WHEN_IN_USE) && !geolocationInitialized){	
+		initializeGeolocation();
+	}	
+	else if(!Ti.Geolocation.hasLocationPermissions(Ti.Geolocation.AUTHORIZATION_WHEN_IN_USE)){
+		Ti.Geolocation.requestLocationPermissions(Ti.Geolocation.AUTHORIZATION_WHEN_IN_USE, function(e) {
+
+			if (e.success) {
+				Ti.API.info(e);
+				initializeGeolocation();
+			} else if(!permissionAlertShown) {
+				permissionAlertShown = true;
+				alert('Location services must be enabled in order to estimate the distance between you and a potential service provider.');
+			}
+		});
+	}
+}; 
 
 
 

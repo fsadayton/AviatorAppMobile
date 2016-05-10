@@ -96,30 +96,47 @@ function updateLabel(e){
  * Function for choosing new profile picture.
  */
 function updateProfilePic(){
-	Titanium.Media.openPhotoGallery({
-		success:function(event) {
-			// called when media returned from the camera
-			if(event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
-				//persist profile pic path
-				profileBasics.save({
-					profile_pic: event.media.nativePath
-				});
+	if(Ti.Media.hasCameraPermissions()){
+		openGallery();
+	}
+	else{
+		Ti.Media.requestCameraPermissions(function(e){
+			Ti.API.info(JSON.stringify(e));
+			if(e.success){
+				openGallery();
+			}
+			else{
+				alert("You cannot select a profile picture until permissions are granted.");
+			}
+		});
+	}
 	
-			} else {
-				alert("got the wrong type back ="+event.mediaType);
+	function openGallery(){
+		Titanium.Media.openPhotoGallery({
+			success:function(event) {
+				// called when media returned from the camera
+				if(event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
+					//persist profile pic path
+					profileBasics.save({
+						profile_pic: event.media.nativePath
+					});
+		
+				} else {
+					alert("got the wrong type back ="+event.mediaType);
+				}
+			},
+			error:function(error) {
+				// called when there's an error
+				var a = Titanium.UI.createAlertDialog({title:'Camera'});
+				if (error.code == Titanium.Media.NO_CAMERA) {
+					a.setMessage('Please run this test on device');
+				} else {
+					a.setMessage('Unexpected error: ' + error.code);
+				}
+				a.show();
 			}
-		},
-		error:function(error) {
-			// called when there's an error
-			var a = Titanium.UI.createAlertDialog({title:'Camera'});
-			if (error.code == Titanium.Media.NO_CAMERA) {
-				a.setMessage('Please run this test on device');
-			} else {
-				a.setMessage('Unexpected error: ' + error.code);
-			}
-			a.show();
-		}
-	});
+		});
+	}
 	
 }
 
@@ -206,24 +223,49 @@ function doClick(e){
 		}).getView().open();
 	}
 	else if(e.index == 2){ //add from contact list selected
-		if(Alloy.Globals.isAndroid){
-			Ti.Contacts.showContacts({
-				selectedPerson: function(e){
-					Ti.API.info("person:" + JSON.stringify(e.person.phone));
-					Alloy.createController('trustedContactModal', e.person).getView().open();
-				},
-				fields:['phone', 'name']
-			});
+		if(Ti.Contacts.hasContactsPermissions()){
+			showContacts();
 		}
 		else{
-			Ti.Contacts.showContacts({
-				selectedProperty: function(e){
-					var modelUtils = require('modelUtils');
-					modelUtils.storeTrustedContact(e.value, e.person.fullName);
-				},
-				fields: ['phone']
+			Ti.Contacts.requestContactsPermissions(function(e){
+				if(e.success){
+					showContacts();
+				}
+				else{
+					alert("Cannot select contact until permission has been granted.");
+				}
 			});
 		}
+		
+		function showContacts(){
+			if(Alloy.Globals.isAndroid){
+				Ti.Contacts.showContacts({
+					selectedPerson: function(e){
+						Ti.API.info("person:" + JSON.stringify(e));
+						if(e.person != null && (e.person.phone == null || _.isEmpty(e.person.phone))){
+							alert("This person does not have a phone number associated with their entry.");
+						}
+						else if(e.person != null && (e.person.phone != null || !_.isEmpty(e.person.phone))){
+							Alloy.createController('trustedContactModal', e.person).getView().open();
+						}
+						else{
+							alert("Cannot get the proper information to add this contact as a trusted person.");
+						}
+					},
+					fields:['phone', 'name']
+				});
+			}
+			else{
+				Ti.Contacts.showContacts({
+					selectedProperty: function(e){
+						var modelUtils = require('modelUtils');
+						modelUtils.storeTrustedContact(e.value, e.person.fullName);
+					},
+					fields: ['phone']
+				});
+			}
+		}
+		
 	}
 }
 
