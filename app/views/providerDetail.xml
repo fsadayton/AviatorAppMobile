@@ -47,7 +47,7 @@
 		</View>
 		
 		<AlertDialog id="dialog" onClick="doClick" title="Disclaimer" 
-			message="Since this website is not directly affiliated with AVIATOR, Family Services of Dayton, Ohio is not responsible for the content on this 3rd party site." cancel="1">
+			message="Since this website is not directly affiliated with AVIATOR, we are not responsible for the content on this 3rd party site." cancel="1">
 			<ButtonNames>
 				<ButtonName>OK</ButtonName>
 				<ButtonName>Cancel</ButtonName>

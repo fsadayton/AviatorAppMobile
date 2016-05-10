@@ -181,30 +181,12 @@ Alloy.Globals.sendTextMessage = function(){
 			alert("You do not have any trusted contacts. Go to 'My Account' to add trusted contacts.");
 			return;
 		}
-		sms = require('ti.android.smsreboot');//require('ti.android.sms');
+		sms = require('ti.android.sms');
 	    sms.addEventListener('complete', isComplete);
 	    
-	    if(sms.hasSmsPermission()){
-	    	sendLocalSms();
-	    }
-	    else{
-	    	sms.requestSmsPermissions(function(e){
-	    		if (e.success) {
-					Ti.API.info(JSON.stringify(e));
-					sendLocalSms();
-				} else {
-					alert('SMS permissions must be enabled to send texts to your trusted contacts.');
-				}
-	    	});
-	    }
-	    
-	    
-	    function sendLocalSms(){
-		    contacts.each(function(contact){
-				sms.sendSMS(contact.get("phone_number"), message);
-		    });	
-	    }
-		
+		contacts.each(function(contact){
+			sms.sendSMS(contact.get("phone_number"), message);
+	    });
 	}
 	else{
 		var module = require('com.omorandi');

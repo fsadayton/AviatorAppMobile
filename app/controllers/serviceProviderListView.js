@@ -1,5 +1,4 @@
 var args = arguments[0] || {};
-
 var Map = require('ti.map');
 
 var categoryDictionary = null;

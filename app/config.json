@@ -1,6 +1,6 @@
 {
   "global": {
-    "apiUrl": "http://aviator.cloudapp.net/api/",
+    "apiUrl": "http://vision21.cloudapp.net/api/",
     "appData": "AppData/",
     "lawEnforcementApi": "AppLawEnforcement/",
     "veteransApi": "AppVeterans/",

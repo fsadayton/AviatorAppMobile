@@ -39,7 +39,7 @@
 				<View class="divider" />
 				<Label class="name">SPECIAL POPULATIONS</Label>
 				<ImageView class="icon" image="/global/disabled8.png" />
-				<Label class="description">Find specialized resources for veterans, the elderly, teens, and more</Label>
+				<Label class="description">Find specialized resources for veterans, the elderly, and more</Label>
 			</View>
 		</View>
 		
