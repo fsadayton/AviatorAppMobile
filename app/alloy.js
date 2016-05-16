@@ -189,8 +189,9 @@ Alloy.Globals.sendTextMessage = function(){
 	    }
 	    else{
 	    	sms.requestSmsPermissions(function(e){
+	    		Ti.API.info(JSON.stringify(e));
 	    		if (e.success) {
-					Ti.API.info(JSON.stringify(e));
+					//Ti.API.info(JSON.stringify(e));
 					sendLocalSms();
 				} else {
 					alert('SMS permissions must be enabled to send texts to your trusted contacts.');

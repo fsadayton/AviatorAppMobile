@@ -43,4 +43,11 @@ $.init = function(obj){
 		     }
 	    },1200);
 	});
+	
+	if(!Alloy.Globals.isAndroid){
+		$.searchBar.addEventListener("cancel", function(e){
+			$.searchBar.blur();
+		});
+	}
+	
 };
