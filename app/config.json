@@ -4,7 +4,8 @@
     "appData": "AppData/",
     "lawEnforcementApi": "AppLawEnforcement/",
     "veteransApi": "AppVeterans/",
-    "compensationApi": "AppCompensation/"
+    "compensationApi": "AppCompensation/",
+    "crisisApi" : "AppCrisisContact/"
   },
   "env:development": {},
   "env:test": {},
