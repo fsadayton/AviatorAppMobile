@@ -46,9 +46,9 @@
 		<View class="boxContainer">
 			<View class="left box" onClick="openAccount">
 				<View class="divider" />
-				<Label class="name">MY ACCOUNT</Label>
-				<ImageView class="icon" image="/global/user42.png" />
-				<Label class="description">View your trusted contacts and favorite providers</Label>
+				<Label class="name">TOOLS</Label>
+				<ImageView class="icon" image="/global/tools.png" />
+				<Label class="description">Use a virtual companion, secure your legal documents, and more</Label>
 			</View>
 			<View class="right box" onClick="openCrisisLines" >
 				<View class="divider" />
