@@ -2,14 +2,19 @@ var args = arguments[0] || {};
 //initialize actions
 Alloy.Globals.addActionBarButtons($.win);
 
-var tableSection = Ti.UI.createTableViewSection({headerView: Alloy.createController('TableViewHeader', {text:"Select a Specialty Group"}).getView()});
+
+var tableSection = Ti.UI.createTableViewSection({headerView: Alloy.createController('TableViewHeader', {text:args.tableHeader}).getView()});
 
 //create veterans row
 //FIXME: Create and use API call for getting specialty groups
-tableSection.add(Alloy.createController('providerCategoryRow',{
+/*tableSection.add(Alloy.createController('providerCategoryRow',{
 	text: "Veterans", 
 	info: "View services that are dedicated to serving veterans, military personnel, and their families."
-}).getView());
+}).getView());*/
+
+_.each(args.tableRows, function(row){
+	tableSection.add(Alloy.createController('providerCategoryRow', row).getView());
+});
 		
 $.generalTable.setData([tableSection]);
 
@@ -18,5 +23,5 @@ $.generalTable.setData([tableSection]);
  * been incorporated. 
  */
 function listProviders(){
-	Alloy.Globals.open('veteranServices');
+	Alloy.Globals.open(args.viewName, {title:"Veterans"});
 }

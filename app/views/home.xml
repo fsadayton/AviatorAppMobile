@@ -7,6 +7,9 @@
 				<View width=55>
 					<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
 				</View>
+				<View width=45>
+					<Button id="navProfile" backgroundImage="/images/settings.png" onClick="openAccount" />
+				</View>
 		</RightNavButtons>
 		<View class="divider yellow" />
 		
@@ -44,7 +47,7 @@
 		</View>
 		
 		<View class="boxContainer">
-			<View class="left box" onClick="openAccount">
+			<View class="left box" onClick="openTools">
 				<View class="divider" />
 				<Label class="name">TOOLS</Label>
 				<ImageView class="icon" image="/global/tools.png" />
