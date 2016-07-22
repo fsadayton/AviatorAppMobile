@@ -23,5 +23,6 @@ $.generalTable.setData([tableSection]);
  * been incorporated. 
  */
 function listProviders(){
-	Alloy.Globals.open(args.viewName, {title:"Veterans"});
+	
+	Alloy.Globals.open(args.viewName, args.viewArgs);
 }

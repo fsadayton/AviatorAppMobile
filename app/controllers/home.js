@@ -45,6 +45,7 @@ function openSpecialServices(){
 		text: "Veterans", 
 		info: "View services that are dedicated to serving veterans, military personnel, and their families."
 	}];
+	var viewArgs = {title:"Veterans"};
 	Alloy.Globals.open('specializedServicesMenu', {title: "Special Populations", tableRows: options, tableHeader:"Select a Specialty Group", viewName:"veteranServices"});
 		Ti.Analytics.featureEvent('home.select.specialPopulations');
 }
@@ -62,7 +63,17 @@ function openTools(){
 		text: "Companion App", 
 		info: "Companion lets you reach out to family, friends, or your public safety department to have them keep an eye on you as you travel late at night."
 	}];
-	Alloy.Globals.open('specializedServicesMenu', {title: "Useful Tools", tableRows: options, tableHeader:"Select a Tool", viewName:"veteranServices"});
+	
+	var viewArgs = {
+			title: "Companion App",
+			description: "Companion lets you reach out to family, friends, or your public safety department to have them keep an eye on you as you travel late at night.",
+			website: "http://companionapp.io/",
+			hasApp:true,
+			orgName:"Companion",
+			itunesUrl: "itunes.apple.com/us/app/companion-never-walk-alone/id925211972",
+			androidUrl:"io.companionapp.companion"
+		};
+	Alloy.Globals.open('specializedServicesMenu', {title: "Useful Tools", tableRows: options, tableHeader:"Select a Tool", viewName:"providerDetail", viewArgs:viewArgs});
 }
 
 //initialize android actions

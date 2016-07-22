@@ -164,7 +164,7 @@ function iosShare(e){
  */
 //FIXME: Look into abstracting ability for more than VINE to be used
 function downloadApp(){
-	Alloy.Globals.isAndroid ? Ti.Platform.openURL("market://details?id=com.appriss.vinemobile") : Ti.Platform.openURL("itms://itunes.apple.com/us/app/vinemobile/id625472495?mt=8");
+	Alloy.Globals.isAndroid ? Ti.Platform.openURL("market://details?id=" + args.androidUrl) : Ti.Platform.openURL("itms://"+ args.itunesUrl);
 }
 
 /**
