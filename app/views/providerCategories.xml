@@ -7,7 +7,7 @@
 				</TableView>
 			</Window>
 		</Tab>
-		<Tab title="CRIME" icon="/tabs/criminal.png">
+		<Tab title="CRIME" icon="/tabs/courthouse.png">
 			<Window class="container" id="win">
 				<ActivityIndicator id="crimeIndicator"/>
 				<TableView id="crimeTable" class="menu" onClick="listProviders">
@@ -43,7 +43,7 @@
 		</View>
 		<View bottom="0" height=Ti.UI.SIZE>
 			<Button id="leftTab" left="0" class="iosTab" width="50%" title=" GENERAL" image="/tabs/home63.png" onClick="onLeftTabClick" tintColor="#009577"/>
-			<Button id="rightTab" right="0" class="iosTab" width="50%" title="CRIME" image="/tabs/criminal.png" onClick="onRightTabClick" tintColor="#929292"/>
+			<Button id="rightTab" right="0" class="iosTab" width="50%" title="CRIME" image="/tabs/courthouse.png" onClick="onRightTabClick" tintColor="#929292"/>
 		</View>
 	</Window>
 	

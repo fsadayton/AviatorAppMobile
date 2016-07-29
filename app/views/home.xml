@@ -1,14 +1,14 @@
 <Alloy>
-	<Window id="win" class="container" title="Home" layout="vertical" onOpen="Alloy.Globals.updateActionBar">
+	<Window id="win" class="container" layout="vertical" onOpen="Alloy.Globals.updateActionBar">
 		<RightNavButtons platform="ios">
-				<View>
+				<View width=40>
+					<Button id="navProfile" backgroundImage="/images/settings.png" onClick="openAccount" />
+				</View>
+				<View width=40>
 					<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
 				</View>
-				<View width=55>
-					<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
-				</View>
 				<View width=45>
-					<Button id="navProfile" backgroundImage="/images/settings.png" onClick="openAccount" />
+					<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
 				</View>
 		</RightNavButtons>
 		<View class="divider yellow" />
