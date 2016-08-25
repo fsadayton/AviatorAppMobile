@@ -2,7 +2,7 @@
 	<Window id="win" class="container" layout="vertical" onOpen="Alloy.Globals.updateActionBar">
 		<RightNavButtons platform="ios">
 				<View width=40>
-					<Button id="navProfile" backgroundImage="/images/settings.png" onClick="openAccount" />
+					<Button id="navProfile" backgroundImage="/images/user.png" onClick="openAccount" />
 				</View>
 				<View width=40>
 					<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>

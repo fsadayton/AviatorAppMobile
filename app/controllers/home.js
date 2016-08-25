@@ -23,8 +23,8 @@ function openCorrections(){
  * Function that opens the user's personal account view.
  */
 function openAccount(){
-	Alloy.Globals.open('account', {title: "My Settings"});
-		Ti.Analytics.featureEvent('home.select.myAccount');
+	Alloy.Globals.open('account', {title: "My Account"});
+	Ti.Analytics.featureEvent('home.select.myAccount');
 
 }
 
@@ -34,20 +34,14 @@ function openAccount(){
 function openCrisisLines(){
 	Alloy.Globals.open('crisisLines', {title: "Crisis Contacts"});
 		Ti.Analytics.featureEvent('home.select.crisisContacts');
-
 }
 
 /**
  * Function that opens the specialized services view.
  */
 function openSpecialServices(){
-	var options = [{
-		text: "Veterans", 
-		info: "View services that are dedicated to serving veterans, military personnel, and their families."
-	}];
-	var viewArgs = {title:"Veterans"};
-	Alloy.Globals.open('specializedServicesMenu', {title: "Special Populations", tableRows: options, tableHeader:"Select a Specialty Group", viewName:"veteranServices"});
-		Ti.Analytics.featureEvent('home.select.specialPopulations');
+	Alloy.Globals.open('specializedServicesMenu', {title: "Special Populations"});
+	Ti.Analytics.featureEvent('home.select.specialPopulations');
 }
 
 /**
@@ -73,7 +67,7 @@ function openTools(){
 			itunesUrl: "itunes.apple.com/us/app/companion-never-walk-alone/id925211972",
 			androidUrl:"io.companionapp.companion"
 		};
-	Alloy.Globals.open('specializedServicesMenu', {title: "Useful Tools", tableRows: options, tableHeader:"Select a Tool", viewName:"providerDetail", viewArgs:viewArgs});
+	Alloy.Globals.open('toolsMenu', {title: "Useful Tools", tableRows: options, tableHeader:"Select a Tool", viewName:"providerDetail", viewArgs:viewArgs});
 }
 
 //initialize android actions
@@ -81,14 +75,14 @@ if(Alloy.Globals.isAndroid){
 	Ti.API.info("I'm here!!!!");
 	Alloy.Globals.addActionBarButtons($.win, [{
 		params:{
-			title:"Settings",
-			icon: "images/settings.png",
+			title:"My Account",
+			icon: "images/user.png",
 			showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
 		}
 		}], 
 		function getMenu(menu){
 			//Add functionality for sharing a service provider
-			var shareItem = _.findWhere(menu.getItems(), {title:"Settings"});
+			var shareItem = _.findWhere(menu.getItems(), {title:"My Account"});
 			shareItem.addEventListener("click", openAccount);
 		}
 	);

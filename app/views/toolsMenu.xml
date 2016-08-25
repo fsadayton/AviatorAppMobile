@@ -8,7 +8,6 @@
 				<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
 			</View>
 		</RightNavButtons>
-		<ActivityIndicator id="generalIndicator"/>
 		<TableView id="generalTable" class="menu" onClick="listProviders">
 		</TableView>
 	</Window>
