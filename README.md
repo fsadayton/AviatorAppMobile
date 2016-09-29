@@ -54,7 +54,8 @@ Once your development environment is setup, the following code changes will need
    - #006e58 - dark green
    - #e9931a - yellow
  - Change the REST URLs in config.json
- - Modify the tiapp.xml with [own Google Maps API Key](http://docs.appcelerator.com/platform/latest/#!/api/Modules.Map) 
+ - Modify the tiapp.xml with [own Google Maps API Key](http://docs.appcelerator.com/platform/latest/#!/api/Modules.Map) (see comments in tiapp.xml)
+ - Modify the tiapp.xml with own app id where appropriate (see comments in tiapp.xml)
 
 # License
 ```c++

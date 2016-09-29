@@ -53,12 +53,17 @@
 	touchEnabled: false
 }
 
-".profileView":{
-	width: "33%",
+".profileView[platform=android]":{
+	width: "33.3%",
 	backgroundColor: "#fff",
 	zIndex: 1,
 	borderColor: "#009577",
 	borderWidth: 1
+}
+".profileView[platform=ios]":{
+	width: "33%",
+	backgroundColor: "#fff",
+	zIndex: 1
 }
 
 "TextField":{
