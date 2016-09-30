@@ -5,7 +5,8 @@
     "lawEnforcementApi": "AppLawEnforcement/",
     "veteransApi": "AppVeterans/",
     "compensationApi": "AppCompensation/",
-    "crisisApi" : "AppCrisisContact/"
+    "crisisApi" : "AppCrisisContact/",
+    "toolsApi" : "AppTool/"
   },
   "env:development": {},
   "env:test": {},

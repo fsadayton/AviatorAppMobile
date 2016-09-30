@@ -53,7 +53,7 @@ function openVictimCompensation(){
 }
 
 function openTools(){
-	var options = [{
+	/*var options = [{
 		text: "Companion App", 
 		info: "Companion lets you reach out to family, friends, or your public safety department to have them keep an eye on you as you travel late at night."
 	}];
@@ -66,8 +66,8 @@ function openTools(){
 			orgName:"Companion",
 			itunesUrl: "itunes.apple.com/us/app/companion-never-walk-alone/id925211972",
 			androidUrl:"io.companionapp.companion"
-		};
-	Alloy.Globals.open('toolsMenu', {title: "Useful Tools", tableRows: options, tableHeader:"Select a Tool", viewName:"providerDetail", viewArgs:viewArgs});
+		};*/
+	Alloy.Globals.open('toolsMenu', {title: "Useful Tools"});
 }
 
 //initialize android actions

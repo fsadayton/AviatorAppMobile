@@ -4,6 +4,7 @@ var args = arguments[0] || {};
 $.navText.text = args.text;
 $.row.categories = args.categories;
 $.row.family = args.text;
+$.row.viewArgs = args.viewArgs;
 
 /**
  * Function that extracts descriptive information from 
