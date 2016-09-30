@@ -30,9 +30,6 @@ if(args.providerType === "general"){
 else if(args.providerType === "corrections"){
 	httpCall = Alloy.CFG.lawEnforcementApi + "GetLawEnforcementProviders";
 }
-else if(args.providerType === "veterans"){
-	httpCall = Alloy.CFG.veteransApi + "GetVeteranProviders";
-}
 else if(args.providerType === "compensation"){
 	httpCall = Alloy.CFG.compensationApi + "GetCompensationProviders";
 }

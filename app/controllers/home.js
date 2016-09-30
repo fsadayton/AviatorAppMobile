@@ -2,6 +2,7 @@
  * CONTROLLER FOR HOME VIEW
  */
 
+
 /**
  * Function that opens the service provider categories view.
  */
@@ -23,7 +24,7 @@ function openCorrections(){
  */
 function openAccount(){
 	Alloy.Globals.open('account', {title: "My Account"});
-		Ti.Analytics.featureEvent('home.select.myAccount');
+	Ti.Analytics.featureEvent('home.select.myAccount');
 
 }
 
@@ -33,7 +34,6 @@ function openAccount(){
 function openCrisisLines(){
 	Alloy.Globals.open('crisisLines', {title: "Crisis Contacts"});
 		Ti.Analytics.featureEvent('home.select.crisisContacts');
-
 }
 
 /**
@@ -41,8 +41,7 @@ function openCrisisLines(){
  */
 function openSpecialServices(){
 	Alloy.Globals.open('specializedServicesMenu', {title: "Special Populations"});
-		Ti.Analytics.featureEvent('home.select.specialPopulations');
-
+	Ti.Analytics.featureEvent('home.select.specialPopulations');
 }
 
 /**
@@ -51,7 +50,40 @@ function openSpecialServices(){
 function openVictimCompensation(){
 	Alloy.Globals.open('victimCompensation', {title: "Compensation"});
 		Ti.Analytics.featureEvent('home.select.victimCompensation');
-
 }
 
-Alloy.Globals.addActionBarButtons($.win);
+function openTools(){
+	var options = [{
+		text: "Companion App", 
+		info: "Companion lets you reach out to family, friends, or your public safety department to have them keep an eye on you as you travel late at night."
+	}];
+	
+	var viewArgs = {
+			title: "Companion App",
+			description: "Companion lets you reach out to family, friends, or your public safety department to have them keep an eye on you as you travel late at night.",
+			website: "http://companionapp.io/",
+			hasApp:true,
+			orgName:"Companion",
+			itunesUrl: "itunes.apple.com/us/app/companion-never-walk-alone/id925211972",
+			androidUrl:"io.companionapp.companion"
+		};
+	Alloy.Globals.open('toolsMenu', {title: "Useful Tools", tableRows: options, tableHeader:"Select a Tool", viewName:"providerDetail", viewArgs:viewArgs});
+}
+
+//initialize android actions
+if(Alloy.Globals.isAndroid){
+	Ti.API.info("I'm here!!!!");
+	Alloy.Globals.addActionBarButtons($.win, [{
+		params:{
+			title:"My Account",
+			icon: "images/user.png",
+			showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
+		}
+		}], 
+		function getMenu(menu){
+			//Add functionality for sharing a service provider
+			var shareItem = _.findWhere(menu.getItems(), {title:"My Account"});
+			shareItem.addEventListener("click", openAccount);
+		}
+	);
+}

@@ -12,7 +12,9 @@ else{
 		description: "VINE allows crime victims to obtain timely and reliable information about criminal cases and the custody status of offenders 24 hours a day.",
 		website: "https://www.vinelink.com/",
 		hasApp:true,
-		orgName:"Victim Information and Notification Everyday"
+		orgName:"Victim Information and Notification Everyday",
+		itunesUrl: "itunes.apple.com/us/app/vinemobile/id625472495?mt=8",
+		androidUrl:"com.appriss.vinemobile"
 	};
 
 	var view = Alloy.createController('providerDetail', args).getView('container');

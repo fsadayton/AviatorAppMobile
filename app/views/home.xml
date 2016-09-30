@@ -1,10 +1,13 @@
 <Alloy>
-	<Window id="win" class="container" title="Home" layout="vertical" onOpen="Alloy.Globals.updateActionBar">
+	<Window id="win" class="container" layout="vertical" onOpen="Alloy.Globals.updateActionBar">
 		<RightNavButtons platform="ios">
-				<View>
+				<View width=40>
+					<Button id="navProfile" backgroundImage="/images/user.png" onClick="openAccount" />
+				</View>
+				<View width=40>
 					<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
 				</View>
-				<View width=55>
+				<View width=45>
 					<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
 				</View>
 		</RightNavButtons>
@@ -44,11 +47,11 @@
 		</View>
 		
 		<View class="boxContainer">
-			<View class="left box" onClick="openAccount">
+			<View class="left box" onClick="openTools">
 				<View class="divider" />
-				<Label class="name">MY ACCOUNT</Label>
-				<ImageView class="icon" image="/global/user42.png" />
-				<Label class="description">View your trusted contacts and favorite providers</Label>
+				<Label class="name">TOOLS</Label>
+				<ImageView class="icon" image="/global/tools.png" />
+				<Label class="description">Use a virtual companion, secure your legal documents, and more</Label>
 			</View>
 			<View class="right box" onClick="openCrisisLines" >
 				<View class="divider" />
