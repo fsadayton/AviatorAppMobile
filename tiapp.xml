@@ -33,7 +33,8 @@
     
     <!--REPLACE THE android TAG WITH THE FOLLOWING-->
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <manifest>
+        <manifest android:versionCode="10">
+            <uses-permission android:name="android.permission.SEND_SMS"/>
             <!-- Allows the API to download data from Google Map servers -->
             <uses-permission android:name="android.permission.INTERNET"/>
             <!-- Allows the API to cache data -->
@@ -46,31 +47,29 @@
             <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
             <!-- Specify OpenGL ES 2.0 as a requirement -->
             <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
-            <!-- Replace <com.domain.appid> with your application ID -->
-            <uses-permission android:name="org.fsadayton.armorapp.permission.MAPS_RECEIVE"/>
+            <!-- TODO: Replace <com.domain.appid> with your application ID -->
+            <uses-permission android:name="com.domain.appid.permission.MAPS_RECEIVE"/>
             <permission
-                android:name="org.fsadayton.armorapp.permission.MAPS_RECEIVE" android:protectionLevel="signature"/>
+                android:name="com.domain.appid.permission.MAPS_RECEIVE" android:protectionLevel="signature"/>
             <application android:theme="@style/Theme.CustomActionBar">
-                <!-- Replace "PASTE YOUR GOOGLE MAPS API KEY HERE" with the Google API key you obtained -->
+                <!-- TODO: Replace "YOUR MAPS KEY" with the Google API key you obtained.
+                Directions for obtaining a key can be found in the "Obtain and Add a Google API Key" section of http://docs.appcelerator.com/platform/latest/#!/guide/Google_Maps_v2_for_Android -->
                 <meta-data
-                    android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyDCmJ4lBpceIqcWtJI9QBws_-l9W6Q5arg"/>
+                    android:name="com.google.android.maps.v2.API_KEY" android:value="YOUR MAPS KEY"/>
             </application>
-            <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="21"/>
+            <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="23"/>
         </manifest>
     </android>
     
     <!--REPLACE THE modules TAG WITH THE FOLLOWING-->
     <modules>
         <module platform="commonjs">ti.cloud</module>
-        <module platform="iphone" version="2.4.1">ti.map</module>
-        <module platform="android" version="2.3.3">ti.map</module>
-        <module platform="android" version="1.1.0">ti.geocoder</module>
-        <module platform="iphone" version="1.0.0">ti.geocoder</module>
-        <module platform="android" version="1.6.7">com.alcoapps.actionbarextras</module>
-        <module platform="android" version="1.0.0">ti.android.sms</module>
-        <module platform="iphone" version="1.1.2">com.omorandi</module>
-        <module platform="iphone" version="1.8.2">dk.napp.social</module>
+        <module platform="android">com.alcoapps.actionbarextras</module>
+        <module platform="iphone">ti.map</module>
+        <module platform="android">ti.map</module>
+        <module platform="iphone">com.omorandi</module>
+        <module platform="iphone">dk.napp.social</module>
     </modules>
     
     <!--REPLACE THE sdk-version TAG WITH THE FOLLOWING-->
-    <sdk-version>5.0.2.GA</sdk-version>
+    <sdk-version>5.3.1.GA</sdk-version>
