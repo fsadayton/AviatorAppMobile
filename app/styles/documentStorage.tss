@@ -1,0 +1,57 @@
+"#win":{
+	backgroundColor:"#203444",
+	layout:"vertical"
+}
+
+"#providerName":{
+	backgroundColor:"#D5D5D5",
+	font:{
+		fontFamily:"Dosis-Bold",
+		fontSize: "20dp"
+	},
+	textAlign: "center",
+	color:"#3D3D3D",
+	width:"100%"
+}
+
+"#providerDescription":{
+	color:"#666",
+	editable: false,
+	focusable: false,
+	height:"90%",
+	font:{
+		fontFamily:"Dosis-Regular",
+		fontSize: "15dp"
+	},
+	top:"10dp",
+	width: "90%",
+	backgroundColor: "#fff",
+	textAlign: "center"
+}
+
+"ImageView":{
+	width:"30dp"
+}
+
+"#descGroup":{
+	backgroundColor:"#fff",
+	height:"25%"
+}
+
+".actionView":{
+	height:"45dp",
+	width:"90%",
+	borderRadius:5,
+	backgroundColor:"#009577",
+	top:"15dp"
+}
+
+".actionLabel":{
+	color:"#fff",
+	textAlign: "center"
+}
+
+".actionImage":{
+	left:"5%"
+}
+

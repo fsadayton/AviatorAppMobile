@@ -21,19 +21,18 @@ Alloy.Globals.sendHttpRequest(Alloy.CFG.toolsApi + urlEndPoint, "GET", null, par
 function parseToolsList(e){
 	
 var json = JSON.parse(this.responseText);
-	Ti.API.info(this.responseText);
 	_.each(json, function(tool){
 		tableSection.add(Alloy.createController('providerCategoryRow',{
-			text: tool.Name, 
-			info: tool.Description,
+			text: tool.name, 
+			info: tool.description,
 			viewArgs :{
-				title: tool.Name,
-				description: tool.Description,
-				website: tool.WebsiteUrl,
-				hasApp:tool.AppStoreUrl == null ? false : true,
-				orgName:tool.Name,
-				itunesUrl: tool.AppStoreUrl,
-				androidUrl: tool.AppStoreUrl
+				title: tool.name,
+				description: tool.description,
+				website: tool.websiteUrl,
+				hasApp:tool.appStoreUrl == null ? false : true,
+				orgName:tool.name,
+				itunesUrl: tool.appStoreUrl,
+				androidUrl: tool.appStoreUrl
 			}	
 		}).getView());
 	});
@@ -46,6 +45,11 @@ var json = JSON.parse(this.responseText);
  * Opens views as listed in the args variable. 
  */
 function listProviders(e){
-	Ti.API.info(JSON.stringify(e.row));
-	Alloy.Globals.open("providerDetail", e.row.viewArgs);
+	
+	if(e.row.family.indexOf("Document Storage") > -1){
+		Alloy.Globals.open("documentStorage", {title:"Document Storage"});
+	}
+	else{
+		Alloy.Globals.open("providerDetail", e.row.viewArgs);
+	}
 }
