@@ -165,6 +165,7 @@ function iosShare(e){
 //FIXME: Look into abstracting ability for more than VINE to be used
 function downloadApp(){
 	if(Alloy.Globals.isAndroid){
+		Ti.API.info("android store URL: " + args.itunesUrl);
 		if(args.androidUrl.indexOf("http") > -1){
 			Ti.Platform.openURL(args.androidUrl);
 		}
@@ -173,6 +174,10 @@ function downloadApp(){
 		}
 	}
 	else{
+		if(args.itunesUrl.indexOf("http") > -1){
+			args.itunesUrl = args.itunesUrl.replace("https://", "");
+			args.itunesUrl = args.itunesUrl.replace("http://", "");
+		}
 		Ti.Platform.openURL("itms://"+ args.itunesUrl);
 	}
 }

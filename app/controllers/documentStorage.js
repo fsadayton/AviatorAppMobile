@@ -7,8 +7,8 @@ var menu;
 
 //set provider name and description
 $.providerName.text = "Document Storage";
-$.providerDescription.value = "View and store your important documents using your camera! Any pictures taken using the Document Storage feature" +
-		" will only be available through AVIATOR; they will not show up in your phone's default gallery.\n " +
+$.providerDescription.value = "View and store your important documents using your camera. Any pictures taken using the Document Storage feature" +
+		" will be available through AVIATOR and your phone's default gallery.\n " +
 		"Use the 'Take Picture' button to open your camera, and take" +
 		" a picture of any document.\nUse the 'View Documents' button to retrieve any previously pictured documents.";
 
@@ -37,10 +37,10 @@ function viewDocuments(){
 				// called when media returned from the camera
 				Ti.API.info("event: " + JSON.stringify(event));
 				if(event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
-					var imageView = Ti.UI.createImageView({
-						image: event.media.nativePath
-					});
-					$.docImage.image = event.media;
+					
+					var resizedImage = event.media.imageAsResized(1024, 1024);
+	
+					$.docImage.image = resizedImage;
 					$.docImage.width = $.imageScroll.width;
 					$.docImage.height = $.imageScroll.height;
 		
@@ -100,7 +100,7 @@ function openCamera(){
 				}
 				a.show();
 			},
-			saveToPhotoGallery:false
+			saveToPhotoGallery:true
 			
 
 		});

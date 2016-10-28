@@ -13,7 +13,7 @@ else{
 var tableSection = Ti.UI.createTableViewSection({headerView: Alloy.createController('TableViewHeader', {text:"Apps and Sites"}).getView()});
 var otherSection = Ti.UI.createTableViewSection({headerView: Alloy.createController('TableViewHeader', {text:"Other"}).getView()});
 
-otherSection.add(Alloy.createController('providerCategoryRow', {text:'Document Storage', info:"stuff"}).getView());
+otherSection.add(Alloy.createController('providerCategoryRow', {text:'Document Storage', info:"Take pictures of documents for later retrieval."}).getView());
 
 //send request to get families and crime types
 Alloy.Globals.sendHttpRequest(Alloy.CFG.toolsApi + urlEndPoint, "GET", null, parseToolsList);

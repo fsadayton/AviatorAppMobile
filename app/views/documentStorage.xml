@@ -23,8 +23,10 @@
 			<View class="actionView" onClick="openCamera">
 				<Label class="actionLabel">TAKE A PICTURE</Label>
 			</View>
-			<ScrollView id="imageScroll" contentHeight="auto" contentWidth="auto" top="15dp">
-				<ImageView id="docImage"/>
+
+			<ScrollView id="imageScroll" contentHeight="auto" contentWidth="auto" top="15dp" 
+				maxZoomScale="100" minZoomScale="0.1" zoomScale="1">
+				<ImageView id="docImage" enableZoomControls=true />
 			</ScrollView>
 			
 		</View>

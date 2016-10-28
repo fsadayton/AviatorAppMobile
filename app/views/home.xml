@@ -34,9 +34,9 @@
 		<View class="boxContainer">
 			<View class="left box" onClick="openVictimCompensation">
 				<View class="divider" />
-				<Label class="name" >VICTIM COMPENSATION</Label>
+				<Label class="name" >ADVOCACY & COMPENSATION</Label>
 				<ImageView class="icon" image="/global/payment7.png" />
-				<Label class="description">Victim of a violent crime? View financial assistance options here.</Label>
+				<Label class="description">View advocacy and financial resources here.</Label>
 			</View>
 			<View class="right box" onClick="openSpecialServices">
 				<View class="divider" />
@@ -51,7 +51,7 @@
 				<View class="divider" />
 				<Label class="name">TOOLS</Label>
 				<ImageView class="icon" image="/global/tools.png" />
-				<Label class="description">Use a virtual companion, secure your legal documents, and more</Label>
+				<Label class="description">Use a virtual companion, store your documents, and more</Label>
 			</View>
 			<View class="right box" onClick="openCrisisLines" >
 				<View class="divider" />
