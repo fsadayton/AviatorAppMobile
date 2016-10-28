@@ -27,13 +27,25 @@
                 <string>
                     Location is used to determine the distance between your location and a service provider.
                 </string>
+                <key>NSContactsUsageDescription</key>
+                <string>Contact information is used to retrieve and add selected phone numbers to your trusted contacts list.</string>
+                <key>NSCameraUsageDescription</key>
+                <string>This feature requires the use of your phone's camera.</string>
+                <key>NSPhotoLibraryUsageDescription</key>
+                <string>Any pictures taken in the app will be saved to your phone's default photo gallery.</string>
+                <key>NSMicrophoneUsageDescription</key>
+                <string>This feature requires the use of the microphone.</string>
+                <key>NSAppleMusicUsageDescription</key>
+                <string>This feature requires access to your media files.</string>
             </dict>
         </plist>
     </ios>
-    
-    <!--REPLACE THE android TAG WITH THE FOLLOWING-->
+   
+   <!--REPLACE THE android TAG WITH THE FOLLOWING-->
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <manifest android:versionCode="10">
+            <uses-feature android:name="android.hardware.location.gps"/>
+            <uses-feature android:name="android.hardware.location.network"/>
             <uses-permission android:name="android.permission.SEND_SMS"/>
             <!-- Allows the API to download data from Google Map servers -->
             <uses-permission android:name="android.permission.INTERNET"/>
@@ -47,13 +59,15 @@
             <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
             <!-- Specify OpenGL ES 2.0 as a requirement -->
             <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
+            
             <!-- TODO: Replace <com.domain.appid> with your application ID -->
             <uses-permission android:name="com.domain.appid.permission.MAPS_RECEIVE"/>
             <permission
                 android:name="com.domain.appid.permission.MAPS_RECEIVE" android:protectionLevel="signature"/>
             <application android:theme="@style/Theme.CustomActionBar">
-                <!-- TODO: Replace "YOUR MAPS KEY" with the Google API key you obtained.
+            <!-- TODO: Replace "YOUR MAPS KEY" with the Google API key you obtained.
                 Directions for obtaining a key can be found in the "Obtain and Add a Google API Key" section of http://docs.appcelerator.com/platform/latest/#!/guide/Google_Maps_v2_for_Android -->
+
                 <meta-data
                     android:name="com.google.android.maps.v2.API_KEY" android:value="YOUR MAPS KEY"/>
             </application>
@@ -69,7 +83,9 @@
         <module platform="android">ti.map</module>
         <module platform="iphone">com.omorandi</module>
         <module platform="iphone">dk.napp.social</module>
+        <module platform="android">ti.android.smsreboot</module>
     </modules>
-    
-    <!--REPLACE THE sdk-version TAG WITH THE FOLLOWING-->
+	
+	<!--REPLACE THE sdk-version TAG WITH THE FOLLOWING-->
     <sdk-version>5.3.1.GA</sdk-version>
+
