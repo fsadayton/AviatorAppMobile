@@ -14,3 +14,10 @@
 	mapType: Alloy.Globals.Map.NORMAL_TYPE,
 	userLocation: true
 }
+
+"#noResults":{
+	zIndex: 1,
+	width: "80%",
+	top: "40%",
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER
+}

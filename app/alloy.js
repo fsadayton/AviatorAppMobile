@@ -85,7 +85,7 @@ Alloy.Globals.sendHttpRequest = function(url, type, data, onSuccess, onError){
     	}
     	else{
     	    client.onerror = function (e){
-                Alloy.Globals.createNotificationPopup('Action cannot be completed at this time ('+this.status+') - ' + e.error, "Network Error");
+                Alloy.Globals.createNotificationPopup('Action cannot be completed at this time - ' + e.error, "Network Error");
                 Ti.API.error(e);
             };
     	}
@@ -116,7 +116,7 @@ Alloy.Globals.sendHttpRequest = function(url, type, data, onSuccess, onError){
        	data == null ? client.send() : client.send(JSON.stringify(data));
    	}
    	else{
-   	    Alloy.Globals.createNotificationPopup("Please check your network connection.", "Network Error");
+   	    Alloy.Globals.createNotificationPopup("Cannot retrieve data. Please check your network connection and try again.", "Network Error");
    	}
 };
 
@@ -153,6 +153,8 @@ Alloy.Globals.hideScreen = function(){
 	else{
 		Ti.Platform.openURL("http://" + website);
 	}
+	Ti.Analytics.featureEvent('navBar.select.quickHide');
+
 };
 /**
  * Function that composes and sends a text message to user's trusted
@@ -179,12 +181,31 @@ Alloy.Globals.sendTextMessage = function(){
 			alert("You do not have any trusted contacts. Go to 'My Account' to add trusted contacts.");
 			return;
 		}
-		sms = require('ti.android.sms');
+		sms = require('ti.android.smsreboot');//require('ti.android.sms');
 	    sms.addEventListener('complete', isComplete);
 	    
-		contacts.each(function(contact){
-			sms.sendSMS(contact.get("phone_number"), message);
-	    });
+	    if(sms.hasSmsPermission()){
+	    	sendLocalSms();
+	    }
+	    else{
+	    	sms.requestSmsPermissions(function(e){
+	    		Ti.API.info(JSON.stringify(e));
+	    		if (e.success) {
+					//Ti.API.info(JSON.stringify(e));
+					sendLocalSms();
+				} else {
+					alert('SMS permissions must be enabled to send texts to your trusted contacts.');
+				}
+	    	});
+	    }
+	    
+	    
+	    function sendLocalSms(){
+		    contacts.each(function(contact){
+				sms.sendSMS(contact.get("phone_number"), message);
+		    });	
+	    }
+		
 	}
 	else{
 		var module = require('com.omorandi');
@@ -209,17 +230,34 @@ Alloy.Globals.sendTextMessage = function(){
 	 */
 	function isComplete(e){
 		clearTimeout(timeout);
+		Ti.API.info("e.result: " + e.result + sms.SENT + sms.DELIVERED);
 		if(e.result === sms.FAILED){
 			count++;
+		}
+		else if(e.result === sms.CANCELLED){
+			count = -1;
 		}
 		timeout = setTimeout(function(e){
 			if(count > 0){
 				alert("Operation complete, but " + count + " of your trusted contacts could not be reached.");
 			}
-			else{
+			else if(count == 0){
 				alert("Your trusted contacts have been notified.");
 			}
 			sms.removeEventListener('complete', isComplete);
+			count = 0;
 		}, 1000);
 	}
 };
+
+if(!Alloy.Globals.isAndroid){
+	Alloy.Globals.openProviderMessage = function(){
+				Alloy.createController("alertDialog", {
+					title: "Help",
+					message:"These providers are best suited to help you based on your unique needs. Use the Map button to see which providers are closest to you. Use the Filter button to see providers by county or category. Would you like to visit our YouTube channel for a complete tutorial?",					
+					callback: function(){
+						Ti.Platform.openURL("https://www.youtube.com/playlist?list=PL5h6KCzb5JtT3n7fjEvtRrhlVk1aEEP20");
+					}
+				}).getView().show();
+			};
+}

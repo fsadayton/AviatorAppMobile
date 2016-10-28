@@ -23,7 +23,7 @@
 ".headerLabel":{
 	color:"#009577",
 	height:"15dp",
-	top:"10dp"
+	top:"7dp"
 }
 
 "#contactTableView":{
@@ -38,12 +38,12 @@
 "#profileBar":{
 	width: "70%",
 	height:"42dp",
-	borderRadius: 20,
+	borderRadius: 5,
 	borderColor: "#009577",
 	borderWidth: 2,
 	layout: "horizontal",
 	top: "5dp",
-	backgroundColor:"red"
+	backgroundColor:"#fff"
 }
 
 ".profileButton":{
@@ -53,12 +53,17 @@
 	touchEnabled: false
 }
 
-".profileView":{
-	width: "33%",
+".profileView[platform=android]":{
+	width: "33.3%",
 	backgroundColor: "#fff",
 	zIndex: 1,
 	borderColor: "#009577",
 	borderWidth: 1
+}
+".profileView[platform=ios]":{
+	width: "33%",
+	backgroundColor: "#fff",
+	zIndex: 1
 }
 
 "TextField":{
@@ -80,7 +85,7 @@
 
 "#trustedMessageEdit":{
 	width:"90%",
-	borderRadius:15,
+	borderRadius:5,
 	borderColor: "#666",
 	font:{
 		fontSize:"15dp",

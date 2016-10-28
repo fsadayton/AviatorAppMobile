@@ -1,0 +1,34 @@
+<Alloy>
+	<Window id="win" onOpen="Alloy.Globals.updateActionBar">
+		<RightNavButtons platform="ios">
+			<View>
+				<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
+			</View>
+			<View width=55>
+				<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
+			</View>
+		</RightNavButtons>
+		
+		<View id="container" layout="vertical">
+			<View class="divider yellow"/>
+			<Label id="providerName"/>
+		
+			<View id="descGroup">
+				<TextArea id="providerDescription"/>
+			</View>
+
+			<View class="actionView" onClick="viewDocuments">
+				<Label class="actionLabel">VIEW DOCUMENTS</Label>
+			</View>
+			<View class="actionView" onClick="openCamera">
+				<Label class="actionLabel">TAKE A PICTURE</Label>
+			</View>
+
+			<ScrollView id="imageScroll" contentHeight="auto" contentWidth="auto" top="15dp" 
+				maxZoomScale="100" minZoomScale="0.1" zoomScale="1">
+				<ImageView id="docImage" enableZoomControls=true />
+			</ScrollView>
+			
+		</View>
+	</Window>
+</Alloy>

@@ -5,7 +5,7 @@
 
 "#bubbleText":{
 	color:"#666",
-	borderRadius:20,
+	borderRadius:5,
   	borderWidth: 2,
   	borderColor: "#009577",
   	height:"45dp",

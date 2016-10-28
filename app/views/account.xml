@@ -1,14 +1,17 @@
 <Alloy>
 	<Window id="win" onOpen="Alloy.Globals.updateActionBar" onClose="destroy">
 		<RightNavButtons platform="ios">
-				<View height="Ti.UI.SIZE">
+				<View>
+					<Button id="navInfo" backgroundImage="/images/question30.png" onClick="openMessage" />
+				</View>
+				<View width=55>
 					<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
 				</View>
-				<View width=55 height="Ti.UI.SIZE">
+				<View>
 					<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
 				</View>
 		</RightNavButtons>
-		<View class="divider"/>
+		<View class="divider yellow"/>
 		<View id="centeredView" height="15%">
 			<View id="profileHeader" layout="horizontal" bottom="10dp" top="10dp"  width=Ti.UI.SIZE>
 				<ImageView id="accountImage" image="{profileBasics.profile_pic}" platform="android"/>
@@ -23,13 +26,13 @@
 				<ImageView class="profileButton" image="/global/add126.png" />
 			</View>
 			<View id="favorites" class="profileView" onClick="toggleSelection">			
-				<ImageView class="profileButton" image="/global/star256.png" />
+				<ImageView class="profileButton" image="/global/star174.png" />
 			</View>
 		</View>
 		<ScrollableView id="profileScroll" scrollingEnabled="false">
 			<View layout="vertical">
 				<Label class="headerLabel">PROFILE SUMMARY</Label>
-				<ScrollView height="70%" layout="vertical" showVerticalScrollIndicator=true>
+				<ScrollView height="70%" layout="vertical" scrollType="vertical" showVerticalScrollIndicator=true>
 					<View layout="horizontal" width="90%" top="5dp" height=Ti.UI.SIZE platform="android">
 						<Label class="sentence">My name is</Label>
 						<TextField id="nameField" class="sentence" editable=false focusable=false value="{profileBasics.name}" onClick="updateProfile"/>

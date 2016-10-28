@@ -3,6 +3,10 @@ var countySelector = require("countySelectorUtils");
 
 var providerListObject;
 
+/**
+ * exported function for passing provider list object across multiple
+ * views.
+ */
 exports.setProviderListObject = function(listObject){
 	providerListObject = listObject;
 };
@@ -16,13 +20,13 @@ function toggleMapListView(){
 	var map = providerListObject.getMapViews().map;
 	var listView = providerListObject.getListView();
 	
-	if(mapModule.visible){
+	if(mapModule.visible == true){
 		setMapVisibility(false);
 	}
 	else{
 		setMapVisibility(true);
-		//TODO: Find better alternative to setting map region
-		map.setRegion({latitude:39.719704, longitude:-84.219832, latitudeDelta:0.2, longitudeDelta:0.2});
+		//FIXME: Find better alternative to setting map region
+		map.setRegion({latitude:39.9611111, longitude:-82.9988889, latitudeDelta:5.0, longitudeDelta:.5});
 	}
 	
 	function setMapVisibility(isMapVisible){

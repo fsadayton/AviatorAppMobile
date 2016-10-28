@@ -16,9 +16,13 @@
 }
 
 "#summaryText":{
-	layout: "horizontal",
 	scrollType: "vertical",
 	backgroundColor:"#fff"
+
+}
+
+"#summaryText[platform=ios]":{
+	contentHeight: "600px"
 }
 
 "ScrollableView":{
@@ -39,10 +43,11 @@
 	right:"3dp",
 	color:"#000",
 	width:Titanium.UI.SIZE,
-	wordWrap: true
+	wordWrap: true,
+	horizontalWrap: true
 }
 
-"#categoriesPicker":{
+"#categoriesPicker[platform=android]":{
 	layout: "horizontal",
 	backgroundColor: "#fff",
 	top:"3dp",
@@ -51,17 +56,16 @@
 	right:"3dp"
 }
 
-"#countiesPicker":{
+"#categoriesPicker[platform=ios]":{
 	layout: "horizontal",
 	backgroundColor: "#fff",
-	top:"5dp",
-	bottom:"5dp",
-	left:"5dp",
-	right:"5dp"
+	top:"3dp",
+	left:"3dp",
+	right:"3dp"
 }
 
 ".emph[platform=ios]":{
-	height:'auto'
+	height:Ti.UI.SIZE
 }
 
 ".emph":{

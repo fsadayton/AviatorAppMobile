@@ -1,15 +1,7 @@
 <Alloy>		
-	<TabGroup id="tabGroup" onOpen="Alloy.Globals.updateActionBar" onClose="close">
+	<TabGroup id="tabGroup" onOpen="Alloy.Globals.updateActionBar" onClose="close" platform="android">
 		<Tab title="LOCAL LAW" icon="/tabs/justice4.png">
 			<Window class="container" id="win">
-				<RightNavButtons platform="ios">
-					<View height="Ti.UI.SIZE">
-						<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
-					</View>
-					<View width=55 height="Ti.UI.SIZE">
-						<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
-					</View>
-				</RightNavButtons>
 				<Require id="providerList" src="serviceProviderListView" providerType="corrections"/>
 				<Require id="providerButtonBar" src="serviceProviderButtonBar" />
 			</Window>
@@ -19,7 +11,37 @@
 				description="VINE allows crime victims to obtain timely and reliable information about criminal cases and the custody status of offenders 24 hours a day."
 				website="https://www.vinelink.com/"
 				hasApp=true
+				itunesUrl="itunes.apple.com/us/app/vinemobile/id625472495?mt=8"
+				androidUrl="com.appriss.vinemobile"
 				orgName="Victim Information and Notification Everyday"/>
 		</Tab>
 	</TabGroup>
+	
+	<!--IN ORDER FOR QUICK HIDE AND TRUSTED CONTACT BUTTONS TO BE VISIBLE, A CUSTOM TAB SYSTEM IS USED FOR THE IOS PLATFORM-->
+	<Window id="tabGroup" platform="ios">
+		<RightNavButtons>
+			<View>
+				<Button id="navInfo" backgroundImage="/images/question30.png" onClick="Alloy.Globals.openProviderMessage" />
+			</View>
+			<View width=55>
+				<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
+			</View>
+			<View>
+				<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
+			</View>
+		</RightNavButtons>
+		<View id="container" bottom="50" top="0" left="0" right="0">
+			<View id="tab1" icon="/tabs/justice4.png" visible="true">
+					<Require id="providerList" src="serviceProviderListView" providerType="corrections"/>
+					<Require id="providerButtonBar" src="serviceProviderButtonBar" />
+			</View>
+			<View id="tab2" visible="false" backgroundColor="#203444">
+				<!-- View is added in the controller-->
+			</View>
+		</View>
+		<View bottom="0" height=Ti.UI.SIZE>
+			<Button id="leftTab" left="0" class="iosTab" width="50%" title="  LOCAL LAW" image="/tabs/justice4.png" onClick="onLeftTabClick" tintColor="#009577"/>
+			<Button id="rightTab" right="0" class="iosTab" width="50%" title=" VINE" image="/tabs/vine.png" onClick="onRightTabClick" tintColor="#929292"/>
+		</View>
+	</Window>
 </Alloy>

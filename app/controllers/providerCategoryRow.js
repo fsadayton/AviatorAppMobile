@@ -1,7 +1,17 @@
 var args = arguments[0] || {};
 
+//set row element data
 $.navText.text = args.text;
+$.row.categories = args.categories;
+$.row.family = args.text;
+$.row.viewArgs = args.viewArgs;
 
+/**
+ * Function that extracts descriptive information from 
+ * the row when its info button is clicked and 
+ * displays it in a popup dialog.
+ * @param {Object} e
+ */
 function showInfo(e){
 	e.cancelBubble = true;
 	var dialog = Ti.UI.createAlertDialog({
@@ -11,6 +21,3 @@ function showInfo(e){
   	});
   dialog.show();
 }
-
-$.row.categories = args.categories;
-$.row.family = args.text;

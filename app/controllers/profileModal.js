@@ -28,7 +28,7 @@ if(args.counties){
 				countyName: county.name,
 				countyId: county.id
 			});
-			
+			Ti.Analytics.featureEvent('myAccount.county.' + county.name);
 			$.win.close();
 		}
 		else{
@@ -36,6 +36,10 @@ if(args.counties){
 		}
 	}
 	
+	/**
+	 * Function for updating selected county if only one county can be 
+	 * selected at a time.
+	 */
 	function updateSelection(countyId, countyName, isNew){
 		if(isNew){
 			selectable.setSelectedCounty({id:countyId, name:countyName});
@@ -57,21 +61,30 @@ else{
 	if(args.sourceId === "website"){
 		//function that persists website url
 		function saveWebsite(){
-			profileBasics.save({
-				website:$.generalTextField.value.trim()
-			});
-			$.win.close();
+			if($.generalTextField.value.trim().length == 0){
+				alert("Please enter a value before saving");
+			}
+			else{
+				profileBasics.save({
+					website:$.generalTextField.value.trim()
+				});
+				$.win.close();
+			}
+			
 		}
 	}
 	else if(args.sourceId === "nameField"){ //initialize save name fucntion
-		args.callback();//used to refresh/center new name
-		
 		//function that persists new name for user
 		function saveName(){
-			profileBasics.save({
-				name: $.generalTextField.value.trim()
-			});
-			$.win.close();
+			if($.generalTextField.value.trim().length == 0){
+				alert("Please enter a value before saving");
+			}
+			else{
+				profileBasics.save({
+					name: $.generalTextField.value.trim()
+				});
+				$.win.close();
+			}
 		}
 	}
 	else{ //profile modal is used to add/update trusted contact
@@ -113,14 +126,17 @@ function submit(){
 	else{
 		//persist trusted contact info
 		var modelUtils = require('modelUtils');
-		var phone = $.subTextField.value.trim();
+		var phone = $.subTextField.value.trim() === args.phone ? null : $.subTextField.value.trim();
 		var name = $.generalTextField.value.trim();
-		if(args.modelId){
+		if(args.modelId && ((phone != null && phone.length > 0) || phone == null) && name.length > 0){
 			modelUtils.updateTrustedContact(args.modelId, name, phone, $.win);
 		}
-		else{
+		else if(phone.length > 0 && name.length > 0){
 			modelUtils.storeTrustedContact(phone, name, $.win);
 		}		
+		else{
+			alert("Please enter a value before saving.");
+		}
 	}
 }
 			

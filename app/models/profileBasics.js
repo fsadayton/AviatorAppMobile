@@ -13,7 +13,7 @@ exports.definition = {
 			"countyName": "Montgomery",
 			"countyId":"57",
 			"emergency_message":"I need your help. Please contact me ASAP.",
-			"profile_pic":"/global/user256.png",
+			"profile_pic":"/global/user42.png",
 			"website":"http://weather.com"
 		},
 		adapter: {

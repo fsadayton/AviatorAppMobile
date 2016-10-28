@@ -1,3 +1,6 @@
+/**
+ * CONTROLLER FOR DISPLAYING A SERVICE PROVIDER'S DETAIL PAGE
+ */
 var args = arguments[0] || {};
 
 var menu;
@@ -5,38 +8,38 @@ var menu;
 //set provider name and description
 $.providerName.text = args.orgName;
 $.providerDescription.value = args.description;
-Ti.API.info("args: " + JSON.stringify(args));
 
 if(args.address){ //format address
 	var address = args.address.split(",");
 	$.address.text = address[0] + "\n" + address[1].trim() + ", " + address[2].trim();
 }
 else{ //no address, remove address view
-	$.win.remove($.addressView);
+	$.container.remove($.addressView);
 	$.descGroup.setHeight("35%");
 }
 
-//check phone status
+//if no phone number, remove view from details
 if(args.phone == null){
-	$.win.remove($.phoneView);
+	$.container.remove($.phoneView);
 }
-else{
+else{ //phone number available, display in details
 	$.phoneLabel.text = "CALL " + args.phone;
 }
 
 //remove any views that are not needed
-if(args.email == null){
-	$.win.remove($.emailView);
+if(args.email == null){ //remove email button
+	$.container.remove($.emailView);
 }
-if(args.website == null){
-	$.win.remove($.websiteView);
+if(args.website == null){ //remove website button
+	$.container.remove($.websiteView);
 }
-if(!args.hasApp){
-	$.win.remove($.downloadAppView);
+if(!args.hasApp){ //remove 'download app' button
+	$.container.remove($.downloadAppView);
 }
 
 /**
  * Add sharing and tagging capabilities to menu bar
+ * for the Android implementation
  */
 if(Alloy.Globals.isAndroid){
 	Alloy.Globals.addActionBarButtons($.win, [{
@@ -78,37 +81,31 @@ if(Alloy.Globals.isAndroid){
 		//Add functionality for saving a favorite service provider
 		var favoriteItem = _.findWhere(menu.getItems(), {title:"Tag as Favorite"});
 		favoriteItem.addEventListener("click", tagAsFavorite);
-		
-	}
-);
+	});
 }
-
 
 /**
  * Function for calculating directions between current location and
  * provider address. Directions will open up in google maps or apple maps.
  */
-function getDirections() {
-	if (Titanium.Geolocation.locationServicesEnabled==false) {
-	    Titanium.UI.createAlertDialog({message:'Please enable location services.'}).show();
-	} else {        
+function getDirections() {       
         // Get Address of order without the name
 	    var destination = args.address;
 
 	    Titanium.Geolocation.accuracy = Titanium.Geolocation.ACCURACY_BEST;
 	       
 	    // Get Driver's location from GPS
-        var url = Alloy.CFG.mapUrl+"?&daddr="+destination;
+        var url = Alloy.CFG.mapUrl+"?daddr="+destination;
         if(Alloy.Globals.isAndroid) {
 			var mapIntent = Ti.Android.createIntent({
 				action : Ti.Android.ACTION_VIEW,
 				data : url
 			});
-		Ti.Android.currentActivity.startActivity(mapIntent);
+			Ti.Android.currentActivity.startActivity(mapIntent);
 		} else {
 			Ti.Platform.openURL(url);
 		}
-	}
+	
 }
 
 /**
@@ -149,7 +146,10 @@ function doClick(e){
 	}
 }
 
-
+/**
+ * Function that allows service provider information to be shared 
+ * on the iOS platform
+ */
 function iosShare(e){
     socialWidget=require('com.alcoapps.socialshare');
     var body = "You might be interested in this organization. \nDescription: " 
@@ -158,43 +158,57 @@ function iosShare(e){
     socialWidget.share({
         status: body
     });
-
 }
 /**
  * Function that opens up VINE mobile app in app store or google play store.
  */
-//TODO: Look into abstracting ability for more than VINE to be used
+//FIXME: Look into abstracting ability for more than VINE to be used
 function downloadApp(){
-	Alloy.Globals.isAndroid ? Ti.Platform.openURL("market://details?id=com.appriss.vinemobile") : Ti.Platform.openURL("itms://itunes.apple.com/us/app/vinemobile/id625472495?mt=8");
+	if(Alloy.Globals.isAndroid){
+		Ti.API.info("android store URL: " + args.itunesUrl);
+		if(args.androidUrl.indexOf("http") > -1){
+			Ti.Platform.openURL(args.androidUrl);
+		}
+		else{
+			Ti.Platform.openURL("market://details?id=" + args.androidUrl);
+		}
+	}
+	else{
+		if(args.itunesUrl.indexOf("http") > -1){
+			args.itunesUrl = args.itunesUrl.replace("https://", "");
+			args.itunesUrl = args.itunesUrl.replace("http://", "");
+		}
+		Ti.Platform.openURL("itms://"+ args.itunesUrl);
+	}
 }
 
 /**
-		 * Function that persists a service provider if it has not already 
-		 * been saved. 
-		 */
-		function tagAsFavorite(){
-			var favorites = Alloy.Collections.favorites;
-			var existingFavorite = favorites.where({name:args.orgName});
+* Function that persists a service provider if it has not already 
+* been saved. 
+*/
+function tagAsFavorite(){
+	var favorites = Alloy.Collections.favorites;
+	var existingFavorite = favorites.where({name:args.orgName});
 			
-			if(existingFavorite.length > 0){
-				//Notify user that he/she has already saved service provider
-				Alloy.Globals.createNotificationPopup(args.orgName + " is already tagged.");
-			}
-			else{
-				var favorite = Alloy.createModel('favorites', {
-					name: args.orgName,
-					address: args.address,
-					description: args.description,
-					phone_number: args.phone,
-					email: args.email,
-					website: args.website
-				});
+	if(existingFavorite.length > 0){
+		//Notify user that he/she has already saved service provider
+		Alloy.Globals.createNotificationPopup(args.orgName + " is already tagged.");
+	}
+	else{
+		var favorite = Alloy.createModel('favorites', {
+			name: args.orgName,
+			address: args.address,
+			description: args.description,
+			phone_number: args.phone,
+			email: args.email,
+			website: args.website
+		});
 			
-				favorites.add(favorite);
-				favorite.save();
-				favorites.fetch();
+		favorites.add(favorite);
+		favorite.save();
+		favorites.fetch();
 				
-				//Notify user that the service provider has been saved
-				Alloy.Globals.createNotificationPopup("Favorite Added.");
-			}
-		}
+		//Notify user that the service provider has been saved
+		Alloy.Globals.createNotificationPopup("Favorite Added.");
+	}
+}

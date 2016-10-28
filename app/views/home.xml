@@ -1,57 +1,62 @@
 <Alloy>
-	<Window id="win" class="container" title="Home" layout="vertical" onOpen="Alloy.Globals.updateActionBar">
+	<Window id="win" class="container" layout="vertical" onOpen="Alloy.Globals.updateActionBar">
 		<RightNavButtons platform="ios">
-				<View height="Ti.UI.SIZE">
+				<View width=40>
+					<Button id="navProfile" backgroundImage="/images/user.png" onClick="openAccount" />
+				</View>
+				<View width=40>
 					<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
 				</View>
-				<View width=55 height="Ti.UI.SIZE">
+				<View width=45>
 					<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
 				</View>
 		</RightNavButtons>
-		<View class="divider"/>
+		<View class="divider yellow" />
+		
+		<!--TODO: REPLACE AVIATOR LOGO WITH OWN CUSTOM LOGO-->
 		<ImageView id="welcomeLabel" image="/global/AVIATOR_Logo_COLOR.png"/>
 		
 		<View class="boxContainer">
 			<View class="left box" onClick="openProviders" >
-				<View class="divider"/>
+				<View class="divider" />
 				<Label class="name" >PERSONAL RESOURCES</Label>
 				<ImageView class="icon" image="/global/familiar17.png" />
 				<Label class="description">View organizations that can help address your needs</Label>
 			</View>
 			<View class="right box" onClick="openCorrections" > 
-				<View class="divider"/>
+				<View class="divider" />
 				<Label class="name">LAW & CORRECTIONS</Label>
-				<ImageView class="icon" image="/global/hands6.png" />
+				<ImageView class="icon" image="/global/justice4blue.png" />
 				<Label class="description">Contact local authorities or find jail time info about an offender</Label>
 			</View>
 		</View>
 		
 		<View class="boxContainer">
 			<View class="left box" onClick="openVictimCompensation">
-				<View class="divider"/>
-				<Label class="name" >VICTIM COMPENSATION</Label>
-				<ImageView class="icon" image="/global/compensation_256.png" />
-				<Label class="description">Victim of a violent crime? View financial assistance options here.</Label>
+				<View class="divider" />
+				<Label class="name" >ADVOCACY & COMPENSATION</Label>
+				<ImageView class="icon" image="/global/payment7.png" />
+				<Label class="description">View advocacy and financial resources here.</Label>
 			</View>
 			<View class="right box" onClick="openSpecialServices">
-				<View class="divider"/>
-				<Label class="name">SPECIALIZED SERVICES</Label>
+				<View class="divider" />
+				<Label class="name">SPECIAL POPULATIONS</Label>
 				<ImageView class="icon" image="/global/disabled8.png" />
-				<Label class="description">Find specialized resources for veterans, the elderly, and more</Label>
+				<Label class="description">Find specialized resources for veterans, the elderly, teens, and more</Label>
 			</View>
 		</View>
 		
 		<View class="boxContainer">
-			<View class="left box" onClick="openAccount">
+			<View class="left box" onClick="openTools">
 				<View class="divider" />
-				<Label class="name">MY ACCOUNT</Label>
-				<ImageView class="icon" image="/global/round58.png" />
-				<Label class="description">View your trusted contacts and favorite providers</Label>
+				<Label class="name">TOOLS</Label>
+				<ImageView class="icon" image="/global/tools.png" />
+				<Label class="description">Use a virtual companion, store your documents, and more</Label>
 			</View>
 			<View class="right box" onClick="openCrisisLines" >
 				<View class="divider" />
 				<Label class="name">CRISIS CONTACTS</Label>
-				<ImageView class="icon" image="/global/phone_256.png" />
+				<ImageView class="icon" image="/global/2440.png" />
 				<Label class="description">View local phone numbers that match your needs</Label>
 			</View>
 		</View>

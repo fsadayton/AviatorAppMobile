@@ -1,10 +1,12 @@
 {
   "global": {
-    "apiUrl": "http://vision21.cloudapp.net/api/",
+    "apiUrl": "http://aviator.cloudapp.net/api/",
     "appData": "AppData/",
     "lawEnforcementApi": "AppLawEnforcement/",
     "veteransApi": "AppVeterans/",
-    "compensationApi": "AppCompensation/"
+    "compensationApi": "AppCompensation/",
+    "crisisApi" : "AppCrisisContact/",
+    "toolsApi" : "AppTool/"
   },
   "env:development": {},
   "env:test": {},

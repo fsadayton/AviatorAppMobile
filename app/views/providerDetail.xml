@@ -1,20 +1,22 @@
 <Alloy>
 	<Window id="win" onOpen="Alloy.Globals.updateActionBar">
 		<RightNavButtons platform="ios">
-			<View height="Ti.UI.SIZE">
+			<View>
 				<Button id="navHelp" backgroundImage="/images/add126.png" onClick="Alloy.Globals.sendTextMessage"/>
 			</View>
-			<View width=55 height="Ti.UI.SIZE">
+			<View width=55>
 				<Button id="navHide" backgroundImage="/images/blind2.png" onClick="Alloy.Globals.hideScreen" />
 			</View>
-			<View width=45 height="Ti.UI.SIZE">
+			<View width=45>
 				<Button id="navShare" backgroundImage="/images/social24.png" onClick="iosShare"  />
 			</View>
-			<View width=45 height="Ti.UI.SIZE">
+			<View width=45>
 				<Button id="navFavorite" backgroundImage="/images/star129.png" onClick="tagAsFavorite"  />
 			</View>
 		</RightNavButtons>
-		<View class="divider"/>
+		
+		<View id="container" layout="vertical">
+		<View class="divider yellow"/>
 		<Label id="providerName"/>
 		
 		<View id="descGroup">
@@ -45,11 +47,12 @@
 		</View>
 		
 		<AlertDialog id="dialog" onClick="doClick" title="Disclaimer" 
-			message="Since this website is not directly affiliated with AVIATOR, we are not responsible for the content on this 3rd party site." cancel="1">
+			message="Since this website is not directly affiliated with AVIATOR, Family Services of Dayton, Ohio is not responsible for the content on this 3rd party site." cancel="1">
 			<ButtonNames>
 				<ButtonName>OK</ButtonName>
 				<ButtonName>Cancel</ButtonName>
 			</ButtonNames>
 		</AlertDialog>
+		</View>
 	</Window>
 </Alloy>

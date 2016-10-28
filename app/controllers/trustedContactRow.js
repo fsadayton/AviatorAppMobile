@@ -42,6 +42,11 @@ function editContact(e){
 	}).getView().open();
 }
 
+/**
+ * Open up phone dialog when trusted contact is clicked to
+ * dial number associated with trusted contact
+ * @param {Object} e
+ */
 function callContact(e){
 	var cleanNumber = $.contactNumber.text.replace(/\s|-|\./g,'');
     Ti.Platform.openURL('tel:' + cleanNumber);

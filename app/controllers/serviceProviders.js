@@ -1,10 +1,25 @@
 var args = arguments[0] || {};
-var providerSearch = require('providerSearch');
 
-$.crisisMenu.search = Alloy.createController("searchView").getView();
+$.crisisMenu.filterAttribute = Alloy.Globals.isAndroid ? "title" : "orgName";
 
 if(Alloy.Globals.isAndroid){
+	var providerSearch = require('providerSearch');
+	$.crisisMenu.search = Alloy.createController("searchView").getView();
 	providerSearch.createAndroidSearchBar($.tabGroup, $.providerList);
+	
+	/**
+ 	* When tab changes, change the table with which the search function is associated. 
+ 	*/
+	$.tabGroup.addEventListener("focus", function(e) {
+		if($.tabGroup.activeTab.title === "LOCATE" && $.providerList.getListView().search != null){
+			Ti.API.info("change search to providerlist");
+			providerSearch.changeSearchActionView($.providerList.getListView().search);
+		}
+		else if($.tabGroup.activeTab.title === "QUICK CALL"){
+			Ti.API.info("change search to quick call");
+			providerSearch.changeSearchActionView($.crisisMenu.search);
+		}
+	});
 }
 
 $.providerList.setCategories(args.categories);
@@ -17,19 +32,34 @@ $.providerButtonBar.setProviderListObject($.providerList);
 function callPhoneNumber(e){
     var cleanNumber = e.row.crisis.replace(/\s|-|\./g,'');
     Ti.Platform.openURL('tel:' + cleanNumber);
+    Ti.Analytics.featureEvent('personalResources.select.quickCall');
 }
 
 /**
- * When tab changes, change the table with which the search function is associated. 
+ * Specific iOS function that makes the content associated
+ * with the left tab visible, and changes the color of the 
+ * active tab
  */
-$.tabGroup.addEventListener("focus", function(e) {
-	if($.tabGroup.activeTab.title === "NEARBY" && $.providerList.getListView().search != null){
-		providerSearch.changeSearchActionView($.providerList.getListView().search);
-	}
-	else if($.tabGroup.activeTab.title === "QUICK CALL"){
-		providerSearch.changeSearchActionView($.crisisMenu.search);
-	}
-});
+function onLeftTabClick(){
+	$.tab1.visible = true;
+	$.tab2.visible = false;
+	
+	$.leftTab.tintColor = "#009577";
+	$.rightTab.tintColor = "#929292";
+}
+
+/**
+ * Specific iOS function that makes the content associated
+ * with the right tab visible, and changes the color of the 
+ * active tab
+ */
+function onRightTabClick(){
+	$.tab1.visible = false;
+	$.tab2.visible = true;
+	
+	$.rightTab.tintColor = "#009577";
+	$.leftTab.tintColor = "#929292";;
+}
 
 /**
  * Reset menu options to prevent java exception.

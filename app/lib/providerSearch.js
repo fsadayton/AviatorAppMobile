@@ -16,16 +16,35 @@ exports.createAndroidSearchBar = function(window, providerListObj){
 				actionView: listView.search,
 				showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS
 			}
-		}],
+		},
+		{
+		params:{
+			title:"Help",
+			icon: "images/question30.png",
+			showAsAction : Ti.Android.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW
+		}}],
 		function(setMenu){
 			_menu = setMenu;
-			var abx = require('com.alcoapps.actionbarextras');
+			/*var abx = require('com.alcoapps.actionbarextras');
 			abx.setSearchView({
 				searchView: listView.search,
 				textColor:"#fff",
 				hintColor:"#b2dfd6",
 				searchIcon:"images/magnifying47.png"
-			});
+			});*/
+			
+			var shareItem = _.findWhere(_menu.getItems(), {title:"Help"});
+			shareItem.addEventListener("click", openMessage);
+		
+			function openMessage(){
+				Alloy.createController("alertDialog", {
+					title: "Help",
+					message:"These providers are best suited to help you based on your unique needs. Use the Map button to see which providers are closest to you. Use the Filter button to see providers by county or category. Would you like to visit our YouTube channel for a complete tutorial?",					
+					callback: function(){
+						Ti.Platform.openURL("https://www.youtube.com/playlist?list=PL5h6KCzb5JtT3n7fjEvtRrhlVk1aEEP20");
+					}
+				}).getView().show();
+			}
 		});
 		listView.search.addEventListener("change", providerListObj.searchTimeout);
 	});
