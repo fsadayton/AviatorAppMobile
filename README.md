@@ -13,6 +13,9 @@ Similar to the “Personal Resources” feature, AVIATOR can help users find spe
 In times of extreme mental or emotional despair, AVIATOR provides quick access to a list of local service providers that offer 24-hour manned phone lines for a multitude of different crises, ranging from suicide prevention to domestic violence help. Regardless of the situation, a real person will always be ready to assist AVIATOR users in their time of need.
 #### Other features
 In the event that you need immediate help from a trusted friend or family member, AVIATOR allows users to instantly send a custom message to 5 trusted family members or friends without leaving the app. In addition, the app can quickly be hidden and replaced with a favorite website with a single touch of AVIATOR’s quick-hide button.
+
+For more information about AVIATOR and the processes that facilitated its creation, please visit our [Google Drive folder](http://bit.ly/aviatornotes). 
+
 # How to Repurpose AVIATOR
 In order to modify AVIATOR for your own community, you will need several technical components. In addition, you will need to modify several files.
 #### Technical Requirements
